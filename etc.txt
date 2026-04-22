@@ -1,0 +1,97 @@
+---
+
+# CAPÍTULO II. MARCO TEÓRICO Y TECNOLÓGICO
+
+2.1. Fundamentos de ingeniería de software
+2.1.1. Metodologías de desarrollo de software
+2.1.2. Modelo seleccionado (por ejemplo, incremental, ágil, etc.)
+
+2.2. Análisis de requerimientos y modelado
+2.2.1. Requerimientos funcionales y no funcionales (visión general teórica)
+2.2.2. Técnicas para levantamiento y análisis (entrevistas, observación, revisión documental)
+2.2.3. Modelado de sistemas con UML
+2.2.3.1. Casos de uso e historias de usuario
+2.2.3.2. Diagramas de secuencia y otros diagramas relevantes
+2.2.4. Modelo C4 de arquitectura de software (si lo utilizas)
+
+2.3. Arquitectura de sistemas
+2.3.1. Modelo cliente-servidor
+2.3.2. Arquitecturas en aplicaciones web
+2.3.2.1. Arquitectura monolítica
+2.3.2.2. Microservicios
+2.3.2.3. Arquitectura en capas (N-tier)
+2.3.2.4. Arquitectura limpia u otras (según el proyecto)
+
+2.4. Tecnologías de desarrollo
+2.4.1. Backend: lenguajes, frameworks y estilos de API (REST, GraphQL, etc.)
+2.4.2. Frontend: frameworks, componentes y estrategias de renderizado
+2.4.3. Bases de datos y persistencia de datos
+2.4.3.1. Bases de datos relacionales y/o NoSQL
+2.4.3.2. ORM y herramientas de acceso a datos
+2.4.4. Infraestructura, despliegue y contenedores (Docker, Kubernetes u otros)
+
+2.5. Experiencia de usuario y accesibilidad
+2.5.1. Diseño centrado en el usuario (UCD)
+2.5.2. Principios básicos de UX en aplicaciones web
+2.5.3. Accesibilidad web y buenas prácticas
+
+---
+
+# CAPÍTULO III. ANÁLISIS Y DISEÑO DEL SISTEMA PROPUESTO
+
+3.1. Análisis del contexto operativo
+3.1.1. Descripción del proceso actual
+3.1.2. Recolección y análisis de evidencias (entrevistas, observación, documentos)
+3.1.3. Problemas y necesidades identificadas
+
+3.2. Definición de requerimientos del sistema
+3.2.1. Requerimientos funcionales
+3.2.2. Requerimientos no funcionales
+
+3.3. Modelo de procesos y flujo de trabajo
+3.3.1. Proceso objetivo y flujo propuesto
+3.3.2. Actores y roles del sistema
+
+3.4. Diseño de la arquitectura de la solución
+3.4.1. Vista de contexto
+3.4.2. Vista de contenedores y componentes principales
+3.4.3. Paquetes y organización del código
+
+3.5. Diseño de datos
+3.5.1. Modelo entidad–relación o esquema relacional
+3.5.2. Consideraciones de integridad y seguridad de datos
+
+3.6. Diseño de la interacción usuario–sistema
+3.6.1. Casos de uso del sistema (definitivos)
+3.6.2. Diagramas de secuencia y otros diagramas de interacción
+3.6.3. Prototipos de interfaz y lineamientos de UX
+
+3.7. Seguridad y cumplimiento
+3.7.1. Gestión de roles, permisos y autenticación
+3.7.2. Políticas de seguridad y protección de datos
+
+3.8. Plan de desarrollo por incrementos o iteraciones
+3.8.1. Definición de incrementos / sprints
+3.8.2. Alcance por incremento
+3.8.3. Criterios de aceptación y cierre de incrementos
+
+
+# CAPÍTULO IV. CONSTRUCCIÓN E IMPLEMENTACIÓN DEL SISTEMA
+
+4.1. Ambiente de desarrollo e implementación
+4.1.1. Herramientas y configuración del entorno
+4.1.2. Estrategia de control de versiones
+
+4.2. Desarrollo por incrementos
+4.2.1. Incremento 1: descripción, funcionalidades desarrolladas y resultados
+4.2.2. Incremento 2: descripción, funcionalidades desarrolladas y resultados
+4.2.3. Incremento 3: descripción, funcionalidades desarrolladas y resultados
+4.2.4. Incremento 4 (u otros): descripción, funcionalidades desarrolladas y resultados
+
+4.3. Integración y despliegue del sistema
+4.3.1. Estrategia de integración continua y despliegue
+4.3.2. Puesta en marcha en el entorno objetivo
+
+4.4. Manual técnico (resumen)
+
+4.5. Manual de usuario (resumen)

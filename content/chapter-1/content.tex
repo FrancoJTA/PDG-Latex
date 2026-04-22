@@ -1,0 +1,112 @@
+\begin{center}
+    \textbf{\Large CAPÍTULO I} \\[0.5cm]
+    \textbf{\large Marco General}
+\end{center}
+\addcontentsline{toc}{section}{CAPÍTULO I}
+\setcounter{section}{1}
+\setcounter{subsection}{0}
+
+% ---------- 1.1 ----------
+\subsection{ANTECEDENTES}
+
+El aprendizaje humano sigue un flujo de procesamiento de la información descrito por Atkinson y Shiffrin (1968), que organiza la memoria en tres etapas: registro sensorial, memoria a corto plazo y memoria a largo plazo. Para que el conocimiento se consolide de manera real y duradera, la información debe atravesar cada etapa bajo condiciones específicas: atención sostenida, procesamiento activo y revisiones distribuidas en el tiempo.
+
+Las plataformas educativas digitales existentes resuelven partes de este proceso de forma aislada. Khan Academy aplica rutas de aprendizaje sobre currículos predefinidos. Anki implementa repetición espaciada sin verificación de comprensión. Duolingo calibra la dificultad pero optimizando el engagement del usuario, no la retención profunda. Khanmigo ofrece retroalimentación inmediata pero solo cuando el estudiante la solicita. Ninguna de estas plataformas integra todas estas soluciones en un sistema cohesivo, sin currículo fijo y adaptable a cualquier dominio de conocimiento.
+
+En el contexto boliviano, el sistema educativo opera bajo un modelo estandarizado donde un solo docente atiende grupos de hasta treinta estudiantes, haciendo inviable la personalización del ritmo o del contenido. El acceso a tutorías privadas, que es la única alternativa de acompañamiento individualizado disponible hoy, tiene un costo que no está al alcance de todos los estudiantes.
+
+% ---------- 1.2 ----------
+\subsection{PLANTEAMIENTO DEL PROBLEMA}
+
+Los estudiantes de último año de colegio en Santa Cruz de la Sierra estudian de manera desordenada y pasiva, sin ninguna guía que organice el contenido según sus conocimientos previos, ajuste la dificultad de manera continua, verifique que la comprensión sea real antes de avanzar, ni programe revisiones para evitar que el conocimiento se olvide. Este proceso genera conocimiento superficial, fragmentado y difícil de aplicar.
+
+Los factores que sostienen este problema son los siguientes. El sistema educativo trata a todos los estudiantes con el mismo contenido y ritmo, ignorando que cada uno tiene un nivel de conocimiento previo distinto. Las estrategias de estudio más comunes, como releer y subrayar, generan familiaridad con el material sin consolidación real. El uso extendido de plataformas de contenido corto ha deteriorado progresivamente la capacidad de sostener atención profunda, y el entorno de estudio actual no ofrece ningún mecanismo para trabajarlo. La retroalimentación sobre lo aprendido llega únicamente a través de evaluaciones formales semanas después del estudio, cuando ya no es posible corregir el proceso. Sin revisiones distribuidas en el tiempo, el conocimiento se olvida de manera predecible y el estudiante no tiene ninguna herramienta que le indique cuándo repasar cada concepto. Los estudiantes avanzan concepto por concepto sin verificar cómo se relacionan entre sí, produciendo un conocimiento que funciona en situaciones predecibles pero colapsa cuando se aplica en contextos nuevos.
+
+% ---------- 1.2.1 ----------
+\subsubsection{FORMULACIÓN DEL PROBLEMA}
+
+¿Cómo puede un sistema de software personalizar el proceso de aprendizaje de estudiantes de último año de colegio en Santa Cruz de la Sierra, organizando el contenido según el nivel individual de cada uno, calibrando la dificultad de manera continua, verificando la comprensión real y programando revisiones automáticas para consolidar el conocimiento de forma eficiente?
+
+% ---------- 1.2.2 ----------
+\subsubsection{ÁRBOL DEL PROBLEMA}
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\textwidth]{imagenes/ishikawa.png}
+\end{figure}
+
+% ---------- 1.3 ----------
+\subsection{OBJETIVOS}
+
+% ---------- 1.3.1 ----------
+\subsubsection{OBJETIVO GENERAL}
+
+Desarrollar una plataforma de aprendizaje que se adapte al nivel individual de cada estudiante, organice el contenido en un orden lógico y personalizado, ajuste la dificultad de manera continua y programe automáticamente las revisiones necesarias para que el conocimiento se consolide de forma real y duradera.
+
+% ---------- 1.3.2 ----------
+\subsubsection{OBJETIVOS ESPECÍFICOS}
+
+\begin{itemize}
+    \item Diseñar un grafo de conocimiento dinámico que organice los conceptos de cualquier dominio según sus dependencias y genere automáticamente una ruta de estudio personalizada para cada estudiante.
+    \item Desarrollar un modelo de usuario que registre el nivel de conocimiento individual, el historial de sesiones y el estado de cada concepto en tiempo real.
+    \item Implementar un motor de dificultad progresiva que ajuste el nivel del contenido de manera continua según el desempeño del estudiante.
+    \item Construir un módulo de comprensión conectada que verifique que el estudiante relaciona los conceptos entre sí antes de permitir el avance.
+    \item Implementar un algoritmo de espaciado automático basado en la curva del olvido que programe revisiones individuales en el momento óptimo para cada concepto.
+    \item Desarrollar un sistema de retroalimentación inmediata que identifique el concepto específico donde ocurrió la falla y ajuste el contenido siguiente en tiempo real.
+\end{itemize}
+
+% ---------- 1.4 ----------
+\subsection{JUSTIFICACIÓN}
+
+El aprendizaje es una actividad que toda persona realiza de manera continua, pero los métodos y herramientas disponibles hoy no están diseñados para acompañar ese proceso de manera individual y eficiente. Este proyecto se justifica porque existe una brecha real entre cómo funciona la memoria humana y cómo está diseñado el entorno de estudio actual, y porque la tecnología disponible hoy permite cerrar esa brecha de una manera que antes no era posible.
+
+% ---------- 1.4.1 ----------
+\subsubsection{JUSTIFICACIÓN TÉCNICA}
+
+El proyecto es técnicamente viable porque cada uno de sus componentes tiene precedente en la industria. Los grafos de conocimiento, los algoritmos de espaciado basados en la curva del olvido y los modelos de usuario adaptativo son tecnologías maduras que ya existen por separado en plataformas como Anki, Khan Academy y Duolingo. Lo que no existe es un sistema que las integre de manera coherente, sin currículo fijo y para cualquier dominio. La generación automática del grafo mediante modelos de lenguaje, el motor de dificultad progresiva y la retroalimentación inmediata son implementables con las herramientas de desarrollo disponibles actualmente. El entregable del proyecto es una arquitectura base funcional construida en fases incrementales, lo que hace el alcance técnico defendible dentro del tiempo de un proyecto de grado.
+
+% ---------- 1.4.2 ----------
+\subsubsection{JUSTIFICACIÓN ECONÓMICA}
+
+El costo anual de un estudiante en colegio privado en Santa Cruz de la Sierra, incluyendo mensualidades, útiles y transporte, oscila entre \$1.000 y \$1.200, sin ninguna garantía de que el proceso de estudio sea eficiente. El acceso a tutorías privadas, única alternativa de personalización disponible hoy, tiene un costo que no está al alcance de todos los estudiantes. El sistema propone un modelo de suscripción mensual que representa entre el 8\% y el 15\% del costo anual del colegio, con un costo marginal por usuario cercano a los \$0,15 mensuales en consumo de inteligencia artificial, lo que genera un margen sostenible desde etapas tempranas. A escala regional, el mercado de estudiantes de secundaria en Latinoamérica representa una oportunidad significativa para un sistema que no depende de ningún currículo institucional preestablecido.
+
+% ---------- 1.4.3 ----------
+\subsubsection{JUSTIFICACIÓN SOCIAL}
+
+El sistema educativo actual genera una brecha entre los estudiantes que tienen acceso a acompañamiento personalizado y los que estudian solos, sin guía ni retroalimentación oportuna. Esta brecha se manifiesta en rendimiento académico y desarrollo de habilidades a largo plazo. Un sistema adaptativo accesible desde cualquier dispositivo, sin depender de un docente ni de un currículo institucional, democratiza el acceso a una experiencia de aprendizaje personalizada que hoy solo está disponible para quienes pueden pagar un tutor privado. El impacto social no se limita al colegio: el sistema es igualmente funcional para cualquier persona que quiera aprender algo por su cuenta, extendiendo su alcance más allá del entorno académico formal.
+
+% ---------- 1.5 ----------
+\subsection{METODOLOGÍA}
+
+El proyecto sigue una metodología de desarrollo incremental por fases, donde cada fase entrega un módulo funcional que se integra con los anteriores. La validación es técnica: se verifica que el sistema produce los comportamientos diseñados de manera consistente.
+
+% ---------- 1.5.1 ----------
+\subsubsection{ENFOQUE DE LA INVESTIGACIÓN}
+
+El enfoque es mixto. Cuantitativo en la medición del comportamiento del sistema: tiempos de respuesta, tasas de error y precisión del motor de dificultad y del algoritmo de espaciado. Cualitativo en la validación de la experiencia del usuario: comprensión del flujo, usabilidad de la interfaz y percepción del acompañamiento adaptativo.
+
+% ---------- 1.5.2 ----------
+\subsubsection{TIPO DE INVESTIGACIÓN}
+
+La investigación es aplicada. Se toma conocimiento existente de las ciencias cognitivas y la ingeniería de software y se aplica al diseño y construcción de un sistema funcional que resuelve un problema real e identificable.
+
+% ---------- 1.5.3 ----------
+\subsubsection{MÉTODO DE INVESTIGACIÓN}
+
+Se utiliza el método de desarrollo iterativo incremental. El sistema se construye en fases comenzando por los módulos centrales: el grafo de conocimiento y el modelo de usuario. Cada fase integra un nuevo módulo, se prueba su funcionamiento de forma aislada y luego su integración con los módulos anteriores. Las decisiones de diseño se toman basándose en evidencia de la literatura de ciencias cognitivas y en los resultados de las pruebas de cada fase.
+
+% ---------- 1.5.4 ----------
+\subsubsection{TÉCNICAS E INSTRUMENTOS DE INVESTIGACIÓN}
+
+Se utilizan pruebas funcionales por módulo para verificar que cada componente produce el comportamiento esperado. Entrevistas y encuestas con estudiantes de último año para validar la usabilidad y pertinencia del flujo. Revisión de literatura científica en ciencias cognitivas como base para las decisiones de diseño del motor de dificultad y el algoritmo de espaciado. Análisis comparativo de plataformas existentes para documentar las brechas que el sistema resuelve.
+
+% ---------- 1.5.5 ----------
+\subsubsection{FUENTES DE INFORMACIÓN}
+
+Las fuentes primarias son los estudiantes de último año del Colegio Cardenal Cushing, consultados mediante entrevistas y pruebas de usabilidad. Las fuentes secundarias incluyen literatura científica en ciencias cognitivas, documentación técnica de las tecnologías utilizadas y análisis de plataformas educativas existentes como Khan Academy, Duolingo y Anki.
+
+% ---------- 1.5.6 ----------
+\subsubsection{PROPUESTA}
+
+El sistema propuesto es una plataforma adaptativa de aprendizaje que organiza el conocimiento en un grafo dinámico generado automáticamente para cualquier dominio, evalúa el nivel inicial del estudiante, genera una ruta de estudio personalizada, ajusta la dificultad de manera continua, verifica que la comprensión sea real antes de permitir el avance y programa revisiones automáticas para evitar el deterioro del conocimiento. El entregable principal del proyecto de grado es una arquitectura base funcional con los módulos centrales integrados y operativos, construida en fases incrementales y validada mediante pruebas técnicas y de usuario.

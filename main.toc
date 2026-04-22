@@ -1,0 +1,92 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{CAPÍTULO I}{1}{}%
+\contentsline {subsection}{\numberline {1.1}ANTECEDENTES}{1}{}%
+\contentsline {subsection}{\numberline {1.2}PLANTEAMIENTO DEL PROBLEMA}{1}{}%
+\contentsline {subsubsection}{\numberline {1.2.1}FORMULACIÓN DEL PROBLEMA}{1}{}%
+\contentsline {subsubsection}{\numberline {1.2.2}ÁRBOL DEL PROBLEMA}{2}{}%
+\contentsline {subsection}{\numberline {1.3}OBJETIVOS}{2}{}%
+\contentsline {subsubsection}{\numberline {1.3.1}OBJETIVO GENERAL}{2}{}%
+\contentsline {subsubsection}{\numberline {1.3.2}OBJETIVOS ESPECÍFICOS}{2}{}%
+\contentsline {subsection}{\numberline {1.4}JUSTIFICACIÓN}{2}{}%
+\contentsline {subsubsection}{\numberline {1.4.1}JUSTIFICACIÓN TÉCNICA}{3}{}%
+\contentsline {subsubsection}{\numberline {1.4.2}JUSTIFICACIÓN ECONÓMICA}{3}{}%
+\contentsline {subsubsection}{\numberline {1.4.3}JUSTIFICACIÓN SOCIAL}{3}{}%
+\contentsline {subsection}{\numberline {1.5}METODOLOGÍA}{3}{}%
+\contentsline {subsubsection}{\numberline {1.5.1}ENFOQUE DE LA INVESTIGACIÓN}{3}{}%
+\contentsline {subsubsection}{\numberline {1.5.2}TIPO DE INVESTIGACIÓN}{4}{}%
+\contentsline {subsubsection}{\numberline {1.5.3}MÉTODO DE INVESTIGACIÓN}{4}{}%
+\contentsline {subsubsection}{\numberline {1.5.4}TÉCNICAS E INSTRUMENTOS DE INVESTIGACIÓN}{4}{}%
+\contentsline {subsubsection}{\numberline {1.5.5}FUENTES DE INFORMACIÓN}{4}{}%
+\contentsline {subsubsection}{\numberline {1.5.6}PROPUESTA}{4}{}%
+\contentsline {section}{CAPÍTULO II}{5}{}%
+\contentsline {subsection}{\numberline {2.1}FUNDAMENTOS DE INGENIERÍA DE SOFTWARE}{5}{}%
+\contentsline {subsubsection}{\numberline {2.1.1}METODOLOGÍAS DE DESARROLLO DE SOFTWARE}{5}{}%
+\contentsline {subsubsection}{\numberline {2.1.2}MODELO SELECCIONADO}{5}{}%
+\contentsline {subsection}{\numberline {2.2}ANÁLISIS DE REQUERIMIENTOS Y MODELADO}{5}{}%
+\contentsline {subsubsection}{\numberline {2.2.1}REQUERIMIENTOS FUNCIONALES Y NO FUNCIONALES}{5}{}%
+\contentsline {subsubsection}{\numberline {2.2.2}TÉCNICAS PARA LEVANTAMIENTO Y ANÁLISIS}{5}{}%
+\contentsline {subsubsection}{\numberline {2.2.3}MODELADO DE SISTEMAS CON UML}{5}{}%
+\contentsline {paragraph}{2.2.3.1. CASOS DE USO E HISTORIAS DE USUARIO}{5}{}%
+\contentsline {paragraph}{2.2.3.2. DIAGRAMAS DE SECUENCIA Y OTROS DIAGRAMAS RELEVANTES}{5}{}%
+\contentsline {subsubsection}{\numberline {2.2.4}MODELO C4 DE ARQUITECTURA DE SOFTWARE}{5}{}%
+\contentsline {subsection}{\numberline {2.3}ARQUITECTURA DE SISTEMAS}{5}{}%
+\contentsline {subsubsection}{\numberline {2.3.1}MODELO CLIENTE-SERVIDOR}{5}{}%
+\contentsline {subsubsection}{\numberline {2.3.2}ARQUITECTURAS EN APLICACIONES WEB}{5}{}%
+\contentsline {paragraph}{2.3.2.1. ARQUITECTURA MONOLÍTICA}{5}{}%
+\contentsline {paragraph}{2.3.2.2. MICROSERVICIOS}{5}{}%
+\contentsline {paragraph}{2.3.2.3. ARQUITECTURA EN CAPAS (N-TIER)}{5}{}%
+\contentsline {paragraph}{2.3.2.4. ARQUITECTURA LIMPIA U OTRAS}{5}{}%
+\contentsline {subsection}{\numberline {2.4}TECNOLOGÍAS DE DESARROLLO}{5}{}%
+\contentsline {subsubsection}{\numberline {2.4.1}BACKEND: LENGUAJES, FRAMEWORKS Y ESTILOS DE API}{5}{}%
+\contentsline {subsubsection}{\numberline {2.4.2}FRONTEND: FRAMEWORKS, COMPONENTES Y ESTRATEGIAS DE RENDERIZADO}{5}{}%
+\contentsline {subsubsection}{\numberline {2.4.3}BASES DE DATOS Y PERSISTENCIA DE DATOS}{5}{}%
+\contentsline {paragraph}{2.4.3.1. BASES DE DATOS RELACIONALES Y/O NOSQL}{5}{}%
+\contentsline {paragraph}{2.4.3.2. ORM Y HERRAMIENTAS DE ACCESO A DATOS}{5}{}%
+\contentsline {subsubsection}{\numberline {2.4.4}INFRAESTRUCTURA, DESPLIEGUE Y CONTENEDORES}{5}{}%
+\contentsline {subsection}{\numberline {2.5}EXPERIENCIA DE USUARIO Y ACCESIBILIDAD}{5}{}%
+\contentsline {subsubsection}{\numberline {2.5.1}DISEÑO CENTRADO EN EL USUARIO (UCD)}{5}{}%
+\contentsline {subsubsection}{\numberline {2.5.2}PRINCIPIOS BÁSICOS DE UX EN APLICACIONES WEB}{5}{}%
+\contentsline {subsubsection}{\numberline {2.5.3}ACCESIBILIDAD WEB Y BUENAS PRÁCTICAS}{5}{}%
+\contentsline {section}{CAPÍTULO III}{6}{}%
+\contentsline {subsection}{\numberline {3.1}ANÁLISIS DEL CONTEXTO OPERATIVO}{6}{}%
+\contentsline {subsubsection}{\numberline {3.1.1}DESCRIPCIÓN DEL PROCESO ACTUAL}{6}{}%
+\contentsline {subsubsection}{\numberline {3.1.2}RECOLECCIÓN Y ANÁLISIS DE EVIDENCIAS}{6}{}%
+\contentsline {subsubsection}{\numberline {3.1.3}PROBLEMAS Y NECESIDADES IDENTIFICADAS}{6}{}%
+\contentsline {subsection}{\numberline {3.2}DEFINICIÓN DE REQUERIMIENTOS DEL SISTEMA}{6}{}%
+\contentsline {subsubsection}{\numberline {3.2.1}REQUERIMIENTOS FUNCIONALES}{6}{}%
+\contentsline {subsubsection}{\numberline {3.2.2}REQUERIMIENTOS NO FUNCIONALES}{6}{}%
+\contentsline {subsection}{\numberline {3.3}MODELO DE PROCESOS Y FLUJO DE TRABAJO}{6}{}%
+\contentsline {subsubsection}{\numberline {3.3.1}PROCESO OBJETIVO Y FLUJO PROPUESTO}{6}{}%
+\contentsline {subsubsection}{\numberline {3.3.2}ACTORES Y ROLES DEL SISTEMA}{6}{}%
+\contentsline {subsection}{\numberline {3.4}DISEÑO DE LA ARQUITECTURA DE LA SOLUCIÓN}{6}{}%
+\contentsline {subsubsection}{\numberline {3.4.1}VISTA DE CONTEXTO}{6}{}%
+\contentsline {subsubsection}{\numberline {3.4.2}VISTA DE CONTENEDORES Y COMPONENTES PRINCIPALES}{6}{}%
+\contentsline {subsubsection}{\numberline {3.4.3}PAQUETES Y ORGANIZACIÓN DEL CÓDIGO}{6}{}%
+\contentsline {subsection}{\numberline {3.5}DISEÑO DE DATOS}{6}{}%
+\contentsline {subsubsection}{\numberline {3.5.1}MODELO ENTIDAD-RELACIÓN O ESQUEMA RELACIONAL}{6}{}%
+\contentsline {subsubsection}{\numberline {3.5.2}CONSIDERACIONES DE INTEGRIDAD Y SEGURIDAD DE DATOS}{6}{}%
+\contentsline {subsection}{\numberline {3.6}DISEÑO DE LA INTERACCIÓN USUARIO-SISTEMA}{6}{}%
+\contentsline {subsubsection}{\numberline {3.6.1}CASOS DE USO DEL SISTEMA}{6}{}%
+\contentsline {subsubsection}{\numberline {3.6.2}DIAGRAMAS DE SECUENCIA Y OTROS DIAGRAMAS DE INTERACCIÓN}{6}{}%
+\contentsline {subsubsection}{\numberline {3.6.3}PROTOTIPOS DE INTERFAZ Y LINEAMIENTOS DE UX}{6}{}%
+\contentsline {subsection}{\numberline {3.7}SEGURIDAD Y CUMPLIMIENTO}{6}{}%
+\contentsline {subsubsection}{\numberline {3.7.1}GESTIÓN DE ROLES, PERMISOS Y AUTENTICACIÓN}{6}{}%
+\contentsline {subsubsection}{\numberline {3.7.2}POLÍTICAS DE SEGURIDAD Y PROTECCIÓN DE DATOS}{6}{}%
+\contentsline {subsection}{\numberline {3.8}PLAN DE DESARROLLO POR INCREMENTOS O ITERACIONES}{6}{}%
+\contentsline {subsubsection}{\numberline {3.8.1}DEFINICIÓN DE INCREMENTOS / SPRINTS}{6}{}%
+\contentsline {subsubsection}{\numberline {3.8.2}ALCANCE POR INCREMENTO}{6}{}%
+\contentsline {subsubsection}{\numberline {3.8.3}CRITERIOS DE ACEPTACIÓN Y CIERRE DE INCREMENTOS}{6}{}%
+\contentsline {section}{CAPÍTULO IV}{7}{}%
+\contentsline {subsection}{\numberline {4.1}AMBIENTE DE DESARROLLO E IMPLEMENTACIÓN}{7}{}%
+\contentsline {subsubsection}{\numberline {4.1.1}HERRAMIENTAS Y CONFIGURACIÓN DEL ENTORNO}{7}{}%
+\contentsline {subsubsection}{\numberline {4.1.2}ESTRATEGIA DE CONTROL DE VERSIONES}{7}{}%
+\contentsline {subsection}{\numberline {4.2}DESARROLLO POR INCREMENTOS}{7}{}%
+\contentsline {subsubsection}{\numberline {4.2.1}INCREMENTO 1: DESCRIPCIÓN, FUNCIONALIDADES DESARROLLADAS Y RESULTADOS}{7}{}%
+\contentsline {subsubsection}{\numberline {4.2.2}INCREMENTO 2: DESCRIPCIÓN, FUNCIONALIDADES DESARROLLADAS Y RESULTADOS}{7}{}%
+\contentsline {subsubsection}{\numberline {4.2.3}INCREMENTO 3: DESCRIPCIÓN, FUNCIONALIDADES DESARROLLADAS Y RESULTADOS}{7}{}%
+\contentsline {subsubsection}{\numberline {4.2.4}INCREMENTO 4 U OTROS: DESCRIPCIÓN, FUNCIONALIDADES DESARROLLADAS Y RESULTADOS}{7}{}%
+\contentsline {subsection}{\numberline {4.3}INTEGRACIÓN Y DESPLIEGUE DEL SISTEMA}{7}{}%
+\contentsline {subsubsection}{\numberline {4.3.1}ESTRATEGIA DE INTEGRACIÓN CONTINUA Y DESPLIEGUE}{7}{}%
+\contentsline {subsubsection}{\numberline {4.3.2}PUESTA EN MARCHA EN EL ENTORNO OBJETIVO}{7}{}%
+\contentsline {subsection}{\numberline {4.4}MANUAL TÉCNICO}{7}{}%
+\contentsline {subsection}{\numberline {4.5}MANUAL DE USUARIO}{7}{}%

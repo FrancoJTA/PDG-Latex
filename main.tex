@@ -1,0 +1,32 @@
+\documentclass[12pt]{article}
+
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+\usepackage[a4paper, margin=2.5cm]{geometry}
+\usepackage{fontspec}
+
+\setmainfont{Liberation Sans}
+
+\raggedbottom
+
+% Ajuste de espacios en secciones para evitar páginas con mucho espacio en blanco
+\usepackage{titlesec}
+\titlespacing*{\section}{0pt}{10pt plus 2pt minus 2pt}{4pt plus 1pt minus 1pt}
+\titlespacing*{\subsection}{0pt}{8pt plus 1pt minus 1pt}{3pt plus 0.5pt minus 0.5pt}
+\titlespacing*{\subsubsection}{0pt}{6pt plus 1pt minus 1pt}{2pt plus 0.5pt minus 0.5pt}
+
+\begin{document}
+
+\pagenumbering{gobble}
+\input{portada}
+\input{content/intro.tex}
+
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+\input{content/chapter-1/content.tex}
+\input{content/chapter-2/content.tex}
+\input{content/chapter-3/content.tex}
+\input{content/chapter-4/content.tex}
+
+\end{document}
