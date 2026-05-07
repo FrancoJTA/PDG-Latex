@@ -1,32 +1,67 @@
-\documentclass[12pt]{article}
+% =============================================================================
+% main.tex — Documento principal
+% Perfil de Trabajo de Grado — Universidad Privada del Valle
+%
+% Motor requerido: XeLaTeX
+%   Compilar con: latexmk -xelatex main.tex
+%
+% La clase univalle-perfil.cls aplica automáticamente:
+%   - Papel carta (21,6 × 27,9 cm), una cara
+%   - Fuente Liberation Sans 11 pt (equivalente a Arial)
+%   - Márgenes: Superior/Inferior 2,5 cm | Izquierdo 3 cm | Derecho 2 cm
+%   - Interlineado 1,5 | Doble espacio entre párrafos
+%   - Paginación arábiga en margen superior derecho (desde Introducción)
+%   - Norma bibliográfica APA (biblatex + biber)
+% =============================================================================
 
-\usepackage[spanish]{babel}
-\usepackage{graphicx}
-\usepackage[a4paper, margin=2.5cm]{geometry}
-\usepackage{fontspec}
+\documentclass{univalle-perfil}
 
-\setmainfont{Liberation Sans}
+% -----------------------------------------------------------------------------
+% BIBLIOGRAFÍA — agregar entradas en referencias.bib
+% -----------------------------------------------------------------------------
+\addbibresource{referencias.bib}
 
-\raggedbottom
+% -----------------------------------------------------------------------------
+% METADATOS DE LA CARÁTULA
+% -----------------------------------------------------------------------------
+\universidad{Universidad Privada del Valle}
+\facultad{Facultad de Informática y Electrónica}
+\carrera{Carrera de Licenciatura en Ingeniería de Sistemas}
+\tituloTrabajo{Plataforma Web de Aprendizaje Adaptativo Basada en Grafos de Conocimiento para la Personalización del Proceso de Estudio}
+\modalidad{Proyecto de Grado}
+\tituloOptar{Licenciatura en Ingeniería de Sistemas}
+\postulante{Franco Javier Torrez Alvarado}
+\tutor{Rolando Lara Sanchez}
+\ciudad{Santa Cruz}
+\pais{Bolivia}
+\anio{2025}
 
-% Ajuste de espacios en secciones para evitar páginas con mucho espacio en blanco
-\usepackage{titlesec}
-\titlespacing*{\section}{0pt}{10pt plus 2pt minus 2pt}{4pt plus 1pt minus 1pt}
-\titlespacing*{\subsection}{0pt}{8pt plus 1pt minus 1pt}{3pt plus 0.5pt minus 0.5pt}
-\titlespacing*{\subsubsection}{0pt}{6pt plus 1pt minus 1pt}{2pt plus 0.5pt minus 0.5pt}
-
+% =============================================================================
 \begin{document}
 
+% --- Carátula (sin número de página) ----------------------------------------
+\makecaratula
+
+% --- Páginas preliminares: dedicatoria, agradecimientos, resumen, abstract ---
 \pagenumbering{gobble}
-\input{portada}
 \input{content/intro.tex}
 
+% --- Índice de contenido -----------------------------------------------------
+% \tableofcontents ya gestiona: nueva página antes, interlineado simple,
+% nueva página después (definido en univalle-perfil.cls)
 \tableofcontents
-\newpage
+
+% --- Contenido principal (numeración arábiga desde aquí) ---------------------
 \pagenumbering{arabic}
+
 \input{content/chapter-1/content.tex}
 \input{content/chapter-2/content.tex}
 \input{content/chapter-3/content.tex}
 \input{content/chapter-4/content.tex}
+
+% --- Referencias bibliográficas (interlineado simple, orden APA) -------------
+% \nocite{*} incluye todas las entradas del .bib aunque no estén citadas en el texto.
+% Quitar esta línea cuando el documento esté completo y solo se quieran las citadas.
+\referencias
 
 \end{document}
