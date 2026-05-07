@@ -70,7 +70,8 @@ ProyectoGrado/
 │   ├── chapter-1/content.tex       # Cap. I: Marco General
 │   ├── chapter-2/content.tex       # Cap. II: Marco Teórico y Tecnológico
 │   ├── chapter-3/content.tex       # Cap. III: Análisis y Diseño del Sistema
-│   └── chapter-4/content.tex       # Cap. IV: Construcción e Implementación
+│   ├── chapter-4/content.tex       # Cap. IV: Construcción e Implementación
+│   └── conclusiones.tex            # Conclusiones y Recomendaciones
 └── imagenes/                       # Figuras e imágenes del documento
 ```
 
@@ -137,7 +138,7 @@ Abrir `referencias.bib` y agregar una entrada según el tipo de fuente:
 
 ## Formato aplicado
 
-La clase `univalle-perfil.cls` aplica automáticamente todas las reglas de la *Guía de Elaboración de Perfil Trabajos de Grado* (DAAP, UNIVALLE 2019):
+La clase `univalle-perfil.cls` aplica automáticamente todas las reglas de la *Norma de Organización y Presentación de Trabajos de Grado* (DAAP, UNIVALLE 2019):
 
 | Parámetro | Valor |
 |---|---|
@@ -147,3 +148,15 @@ La clase `univalle-perfil.cls` aplica automáticamente todas las reglas de la *G
 | Interlineado | 1,5 general — simple en bibliografía, índice y citas extensas |
 | Paginación | Arábiga, margen superior derecho, desde el Cap. I |
 | Bibliografía | Norma APA 7 (biblatex + biber) |
+| Títulos | Negrilla mayúsculas (2 dígitos), cursiva mayúsculas (3 dígitos), cursiva minúsculas (4 dígitos) |
+| Figuras | Numeración `X.Y` (capítulo.figura), título en negrilla, fuente en cursiva |
+| Carátulas | Páginas separadoras sin número para capítulos, conclusiones y referencias |
+
+### Comandos personalizados
+
+```latex
+\capitulo{N}{Romano}{Título}    % Página separadora de capítulo + reinicio de contadores
+\seccioncuerpo{TÍTULO}          % Página separadora para Conclusiones, Recomendaciones, etc.
+\referencias                    % Página separadora + lista bibliográfica APA
+\fuente{Texto.}                 % Pie de figura/cuadro con la fuente
+```

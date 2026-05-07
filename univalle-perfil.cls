@@ -167,11 +167,11 @@
   {\thesubsection}{1em}{}
 
 \titleformat{\subsubsection}[block]
-  {\normalfont\normalsize\bfseries}
+  {\normalfont\normalsize\itshape}
   {\thesubsubsection}{1em}{}
 
 \titleformat{\paragraph}[block]
-  {\normalfont\normalsize\bfseries}
+  {\normalfont\normalsize\itshape}
   {\theparagraph}{1em}{}
 
 % Espacios antes y después de cada nivel.
@@ -209,13 +209,45 @@
 % -----------------------------------------------------------------------------
 \let\oldtableofcontents\tableofcontents
 \renewcommand{\tableofcontents}{%
-  \newpage%                              % siempre inicia en página nueva
+  \newpage%
   \thispagestyle{sinpagina}%
   \begin{spacing}{1.0}%
     \setlength{\parskip}{2pt}%
     \oldtableofcontents%
   \end{spacing}%
-  \newpage%                              % deja página nueva para el contenido
+  \newpage%
+}
+
+% -----------------------------------------------------------------------------
+% ÍNDICE DE FIGURAS (Sección 1.1.10)
+% Presentar solo si el trabajo contiene figuras.
+% Uso en main.tex: \listoffigures
+% -----------------------------------------------------------------------------
+\let\oldlistoffigures\listoffigures
+\renewcommand{\listoffigures}{%
+  \newpage%
+  \thispagestyle{sinpagina}%
+  \begin{spacing}{1.0}%
+    \setlength{\parskip}{2pt}%
+    \oldlistoffigures%
+  \end{spacing}%
+  \newpage%
+}
+
+% -----------------------------------------------------------------------------
+% ÍNDICE DE CUADROS (Sección 1.1.10)
+% Presentar solo si el trabajo contiene cuadros o tablas.
+% Uso en main.tex: \listoftables
+% -----------------------------------------------------------------------------
+\let\oldlistoftables\listoftables
+\renewcommand{\listoftables}{%
+  \newpage%
+  \thispagestyle{sinpagina}%
+  \begin{spacing}{1.0}%
+    \setlength{\parskip}{2pt}%
+    \oldlistoftables%
+  \end{spacing}%
+  \newpage%
 }
 
 % -----------------------------------------------------------------------------
@@ -288,10 +320,10 @@
 % Comando principal para imprimir la bibliografía con formato correcto:
 % interlineado simple, título en mayúsculas, ajustado a la guía.
 \newcommand{\referencias}{%
-  \newpage%
+  \seccioncuerpo{REFERENCIAS BIBLIOGRÁFICAS}%
   \begin{spacing}{1.0}%
     \setlength{\parskip}{0pt}%
-    \printbibliography[title={REFERENCIAS BIBLIOGRÁFICAS}]%
+    \printbibliography[heading=none]%
   \end{spacing}%
 }
 
@@ -428,6 +460,29 @@
 }
 
 % -----------------------------------------------------------------------------
+% SEPARADOR DE SECCIÓN (\seccioncuerpo)
+% Para: CONCLUSIONES, RECOMENDACIONES, APÉNDICES, ANEXOS, etc.
+% Genera una hoja de página completa con el título centrado verticalmente,
+% sin número de página. Aparece en el índice de contenido al nivel de capítulo.
+%
+% Uso:
+%   \seccioncuerpo{CONCLUSIONES}
+%   \seccioncuerpo{RECOMENDACIONES}
+%   \seccioncuerpo{APÉNDICES}
+% -----------------------------------------------------------------------------
+\newcommand{\seccioncuerpo}[1]{%
+  \clearpage%
+  \thispagestyle{sinpagina}%
+  \addcontentsline{toc}{section}{#1}%
+  \vspace*{\fill}%
+  \begin{center}%
+    \fontsize{15}{18}\selectfont\textbf{#1}%
+  \end{center}%
+  \vspace*{\fill}%
+  \clearpage%
+}
+
+% -----------------------------------------------------------------------------
 % CAPÍTULO (\capitulo)
 % Reemplaza el bloque manual de \begin{center}...\end{center} +
 % \addcontentsline + \setcounter que se repetía en cada archivo de capítulo.
@@ -449,21 +504,25 @@
 %   \capitulo{2}{II}{Marco Teórico y Tecnológico}
 % -----------------------------------------------------------------------------
 \newcommand{\capitulo}[3]{%
-  \newpage%
+  \clearpage%
   % Registrar en TOC antes de cambiar el contador (evita número automático)
   \addcontentsline{toc}{section}{CAPÍTULO #2: \MakeUppercase{#3}}%
-  % Configurar contadores
+  % Configurar contadores de sección y reiniciar figuras/cuadros por capítulo
   \setcounter{section}{#1}%
   \setcounter{subsection}{0}%
   \setcounter{subsubsection}{0}%
   \setcounter{paragraph}{0}%
-  % Mostrar encabezado
-  \thispagestyle{fancy}%
+  \setcounter{figure}{0}%
+  \setcounter{table}{0}%
+  % Hoja separadora: sin número de página, título centrado verticalmente (Norma §2.7)
+  \thispagestyle{sinpagina}%
+  \vspace*{\fill}%
   \begin{center}%
-    {\large\textbf{CAPÍTULO #2}}\\[0.5cm]%
-    {\normalsize\textbf{\MakeUppercase{#3}}}%
+    \fontsize{15}{18}\selectfont\textbf{CAPÍTULO #2}\\[0.5\baselineskip]%
+    \fontsize{13}{15.6}\selectfont\textbf{\MakeUppercase{#3}}%
   \end{center}%
-  \nopagebreak[4]%
+  \vspace*{\fill}%
+  \clearpage%
 }
 
 % -----------------------------------------------------------------------------
@@ -473,14 +532,23 @@
 % -----------------------------------------------------------------------------
 \captionsetup{
   labelsep   = period,      % "Figura 1. Descripción"
-  font       = small,
+  font       = normalsize,
   labelfont  = bf,
   justification = raggedright,
   singlelinecheck = false
 }
 
-% Usar "Cuadro" en lugar de "Tabla" (convención UNIVALLE)
-\addto\captionsspanish{\renewcommand{\tablename}{Cuadro}}
+% Convenciones de nombres UNIVALLE (Cuadro en lugar de Tabla; títulos de índices en mayúsculas)
+\addto\captionsspanish{%
+  \renewcommand{\tablename}{Cuadro}%
+  \renewcommand{\listfigurename}{ÍNDICE DE FIGURAS}%
+  \renewcommand{\listtablename}{ÍNDICE DE CUADROS}%
+}
+
+% Numeración de figuras y cuadros con prefijo de capítulo: Figura 1.1, Cuadro 2.3
+% Los contadores se reinician en cada \capitulo{}
+\renewcommand{\thefigure}{\thesection.\arabic{figure}}
+\renewcommand{\thetable}{\thesection.\arabic{table}}
 
 % Comando para la fuente de una figura o cuadro
 % Uso: \fuente{DAAP, 2019.}

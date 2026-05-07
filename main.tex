@@ -46,10 +46,10 @@
 \pagenumbering{gobble}
 \input{content/intro.tex}
 
-% --- Índice de contenido -----------------------------------------------------
-% \tableofcontents ya gestiona: nueva página antes, interlineado simple,
-% nueva página después (definido en univalle-perfil.cls)
+% --- Índices -----------------------------------------------------------------
 \tableofcontents
+\listoffigures
+% \listoftables
 
 % --- Contenido principal (numeración arábiga desde aquí) ---------------------
 \pagenumbering{arabic}
@@ -59,9 +59,10 @@
 \input{content/chapter-3/content.tex}
 \input{content/chapter-4/content.tex}
 
-% --- Referencias bibliográficas (interlineado simple, orden APA) -------------
-% \nocite{*} incluye todas las entradas del .bib aunque no estén citadas en el texto.
-% Quitar esta línea cuando el documento esté completo y solo se quieran las citadas.
+% --- Conclusiones y Recomendaciones ------------------------------------------
+\input{content/conclusiones.tex}
+
+% --- Referencias bibliográficas ----------------------------------------------
 \referencias
 
 \end{document}

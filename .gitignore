@@ -12,9 +12,6 @@
 *.toc
 *.xdv
 
-# ── PDF compilado (opcional: quitar si quieres versionar el PDF) ───────────────
-*.pdf
-
 # ── Claude Code y configuración local ────────────────────────────────────────
 CLAUDE.md
 .codex
