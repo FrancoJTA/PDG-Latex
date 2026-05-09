@@ -12,6 +12,7 @@
 *.toc
 *.xdv
 *.lof
+*.lot
 
 # ── Claude Code y configuración local ────────────────────────────────────────
 CLAUDE.md

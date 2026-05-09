@@ -1,0 +1,294 @@
+% =============================================================================
+% formato/main.tex — Perfil de Proyecto de Grado
+% Estructura según: Guía de Elaboración de Perfil Trabajos de Grado
+% Universidad Privada del Valle — DAAP, 1ra Ed. 2019
+%
+% Motor requerido: XeLaTeX
+%   Compilar con: latexmk -xelatex main.tex  (ejecutar desde esta carpeta)
+%
+% Dependencias:
+%   univalle-perfil.cls  — enlace simbólico al directorio padre
+%   ../imagenes/         — imágenes (logo en carátula, figuras del cuerpo)
+%   ../referencias.bib   — base bibliográfica compartida
+% =============================================================================
+
+\documentclass{univalle-perfil}
+
+\graphicspath{{../}}
+\addbibresource{../referencias.bib}
+
+% -----------------------------------------------------------------------------
+% METADATOS DE LA CARÁTULA
+% -----------------------------------------------------------------------------
+\universidad{Universidad Privada del Valle}
+\facultad{Facultad de Informática y Electrónica}
+\carrera{Carrera de Licenciatura en Ingeniería de Sistemas}
+\tituloTrabajo{Plataforma Web de Aprendizaje Adaptativo Basada en Grafos de Conocimiento para la Personalización del Proceso de Estudio}
+\modalidad{Proyecto de Grado}
+\tituloOptar{Licenciatura en Ingeniería de Sistemas}
+\postulante{Franco Javier Torrez Alvarado}
+\tutor{Rolando Lara Sanchez}
+\ciudad{Santa Cruz}
+\pais{Bolivia}
+\anio{2025}
+
+% =============================================================================
+\begin{document}
+
+% --- Carátula ----------------------------------------------------------------
+\makecaratula
+
+% --- Índices -----------------------------------------------------------------
+\pagenumbering{gobble}
+\tableofcontents
+\listoffigures
+
+% --- Contenido principal -----------------------------------------------------
+\pagenumbering{arabic}
+
+% =============================================================================
+% 1. INTRODUCCIÓN
+% =============================================================================
+\section{Introducción}
+
+El aprendizaje humano sigue un flujo de procesamiento de la información descrito por \textcite{atkinson1968}, que organiza la memoria en tres etapas: registro sensorial, memoria a corto plazo y memoria a largo plazo. Para que el conocimiento se consolide de manera real y duradera, la información debe atravesar cada etapa bajo condiciones específicas: atención sostenida, procesamiento activo y revisiones distribuidas en el tiempo.
+
+Las plataformas educativas digitales existentes resuelven partes de este proceso de forma aislada. Khan Academy aplica rutas de aprendizaje sobre currículos predefinidos. Anki implementa repetición espaciada sin verificación de comprensión. Duolingo calibra la dificultad pero optimizando el engagement del usuario, no la retención profunda. Ninguna de estas plataformas integra todas estas soluciones en un sistema cohesivo, sin currículo fijo y adaptable a cualquier dominio de conocimiento.
+
+En el contexto boliviano, el sistema educativo opera bajo un modelo estandarizado donde un solo docente atiende grupos de hasta treinta estudiantes, haciendo inviable la personalización del ritmo o del contenido. El acceso a tutorías privadas, que es la única alternativa de acompañamiento individualizado disponible hoy, tiene un costo que no está al alcance de todos los estudiantes.
+
+El presente trabajo propone el desarrollo de una plataforma adaptativa de aprendizaje que organiza el conocimiento en un grafo dinámico generado automáticamente para cualquier dominio, construye un modelo de usuario individual, implementa un motor de dificultad progresiva y un algoritmo de espaciado automático basado en la curva del olvido, y entrega retroalimentación inmediata después de cada tarea. El entregable principal es una arquitectura base funcional construida en fases incrementales, validada mediante pruebas técnicas y de usuario.
+
+% =============================================================================
+% 2. ANTECEDENTES DEL PROBLEMA
+% =============================================================================
+\section{Antecedentes del Problema}
+
+Los estudiantes de último año de colegio en Santa Cruz de la Sierra estudian de manera desordenada y pasiva, sin ninguna herramienta que organice el contenido según su nivel individual, ajuste la dificultad de manera continua, verifique que la comprensión sea real antes de avanzar ni programe revisiones para evitar que el conocimiento se olvide. Este proceso genera conocimiento superficial, fragmentado y difícil de aplicar.
+
+El análisis de las causas que inciden en este problema se presenta en la Figura 1.1, elaborada mediante la técnica del árbol del problema. Las causas identificadas se agrupan en tres ejes: el procesamiento pasivo del contenido (releer sin comprender, retroalimentación tardía), la homogeneización del proceso educativo (comprensión fragmentada, procesamiento pasivo institucionalizado) y el deterioro de la atención (atención fragmentada, concentración deteriorada por el uso de plataformas de contenido corto). El efecto central es el aprendizaje ineficiente.
+
+\begin{figure}[H]
+\centering
+\caption{Árbol del problema del proceso de estudio en estudiantes de último año.}
+\includegraphics[width=0.7\textwidth]{imagenes/ishikawa.png}
+\fuente{Elaboración propia, 2025.}
+\end{figure}
+
+No existen en el mercado local plataformas que resuelvan de manera integrada el problema descrito. A nivel internacional, Khan Academy, Anki, Duolingo y Khanmigo abordan partes del proceso de aprendizaje de forma aislada, sin integrar grafos de conocimiento, espaciado automático y verificación de comprensión en un único sistema sin currículo fijo.
+
+\subsection{Planteamiento del Problema}
+
+Los estudiantes de último año de colegio en Santa Cruz de la Sierra estudian de manera desordenada y pasiva, sin ninguna guía que organice el contenido según sus conocimientos previos, ajuste la dificultad de manera continua, verifique que la comprensión sea real antes de avanzar ni programe revisiones para evitar que el conocimiento se olvide, generando así conocimiento superficial, fragmentado y difícil de aplicar en contextos nuevos. ¿Cómo puede un sistema de software personalizar el proceso de aprendizaje de estos estudiantes, organizando el contenido según el nivel individual de cada uno, calibrando la dificultad de manera continua, verificando la comprensión real y programando revisiones automáticas para consolidar el conocimiento de forma eficiente?
+
+\subsection{Objeto de Estudio}
+
+El proceso de aprendizaje individual de los estudiantes de último año de colegio en Santa Cruz de la Sierra, Bolivia, y su relación con las herramientas y métodos de estudio disponibles actualmente.
+
+% =============================================================================
+% 3. OBJETIVOS
+% =============================================================================
+\section{Objetivos}
+
+\subsection{Objetivo General}
+
+Desarrollar una plataforma de aprendizaje que se adapte al nivel individual de cada estudiante, organice el contenido en un orden lógico y personalizado, ajuste la dificultad de manera continua y programe automáticamente las revisiones necesarias para que el conocimiento se consolide de forma real y duradera.
+
+\subsection{Objetivos Específicos}
+
+\begin{itemize}
+    \item Diseñar un grafo de conocimiento dinámico que organice los conceptos de cualquier dominio según sus dependencias y genere automáticamente una ruta de estudio personalizada para cada estudiante.
+    \item Desarrollar un modelo de usuario que registre el nivel de conocimiento individual, el historial de sesiones y el estado de cada concepto en tiempo real.
+    \item Implementar un motor de dificultad progresiva que ajuste el nivel del contenido de manera continua según el desempeño del estudiante.
+    \item Construir un módulo de comprensión conectada que verifique que el estudiante relaciona los conceptos entre sí antes de permitir el avance.
+    \item Implementar un algoritmo de espaciado automático basado en la curva del olvido que programe revisiones individuales en el momento óptimo para cada concepto.
+    \item Desarrollar un sistema de retroalimentación inmediata que identifique el concepto específico donde ocurrió la falla y ajuste el contenido siguiente en tiempo real.
+\end{itemize}
+
+% =============================================================================
+% 4. JUSTIFICACIÓN
+% =============================================================================
+\section{Justificación}
+
+El aprendizaje es una actividad que toda persona realiza de manera continua, pero los métodos y herramientas disponibles hoy no están diseñados para acompañar ese proceso de manera individual y eficiente. Este proyecto se justifica porque existe una brecha real entre cómo funciona la memoria humana y cómo está diseñado el entorno de estudio actual, y porque la tecnología disponible hoy permite cerrar esa brecha de una manera que antes no era posible.
+
+\subsection{Justificación Técnica}
+
+El proyecto es técnicamente viable porque cada uno de sus componentes tiene precedente en la industria. Los grafos de conocimiento, los algoritmos de espaciado basados en la curva del olvido y los modelos de usuario adaptativo son tecnologías maduras que ya existen por separado en plataformas como Anki, Khan Academy y Duolingo. Lo que no existe es un sistema que las integre de manera coherente, sin currículo fijo y para cualquier dominio. La generación automática del grafo mediante modelos de lenguaje, el motor de dificultad progresiva y la retroalimentación inmediata son implementables con las herramientas de desarrollo disponibles actualmente. El entregable del proyecto es una arquitectura base funcional construida en fases incrementales, lo que hace el alcance técnico defendible dentro del tiempo de un proyecto de grado.
+
+\subsection{Justificación Económica}
+
+El costo anual de un estudiante en colegio privado en Santa Cruz de la Sierra, incluyendo mensualidades, útiles y transporte, oscila entre \$1.000 y \$1.200, sin ninguna garantía de que el proceso de estudio sea eficiente. El acceso a tutorías privadas, única alternativa de personalización disponible hoy, tiene un costo que no está al alcance de todos los estudiantes. El sistema propone un modelo de suscripción mensual que representa entre el 8\% y el 15\% del costo anual del colegio, con un costo marginal por usuario cercano a los \$0,15 mensuales en consumo de inteligencia artificial, lo que genera un margen sostenible desde etapas tempranas. A escala regional, el mercado de estudiantes de secundaria en Latinoamérica representa una oportunidad significativa para un sistema que no depende de ningún currículo institucional preestablecido.
+
+\subsection{Justificación Social}
+
+El sistema educativo actual genera una brecha entre los estudiantes que tienen acceso a acompañamiento personalizado y los que estudian solos, sin guía ni retroalimentación oportuna. Esta brecha se manifiesta en rendimiento académico y desarrollo de habilidades a largo plazo. Un sistema adaptativo accesible desde cualquier dispositivo, sin depender de un docente ni de un currículo institucional, democratiza el acceso a una experiencia de aprendizaje personalizada que hoy solo está disponible para quienes pueden pagar un tutor privado. El impacto social no se limita al colegio: el sistema es igualmente funcional para cualquier persona que quiera aprender algo por su cuenta, extendiendo su alcance más allá del entorno académico formal.
+
+% =============================================================================
+% 5. DELIMITACIÓN DE LA INVESTIGACIÓN
+% =============================================================================
+\section{Delimitación de la Investigación}
+
+\subsection{Temática}
+
+El estudio se delimita al campo del desarrollo de software educativo, específicamente en el área de plataformas de aprendizaje adaptativo basadas en grafos de conocimiento. Las teorías consideradas son el modelo de procesamiento de la información de \textcite{atkinson1968} y los principios del espaciado distribuido fundamentados en la curva del olvido. En cuanto a la ingeniería de software, se aplica la metodología de desarrollo iterativo incremental. No se abordan aspectos pedagógicos curriculares ni diseño de contenido educativo institucional; el sistema opera sobre cualquier dominio de conocimiento definido por el usuario.
+
+\subsection{Espacial}
+
+El estudio se realiza en la ciudad de Santa Cruz de la Sierra, Bolivia. La recolección de evidencias y las pruebas de validación con usuarios se desarrollan con estudiantes del Colegio Cardenal Cushing. Los resultados son aplicables a estudiantes de último año de colegios de la ciudad y, en general, a cualquier persona que requiera estudiar un dominio de conocimiento de manera autónoma.
+
+\subsection{Temporal}
+
+La investigación se desarrolla durante el período comprendido entre marzo y diciembre de 2025. El hecho fuente del estudio es el estado actual de los hábitos de estudio de los estudiantes y las limitaciones de las herramientas disponibles. La validez de los resultados está sujeta a cambios significativos en las tecnologías de inteligencia artificial utilizadas para la generación automática del grafo de conocimiento, por lo que se recomienda una revisión de la arquitectura propuesta en un plazo no mayor a tres años.
+
+% =============================================================================
+% 6. PROPUESTA DE SOLUCIÓN AL PLANTEAMIENTO DEL PROBLEMA
+% =============================================================================
+\section{Propuesta de Solución al Planteamiento del Problema}
+
+El sistema propuesto es una plataforma adaptativa de aprendizaje que organiza el conocimiento en un grafo dinámico generado automáticamente para cualquier dominio, evalúa el nivel inicial del estudiante, genera una ruta de estudio personalizada, ajusta la dificultad de manera continua, verifica que la comprensión sea real antes de permitir el avance y programa revisiones automáticas para evitar el deterioro del conocimiento. El entregable principal del proyecto de grado es una arquitectura base funcional con los módulos centrales integrados y operativos, construida en fases incrementales y validada mediante pruebas técnicas y de usuario.
+
+Los módulos centrales del sistema son los siguientes: el grafo de conocimiento dinámico, que organiza los conceptos y sus dependencias; el modelo de usuario individual, que registra el estado de cada concepto en tiempo real; el motor de dificultad progresiva, que calibra el nivel del contenido según el desempeño; el módulo de comprensión conectada, que verifica relaciones entre conceptos antes de permitir el avance; el algoritmo de espaciado automático, que programa revisiones en el momento óptimo; y el sistema de retroalimentación inmediata, que identifica y corrige fallas en tiempo real.
+
+% =============================================================================
+% 7. DISEÑO METODOLÓGICO
+% =============================================================================
+\section{Diseño Metodológico}
+
+El proyecto sigue una metodología de desarrollo incremental por fases, donde cada fase entrega un módulo funcional que se integra con los anteriores. La validación es técnica: se verifica que el sistema produce los comportamientos diseñados de manera consistente.
+
+\subsection{Tipo de Investigación}
+
+La investigación es aplicada. Se toma conocimiento existente de las ciencias cognitivas y la ingeniería de software y se aplica al diseño y construcción de un sistema funcional que resuelve un problema real e identificable. El enfoque es mixto: cuantitativo en la medición del comportamiento del sistema (tiempos de respuesta, tasas de error, precisión del motor de dificultad y del algoritmo de espaciado) y cualitativo en la validación de la experiencia del usuario (comprensión del flujo, usabilidad de la interfaz y percepción del acompañamiento adaptativo).
+
+\subsection{Método de Investigación}
+
+Se utiliza el método de desarrollo iterativo incremental. El sistema se construye en fases comenzando por los módulos centrales: el grafo de conocimiento y el modelo de usuario. Cada fase integra un nuevo módulo, se prueba su funcionamiento de forma aislada y luego su integración con los módulos anteriores. Las decisiones de diseño se toman basándose en evidencia de la literatura de ciencias cognitivas y en los resultados de las pruebas de cada fase.
+
+\subsection{Técnicas e Instrumentos de Investigación}
+
+\subsubsection{Técnicas}
+
+Se utilizan pruebas funcionales por módulo para verificar que cada componente produce el comportamiento esperado. Se aplican entrevistas y encuestas con estudiantes de último año para validar la usabilidad y pertinencia del flujo. Se realiza revisión de literatura científica en ciencias cognitivas como base para las decisiones de diseño del motor de dificultad y el algoritmo de espaciado. Se efectúa análisis comparativo de plataformas existentes para documentar las brechas que el sistema resuelve.
+
+\subsubsection{Instrumentos}
+
+Los instrumentos correspondientes a cada técnica son los siguientes: guías de entrevista semiestructurada y cuestionarios de usabilidad para la validación con usuarios; fichas de revisión bibliográfica para la sistematización de la literatura científica; y matrices de análisis comparativo para la evaluación de plataformas existentes.
+
+\subsection{Población y Muestra}
+
+La población objetivo son los estudiantes de último año de colegio en Santa Cruz de la Sierra. Las fuentes primarias son los estudiantes de último año del Colegio Cardenal Cushing, consultados mediante entrevistas y pruebas de usabilidad. Las fuentes secundarias incluyen literatura científica en ciencias cognitivas, documentación técnica de las tecnologías utilizadas y análisis de plataformas educativas existentes como Khan Academy, Duolingo y Anki. La muestra para la validación se selecciona mediante muestreo no probabilístico por conveniencia, dado el carácter aplicado de la investigación.
+
+% =============================================================================
+% 8. ÍNDICE TENTATIVO
+% =============================================================================
+\section{Índice Tentativo}
+
+\begin{indicetentativo}
+INTRODUCCIÓN \\[2pt]
+CAPÍTULO I. MARCO GENERAL \\
+\quad 1.1 Antecedentes \\
+\quad 1.2 Planteamiento del Problema \\
+\quad\quad 1.2.1 Formulación del Problema \\
+\quad\quad 1.2.2 Árbol del Problema \\
+\quad 1.3 Objetivos \\
+\quad\quad 1.3.1 Objetivo General \\
+\quad\quad 1.3.2 Objetivos Específicos \\
+\quad 1.4 Justificación \\
+\quad\quad 1.4.1 Justificación Técnica \\
+\quad\quad 1.4.2 Justificación Económica \\
+\quad\quad 1.4.3 Justificación Social \\
+\quad 1.5 Metodología \\
+\quad\quad 1.5.1 Enfoque de la Investigación \\
+\quad\quad 1.5.2 Tipo de Investigación \\
+\quad\quad 1.5.3 Método de Investigación \\
+\quad\quad 1.5.4 Técnicas e Instrumentos de Investigación \\
+\quad\quad 1.5.5 Fuentes de Información \\
+\quad\quad 1.5.6 Propuesta \\[2pt]
+CAPÍTULO II. MARCO TEÓRICO Y TECNOLÓGICO \\
+\quad 2.1 Fundamentos de Ingeniería de Software \\
+\quad\quad 2.1.1 Metodologías de Desarrollo de Software \\
+\quad\quad 2.1.2 Modelo Seleccionado \\
+\quad 2.2 Análisis de Requerimientos y Modelado \\
+\quad\quad 2.2.1 Requerimientos Funcionales y No Funcionales \\
+\quad\quad 2.2.2 Técnicas para Levantamiento y Análisis \\
+\quad\quad 2.2.3 Modelado de Sistemas con UML \\
+\quad\quad 2.2.4 Modelo C4 de Arquitectura de Software \\
+\quad 2.3 Arquitectura de Sistemas \\
+\quad\quad 2.3.1 Modelo Cliente-Servidor \\
+\quad\quad 2.3.2 Arquitecturas en Aplicaciones Web \\
+\quad 2.4 Tecnologías de Desarrollo \\
+\quad\quad 2.4.1 Backend: Lenguajes, Frameworks y Estilos de API \\
+\quad\quad 2.4.2 Frontend: Frameworks, Componentes y Renderizado \\
+\quad\quad 2.4.3 Bases de Datos y Persistencia de Datos \\
+\quad\quad 2.4.4 Infraestructura, Despliegue y Contenedores \\
+\quad 2.5 Experiencia de Usuario y Accesibilidad \\
+\quad\quad 2.5.1 Diseño Centrado en el Usuario (UCD) \\
+\quad\quad 2.5.2 Principios Básicos de UX en Aplicaciones Web \\
+\quad\quad 2.5.3 Accesibilidad Web y Buenas Prácticas \\[2pt]
+CAPÍTULO III. ANÁLISIS Y DISEÑO DEL SISTEMA PROPUESTO \\
+\quad 3.1 Análisis del Contexto Operativo \\
+\quad 3.2 Definición de Requerimientos del Sistema \\
+\quad 3.3 Modelo de Procesos y Flujo de Trabajo \\
+\quad 3.4 Diseño de la Arquitectura de la Solución \\
+\quad 3.5 Diseño de Datos \\
+\quad 3.6 Diseño de la Interacción Usuario-Sistema \\
+\quad 3.7 Seguridad y Cumplimiento \\
+\quad 3.8 Plan de Desarrollo por Incrementos o Iteraciones \\[2pt]
+CAPÍTULO IV. CONSTRUCCIÓN E IMPLEMENTACIÓN DEL SISTEMA \\
+\quad 4.1 Ambiente de Desarrollo e Implementación \\
+\quad 4.2 Desarrollo por Incrementos \\
+\quad 4.3 Integración y Despliegue del Sistema \\
+\quad 4.4 Manual Técnico \\
+\quad 4.5 Manual de Usuario \\[2pt]
+CONCLUSIONES \\
+RECOMENDACIONES \\
+REFERENCIAS BIBLIOGRÁFICAS \\
+ANEXOS
+\end{indicetentativo}
+
+% =============================================================================
+% 9. MARCO TEÓRICO
+% =============================================================================
+\section{Marco Teórico}
+
+Los fundamentos teóricos del presente trabajo se organizan en cinco áreas de conocimiento. A continuación se presenta el índice de tópicos que estructuran el marco teórico, seguido del desarrollo de los aspectos más directamente vinculados al objeto de estudio.
+
+Los tópicos considerados son los siguientes: fundamentos de ingeniería de software (metodologías de desarrollo y modelo seleccionado); análisis de requerimientos y modelado (requerimientos funcionales y no funcionales, técnicas de levantamiento, modelado UML y modelo C4); arquitectura de sistemas (modelo cliente-servidor y arquitecturas en aplicaciones web); tecnologías de desarrollo (backend, frontend, bases de datos e infraestructura); y experiencia de usuario y accesibilidad (diseño centrado en el usuario, principios de UX y accesibilidad web).
+
+El fundamento teórico central del proyecto es el modelo de procesamiento de la información propuesto por \textcite{atkinson1968}, que describe el aprendizaje como un flujo de etapas cognitivas con condiciones específicas para funcionar. A partir de ese marco, el sistema organiza el conocimiento en un grafo dinámico, construye un modelo de usuario individual e implementa un algoritmo de espaciado automático basado en la curva del olvido. Estos principios determinan las decisiones de diseño de todos los módulos del sistema.
+
+% =============================================================================
+% 10. CRONOGRAMA
+% =============================================================================
+\section{Cronograma}
+
+El desarrollo del proyecto se organiza en cuatro fases incrementales durante el período marzo--diciembre de 2025. Cada fase entrega un módulo funcional validado que se integra con los anteriores.
+
+\begin{table}[H]
+\centering
+\caption{Cronograma de desarrollo por fases — 2025.}
+\begin{tabular}{llll}
+\toprule
+\textbf{Fase} & \textbf{Actividad} & \textbf{Inicio} & \textbf{Fin} \\
+\midrule
+1 & Grafo de conocimiento y modelo de usuario & Marzo & Mayo \\
+2 & Motor de dificultad progresiva & Junio & Julio \\
+3 & Algoritmo de espaciado y retroalimentación & Agosto & Septiembre \\
+4 & Integración, pruebas y validación con usuarios & Octubre & Diciembre \\
+\bottomrule
+\end{tabular}
+\fuente{Elaboración propia, 2025.}
+\end{table}
+
+% =============================================================================
+% 11. REFERENCIAS BIBLIOGRÁFICAS
+% =============================================================================
+\referencias
+
+% =============================================================================
+% ANEXOS
+% =============================================================================
+\seccioncuerpo{ANEXOS}
+
+\end{document}
