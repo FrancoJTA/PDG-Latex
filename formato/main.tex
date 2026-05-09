@@ -30,7 +30,7 @@
 \tutor{Rolando Lara Sanchez}
 \ciudad{Santa Cruz}
 \pais{Bolivia}
-\anio{2025}
+\anio{2026}
 
 % =============================================================================
 \begin{document}
@@ -66,16 +66,41 @@ El presente trabajo propone el desarrollo de una plataforma adaptativa de aprend
 
 Los estudiantes de último año de colegio en Santa Cruz de la Sierra estudian de manera desordenada y pasiva, sin ninguna herramienta que organice el contenido según su nivel individual, ajuste la dificultad de manera continua, verifique que la comprensión sea real antes de avanzar ni programe revisiones para evitar que el conocimiento se olvide. Este proceso genera conocimiento superficial, fragmentado y difícil de aplicar.
 
-El análisis de las causas que inciden en este problema se presenta en la Figura 1.1, elaborada mediante la técnica del árbol del problema. Las causas identificadas se agrupan en tres ejes: el procesamiento pasivo del contenido (releer sin comprender, retroalimentación tardía), la homogeneización del proceso educativo (comprensión fragmentada, procesamiento pasivo institucionalizado) y el deterioro de la atención (atención fragmentada, concentración deteriorada por el uso de plataformas de contenido corto). El efecto central es el aprendizaje ineficiente.
+El análisis del entorno de estudio actual se sintetiza en el Cuadro 2.1 mediante un análisis FODA, que identifica las fortalezas y debilidades del contexto actual, así como las oportunidades y amenazas que determinan el espacio de solución del problema.
 
-\begin{figure}[H]
+\begin{table}[H]
 \centering
-\caption{Árbol del problema del proceso de estudio en estudiantes de último año.}
-\includegraphics[width=0.7\textwidth]{imagenes/ishikawa.png}
-\fuente{Elaboración propia, 2025.}
-\end{figure}
+\caption{Análisis FODA del entorno de estudio actual.}
+{\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|p{0.44\textwidth}|p{0.44\textwidth}|}
+\hline
+\textbf{Fortalezas} & \textbf{Oportunidades} \\
+\hline
+$\bullet$~Herramientas digitales de estudio disponibles globalmente (Anki, Khan Academy). \newline
+$\bullet$~Algoritmos de repetición espaciada con fundamento científico comprobado. \newline
+$\bullet$~Creciente acceso a dispositivos móviles e internet en Bolivia.
+&
+$\bullet$~Ausencia de soluciones integradas de aprendizaje adaptativo en el mercado boliviano. \newline
+$\bullet$~Disponibilidad de modelos de lenguaje para generación automática de grafos de conocimiento. \newline
+$\bullet$~Demanda creciente de herramientas de estudio independientes del currículo institucional.
+\\
+\hline
+\textbf{Debilidades} & \textbf{Amenazas} \\
+\hline
+$\bullet$~Hábitos de estudio pasivos: relectura sin verificación de comprensión real. \newline
+$\bullet$~Acceso a tutorías personalizadas limitado por costo. \newline
+$\bullet$~Herramientas existentes operan sobre currículos fijos sin adaptación al usuario individual.
+&
+$\bullet$~Plataformas internacionales con mayores recursos podrían incorporar funcionalidades similares. \newline
+$\bullet$~Dependencia de tecnologías de IA con evolución rápida y costos variables. \newline
+$\bullet$~Resistencia al cambio de hábitos de estudio en estudiantes acostumbrados a métodos tradicionales.
+\\
+\hline
+\end{tabular}}
+\fuente{Elaboración propia, 2026.}
+\end{table}
 
-No existen en el mercado local plataformas que resuelvan de manera integrada el problema descrito. A nivel internacional, Khan Academy, Anki, Duolingo y Khanmigo abordan partes del proceso de aprendizaje de forma aislada, sin integrar grafos de conocimiento, espaciado automático y verificación de comprensión en un único sistema sin currículo fijo.
+No existen en el mercado local plataformas que resuelvan de manera integrada el problema descrito. A nivel internacional, Khan Academy, Anki y Duolingo abordan partes del proceso de aprendizaje de forma aislada, sin integrar grafos de conocimiento, espaciado automático y verificación de comprensión en un único sistema sin currículo fijo.
 
 \subsection{Planteamiento del Problema}
 
@@ -83,7 +108,7 @@ Los estudiantes de último año de colegio en Santa Cruz de la Sierra estudian d
 
 \subsection{Objeto de Estudio}
 
-El proceso de aprendizaje individual de los estudiantes de último año de colegio en Santa Cruz de la Sierra, Bolivia, y su relación con las herramientas y métodos de estudio disponibles actualmente.
+El proceso de estudio autónomo de los estudiantes de último año de colegio en Santa Cruz de la Sierra: su organización del contenido, secuencia de estudio, nivel de comprensión alcanzado y retención del conocimiento a lo largo del tiempo.
 
 % =============================================================================
 % 3. OBJETIVOS
@@ -131,15 +156,15 @@ El sistema educativo actual genera una brecha entre los estudiantes que tienen a
 
 \subsection{Temática}
 
-El estudio se delimita al campo del desarrollo de software educativo, específicamente en el área de plataformas de aprendizaje adaptativo basadas en grafos de conocimiento. Las teorías consideradas son el modelo de procesamiento de la información de \textcite{atkinson1968} y los principios del espaciado distribuido fundamentados en la curva del olvido. En cuanto a la ingeniería de software, se aplica la metodología de desarrollo iterativo incremental. No se abordan aspectos pedagógicos curriculares ni diseño de contenido educativo institucional; el sistema opera sobre cualquier dominio de conocimiento definido por el usuario.
+La investigación se delimita al desarrollo de una plataforma web de aprendizaje adaptativo orientada a personalizar el proceso de estudio autónomo mediante grafos de conocimiento, modelado del usuario, ajuste progresivo de dificultad, verificación de comprensión y programación automática de repasos. El proyecto no aborda el diseño curricular institucional ni la evaluación pedagógica formal de largo plazo; se enfoca en el diseño, construcción y validación funcional de una solución de software.
 
 \subsection{Espacial}
 
-El estudio se realiza en la ciudad de Santa Cruz de la Sierra, Bolivia. La recolección de evidencias y las pruebas de validación con usuarios se desarrollan con estudiantes del Colegio Cardenal Cushing. Los resultados son aplicables a estudiantes de último año de colegios de la ciudad y, en general, a cualquier persona que requiera estudiar un dominio de conocimiento de manera autónoma.
+La investigación se desarrolla en la ciudad de Santa Cruz de la Sierra, Bolivia, tomando como población de referencia a estudiantes de último año de colegio. La validación inicial de la propuesta se realizará con estudiantes del Colegio Cardenal Cushing, debido al acceso disponible para aplicar entrevistas, pruebas de uso y observación del proceso de estudio. Aunque la plataforma puede adaptarse a otros contextos educativos, los resultados de esta investigación se interpretan dentro de este entorno específico.
 
 \subsection{Temporal}
 
-La investigación se desarrolla durante el período comprendido entre marzo y diciembre de 2025. El hecho fuente del estudio es el estado actual de los hábitos de estudio de los estudiantes y las limitaciones de las herramientas disponibles. La validez de los resultados está sujeta a cambios significativos en las tecnologías de inteligencia artificial utilizadas para la generación automática del grafo de conocimiento, por lo que se recomienda una revisión de la arquitectura propuesta en un plazo no mayor a tres años.
+La investigación se desarrolla durante la gestión 2026, en el período comprendido entre abril y diciembre. En este intervalo se realiza el análisis del problema, diseño de la solución, desarrollo incremental de los módulos principales, integración del sistema y validación inicial con usuarios. Los resultados se limitan al estado de las tecnologías disponibles durante dicho período, especialmente en lo referente a modelos de lenguaje, generación automática de grafos de conocimiento y servicios de inteligencia artificial.
 
 % =============================================================================
 % 6. PROPUESTA DE SOLUCIÓN AL PLANTEAMIENTO DEL PROBLEMA
@@ -252,33 +277,53 @@ ANEXOS
 % =============================================================================
 \section{Marco Teórico}
 
-Los fundamentos teóricos del presente trabajo se organizan en cinco áreas de conocimiento. A continuación se presenta el índice de tópicos que estructuran el marco teórico, seguido del desarrollo de los aspectos más directamente vinculados al objeto de estudio.
+Los fundamentos teóricos del presente trabajo se organizan en cuatro áreas: ciencias cognitivas, aprendizaje adaptativo, grafos de conocimiento e ingeniería de software. Estas áreas permiten explicar por qué el sistema debe personalizar el proceso de estudio, cómo puede representar el conocimiento y bajo qué enfoque técnico se construirá la plataforma.
 
-Los tópicos considerados son los siguientes: fundamentos de ingeniería de software (metodologías de desarrollo y modelo seleccionado); análisis de requerimientos y modelado (requerimientos funcionales y no funcionales, técnicas de levantamiento, modelado UML y modelo C4); arquitectura de sistemas (modelo cliente-servidor y arquitecturas en aplicaciones web); tecnologías de desarrollo (backend, frontend, bases de datos e infraestructura); y experiencia de usuario y accesibilidad (diseño centrado en el usuario, principios de UX y accesibilidad web).
+\subsection{Procesamiento de la información, memoria y retención}
 
-El fundamento teórico central del proyecto es el modelo de procesamiento de la información propuesto por \textcite{atkinson1968}, que describe el aprendizaje como un flujo de etapas cognitivas con condiciones específicas para funcionar. A partir de ese marco, el sistema organiza el conocimiento en un grafo dinámico, construye un modelo de usuario individual e implementa un algoritmo de espaciado automático basado en la curva del olvido. Estos principios determinan las decisiones de diseño de todos los módulos del sistema.
+El modelo de procesamiento de la información plantea que la memoria humana opera mediante etapas sucesivas de registro sensorial, memoria a corto plazo y memoria a largo plazo \parencite{atkinson1968}. Desde este enfoque, estudiar no consiste únicamente en exponerse al contenido, sino en procesarlo activamente, recuperarlo y revisarlo en momentos adecuados. La curva del olvido descrita por \textcite{ebbinghaus1913} muestra que la retención disminuye con el tiempo si no existen repasos posteriores, mientras que la práctica distribuida mejora el recuerdo frente a sesiones concentradas \parencite{cepeda2006}. Por ello, el sistema propuesto incorpora repasos automáticos y evita que el estudiante avance sin consolidar conceptos previos.
+
+La verificación activa de comprensión también es relevante. \textcite{roediger2006} muestran que recuperar información mediante pruebas fortalece la retención más que releer pasivamente. Además, la carga cognitiva debe controlarse para no saturar al estudiante durante la resolución de tareas \parencite{sweller1988}. Estos fundamentos justifican el uso de ejercicios graduados, retroalimentación inmediata y control progresivo de dificultad.
+
+\subsection{Aprendizaje adaptativo y modelos de usuario}
+
+El aprendizaje adaptativo busca ajustar el contenido, el ritmo y la dificultad a las características del estudiante. \textcite{bloom1984} demostró la ventaja del acompañamiento individual frente a la instrucción grupal, lo que respalda la necesidad de sistemas que aproximen una experiencia personalizada. En la misma línea, los sistemas tutores inteligentes han mostrado resultados relevantes cuando modelan el estado del estudiante y entregan apoyo durante la resolución de tareas \parencite{vanlehn2011}.
+
+Para personalizar el aprendizaje es necesario representar el conocimiento actual del usuario. El seguimiento de conocimiento permite estimar qué conceptos domina el estudiante y cuáles requieren refuerzo \parencite{corbett1994}. Los modelos de usuario en sistemas educativos adaptativos amplían esta idea al registrar desempeño, progreso, preferencias y necesidades individuales \parencite{brusilovsky2007}. En el presente proyecto, este fundamento se traduce en un modelo de usuario que registra el estado de cada concepto y guía la selección del contenido siguiente.
+
+\subsection{Grafos de conocimiento aplicados a educación}
+
+Un grafo de conocimiento representa entidades y relaciones mediante nodos y enlaces, permitiendo organizar información compleja de forma explícita \parencite{hogan2021}. En educación, esta estructura permite modelar conceptos, prerrequisitos y dependencias entre temas. De esta manera, el sistema puede determinar qué debe estudiar primero un usuario y qué conceptos se ven afectados cuando falla una respuesta.
+
+Los grafos de conocimiento educativos han sido utilizados para estructurar dominios de aprendizaje y apoyar sistemas de recomendación o rutas personalizadas \parencite{chen2018}. En este proyecto, el grafo cumple una función central: organizar cualquier dominio de conocimiento definido por el usuario, establecer relaciones entre conceptos y alimentar el modelo de dificultad, comprensión y repaso.
+
+\subsection{Ingeniería de software y desarrollo de la plataforma}
+
+Desde la ingeniería de software, el proyecto requiere un proceso de desarrollo controlado que permita construir módulos verificables e integrarlos progresivamente. \textcite{sommerville2016} plantea que el desarrollo de software debe partir de requerimientos claros, diseño, implementación, pruebas y evolución. \textcite{pressman2014} destaca la importancia de dividir sistemas complejos en componentes y validar cada incremento antes de avanzar.
+
+Por esta razón, la plataforma se plantea como una solución construida por fases: grafo de conocimiento, modelo de usuario, motor de dificultad, algoritmo de espaciado, retroalimentación e integración final. Este enfoque permite reducir el riesgo técnico, validar cada módulo y mantener la trazabilidad entre el problema educativo y la solución implementada.
 
 % =============================================================================
 % 10. CRONOGRAMA
 % =============================================================================
 \section{Cronograma}
 
-El desarrollo del proyecto se organiza en cuatro fases incrementales durante el período marzo--diciembre de 2025. Cada fase entrega un módulo funcional validado que se integra con los anteriores.
+El desarrollo del proyecto se organiza en cuatro fases incrementales durante la gestión 2026, en el período comprendido entre abril y diciembre. Cada fase entrega un módulo funcional validado que se integra con los anteriores.
 
 \begin{table}[H]
 \centering
-\caption{Cronograma de desarrollo por fases — 2025.}
+\caption{Cronograma de desarrollo por fases — gestión 2026.}
 \begin{tabular}{llll}
 \toprule
 \textbf{Fase} & \textbf{Actividad} & \textbf{Inicio} & \textbf{Fin} \\
 \midrule
-1 & Grafo de conocimiento y modelo de usuario & Marzo & Mayo \\
+1 & Grafo de conocimiento y modelo de usuario & Abril & Mayo \\
 2 & Motor de dificultad progresiva & Junio & Julio \\
 3 & Algoritmo de espaciado y retroalimentación & Agosto & Septiembre \\
 4 & Integración, pruebas y validación con usuarios & Octubre & Diciembre \\
 \bottomrule
 \end{tabular}
-\fuente{Elaboración propia, 2025.}
+\fuente{Elaboración propia, 2026.}
 \end{table}
 
 % =============================================================================

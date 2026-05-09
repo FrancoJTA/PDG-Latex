@@ -29,7 +29,7 @@
 %   \tituloOptar{Licenciatura en Ingeniería de Sistemas}
 %   \postulante{Nombre Completo del Postulante}
 %   \tutor{Nombre Completo del Tutor}
-%   \ciudad{Santa Cruz}\pais{Bolivia}\anio{2025}
+%   \ciudad{Santa Cruz}\pais{Bolivia}\anio{2026}
 %   \begin{document}
 %     \makecaratula
 %     \tableofcontents \newpage
@@ -40,7 +40,7 @@
 % =============================================================================
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{univalle-perfil}[2025/05/06 Perfil de Trabajo de Grado UNIVALLE]
+\ProvidesClass{univalle-perfil}[2026/05/06 Perfil de Trabajo de Grado UNIVALLE]
 
 % -----------------------------------------------------------------------------
 % CLASE BASE
@@ -341,7 +341,7 @@
 \newcommand{\@tutor}{}
 \newcommand{\@ciudad}{Santa Cruz}
 \newcommand{\@pais}{Bolivia}
-\newcommand{\@anio}{2025}
+\newcommand{\@anio}{2026}
 
 \newcommand{\universidad}[1]{\renewcommand{\@universidad}{#1}}
 \newcommand{\facultad}[1]{\renewcommand{\@facultad}{#1}}

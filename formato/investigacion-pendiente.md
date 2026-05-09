@@ -23,34 +23,34 @@ El texto actual describe el diagrama con tres ejes: procesamiento pasivo del con
 
 **Sección afectada:** §2.2 Objeto de Estudio.
 
-El objeto de estudio fue redactado porque el formato del perfil lo exige, pero no proviene directamente del Capítulo I original.
+El objeto de estudio fue definido como una combinación entre proceso de estudio y personalización educativa. Esta opción evita reducir el proyecto solo al sistema de software y mantiene el centro en el problema real del estudiante.
 
-**Texto actual:**
+**Texto seleccionado:**
 
-> El proceso de aprendizaje individual de los estudiantes de último año de colegio en Santa Cruz de la Sierra, Bolivia, y su relación con las herramientas y métodos de estudio disponibles actualmente.
+> El proceso de estudio autónomo de los estudiantes de último año de colegio en Santa Cruz de la Sierra, considerando su organización, adaptación al nivel individual, verificación de comprensión y consolidación del conocimiento mediante herramientas digitales adaptativas.
 
-**Qué decidir:**
+**Por qué se usa este enfoque:**
 
-- Confirmar si ese será el objeto de estudio formal.
-- Definir si el objeto debe enfocarse en el proceso de aprendizaje, en el proceso de estudio, en la personalización educativa o en el sistema de software.
-- Validar que el objeto sea coherente con el problema, el objetivo general y la delimitación.
+- Enfoca el problema en cómo estudian los estudiantes, no solo en cómo aprenden en abstracto.
+- Conecta directamente con la solución adaptativa: ruta personalizada, dificultad progresiva, verificación de comprensión y repasos.
+- Sigue siendo adecuado para Ingeniería de Sistemas porque permite desarrollar y validar una plataforma web.
+- Evita que el objeto de estudio sea únicamente la aplicación, que corresponde mejor a la propuesta de solución.
 
-**Fuentes a consultar:** guía institucional del perfil, Capítulo I del documento principal y observaciones del tutor.
+**Pendiente:** validar la redacción final con el tutor y comprobar que coincida con la delimitación y el objetivo general.
 
 ### 3. Delimitación de la investigación
 
 **Sección afectada:** §5 Delimitación de la Investigación.
 
-La sección completa fue derivada del contexto general del proyecto y necesita aprobación.
+La delimitación fue definida para la gestión 2026, desde abril hasta diciembre, manteniendo el foco en el desarrollo y validación funcional de una plataforma web adaptativa.
 
-**Qué verificar:**
+**Definición aplicada:**
 
-- Delimitación temática: confirmar si es correcto declarar que no se abordan aspectos pedagógicos curriculares.
-- Delimitación espacial: confirmar si el estudio se limita a Santa Cruz de la Sierra y al Colegio Cardenal Cushing.
-- Delimitación temporal: confirmar el periodo marzo-diciembre de 2025.
-- Revisar la frase sobre actualizar la arquitectura en tres años por cambios en IA, porque no proviene del texto original.
+- Temática: desarrollo de una plataforma web de aprendizaje adaptativo para personalizar el estudio autónomo mediante grafos de conocimiento, modelo de usuario, dificultad progresiva, verificación de comprensión y repasos automáticos.
+- Espacial: Santa Cruz de la Sierra, Bolivia, con validación inicial en estudiantes del Colegio Cardenal Cushing.
+- Temporal: gestión 2026, período abril-diciembre.
 
-**Fuentes a consultar:** alcance real del proyecto, planificación académica, cronograma aprobado y criterio del tutor.
+**Pendiente:** validar con el tutor si el Colegio Cardenal Cushing debe quedar nombrado formalmente o si conviene dejarlo como "una unidad educativa de Santa Cruz de la Sierra".
 
 ## Prioridad media
 
@@ -118,9 +118,9 @@ El cronograma fue derivado en cuatro fases, pero no existe en el Capítulo I ori
 
 **Sección afectada:** §9 Marco Teórico.
 
-El marco teórico del perfil está resumido porque el Capítulo II del documento principal todavía funciona como esqueleto.
+El Marco Teórico del perfil fue desarrollado en `formato/main.tex` con subsecciones sobre ciencias cognitivas, aprendizaje adaptativo, grafos de conocimiento e ingeniería de software.
 
-**Qué investigar o desarrollar:**
+**Puntos desarrollados:**
 
 - Teoría del procesamiento de la información.
 - Curva del olvido y repetición espaciada.
@@ -130,36 +130,22 @@ El marco teórico del perfil está resumido porque el Capítulo II del documento
 - Retroalimentación inmediata y tutoría inteligente.
 - Ingeniería de software para plataformas web.
 
-**Fuentes disponibles en `referencias.bib`:** Atkinson, Ebbinghaus, Cepeda, Bloom, VanLehn, Corbett, Brusilovsky, Sommerville y Pressman.
+**Fuentes citadas en el perfil:** Atkinson, Ebbinghaus, Cepeda, Roediger, Sweller, Bloom, VanLehn, Corbett, Brusilovsky, Hogan, Chen, Sommerville y Pressman.
 
 ### 8. Referencias bibliográficas citadas
 
 **Sección afectada:** §11 Referencias Bibliográficas.
 
-Actualmente solo aparece `atkinson1968` citado en el perfil. Las demás entradas de `referencias.bib` no aparecerán en la bibliografía impresa si no se citan.
+El perfil ya cita fuentes adicionales dentro del Marco Teórico para que aparezcan en la bibliografía impresa.
 
-**Qué hacer:**
+**Citas incorporadas:**
 
-- Decidir qué fuentes deben respaldar el Marco Teórico.
-- Agregar citas en §9 para las fuentes relevantes.
-- Verificar que todas las referencias citadas estén en `referencias.bib`.
-- Eliminar o dejar sin citar las fuentes que no se usarán.
+- Ciencias cognitivas: `atkinson1968`, `ebbinghaus1913`, `cepeda2006`, `roediger2006`, `sweller1988`.
+- Aprendizaje adaptativo: `bloom1984`, `vanlehn2011`, `corbett1994`, `brusilovsky2007`.
+- Grafos de conocimiento: `hogan2021`, `chen2018`.
+- Ingeniería de software: `sommerville2016`, `pressman2014`.
 
-**Fuente principal:** `referencias.bib`.
-
-### 9. Consistencia sobre Khanmigo
-
-**Sección afectada:** §1 Introducción.
-
-El texto del Capítulo I menciona que Khanmigo ofrece retroalimentación inmediata cuando el estudiante la solicita, pero esa idea no aparece en la introducción del perfil.
-
-**Qué decidir:**
-
-- Agregar Khanmigo para mantener consistencia con el Capítulo I.
-- Omitirlo si se quiere una introducción más breve.
-- Si se agrega, mantener la comparación equilibrada con Khan Academy, Anki y Duolingo.
-
-**Fuente a consultar:** Capítulo I del documento principal.
+**Pendiente:** revisar si el tutor exige más desarrollo sobre arquitectura web, UX o accesibilidad en esta sección.
 
 ## Referencias bibliográficas sugeridas
 
@@ -187,7 +173,6 @@ Esta lista combina fuentes ya presentes en `referencias.bib` con fuentes adicion
 
 - Khan Academy Help Center. *How do Khan Academy's Mastery levels work?* Útil para describir aprendizaje por dominio, niveles de dominio y seguimiento de progreso.
 - Khan Academy Help Center. *What are Course and Unit Mastery?* Útil para explicar cómo una plataforma existente organiza progreso por curso/unidad.
-- Khan Academy Help Center. *How can I use Khan Academy's AI features responsibly?* Útil para Khanmigo, uso responsable de IA y límites de herramientas generativas.
 - Anki Manual. *Background*. Útil para explicar active recall, repetición espaciada y revisión cerca del olvido.
 - Duolingo Blog. *What is spaced repetition, and why is it good for learning?* Útil como caso aplicado de repetición espaciada y práctica personalizada.
 - Duolingo Research. *Spaced Repetition Data*. Útil como caso de datos reales para algoritmos de memoria y predicción de recuerdo.
@@ -242,7 +227,7 @@ Esta lista combina fuentes ya presentes en `referencias.bib` con fuentes adicion
 
 ### Dónde usar estas fuentes en el perfil
 
-- §1 Introducción: Khan Academy, Anki, Duolingo y Khanmigo como plataformas comparables.
+- §1 Introducción: Khan Academy, Anki y Duolingo como plataformas comparables.
 - §2 Antecedentes: fuentes sobre aprendizaje pasivo (Craik & Lockhart), memoria (Atkinson, Ebbinghaus), retroalimentación (Roediger & Karpicke) y personalización (Bloom).
 - §5 Delimitación — Temática: Sweller para carga cognitiva, Brusilovsky para sistemas adaptativos.
 - §7 Diseño Metodológico: Sommerville y Pressman para desarrollo incremental, pruebas y validación.

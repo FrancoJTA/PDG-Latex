@@ -5,7 +5,7 @@ Facultad de Informática y Electrónica — Carrera de Licenciatura en Ingenier�
 
 **Postulante:** Franco Javier Torrez Alvarado
 **Tutor:** Rolando Lara Sanchez
-**Ciudad:** Santa Cruz, Bolivia — 2025
+**Ciudad:** Santa Cruz, Bolivia — 2026
 
 ---
 
@@ -130,7 +130,7 @@ Abrir `referencias.bib` y agregar una entrada según el tipo de fuente:
   \centering
   \includegraphics[width=0.7\textwidth]{imagenes/nombre.png}
   \caption{Descripción de la figura.}
-  \fuente{Elaboración propia, 2025.}
+  \fuente{Elaboración propia, 2026.}
 \end{figure}
 ```
 
