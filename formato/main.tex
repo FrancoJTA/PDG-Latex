@@ -17,13 +17,18 @@
 \graphicspath{{../}}
 \addbibresource{../referencias.bib}
 
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\usetikzlibrary{shapes.geometric, positioning, arrows.meta}
+
 % -----------------------------------------------------------------------------
 % METADATOS DE LA CARÁTULA
 % -----------------------------------------------------------------------------
 \universidad{Universidad Privada del Valle}
 \facultad{Facultad de Informática y Electrónica}
 \carrera{Carrera de Licenciatura en Ingeniería de Sistemas}
-\tituloTrabajo{Plataforma Web de Aprendizaje Adaptativo Basada en Grafos de Conocimiento para la Personalización del Proceso de Estudio}
+\tituloTrabajo{Plataforma Web de Aprendizaje Adaptativo Basada en Grafos de Conocimiento para la Personalización del Estudio Autónomo de Matemáticas en Estudiantes del Colegio Cardenal Cushing en Santa Cruz de la Sierra}
 \modalidad{Proyecto de Grado}
 \tituloOptar{Licenciatura en Ingeniería de Sistemas}
 \postulante{Franco Javier Torrez Alvarado}
@@ -57,14 +62,14 @@ Las plataformas educativas digitales existentes resuelven partes de este proceso
 
 En el contexto boliviano, el sistema educativo opera bajo un modelo estandarizado donde un solo docente atiende grupos de hasta treinta estudiantes, haciendo inviable la personalización del ritmo o del contenido. El acceso a tutorías privadas, que es la única alternativa de acompañamiento individualizado disponible hoy, tiene un costo que no está al alcance de todos los estudiantes.
 
-El presente trabajo propone el desarrollo de una plataforma adaptativa de aprendizaje que organiza el conocimiento en un grafo dinámico generado automáticamente para cualquier dominio, construye un modelo de usuario individual, implementa un motor de dificultad progresiva y un algoritmo de espaciado automático basado en la curva del olvido, y entrega retroalimentación inmediata después de cada tarea. El entregable principal es una arquitectura base funcional construida en fases incrementales, validada mediante pruebas técnicas y de usuario.
+El presente trabajo propone el desarrollo de una plataforma adaptativa de aprendizaje que organiza el conocimiento matemático de último año en un grafo de prerrequisitos, construye un modelo de usuario individual, implementa un motor de dificultad progresiva y un algoritmo de espaciado automático basado en la curva del olvido, y entrega retroalimentación inmediata después de cada ejercicio. El entregable principal es una arquitectura base funcional construida en fases incrementales, validada mediante pruebas técnicas y de usuario.
 
 % =============================================================================
 % 2. ANTECEDENTES DEL PROBLEMA
 % =============================================================================
 \section{Antecedentes del Problema}
 
-Los estudiantes de último año de colegio en Santa Cruz de la Sierra estudian de manera desordenada y pasiva, sin ninguna herramienta que organice el contenido según su nivel individual, ajuste la dificultad de manera continua, verifique que la comprensión sea real antes de avanzar ni programe revisiones para evitar que el conocimiento se olvide. Este proceso genera conocimiento superficial, fragmentado y difícil de aplicar.
+Los estudiantes de último año del Colegio Cardenal Cushing en Santa Cruz de la Sierra estudian matemáticas de manera desordenada y pasiva, sin ninguna herramienta que organice los contenidos según su nivel individual, ajuste la dificultad de manera continua, verifique que la comprensión sea real antes de avanzar ni programe revisiones para evitar que los conceptos aprendidos se olviden. Este proceso genera conocimiento superficial, fragmentado y difícil de aplicar en la resolución de problemas.
 
 El análisis del entorno de estudio actual se sintetiza en el Cuadro 2.1 mediante un análisis FODA, que identifica las fortalezas y debilidades del contexto actual, así como las oportunidades y amenazas que determinan el espacio de solución del problema.
 
@@ -100,15 +105,15 @@ $\bullet$~Resistencia al cambio de hábitos de estudio en estudiantes acostumbra
 \fuente{Elaboración propia, 2026.}
 \end{table}
 
-No existen en el mercado local plataformas que resuelvan de manera integrada el problema descrito. A nivel internacional, Khan Academy, Anki y Duolingo abordan partes del proceso de aprendizaje de forma aislada, sin integrar grafos de conocimiento, espaciado automático y verificación de comprensión en un único sistema sin currículo fijo.
+No existen en el mercado local plataformas que resuelvan de manera integrada el problema descrito. A nivel internacional, Khan Academy, Anki y Duolingo abordan partes del proceso de estudio de forma aislada, sin integrar grafos de conocimiento, espaciado automático y verificación de comprensión en un único sistema sin currículo fijo.
 
 \subsection{Planteamiento del Problema}
 
-Los estudiantes de último año de colegio en Santa Cruz de la Sierra estudian de manera desordenada y pasiva, sin ninguna guía que organice el contenido según sus conocimientos previos, ajuste la dificultad de manera continua, verifique que la comprensión sea real antes de avanzar ni programe revisiones para evitar que el conocimiento se olvide, generando así conocimiento superficial, fragmentado y difícil de aplicar en contextos nuevos. ¿Cómo puede un sistema de software personalizar el proceso de aprendizaje de estos estudiantes, organizando el contenido según el nivel individual de cada uno, calibrando la dificultad de manera continua, verificando la comprensión real y programando revisiones automáticas para consolidar el conocimiento de forma eficiente?
+Los estudiantes de último año del Colegio Cardenal Cushing en Santa Cruz de la Sierra presentan un proceso de estudio de matemáticas desorganizado y pasivo: no disponen de ninguna guía que organice los contenidos según sus conocimientos previos, ajuste la dificultad de manera continua, verifique que la comprensión sea real antes de avanzar ni programe revisiones para evitar que los conceptos se olviden, generando conocimiento superficial, fragmentado y difícil de aplicar en la resolución de problemas. ¿Cómo puede una plataforma web de aprendizaje adaptativo basada en grafos de conocimiento personalizar el estudio autónomo de matemáticas de los estudiantes del Colegio Cardenal Cushing, organizando los contenidos según su nivel individual, ajustando la dificultad de manera continua, verificando la comprensión real y programando revisiones automáticas para consolidar el conocimiento de forma eficiente?
 
 \subsection{Objeto de Estudio}
 
-El proceso de estudio autónomo de los estudiantes de último año de colegio en Santa Cruz de la Sierra: su organización del contenido, secuencia de estudio, nivel de comprensión alcanzado y retención del conocimiento a lo largo del tiempo.
+El proceso de estudio autónomo de matemáticas de los estudiantes de último año del Colegio Cardenal Cushing en Santa Cruz de la Sierra: su organización de los contenidos, secuencia de estudio, nivel de comprensión alcanzado y retención de los conceptos matemáticos a lo largo del tiempo.
 
 % =============================================================================
 % 3. OBJETIVOS
@@ -117,17 +122,15 @@ El proceso de estudio autónomo de los estudiantes de último año de colegio en
 
 \subsection{Objetivo General}
 
-Desarrollar una plataforma de aprendizaje que se adapte al nivel individual de cada estudiante, organice el contenido en un orden lógico y personalizado, ajuste la dificultad de manera continua y programe automáticamente las revisiones necesarias para que el conocimiento se consolide de forma real y duradera.
+Desarrollar una plataforma web de aprendizaje adaptativo basada en grafos de conocimiento que personalice el estudio autónomo de matemáticas de los estudiantes de último año del Colegio Cardenal Cushing, mediante la organización de los contenidos matemáticos según sus prerrequisitos, el ajuste continuo de dificultad, la verificación de comprensión y la programación automática de repasos.
 
 \subsection{Objetivos Específicos}
 
 \begin{itemize}
-    \item Diseñar un grafo de conocimiento dinámico que organice los conceptos de cualquier dominio según sus dependencias y genere automáticamente una ruta de estudio personalizada para cada estudiante.
-    \item Desarrollar un modelo de usuario que registre el nivel de conocimiento individual, el historial de sesiones y el estado de cada concepto en tiempo real.
-    \item Implementar un motor de dificultad progresiva que ajuste el nivel del contenido de manera continua según el desempeño del estudiante.
-    \item Construir un módulo de comprensión conectada que verifique que el estudiante relaciona los conceptos entre sí antes de permitir el avance.
-    \item Implementar un algoritmo de espaciado automático basado en la curva del olvido que programe revisiones individuales en el momento óptimo para cada concepto.
-    \item Desarrollar un sistema de retroalimentación inmediata que identifique el concepto específico donde ocurrió la falla y ajuste el contenido siguiente en tiempo real.
+    \item Analizar el proceso de estudio autónomo de matemáticas de los estudiantes del Colegio Cardenal Cushing mediante entrevistas y observación directa, para identificar los requerimientos funcionales y no funcionales de la plataforma.
+    \item Diseñar la arquitectura de la plataforma web adaptativa, incluyendo el grafo de prerrequisitos del currículo de matemáticas de último año, el modelo de usuario, el motor de dificultad progresiva, el algoritmo de espaciado automático basado en la curva del olvido y el sistema de retroalimentación inmediata.
+    \item Construir la plataforma mediante implementación incremental por módulos, integrando el grafo de conocimiento matemático, el modelo de usuario, el motor de dificultad, la verificación de comprensión, el algoritmo de espaciado y la retroalimentación.
+    \item Evaluar el funcionamiento de la plataforma mediante pruebas funcionales basadas en los requerimientos definidos y pruebas de usabilidad con estudiantes del Colegio Cardenal Cushing, verificando que el sistema personaliza el estudio de matemáticas de manera efectiva.
 \end{itemize}
 
 % =============================================================================
@@ -139,7 +142,7 @@ El aprendizaje es una actividad que toda persona realiza de manera continua, per
 
 \subsection{Justificación Técnica}
 
-El proyecto es técnicamente viable porque cada uno de sus componentes tiene precedente en la industria. Los grafos de conocimiento, los algoritmos de espaciado basados en la curva del olvido y los modelos de usuario adaptativo son tecnologías maduras que ya existen por separado en plataformas como Anki, Khan Academy y Duolingo. Lo que no existe es un sistema que las integre de manera coherente, sin currículo fijo y para cualquier dominio. La generación automática del grafo mediante modelos de lenguaje, el motor de dificultad progresiva y la retroalimentación inmediata son implementables con las herramientas de desarrollo disponibles actualmente. El entregable del proyecto es una arquitectura base funcional construida en fases incrementales, lo que hace el alcance técnico defendible dentro del tiempo de un proyecto de grado.
+El proyecto es técnicamente viable porque cada uno de sus componentes tiene precedente en la industria. Los grafos de conocimiento, los algoritmos de espaciado basados en la curva del olvido y los modelos de usuario adaptativo son tecnologías maduras que ya existen por separado en plataformas como Anki, Khan Academy y Duolingo. Lo que no existe es un sistema que las integre de manera coherente aplicado específicamente al currículo de matemáticas de último año de colegio en Bolivia. El grafo de prerrequisitos matemáticos, el motor de dificultad progresiva y la retroalimentación inmediata son implementables con las herramientas de desarrollo disponibles actualmente. El entregable del proyecto es una arquitectura base funcional construida en fases incrementales, lo que hace el alcance técnico defendible dentro del tiempo de un proyecto de grado.
 
 \subsection{Justificación Económica}
 
@@ -156,7 +159,7 @@ El sistema educativo actual genera una brecha entre los estudiantes que tienen a
 
 \subsection{Temática}
 
-La investigación se delimita al desarrollo de una plataforma web de aprendizaje adaptativo orientada a personalizar el proceso de estudio autónomo mediante grafos de conocimiento, modelado del usuario, ajuste progresivo de dificultad, verificación de comprensión y programación automática de repasos. El proyecto no aborda el diseño curricular institucional ni la evaluación pedagógica formal de largo plazo; se enfoca en el diseño, construcción y validación funcional de una solución de software.
+La investigación se delimita al desarrollo de una plataforma web de aprendizaje adaptativo orientada a personalizar el estudio autónomo de matemáticas de último año de colegio, mediante un grafo de prerrequisitos del currículo matemático, modelado del usuario, ajuste progresivo de dificultad, verificación de comprensión y programación automática de repasos. El proyecto no aborda otras materias del currículo escolar ni la evaluación pedagógica formal de largo plazo; se enfoca en el diseño, construcción y validación funcional de una solución de software aplicada al dominio de matemáticas.
 
 \subsection{Espacial}
 
@@ -171,9 +174,84 @@ La investigación se desarrolla durante la gestión 2026, en el período compren
 % =============================================================================
 \section{Propuesta de Solución al Planteamiento del Problema}
 
-El sistema propuesto es una plataforma adaptativa de aprendizaje que organiza el conocimiento en un grafo dinámico generado automáticamente para cualquier dominio, evalúa el nivel inicial del estudiante, genera una ruta de estudio personalizada, ajusta la dificultad de manera continua, verifica que la comprensión sea real antes de permitir el avance y programa revisiones automáticas para evitar el deterioro del conocimiento. El entregable principal del proyecto de grado es una arquitectura base funcional con los módulos centrales integrados y operativos, construida en fases incrementales y validada mediante pruebas técnicas y de usuario.
+El sistema propuesto es una plataforma adaptativa de aprendizaje que organiza los contenidos matemáticos de último año en un grafo de prerrequisitos del currículo, evalúa el nivel inicial del estudiante, genera una ruta de estudio personalizada, ajusta la dificultad de manera continua, verifica que la comprensión sea real antes de permitir el avance y programa revisiones automáticas para evitar el deterioro del conocimiento. El entregable principal del proyecto de grado es una arquitectura base funcional con los módulos centrales integrados y operativos, construida en fases incrementales y validada mediante pruebas técnicas y de usuario.
 
 Los módulos centrales del sistema son los siguientes: el grafo de conocimiento dinámico, que organiza los conceptos y sus dependencias; el modelo de usuario individual, que registra el estado de cada concepto en tiempo real; el motor de dificultad progresiva, que calibra el nivel del contenido según el desempeño; el módulo de comprensión conectada, que verifica relaciones entre conceptos antes de permitir el avance; el algoritmo de espaciado automático, que programa revisiones en el momento óptimo; y el sistema de retroalimentación inmediata, que identifica y corrige fallas en tiempo real.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+  node distance=0.55cm and 0.75cm,
+  box/.style={rectangle, rounded corners=4pt, draw, thick,
+              text width=3.0cm, minimum height=1.1cm,
+              align=center, font=\small},
+  arr/.style={-{Stealth}, thick},
+]
+% Fila superior (izquierda a derecha)
+\node[box] (grafo)  {Grafo de\\conocimiento\\dinámico};
+\node[box, right=of grafo]  (motor)  {Motor de\\dificultad\\progresiva};
+\node[box, right=of motor]  (verif)  {Verificación\\de comprensión};
+% Fila inferior (derecha a izquierda, alineada debajo)
+\node[box, below=1.5cm of verif]   (retro)     {Retroalimentación\\inmediata};
+\node[box, left=of retro]           (espaciado) {Algoritmo de\\espaciado\\automático};
+\node[box, left=of espaciado]       (usuario)   {Modelo de\\usuario\\individual};
+% Flechas fila superior
+\draw[arr] (grafo)      -- (motor);
+\draw[arr] (motor)      -- (verif);
+% Flecha columna derecha: abajo
+\draw[arr] (verif.south) -- (retro.north);
+% Flechas fila inferior
+\draw[arr] (retro)      -- (espaciado);
+\draw[arr] (espaciado)  -- (usuario);
+% Retroalimentación: modelo de usuario actualiza el motor (lado izquierdo)
+\draw[arr, dashed] (usuario.west) -- ++(-0.85,0) |- (motor.west);
+\end{tikzpicture}
+\caption{Módulos centrales de la plataforma y flujo de interacción entre componentes. La flecha punteada indica que el modelo de usuario retroalimenta continuamente al motor de dificultad.}
+\fuente{Elaboración propia, 2026.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+  node distance=0.5cm,
+  startstop/.style={rectangle, rounded corners=8pt, draw, thick,
+                    text width=3.6cm, minimum height=0.8cm,
+                    align=center, font=\small},
+  process/.style={rectangle, draw, thick,
+                  text width=3.6cm, minimum height=0.8cm,
+                  align=center, font=\small},
+  decision/.style={diamond, draw, thick, aspect=3.2,
+                   text width=2.4cm, align=center,
+                   font=\small, inner sep=1pt},
+  arr/.style={-{Stealth}, thick},
+]
+\node[startstop] (start)     {Estudiante sube un tema};
+\node[process, below=of start]    (grafo)    {Generación del grafo de conocimiento};
+\node[process, below=of grafo]    (select)   {Seleccionar siguiente concepto};
+\node[process, below=of select]   (ejercicio){Presentar ejercicio graduado};
+\node[decision, below=0.7cm of ejercicio] (correcto) {¿Comprensión correcta?};
+\node[process, right=2.8cm of correcto]  (feedback) {Retroalimentación\\ inmediata};
+\node[process, below=0.7cm of correcto]  (actualizar){Actualizar modelo de usuario};
+\node[process, below=of actualizar]      (espaciado) {Programar repaso automático};
+\node[decision, below=0.7cm of espaciado](mas)       {¿Más conceptos?};
+\node[startstop, below=0.7cm of mas]     (end)       {Fin de la sesión};
+% Flujo principal
+\draw[arr] (start)     -- (grafo);
+\draw[arr] (grafo)     -- (select);
+\draw[arr] (select)    -- (ejercicio);
+\draw[arr] (ejercicio) -- (correcto);
+\draw[arr] (correcto)  -- node[right, font=\footnotesize]{Sí} (actualizar);
+\draw[arr] (correcto.east) -- node[above, font=\footnotesize]{No} (feedback.west);
+\draw[arr] (feedback.north) -- ++(0,0.4) -| (ejercicio.east);
+\draw[arr] (actualizar) -- (espaciado);
+\draw[arr] (espaciado)  -- (mas);
+\draw[arr] (mas)        -- node[right, font=\footnotesize]{No} (end);
+% Bucle: siguiente concepto
+\draw[arr] (mas.west) -- ++(-3.2,0) |- node[left, font=\footnotesize, near end]{Sí} (select.west);
+\end{tikzpicture}
+\caption{Flujo del proceso de estudio adaptativo en la plataforma.}
+\fuente{Elaboración propia, 2026.}
+\end{figure}
 
 % =============================================================================
 % 7. DISEÑO METODOLÓGICO
@@ -283,6 +361,49 @@ Los fundamentos teóricos del presente trabajo se organizan en cuatro áreas: ci
 
 El modelo de procesamiento de la información plantea que la memoria humana opera mediante etapas sucesivas de registro sensorial, memoria a corto plazo y memoria a largo plazo \parencite{atkinson1968}. Desde este enfoque, estudiar no consiste únicamente en exponerse al contenido, sino en procesarlo activamente, recuperarlo y revisarlo en momentos adecuados. La curva del olvido descrita por \textcite{ebbinghaus1913} muestra que la retención disminuye con el tiempo si no existen repasos posteriores, mientras que la práctica distribuida mejora el recuerdo frente a sesiones concentradas \parencite{cepeda2006}. Por ello, el sistema propuesto incorpora repasos automáticos y evita que el estudiante avance sin consolidar conceptos previos.
 
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+  width=0.82\textwidth,
+  height=5.5cm,
+  xlabel={Tiempo (días)},
+  ylabel={Retención (\%)},
+  xmin=0, xmax=30,
+  ymin=0, ymax=108,
+  xtick={0,5,10,15,20,25,30},
+  ytick={0,20,40,60,80,100},
+  legend pos=south west,
+  legend style={font=\small},
+  grid=major,
+  grid style={line width=0.3pt, draw=gray!30},
+  axis lines=left,
+  label style={font=\small},
+  tick label style={font=\small},
+]
+% Líneas verticales en los puntos de repaso
+\addplot[gray!60, thin, dashed, forget plot] coordinates {(1,0)(1,100)};
+\addplot[gray!60, thin, dashed, forget plot] coordinates {(3,0)(3,100)};
+\addplot[gray!60, thin, dashed, forget plot] coordinates {(7,0)(7,100)};
+\addplot[gray!60, thin, dashed, forget plot] coordinates {(14,0)(14,100)};
+% Sin repasos — caída exponencial aproximada
+\addplot[thick, gray, dashed] coordinates {
+  (0,100)(1,74)(2,58)(3,51)(5,37)(7,26)(10,17)(14,10)(21,5)(30,3)
+};
+\addlegendentry{Sin repasos}
+% Con repasos espaciados — patrón de dientes de sierra con valles crecientes
+\addplot[thick, black] coordinates {(0,100)(0.5,85)(1,74)};
+\addlegendentry{Con repasos espaciados}
+\addplot[thick, black, forget plot] coordinates {(1,98)(2,82)(3,72)};
+\addplot[thick, black, forget plot] coordinates {(3,98)(5,84)(7,76)};
+\addplot[thick, black, forget plot] coordinates {(7,99)(10,87)(14,81)};
+\addplot[thick, black, forget plot] coordinates {(14,99)(21,92)(30,87)};
+\end{axis}
+\end{tikzpicture}
+\caption{Curva del olvido de Ebbinghaus: retención sin repasos y con repasos espaciados. Las líneas verticales punteadas indican los momentos de repaso.}
+\fuente{Adaptado de \textcite{ebbinghaus1913} y \textcite{cepeda2006}.}
+\end{figure}
+
 La verificación activa de comprensión también es relevante. \textcite{roediger2006} muestran que recuperar información mediante pruebas fortalece la retención más que releer pasivamente. Además, la carga cognitiva debe controlarse para no saturar al estudiante durante la resolución de tareas \parencite{sweller1988}. Estos fundamentos justifican el uso de ejercicios graduados, retroalimentación inmediata y control progresivo de dificultad.
 
 \subsection{Aprendizaje adaptativo y modelos de usuario}
@@ -295,7 +416,7 @@ Para personalizar el aprendizaje es necesario representar el conocimiento actual
 
 Un grafo de conocimiento representa entidades y relaciones mediante nodos y enlaces, permitiendo organizar información compleja de forma explícita \parencite{hogan2021}. En educación, esta estructura permite modelar conceptos, prerrequisitos y dependencias entre temas. De esta manera, el sistema puede determinar qué debe estudiar primero un usuario y qué conceptos se ven afectados cuando falla una respuesta.
 
-Los grafos de conocimiento educativos han sido utilizados para estructurar dominios de aprendizaje y apoyar sistemas de recomendación o rutas personalizadas \parencite{chen2018}. En este proyecto, el grafo cumple una función central: organizar cualquier dominio de conocimiento definido por el usuario, establecer relaciones entre conceptos y alimentar el modelo de dificultad, comprensión y repaso.
+Los grafos de conocimiento educativos han sido utilizados para estructurar dominios de aprendizaje y apoyar sistemas de recomendación o rutas personalizadas \parencite{chen2018}. En este proyecto, el grafo cumple una función central: organizar el currículo de matemáticas de último año según sus relaciones de prerrequisito, establecer las dependencias entre conceptos y alimentar el modelo de dificultad, comprensión y repaso.
 
 \subsection{Ingeniería de software y desarrollo de la plataforma}
 

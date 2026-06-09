@@ -154,3 +154,39 @@ Desarrollar algunos de los aspectos teóricos mencionados en el índice tentativ
 ## Anexos
 
 *(Material complementario: encuestas, entrevistas, diagramas, etc.)*
+
+1 minuto intro
+1 Introduccion, lamina
+2 
+
+Presentar Foda
+
+Diapositiva
+¿Cómo puede una plataforma web de aprendizaje adaptativo basada en grafos de conocimiento personalizar el proceso de estudio de los estudiantes del Colegio Cardenal Cushing, organizando el contenido según su nivel individual, ajustando la dificultad de manera continua, verificando la comprensión real y programando revisiones automáticas para consolidar el conocimiento de forma eficiente?
+
+Objeto de estudio
+Imagenes del cardenal
+    
+Objetivo general tal cual
+
+Objetivos especificos 
+-Desarrollar cambiar por implementar
+
+Ha sido un error de verbo, se piensa remplazar con construir o implementar
+bl
+
+Justificacion
+ - Tecnica
+ - Economica
+ -Social
+ Imagenes
+
+Propuesta
+Lamina, exquisita representando lo que realizara el software como se conectara y las funciones que este realizara
+Tiene que ser visualmente algo muy claro
+
+Diseño metodologico
+ -tipo
+ -Metodo
+ -Tecnicas
+ -Poblacion
