@@ -18,7 +18,7 @@
 \universidad{Universidad Privada del Valle}
 \facultad{Facultad de Informática y Electrónica}
 \carrera{Carrera de Licenciatura en Ingeniería de Sistemas}
-\tituloTrabajo{TODO: Título del proyecto}
+\tituloTrabajo{Desarrollo de un módulo de inteligencia predictiva para el ERP ISI Mustang basado en el aprovechamiento de datos históricos operativos}
 \modalidad{Proyecto de Grado}
 \tituloOptar{Licenciatura en Ingeniería de Sistemas}
 \postulante{Franco Javier Torrez Alvarado}
@@ -59,12 +59,15 @@
 
 \subsection{Planteamiento del Problema}
 
-% TODO: 1 párrafo de 3 a 5 líneas. Formulación del problema (puede ser
-% en forma de pregunta). Especificar la población que se investiga.
+ISI Mustang Bolivia, empresa con más de 25 años de operación en ingeniería y servicios tecnológicos para los sectores de gas y petróleo, energía, minería y construcción, gestiona proyectos integrales de tipo EPC (ingeniería, provisión y construcción) desde su sede en Santa Cruz de la Sierra. Para la administración de sus operaciones, la empresa cuenta con un ERP propio que registra información de proyectos, certificaciones, recursos humanos, horas, requisiciones y compras, acumulando más de diez años de datos históricos operativos. Sin embargo, dicha información es utilizada únicamente con fines descriptivos y de control inmediato, sin un mecanismo que permita identificar patrones o anticipar comportamientos futuros. Como consecuencia, la detección de desviaciones presupuestarias, retrasos y cuellos de botella ocurre de forma reactiva, una vez que las situaciones ya han impactado la operación. Esto limita la capacidad de gestión proactiva de riesgos en proyectos de alta complejidad técnica y económica.
+
+\subsubsection{Formulación del Problema}
+
+¿Cómo pueden los datos históricos operativos del ERP ISI Mustang contribuir a anticipar desviaciones y riesgos en la gestión de proyectos de ingeniería?
 
 \subsection{Objeto de Estudio}
 
-% TODO: 1 a 2 líneas. Responde al "¿qué voy a estudiar?".
+Los patrones de desviación y riesgo presentes en los datos históricos de gestión de proyectos del ERP ISI Mustang.
 
 % =============================================================================
 % 3. OBJETIVOS
@@ -73,15 +76,15 @@
 
 \subsection{Objetivo General}
 
-% TODO: Qué / Para qué / Cómo / Dónde. Debe ser medible.
+Desarrollar un módulo de inteligencia predictiva integrado al ERP ISI Mustang, mediante técnicas de aprendizaje automático aplicadas sobre datos históricos operativos, para anticipar desviaciones y riesgos en la gestión de proyectos de ingeniería.
 
 \subsection{Objetivos Específicos}
 
 \begin{itemize}
-    \item % TODO
-    \item % TODO
-    \item % TODO
-    \item % TODO
+    \item Analizar los datos históricos disponibles en los módulos del ERP ISI Mustang para identificar variables predictoras y casos de uso relevantes para el módulo de inteligencia predictiva.
+    \item Diseñar la arquitectura del módulo predictivo y seleccionar los modelos de aprendizaje automático adecuados para cada caso de uso identificado.
+    \item Construir el módulo de inteligencia predictiva con sus interfaces de visualización integradas al ERP ISI Mustang.
+    \item Evaluar la precisión de los modelos y la funcionalidad del módulo mediante métricas de rendimiento y pruebas con usuarios clave de ISI Mustang.
 \end{itemize}
 
 % =============================================================================
@@ -93,15 +96,15 @@
 
 \subsection{Justificación Técnica}
 
-% TODO
+El ERP de ISI Mustang acumula más de diez años de datos operativos distribuidos en múltiples módulos, constituyendo un volumen suficiente para el entrenamiento de modelos de aprendizaje automático. En particular, el módulo de certificaciones contiene registros históricos de desviaciones con sus causas documentadas, conformando un conjunto de datos etiquetados para aprendizaje supervisado que pocas organizaciones poseen. Las técnicas actuales de aprendizaje automático, como gradient boosting, redes neuronales y procesamiento de lenguaje natural, son suficientemente maduras para ser aplicadas sobre este tipo de datos operativos. Además, la integración de un módulo predictivo al ERP existente es técnicamente viable mediante acceso directo a la base de datos del sistema.
 
 \subsection{Justificación Económica}
 
-% TODO
+Los proyectos de tipo EPC que ejecuta ISI Mustang en sectores como gas y petróleo, minería y energía involucran presupuestos de alta envergadura, donde la detección temprana de desviaciones puede reducir significativamente los costos de corrección. La anticipación de cuellos de botella en la asignación de recursos permite evitar sobrecostos por sobreasignación o tiempos improductivos. Asimismo, la capacidad predictiva sobre propuestas y proyectos mejora la competitividad de la empresa en la estimación y adjudicación de nuevos contratos.
 
 \subsection{Justificación Social}
 
-% TODO
+Una gestión de proyectos más proactiva y basada en datos garantiza entregas más confiables en sectores críticos para el desarrollo de Bolivia, como energía, agua y construcción. La reducción de la gestión reactiva disminuye la carga operativa de los equipos de proyecto, contribuyendo a mejores condiciones de trabajo. A nivel más amplio, el proyecto demuestra que empresas bolivianas pueden capitalizar sus propios datos históricos mediante inteligencia artificial, aportando al desarrollo tecnológico nacional.
 
 % =============================================================================
 % 5. DELIMITACIÓN DE LA INVESTIGACIÓN
@@ -110,16 +113,15 @@
 
 \subsection{Temática}
 
-% TODO: Límite del estudio en cuanto a teorías, áreas del conocimiento,
-% normas y regulaciones aplicables.
+El presente trabajo se delimita a las áreas de aprendizaje automático supervisado, ingeniería de datos y analítica predictiva, aplicadas sobre los datos operativos del ERP ISI Mustang. En cuanto a la gestión de proyectos, el estudio se circunscribe a proyectos de tipo EPC ejecutados por ISI Mustang. Quedan fuera del alcance las fuentes de datos externas al ERP, como sensores IoT, datos de mercado o información climática, así como los módulos del sistema que no se encuentren activos o poblados con datos históricos suficientes.
 
 \subsection{Espacial}
 
-% TODO: Lugar geográfico del estudio y lugar de aplicación de resultados.
+El estudio se desarrolla en las instalaciones de ISI Mustang Bolivia, con sede en Santa Cruz de la Sierra, Bolivia. Los datos históricos utilizados corresponden a proyectos ejecutados por la empresa principalmente en territorio boliviano. El módulo de inteligencia predictiva desarrollado será integrado y validado en el ERP operativo de ISI Mustang en su sede central.
 
 \subsection{Temporal}
 
-% TODO: Período de tiempo, fechas estimadas, límite de validez.
+Los datos históricos utilizados para el entrenamiento de los modelos de aprendizaje automático abarcan un período de más de diez años de operación del ERP ISI Mustang. El desarrollo del proyecto de grado se estima entre abril y agosto de 2026, período que comprende las etapas de análisis, diseño, construcción y evaluación del módulo predictivo.
 
 % =============================================================================
 % 6. PROPUESTA DE SOLUCIÓN AL PLANTEAMIENTO DEL PROBLEMA
