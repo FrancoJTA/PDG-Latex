@@ -1,0 +1,679 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nyt/apasortcite//global/global/global}
+    \entry{AIcostEstimation2024}{article}{}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=1b68cedd38f2cb5d405d8c2949769f8a}{%
+           family={Akter},
+           familyi={A\bibinitperiod},
+           given={Shaheen},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {MDPI}%
+      }
+      \strng{namehash}{a070c7e0745d70e38fefbe4098686937}
+      \strng{fullhash}{a070c7e0745d70e38fefbe4098686937}
+      \strng{fullhashraw}{a070c7e0745d70e38fefbe4098686937}
+      \strng{bibnamehash}{a070c7e0745d70e38fefbe4098686937}
+      \strng{authorbibnamehash}{a070c7e0745d70e38fefbe4098686937}
+      \strng{authornamehash}{a070c7e0745d70e38fefbe4098686937}
+      \strng{authorfullhash}{a070c7e0745d70e38fefbe4098686937}
+      \strng{authorfullhashraw}{a070c7e0745d70e38fefbe4098686937}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Machine Learning and Knowledge Extraction}
+      \field{number}{2}
+      \field{title}{Advancement of Artificial Intelligence in Cost Estimation for Project Management Success: {A} Systematic Review of Machine Learning, Deep Learning, Regression, and Hybrid Models}
+      \field{volume}{6}
+      \field{year}{2024}
+      \field{pages}{35}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.3390/make6020035
+      \endverb
+    \endentry
+    \entry{MLdrivenERP2023}{article}{}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=c57d70bdcbd6111110bd0c040a14c30e}{%
+           family={Hassan},
+           familyi={H\bibinitperiod},
+           given={Ahmed},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Springer Open}%
+      }
+      \strng{namehash}{63d13e700959a906fa500eb1451b2a93}
+      \strng{fullhash}{63d13e700959a906fa500eb1451b2a93}
+      \strng{fullhashraw}{63d13e700959a906fa500eb1451b2a93}
+      \strng{bibnamehash}{63d13e700959a906fa500eb1451b2a93}
+      \strng{authorbibnamehash}{63d13e700959a906fa500eb1451b2a93}
+      \strng{authornamehash}{63d13e700959a906fa500eb1451b2a93}
+      \strng{authorfullhash}{63d13e700959a906fa500eb1451b2a93}
+      \strng{authorfullhashraw}{63d13e700959a906fa500eb1451b2a93}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Beni-Suef University Journal of Basic and Applied Sciences}
+      \field{title}{Machine learning-driven optimization of enterprise resource planning ({ERP}) systems: a comprehensive review}
+      \field{year}{2023}
+      \verb{doi}
+      \verb 10.1186/s43088-023-00460-y
+      \endverb
+    \endentry
+    \entry{EPCleadingIndicators2018}{article}{}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=dc808d7f9c2a6f5424cb04f22a1d5913}{%
+           family={Herrera},
+           familyi={H\bibinitperiod},
+           given={Rafael},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {ASCE}%
+      }
+      \strng{namehash}{414b266fc0e47cdfdbb0e083881b309c}
+      \strng{fullhash}{414b266fc0e47cdfdbb0e083881b309c}
+      \strng{fullhashraw}{414b266fc0e47cdfdbb0e083881b309c}
+      \strng{bibnamehash}{414b266fc0e47cdfdbb0e083881b309c}
+      \strng{authorbibnamehash}{414b266fc0e47cdfdbb0e083881b309c}
+      \strng{authornamehash}{414b266fc0e47cdfdbb0e083881b309c}
+      \strng{authorfullhash}{414b266fc0e47cdfdbb0e083881b309c}
+      \strng{authorfullhashraw}{414b266fc0e47cdfdbb0e083881b309c}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Construction Research Congress 2018}
+      \field{title}{Engineering, Procurement, and Construction Cost and Schedule Performance Leading Indicators: {State-of-the-Art} Review}
+      \field{year}{2018}
+      \verb{doi}
+      \verb 10.1061/9780784481271.037
+      \endverb
+    \endentry
+    \entry{XGBoostCostOverrun2026}{article}{}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=5dbaee2bd1f68bfb2185d56f91e4b038}{%
+           family={Kumar},
+           familyi={K\bibinitperiod},
+           given={Rajesh},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{35d6322b312f2d8770b01598a1958ce7}
+      \strng{fullhash}{35d6322b312f2d8770b01598a1958ce7}
+      \strng{fullhashraw}{35d6322b312f2d8770b01598a1958ce7}
+      \strng{bibnamehash}{35d6322b312f2d8770b01598a1958ce7}
+      \strng{authorbibnamehash}{35d6322b312f2d8770b01598a1958ce7}
+      \strng{authornamehash}{35d6322b312f2d8770b01598a1958ce7}
+      \strng{authorfullhash}{35d6322b312f2d8770b01598a1958ce7}
+      \strng{authorfullhashraw}{35d6322b312f2d8770b01598a1958ce7}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Asian Journal of Civil Engineering}
+      \field{title}{An explainable {XGBoost} model for predicting cost overruns in construction projects}
+      \field{year}{2026}
+      \verb{doi}
+      \verb 10.1007/s42107-026-01686-8
+      \endverb
+    \endentry
+    \entry{DomainAwareXGBoost2025}{report}{}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=f16c42df13bd61065becac850067c623}{%
+           family={Morales},
+           familyi={M\bibinitperiod},
+           given={Diego},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{institution}{1}{%
+        {ResearchGate}%
+      }
+      \strng{namehash}{cef834c72da575919322f75605d53b91}
+      \strng{fullhash}{cef834c72da575919322f75605d53b91}
+      \strng{fullhashraw}{cef834c72da575919322f75605d53b91}
+      \strng{bibnamehash}{cef834c72da575919322f75605d53b91}
+      \strng{authorbibnamehash}{cef834c72da575919322f75605d53b91}
+      \strng{authornamehash}{cef834c72da575919322f75605d53b91}
+      \strng{authorfullhash}{cef834c72da575919322f75605d53b91}
+      \strng{authorfullhashraw}{cef834c72da575919322f75605d53b91}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Domain-Aware Machine Learning for Project Delay Prediction: {A} Rule-Constrained {XGBoost} Framework}
+      \field{type}{techreport}
+      \field{year}{2025}
+    \endentry
+    \entry{MLcostForecasting2022}{article}{}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=fc985bf4489819d4c41f8c9af9c1133f}{%
+           family={Pereira},
+           familyi={P\bibinitperiod},
+           given={Eduardo},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{121277730b510c5003867237ec14d5af}
+      \strng{fullhash}{121277730b510c5003867237ec14d5af}
+      \strng{fullhashraw}{121277730b510c5003867237ec14d5af}
+      \strng{bibnamehash}{121277730b510c5003867237ec14d5af}
+      \strng{authorbibnamehash}{121277730b510c5003867237ec14d5af}
+      \strng{authornamehash}{121277730b510c5003867237ec14d5af}
+      \strng{authorfullhash}{121277730b510c5003867237ec14d5af}
+      \strng{authorfullhashraw}{121277730b510c5003867237ec14d5af}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IFAC-PapersOnLine}
+      \field{title}{A Machine Learning Study to Enhance Project Cost Forecasting}
+      \field{year}{2022}
+      \verb{doi}
+      \verb 10.1016/j.ifacol.2022.09.537
+      \endverb
+    \endentry
+    \entry{Rashid2019}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=76d4c4ffd409204241431afd2728f479}{%
+           family={Rashid},
+           familyi={R\bibinitperiod},
+           given={Mohammed},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6c3a5782f66056a9bdf42e236c26a61e}{%
+           family={Al-Azri},
+           familyi={A\bibinithyphendelim A\bibinitperiod},
+           given={Nasser},
+           giveni={N\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{b8b94616cc0bfa650bce5d2d8dbadcca}
+      \strng{fullhash}{b8b94616cc0bfa650bce5d2d8dbadcca}
+      \strng{fullhashraw}{b8b94616cc0bfa650bce5d2d8dbadcca}
+      \strng{bibnamehash}{b8b94616cc0bfa650bce5d2d8dbadcca}
+      \strng{authorbibnamehash}{b8b94616cc0bfa650bce5d2d8dbadcca}
+      \strng{authornamehash}{b8b94616cc0bfa650bce5d2d8dbadcca}
+      \strng{authorfullhash}{b8b94616cc0bfa650bce5d2d8dbadcca}
+      \strng{authorfullhashraw}{b8b94616cc0bfa650bce5d2d8dbadcca}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{2019 International Conference on Computer and Information Sciences (ICCIS)}
+      \field{title}{{ERP} Implementation in the Oil and Gas Sector: {A} Case Study in Sultanate of Oman}
+      \field{year}{2019}
+      \verb{doi}
+      \verb 10.1109/ICCISci.2019.8748779
+      \endverb
+    \endentry
+    \entry{CostOverrunsEPC2022}{article}{}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=4d3ff2f21f3048431b17c92abff448d2}{%
+           family={Zainol},
+           familyi={Z\bibinitperiod},
+           given={Norfashiha},
+           giveni={N\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {HRMARS}%
+      }
+      \strng{namehash}{0b22a18dbf6fc008d0ab9a82a1239372}
+      \strng{fullhash}{0b22a18dbf6fc008d0ab9a82a1239372}
+      \strng{fullhashraw}{0b22a18dbf6fc008d0ab9a82a1239372}
+      \strng{bibnamehash}{0b22a18dbf6fc008d0ab9a82a1239372}
+      \strng{authorbibnamehash}{0b22a18dbf6fc008d0ab9a82a1239372}
+      \strng{authornamehash}{0b22a18dbf6fc008d0ab9a82a1239372}
+      \strng{authorfullhash}{0b22a18dbf6fc008d0ab9a82a1239372}
+      \strng{authorfullhashraw}{0b22a18dbf6fc008d0ab9a82a1239372}
+      \field{sortinit}{Z}
+      \field{sortinithash}{96892c0b0a36bb8557c40c49813d48b3}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{International Journal of Academic Research in Business and Social Sciences}
+      \field{title}{Cost Overruns in Engineering Procurement Construction ({EPC}) Fabrication Oil and Gas Megaprojects in {Malaysia}: {The} Importance of Resource Allocation ({5M})}
+      \field{year}{2022}
+    \endentry
+    \entry{AutoMLpipeline2025}{article}{}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=25bbf4047d900f3760c65b01ee899dba}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Wei},
+           giveni={W\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{a88dfc5c55489606792d411cce65410b}
+      \strng{fullhash}{a88dfc5c55489606792d411cce65410b}
+      \strng{fullhashraw}{a88dfc5c55489606792d411cce65410b}
+      \strng{bibnamehash}{a88dfc5c55489606792d411cce65410b}
+      \strng{authorbibnamehash}{a88dfc5c55489606792d411cce65410b}
+      \strng{authornamehash}{a88dfc5c55489606792d411cce65410b}
+      \strng{authorfullhash}{a88dfc5c55489606792d411cce65410b}
+      \strng{authorfullhashraw}{a88dfc5c55489606792d411cce65410b}
+      \field{sortinit}{Z}
+      \field{sortinithash}{96892c0b0a36bb8557c40c49813d48b3}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Automation in Construction}
+      \field{title}{Automated machine learning pipeline for robust project cost and duration forecasting}
+      \field{year}{2025}
+      \verb{doi}
+      \verb 10.1016/j.autcon.2025.004662
+      \endverb
+    \endentry
+  \enddatalist
+  \datalist[entry]{nyt/global//global/global/global}
+    \entry{AIcostEstimation2024}{article}{}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=1b68cedd38f2cb5d405d8c2949769f8a}{%
+           family={Akter},
+           familyi={A\bibinitperiod},
+           given={Shaheen},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {MDPI}%
+      }
+      \strng{namehash}{a070c7e0745d70e38fefbe4098686937}
+      \strng{fullhash}{a070c7e0745d70e38fefbe4098686937}
+      \strng{fullhashraw}{a070c7e0745d70e38fefbe4098686937}
+      \strng{bibnamehash}{a070c7e0745d70e38fefbe4098686937}
+      \strng{authorbibnamehash}{a070c7e0745d70e38fefbe4098686937}
+      \strng{authornamehash}{a070c7e0745d70e38fefbe4098686937}
+      \strng{authorfullhash}{a070c7e0745d70e38fefbe4098686937}
+      \strng{authorfullhashraw}{a070c7e0745d70e38fefbe4098686937}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Machine Learning and Knowledge Extraction}
+      \field{number}{2}
+      \field{title}{Advancement of Artificial Intelligence in Cost Estimation for Project Management Success: {A} Systematic Review of Machine Learning, Deep Learning, Regression, and Hybrid Models}
+      \field{volume}{6}
+      \field{year}{2024}
+      \field{pages}{35}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.3390/make6020035
+      \endverb
+    \endentry
+    \entry{MLdrivenERP2023}{article}{}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=c57d70bdcbd6111110bd0c040a14c30e}{%
+           family={Hassan},
+           familyi={H\bibinitperiod},
+           given={Ahmed},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Springer Open}%
+      }
+      \strng{namehash}{63d13e700959a906fa500eb1451b2a93}
+      \strng{fullhash}{63d13e700959a906fa500eb1451b2a93}
+      \strng{fullhashraw}{63d13e700959a906fa500eb1451b2a93}
+      \strng{bibnamehash}{63d13e700959a906fa500eb1451b2a93}
+      \strng{authorbibnamehash}{63d13e700959a906fa500eb1451b2a93}
+      \strng{authornamehash}{63d13e700959a906fa500eb1451b2a93}
+      \strng{authorfullhash}{63d13e700959a906fa500eb1451b2a93}
+      \strng{authorfullhashraw}{63d13e700959a906fa500eb1451b2a93}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Beni-Suef University Journal of Basic and Applied Sciences}
+      \field{title}{Machine learning-driven optimization of enterprise resource planning ({ERP}) systems: a comprehensive review}
+      \field{year}{2023}
+      \verb{doi}
+      \verb 10.1186/s43088-023-00460-y
+      \endverb
+    \endentry
+    \entry{EPCleadingIndicators2018}{article}{}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=dc808d7f9c2a6f5424cb04f22a1d5913}{%
+           family={Herrera},
+           familyi={H\bibinitperiod},
+           given={Rafael},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {ASCE}%
+      }
+      \strng{namehash}{414b266fc0e47cdfdbb0e083881b309c}
+      \strng{fullhash}{414b266fc0e47cdfdbb0e083881b309c}
+      \strng{fullhashraw}{414b266fc0e47cdfdbb0e083881b309c}
+      \strng{bibnamehash}{414b266fc0e47cdfdbb0e083881b309c}
+      \strng{authorbibnamehash}{414b266fc0e47cdfdbb0e083881b309c}
+      \strng{authornamehash}{414b266fc0e47cdfdbb0e083881b309c}
+      \strng{authorfullhash}{414b266fc0e47cdfdbb0e083881b309c}
+      \strng{authorfullhashraw}{414b266fc0e47cdfdbb0e083881b309c}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Construction Research Congress 2018}
+      \field{title}{Engineering, Procurement, and Construction Cost and Schedule Performance Leading Indicators: {State-of-the-Art} Review}
+      \field{year}{2018}
+      \verb{doi}
+      \verb 10.1061/9780784481271.037
+      \endverb
+    \endentry
+    \entry{XGBoostCostOverrun2026}{article}{}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=5dbaee2bd1f68bfb2185d56f91e4b038}{%
+           family={Kumar},
+           familyi={K\bibinitperiod},
+           given={Rajesh},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{35d6322b312f2d8770b01598a1958ce7}
+      \strng{fullhash}{35d6322b312f2d8770b01598a1958ce7}
+      \strng{fullhashraw}{35d6322b312f2d8770b01598a1958ce7}
+      \strng{bibnamehash}{35d6322b312f2d8770b01598a1958ce7}
+      \strng{authorbibnamehash}{35d6322b312f2d8770b01598a1958ce7}
+      \strng{authornamehash}{35d6322b312f2d8770b01598a1958ce7}
+      \strng{authorfullhash}{35d6322b312f2d8770b01598a1958ce7}
+      \strng{authorfullhashraw}{35d6322b312f2d8770b01598a1958ce7}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Asian Journal of Civil Engineering}
+      \field{title}{An explainable {XGBoost} model for predicting cost overruns in construction projects}
+      \field{year}{2026}
+      \verb{doi}
+      \verb 10.1007/s42107-026-01686-8
+      \endverb
+    \endentry
+    \entry{DomainAwareXGBoost2025}{report}{}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=f16c42df13bd61065becac850067c623}{%
+           family={Morales},
+           familyi={M\bibinitperiod},
+           given={Diego},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{institution}{1}{%
+        {ResearchGate}%
+      }
+      \strng{namehash}{cef834c72da575919322f75605d53b91}
+      \strng{fullhash}{cef834c72da575919322f75605d53b91}
+      \strng{fullhashraw}{cef834c72da575919322f75605d53b91}
+      \strng{bibnamehash}{cef834c72da575919322f75605d53b91}
+      \strng{authorbibnamehash}{cef834c72da575919322f75605d53b91}
+      \strng{authornamehash}{cef834c72da575919322f75605d53b91}
+      \strng{authorfullhash}{cef834c72da575919322f75605d53b91}
+      \strng{authorfullhashraw}{cef834c72da575919322f75605d53b91}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Domain-Aware Machine Learning for Project Delay Prediction: {A} Rule-Constrained {XGBoost} Framework}
+      \field{type}{techreport}
+      \field{year}{2025}
+    \endentry
+    \entry{MLcostForecasting2022}{article}{}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=fc985bf4489819d4c41f8c9af9c1133f}{%
+           family={Pereira},
+           familyi={P\bibinitperiod},
+           given={Eduardo},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{121277730b510c5003867237ec14d5af}
+      \strng{fullhash}{121277730b510c5003867237ec14d5af}
+      \strng{fullhashraw}{121277730b510c5003867237ec14d5af}
+      \strng{bibnamehash}{121277730b510c5003867237ec14d5af}
+      \strng{authorbibnamehash}{121277730b510c5003867237ec14d5af}
+      \strng{authornamehash}{121277730b510c5003867237ec14d5af}
+      \strng{authorfullhash}{121277730b510c5003867237ec14d5af}
+      \strng{authorfullhashraw}{121277730b510c5003867237ec14d5af}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IFAC-PapersOnLine}
+      \field{title}{A Machine Learning Study to Enhance Project Cost Forecasting}
+      \field{year}{2022}
+      \verb{doi}
+      \verb 10.1016/j.ifacol.2022.09.537
+      \endverb
+    \endentry
+    \entry{Rashid2019}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=76d4c4ffd409204241431afd2728f479}{%
+           family={Rashid},
+           familyi={R\bibinitperiod},
+           given={Mohammed},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6c3a5782f66056a9bdf42e236c26a61e}{%
+           family={Al-Azri},
+           familyi={A\bibinithyphendelim A\bibinitperiod},
+           given={Nasser},
+           giveni={N\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{b8b94616cc0bfa650bce5d2d8dbadcca}
+      \strng{fullhash}{b8b94616cc0bfa650bce5d2d8dbadcca}
+      \strng{fullhashraw}{b8b94616cc0bfa650bce5d2d8dbadcca}
+      \strng{bibnamehash}{b8b94616cc0bfa650bce5d2d8dbadcca}
+      \strng{authorbibnamehash}{b8b94616cc0bfa650bce5d2d8dbadcca}
+      \strng{authornamehash}{b8b94616cc0bfa650bce5d2d8dbadcca}
+      \strng{authorfullhash}{b8b94616cc0bfa650bce5d2d8dbadcca}
+      \strng{authorfullhashraw}{b8b94616cc0bfa650bce5d2d8dbadcca}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{2019 International Conference on Computer and Information Sciences (ICCIS)}
+      \field{title}{{ERP} Implementation in the Oil and Gas Sector: {A} Case Study in Sultanate of Oman}
+      \field{year}{2019}
+      \verb{doi}
+      \verb 10.1109/ICCISci.2019.8748779
+      \endverb
+    \endentry
+    \entry{CostOverrunsEPC2022}{article}{}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=4d3ff2f21f3048431b17c92abff448d2}{%
+           family={Zainol},
+           familyi={Z\bibinitperiod},
+           given={Norfashiha},
+           giveni={N\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {HRMARS}%
+      }
+      \strng{namehash}{0b22a18dbf6fc008d0ab9a82a1239372}
+      \strng{fullhash}{0b22a18dbf6fc008d0ab9a82a1239372}
+      \strng{fullhashraw}{0b22a18dbf6fc008d0ab9a82a1239372}
+      \strng{bibnamehash}{0b22a18dbf6fc008d0ab9a82a1239372}
+      \strng{authorbibnamehash}{0b22a18dbf6fc008d0ab9a82a1239372}
+      \strng{authornamehash}{0b22a18dbf6fc008d0ab9a82a1239372}
+      \strng{authorfullhash}{0b22a18dbf6fc008d0ab9a82a1239372}
+      \strng{authorfullhashraw}{0b22a18dbf6fc008d0ab9a82a1239372}
+      \field{sortinit}{Z}
+      \field{sortinithash}{96892c0b0a36bb8557c40c49813d48b3}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{International Journal of Academic Research in Business and Social Sciences}
+      \field{title}{Cost Overruns in Engineering Procurement Construction ({EPC}) Fabrication Oil and Gas Megaprojects in {Malaysia}: {The} Importance of Resource Allocation ({5M})}
+      \field{year}{2022}
+    \endentry
+    \entry{AutoMLpipeline2025}{article}{}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=25bbf4047d900f3760c65b01ee899dba}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Wei},
+           giveni={W\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{a88dfc5c55489606792d411cce65410b}
+      \strng{fullhash}{a88dfc5c55489606792d411cce65410b}
+      \strng{fullhashraw}{a88dfc5c55489606792d411cce65410b}
+      \strng{bibnamehash}{a88dfc5c55489606792d411cce65410b}
+      \strng{authorbibnamehash}{a88dfc5c55489606792d411cce65410b}
+      \strng{authornamehash}{a88dfc5c55489606792d411cce65410b}
+      \strng{authorfullhash}{a88dfc5c55489606792d411cce65410b}
+      \strng{authorfullhashraw}{a88dfc5c55489606792d411cce65410b}
+      \field{sortinit}{Z}
+      \field{sortinithash}{96892c0b0a36bb8557c40c49813d48b3}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Automation in Construction}
+      \field{title}{Automated machine learning pipeline for robust project cost and duration forecasting}
+      \field{year}{2025}
+      \verb{doi}
+      \verb 10.1016/j.autcon.2025.004662
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
