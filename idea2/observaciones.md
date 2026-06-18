@@ -67,6 +67,12 @@ Ambas referencias tienen Índice de Anexos. Franco tiene `\listoffigures` y `\li
 
 ## ✅ Resueltos
 
+### Revisión del tutor (Ing. Rolando Lara Sanchez)
+- **(Título / nombre del ERP)**: el tutor preguntó si el ERP se llama igual que la empresa. Aclarado en el Planteamiento: *"un ERP propio, denominado igualmente ISI Mustang"*.
+- **(Planteamiento — qué es EPC)**: el tutor observó que se usaba "proyectos EPC" sin explicar su significado ni las actividades de la empresa. Agregada la definición en el Planteamiento (Engineering, Procurement and Construction: diseño de ingeniería, procura y construcción para gas, petróleo, minería y energía) y qué gestiona el ERP.
+- **(Formulación del problema)**: el tutor pidió no formularla midiendo el módulo (la solución), sino partiendo del problema central. Reformulada a la variante centrada en el problema: *"¿Cómo aprovechar los datos históricos del ERP ISI Mustang para anticipar desviaciones y riesgos en los proyectos de ingeniería EPC de la empresa?"* (reemplaza el anterior "¿En qué medida un módulo… permite…?").
+- **(Objetivos específicos — doble verbo)**: el tutor señaló que OE1, OE2 y OE3 tenían dos verbos en infinitivo (ambiguos). Reformulados a un solo verbo de acción cada uno, con las acciones secundarias convertidas en sustantivos: OE1 "Analizar… para la identificación… y la definición…"; OE2 "Diseñar… incluyendo la selección de los modelos…"; OE3 "Construir el módulo predictivo, comprendiendo el pipeline… y el entrenamiento…". OE4 (Integrar) y OE5 (Evaluar) ya tenían un solo verbo.
+
 ### Segunda revisión completa (hallazgos 1–9)
 - **(1) Numeración de figuras y cuadros**: agregado `\counterwithin{figure}{section}` y `\counterwithin{table}{section}` al preámbulo. Ahora figuras 2.1, 2.2, 6.1, 6.2, 6.3 y cuadros 2.1, 10.1 — se reinicia por sección.
 - **(2) Marco Teórico vs Índice Tentativo**: agregada la subsección redactada "Ingeniería de Software" (modelo iterativo e incremental + arquitectura por capas) y cambiado "cinco áreas"→"seis áreas" con "ingeniería de software" en la lista introductoria.
