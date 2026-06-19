@@ -159,11 +159,11 @@
 
 % Formato visual de cada nivel
 \titleformat{\section}[block]
-  {\normalfont\large\bfseries\centering\MakeUppercase}
+  {\normalfont\large\bfseries}
   {\thesection}{1em}{}
 
 \titleformat{\subsection}[block]
-  {\normalfont\normalsize\bfseries\MakeUppercase}
+  {\normalfont\normalsize\bfseries}
   {\thesubsection}{1em}{}
 
 \titleformat{\subsubsection}[block]
