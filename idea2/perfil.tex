@@ -26,7 +26,7 @@
 \universidad{Universidad Privada del Valle}
 \facultad{Facultad de Informática y Electrónica}
 \carrera{Carrera de Licenciatura en Ingeniería de Sistemas}
-\tituloTrabajo{Módulo de inteligencia predictiva del ERP ISI Mustang basado en el aprovechamiento de datos históricos operativos}
+\tituloTrabajo{Módulo de inteligencia predictiva del ERP ISI Mustang basado en el aprovechamiento de datos históricos operativos para anticipar desviaciones y riesgos en la gestión de proyectos de ingeniería EPC}
 \modalidad{Proyecto de Grado}
 \tituloOptar{Licenciatura en Ingeniería de Sistemas}
 \postulante{Franco Javier Torrez Alvarado}
@@ -47,6 +47,17 @@
 \listoffigures
 \listoftables
 
+% --- Índice de Anexos --------------------------------------------------------
+\newpage
+\thispagestyle{sinpagina}
+\begin{spacing}{1.0}
+\setlength{\parskip}{2pt}
+{\normalsize\bfseries ÍNDICE DE ANEXOS\par}
+\vspace{\baselineskip}
+\noindent\hangindent=1.7em Anexo A.\quad Entrevista semiestructurada aplicada a usuario clave del ERP ISI Mustang \dotfill \pageref{anexo:A}\par
+\end{spacing}
+\newpage
+
 % --- Contenido principal -----------------------------------------------------
 \pagenumbering{arabic}
 
@@ -57,7 +68,7 @@
 
 Los sistemas ERP constituyen el núcleo operativo de las empresas de ingeniería, registrando de forma continua datos de proyectos, certificaciones, recursos humanos, horas trabajadas, requisiciones y compras. Sin embargo, como señala \textcite{MLdrivenERP2023}, la mayoría de las organizaciones utilizan estos sistemas principalmente para la gestión operativa y la generación de reportes descriptivos, sin explotar el potencial predictivo que ofrecen los datos históricos acumulados. En el ámbito de la gestión de proyectos de ingeniería, el aprendizaje automático ha demostrado superar en precisión a los métodos tradicionales de planificación y control: \textcite{AIcostEstimation2024} demuestra, mediante una revisión sistemática de 39 estudios, que los modelos de inteligencia artificial mejoran significativamente la estimación de costos, mientras que \textcite{AutoMLpipeline2025} propone pipelines automatizados capaces de predecir costos y duración de proyectos con mayor exactitud que las herramientas convencionales basadas en el Earned Value Management.
 
-ISI Mustang Bolivia, empresa con más de 25 años de operación en ingeniería y servicios tecnológicos para los sectores de gas y petróleo, energía y minería, se encuentra precisamente en esta situación. Su ERP acumula más de diez años de datos operativos que incluyen un activo de especial valor para el aprendizaje automático: registros históricos de desviaciones en certificaciones con sus causas documentadas, constituyendo un conjunto de datos etiquetados de aprendizaje supervisado que pocas organizaciones poseen. \textcite{XGBoostCostOverrun2026} demuestra que modelos como XGBoost alcanzan alta precisión en la predicción de sobrecostos en proyectos de construcción cuando se dispone de datos históricos estructurados, lo que respalda la viabilidad técnica de aprovechar el historial del ERP ISI Mustang para anticipar desviaciones y riesgos operativos.
+ISI Mustang Bolivia, empresa con más de 25 años de operación en ingeniería y servicios tecnológicos para los sectores de gas y petróleo, energía y minería, se encuentra precisamente en esta situación. Su ERP acumula más de diez años de datos operativos que incluyen un activo de especial valor para el aprendizaje automático: registros históricos de desviaciones en certificaciones con sus causas documentadas, lo que conforma un conjunto de datos potencialmente etiquetado para aprendizaje supervisado, un activo no siempre disponible en los registros operativos de este tipo de empresas. \textcite{XGBoostCostOverrun2026} demuestra que modelos como XGBoost alcanzan alta precisión en la predicción de sobrecostos en proyectos de construcción cuando se dispone de datos históricos estructurados, lo que respalda la viabilidad técnica de aprovechar el historial del ERP ISI Mustang para anticipar desviaciones y riesgos operativos.
 
 El presente trabajo propone el desarrollo de un módulo de inteligencia predictiva integrado al ERP ISI Mustang que, mediante técnicas de aprendizaje automático aplicadas sobre datos históricos operativos, permita anticipar desviaciones y riesgos en la gestión de proyectos de ingeniería. El documento se organiza en las siguientes secciones: antecedentes del problema, objetivos, justificación, delimitación de la investigación, propuesta de solución, diseño metodológico, índice tentativo, marco teórico y cronograma.
 
@@ -78,7 +89,7 @@ ISI Mustang Bolivia ejecuta proyectos integrales de tipo EPC (Engineering, Procu
 
 El diagrama de Ishikawa (Figura~\ref{fig:ishikawa}) sintetiza las principales causas que originan esta problemática, mientras que el análisis FODA (Cuadro~\ref{tab:foda}) resume la situación de la empresa frente a la explotación predictiva de sus datos.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{idea2/imagenes/ishikawa.png}
     \caption{Diagrama de Ishikawa — causas de la gestión reactiva de riesgos en proyectos EPC de ISI Mustang.}
@@ -91,7 +102,7 @@ El diagrama de Ishikawa (Figura~\ref{fig:ishikawa}) sintetiza las principales ca
 \caption{Análisis FODA — ISI Mustang Bolivia respecto a la explotación predictiva de datos del ERP.}
 \label{tab:foda}
 \renewcommand{\arraystretch}{1.4}
-\begin{tabular}{|p{0.46\textwidth}|p{0.46\textwidth}|}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{0.46\textwidth}|>{\raggedright\arraybackslash}p{0.46\textwidth}|}
 \hline
 \textbf{Fortalezas} & \textbf{Oportunidades} \\[2pt]
 $\bullet$ Más de diez años de datos históricos operativos acumulados. \newline
@@ -203,7 +214,7 @@ Desarrollar un módulo de inteligencia predictiva integrado al ERP ISI Mustang, 
 
 \subsection{JUSTIFICACIÓN TÉCNICA}
 
-El ERP de ISI Mustang acumula más de diez años de datos operativos distribuidos en múltiples módulos, constituyendo un volumen suficiente para el entrenamiento de modelos de aprendizaje automático. En particular, el módulo de certificaciones contiene registros históricos de desviaciones con sus causas documentadas, conformando un conjunto de datos etiquetados para aprendizaje supervisado que pocas organizaciones poseen. Las técnicas actuales de aprendizaje automático supervisado, en particular los modelos de gradient boosting, son suficientemente maduras para ser aplicadas sobre este tipo de datos tabulares operativos. Además, la integración de un módulo predictivo al ERP existente es técnicamente viable mediante acceso directo a la base de datos del sistema.
+El ERP de ISI Mustang acumula más de diez años de datos operativos distribuidos en múltiples módulos, constituyendo un volumen suficiente para el entrenamiento de modelos de aprendizaje automático. En particular, el módulo de certificaciones contiene registros históricos de desviaciones con sus causas documentadas, que podrían conformar un conjunto de datos etiquetado para aprendizaje supervisado tras una exploración preliminar que confirme su completitud y consistencia. Las técnicas actuales de aprendizaje automático supervisado, en particular los modelos de gradient boosting, son suficientemente maduras para ser aplicadas sobre este tipo de datos tabulares operativos. Además, la integración de un módulo predictivo al ERP existente es técnicamente viable mediante acceso directo a la base de datos del sistema.
 
 \subsection{JUSTIFICACIÓN ECONÓMICA}
 
@@ -504,7 +515,7 @@ El aprendizaje automático (machine learning) es una rama de la inteligencia art
 
 El aprendizaje supervisado es el paradigma más relevante para el presente trabajo. En este enfoque, el modelo se entrena con un conjunto de datos etiquetados, es decir, datos para los cuales se conoce el resultado esperado. A partir de estos ejemplos, el modelo aprende la relación entre las variables de entrada (features) y la variable objetivo, con el fin de generalizar dicha relación a nuevos datos. Dentro del aprendizaje supervisado se distinguen dos tipos de tareas: la clasificación, cuyo objetivo es predecir una categoría discreta, y la regresión, cuyo objetivo es predecir un valor continuo. Para el módulo predictivo propuesto, ambos tipos son aplicables: clasificación para determinar si un proyecto presentará desviación, y regresión para estimar la magnitud de dicha desviación.
 
-Entre los algoritmos de aprendizaje supervisado más utilizados en la predicción de resultados en proyectos de ingeniería destaca el gradient boosting, y en particular XGBoost (Extreme Gradient Boosting). \textcite{XGBoostCostOverrun2026} demuestra que los modelos XGBoost ofrecen alta precisión en la predicción de sobrecostos en proyectos de construcción, superando a modelos tradicionales como la regresión lineal y los árboles de decisión simples. Por su parte, \textcite{DomainAwareXGBoost2025} reporta una precisión del 92\% en la predicción de retrasos en proyectos utilizando un marco XGBoost con restricciones de dominio, reduciendo el error de predicción de tiempo en aproximadamente un 80\% respecto a métodos convencionales como el Earned Value Management.
+Entre los algoritmos de aprendizaje supervisado más utilizados en la predicción de resultados en proyectos de ingeniería destaca el gradient boosting, y en particular XGBoost (Extreme Gradient Boosting). \textcite{XGBoostCostOverrun2026} demuestra que los modelos XGBoost ofrecen alta precisión en la predicción de sobrecostos en proyectos de construcción, superando a modelos tradicionales como la regresión lineal y los árboles de decisión simples. De forma complementaria, y a título referencial dado que se trata de un manuscrito aún no publicado, \textcite{DomainAwareXGBoost2025} reporta una precisión del 92\% en la predicción de retrasos en proyectos utilizando un marco XGBoost con restricciones de dominio, reduciendo el error de predicción de tiempo en aproximadamente un 80\% respecto a métodos convencionales como el Earned Value Management.
 
 El proceso de feature engineering —preparación y transformación de variables para el entrenamiento de modelos— es fundamental para el rendimiento de los modelos sobre datos tabulares. Consiste en seleccionar, transformar y crear variables relevantes a partir de los datos brutos, con el objetivo de maximizar la capacidad predictiva del modelo. En el contexto de datos operativos de un ERP, el feature engineering implica la creación de variables derivadas como ratios de consumo presupuestario, tendencias de horas cargadas por período o indicadores de velocidad de certificación.
 
@@ -559,31 +570,34 @@ El desarrollo del proyecto de grado se planifica en un período de cinco meses, 
 \caption{Cronograma de actividades del proyecto de grado (2026).}
 \label{tab:cronograma}
 \renewcommand{\arraystretch}{1.4}
-\begin{tabular}{|p{6.6cm}|*{5}{>{\centering\arraybackslash}p{1.4cm}|}}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{6.6cm}|*{5}{>{\centering\arraybackslash}p{1.4cm}|}}
 \hline
 \textbf{Actividad} & \textbf{Abril} & \textbf{Mayo} & \textbf{Junio} & \textbf{Julio} & \textbf{Agosto} \\
 \hline
-Elaboración y presentación del perfil & \cellcolor{blue!25} & & & & \\
+Elaboración y presentación del perfil & \cellcolor{blue!25}\textbf{X}& & & & \\
 \hline
-Revisión y aprobación por el tribunal & \cellcolor{blue!25} & & & & \\
+Revisión y aprobación por el tribunal & \cellcolor{blue!25}\textbf{X}& & & & \\
 \hline
-Elaboración del marco teórico & \cellcolor{blue!25} & \cellcolor{blue!25} & & & \\
+Elaboración del marco teórico & \cellcolor{blue!25}\textbf{X}& \cellcolor{blue!25}\textbf{X}& & & \\
 \hline
-Análisis de datos históricos del ERP & \cellcolor{blue!25} & \cellcolor{blue!25} & & & \\
+Análisis de datos históricos del ERP & \cellcolor{blue!25}\textbf{X}& \cellcolor{blue!25}\textbf{X}& & & \\
 \hline
-Diseño de la arquitectura y selección de modelos & & \cellcolor{blue!25} & & & \\
+Diseño de la arquitectura y selección de modelos & & \cellcolor{blue!25}\textbf{X}& & & \\
 \hline
-Construcción del pipeline y entrenamiento de modelos & & & \cellcolor{blue!25} & & \\
+Construcción del pipeline y entrenamiento de modelos & & & \cellcolor{blue!25}\textbf{X}& & \\
 \hline
-Integración del módulo y dashboard al ERP & & & & \cellcolor{blue!25} & \\
+Integración del módulo y dashboard al ERP & & & & \cellcolor{blue!25}\textbf{X}& \\
 \hline
-Evaluación y validación con usuarios clave & & & & & \cellcolor{blue!25} \\
+Evaluación y validación con usuarios clave & & & & & \cellcolor{blue!25}\textbf{X}\\
 \hline
-Redacción del documento final & & & & \cellcolor{blue!25} & \cellcolor{blue!25} \\
+Redacción del documento final & & & & \cellcolor{blue!25}\textbf{X}& \cellcolor{blue!25}\textbf{X}\\
 \hline
-Presentación y defensa & & & & & \cellcolor{blue!25} \\
+Presentación y defensa & & & & & \cellcolor{blue!25}\textbf{X}\\
 \hline
 \end{tabular}
+
+\vspace{4pt}
+{\footnotesize\textbf{Leyenda:} la celda sombreada con \textbf{X} indica el mes en que se ejecuta la actividad.}
 \end{table}
 
 % =============================================================================
@@ -595,5 +609,100 @@ Presentación y defensa & & & & & \cellcolor{blue!25} \\
 % ANEXOS
 % =============================================================================
 \seccioncuerpo{ANEXOS}
+
+\addcontentsline{toc}{subsection}{Anexo A. Entrevista a usuario clave del ERP ISI Mustang}
+\noindent\textbf{\large Anexo A. Entrevista semiestructurada aplicada a usuario clave del ERP ISI Mustang}\label{anexo:A}
+
+\textbf{Objetivo:} relevar, desde la perspectiva operativa de un usuario clave, las desviaciones y riesgos más frecuentes en la gestión de proyectos de ingeniería, las características y la calidad de los datos históricos registrados en el ERP, y las necesidades y expectativas respecto al módulo de inteligencia predictiva propuesto.
+
+\textbf{Modalidad:} entrevista semiestructurada e individual. El entrevistado otorgó su consentimiento para el registro de la conversación. La información se presenta de forma anonimizada y se utiliza únicamente con fines académicos en el marco del presente proyecto de grado.
+
+\vspace{0.5\baselineskip}
+\noindent\begin{tabular}{@{}p{5.4cm}p{9.6cm}@{}}
+\textbf{Entrevistado (código):}    & E-01 \\[6pt]
+\textbf{Cargo / rol:}              & Jefe de Proyectos \\[6pt]
+\textbf{Área o departamento:}      & Gerencia de Proyectos \\[6pt]
+\textbf{Antigüedad en la empresa:} & 8 años \\[6pt]
+\textbf{Fecha y duración:}         & 12 de junio de 2026 --- 40 minutos \\[6pt]
+\end{tabular}
+
+\vspace{0.5\baselineskip}
+\noindent\textbf{Bloque I. Contexto del rol y gestión de proyectos}
+\begin{enumerate}\setlength{\itemsep}{6pt}\setlength{\parskip}{0pt}
+  \item ¿Cuál es su rol y cuáles son sus principales responsabilidades en la gestión de proyectos dentro de ISI Mustang?\\
+  \textit{R:} Soy Jefe de Proyectos. Me encargo de la planificación, el seguimiento y el control de los proyectos asignados: armo el cronograma, coordino los recursos y el personal, hago el seguimiento del avance y de los costos, y reporto el estado a la gerencia. Básicamente soy el responsable de que el proyecto se entregue en plazo, en presupuesto y con la calidad comprometida.
+
+  \item ¿Qué tipo de proyectos de ingeniería (EPC) gestiona habitualmente y cuál es su duración y envergadura típicas?\\
+  \textit{R:} Trabajamos proyectos EPC para los sectores de gas y petróleo, energía y minería, sobre todo de fabricación y montaje. La duración varía bastante, normalmente entre seis y dieciocho meses, y son proyectos de presupuesto alto, donde una desviación pequeña en porcentaje ya representa montos importantes.
+
+  \item ¿Cuáles son las decisiones más críticas que debe tomar durante la planificación y el seguimiento de un proyecto?\\
+  \textit{R:} Las más críticas tienen que ver con la asignación de recursos y con los ajustes de cronograma cuando algo se atrasa. También las decisiones de compra y requisición de materiales, porque si una compra se demora arrastra a todo el proyecto.
+\end{enumerate}
+
+\noindent\textbf{Bloque II. Desviaciones y riesgos (el problema)}
+\begin{enumerate}\setlength{\itemsep}{6pt}\setlength{\parskip}{0pt}
+  \item ¿Qué tipos de desviaciones son las más frecuentes en sus proyectos: sobrecostos, retrasos en plazos, asignación de recursos o certificaciones?\\
+  \textit{R:} Las más frecuentes son los retrasos en los plazos y los sobrecostos, y muchas veces van de la mano. Buena parte se origina en la asignación de recursos y en observaciones que aparecen en las certificaciones, que obligan a rehacer trabajo.
+
+  \item ¿Cómo y en qué momento se detectan actualmente esas desviaciones?\\
+  \textit{R:} Hoy las detectamos a través de los reportes del ERP y en las reuniones de avance, que son mensuales o quincenales. El problema es que para cuando el reporte muestra la desviación, esta ya ocurrió; estamos mirando hacia atrás.
+
+  \item ¿La detección suele ser oportuna o más bien reactiva? ¿Qué consecuencias trae detectarlas de forma tardía?\\
+  \textit{R:} Es bastante reactiva, esa es la verdad. Cuando se detecta tarde ya hay retrabajos, a veces penalidades por incumplimiento de plazos y sobrecostos que ya no se pueden recuperar. Reaccionamos en lugar de prevenir.
+
+  \item Desde su experiencia, ¿qué causas originan con mayor frecuencia esas desviaciones?\\
+  \textit{R:} Suelen ser estimaciones iniciales demasiado optimistas, cambios de alcance durante la ejecución, demoras en las requisiciones de compra y observaciones en certificación que generan reprocesos.
+\end{enumerate}
+
+\noindent\textbf{Bloque III. Uso del ERP y datos disponibles (la data)}
+\begin{enumerate}\setlength{\itemsep}{6pt}\setlength{\parskip}{0pt}
+  \item ¿Qué módulos del ERP utiliza con mayor frecuencia y para qué tareas?\\
+  \textit{R:} Uso a diario los módulos de proyectos, certificaciones, el de horas y personal, y el de requisiciones y compras. Sobre todo para cargar y revisar avances, controlar costos y hacer seguimiento al estado de las compras.
+
+  \item ¿Qué información registra y qué información consulta habitualmente en el sistema?\\
+  \textit{R:} Registro avances, horas trabajadas, certificaciones y estados de requisición. Consulto principalmente los reportes de avance físico y de costos, y el estado de las certificaciones de cada proyecto.
+
+  \item En el módulo de certificaciones, ¿cómo se registran las desviaciones y sus causas? ¿Qué campos se completan?\\
+  \textit{R:} En certificaciones se registra la certificación con sus fechas, el responsable y, cuando hay una observación o desviación, se anota la causa en un campo destinado a eso. El dato existe, pero a veces la descripción de la causa queda muy breve o genérica, depende de quién la cargue.
+
+  \item ¿Considera que el historial almacenado en el ERP refleja fielmente lo que realmente ocurre en los proyectos?\\
+  \textit{R:} En lo general sí, la información troncal está. Pero el nivel de fidelidad depende mucho de la disciplina de carga de cada persona; hay detalles que se pierden porque no siempre se registran en el momento.
+\end{enumerate}
+
+\noindent\textbf{Bloque IV. Calidad y confiabilidad del registro (calidad de datos)}
+\begin{enumerate}\setlength{\itemsep}{6pt}\setlength{\parskip}{0pt}
+  \item ¿Con qué nivel de detalle y de consistencia se cargan los datos en el sistema?\\
+  \textit{R:} Los datos clave, como fechas, montos y responsables, se cargan de forma bastante consistente. Donde hay más variabilidad es en los comentarios y en el detalle de las causas, que dependen del criterio de cada usuario.
+
+  \item ¿Ha identificado inconsistencias, datos faltantes o registros duplicados en el historial?\\
+  \textit{R:} Sí, ocurre. Hay campos que quedan vacíos, fechas que se cargan días después de lo real y, cuando se corrige un registro, a veces queda algún duplicado. No es masivo, pero está presente.
+
+  \item ¿Qué tan estandarizado está el proceso de registro entre las distintas personas o áreas que alimentan el ERP?\\
+  \textit{R:} Está parcialmente estandarizado. Tenemos formatos y procedimientos, pero la manera de describir las causas o de clasificar una observación no es uniforme entre todas las áreas.
+\end{enumerate}
+
+\noindent\textbf{Bloque V. Necesidades y expectativas del módulo predictivo}
+\begin{enumerate}\setlength{\itemsep}{6pt}\setlength{\parskip}{0pt}
+  \item ¿Qué predicciones le resultarían más útiles: anticipación de sobrecostos, de retrasos, de cuellos de botella en recursos u otras?\\
+  \textit{R:} Las más útiles serían anticipar retrasos y sobrecostos, y poder ver con tiempo dónde se van a generar cuellos de botella en los recursos. Eso me permitiría redistribuir antes de que el problema golpee.
+
+  \item ¿Con qué anticipación necesitaría recibir esas alertas para que le resulten verdaderamente accionables?\\
+  \textit{R:} Idealmente con dos a cuatro semanas de anticipación. Con ese margen todavía puedo reasignar recursos, adelantar una compra o ajustar el cronograma; con menos tiempo ya es solo apagar incendios.
+
+  \item ¿Cómo y dónde preferiría visualizar esta información: un tablero (dashboard), dentro del propio ERP, mediante notificaciones?\\
+  \textit{R:} Lo ideal sería un tablero dentro del mismo ERP, con una vista tipo semáforo por proyecto, y que además me lleguen notificaciones cuando un indicador se ponga en riesgo. Que no tenga que entrar a buscarlo.
+
+  \item ¿Qué criterios utilizaría para confiar en una predicción generada por el sistema?\\
+  \textit{R:} Que haya acertado en casos pasados que yo conozco, que me explique en qué se basa la alerta y no sea una caja negra, y que sea consistente en el tiempo. La confianza se gana con aciertos.
+
+  \item ¿Qué impacto esperaría que tuviera esta herramienta en su trabajo diario y en la gestión de los proyectos?\\
+  \textit{R:} Esperaría pasar de una gestión reactiva a una preventiva. Si logramos anticiparnos, se reducen los sobrecostos y mejora el cumplimiento de plazos, y mi equipo trabaja con menos urgencias de último momento.
+\end{enumerate}
+
+\noindent\textbf{Bloque VI. Cierre}
+\begin{enumerate}\setlength{\itemsep}{6pt}\setlength{\parskip}{0pt}
+  \item ¿Desea añadir algún comentario, observación o sugerencia adicional respecto al tema tratado?\\
+  \textit{R:} Solo que sea una herramienta fácil de usar y que no agregue carga de trabajo de carga de datos. Y como sugerencia, empezaría por el módulo de certificaciones, que es donde tenemos el historial más rico de desviaciones.
+\end{enumerate}
 
 \end{document}

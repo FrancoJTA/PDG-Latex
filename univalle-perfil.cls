@@ -75,10 +75,10 @@
 % disponible en sistemas Linux. Si Arial está instalado en el sistema,
 % reemplazar "Liberation Sans" por "Arial" en las tres líneas siguientes.
 % -----------------------------------------------------------------------------
-\setmainfont{Liberation Sans}[
-  BoldFont      = Liberation Sans Bold,
-  ItalicFont    = Liberation Sans Italic,
-  BoldItalicFont = Liberation Sans Bold Italic
+\setmainfont{Arial}[
+  BoldFont       = Arial Bold,
+  ItalicFont     = Arial Italic,
+  BoldItalicFont = Arial Bold Italic
 ]
 
 % -----------------------------------------------------------------------------
@@ -122,6 +122,17 @@
 
 % Justificación del texto
 \justifying
+
+% -----------------------------------------------------------------------------
+% Evitar el corte de palabras con guion al final de línea.
+% La guía exige presentación formal en Word (sin guionado automático); se
+% suprime la separación silábica y se permite un estiramiento de emergencia
+% para que la justificación no genere líneas desbordadas.
+% -----------------------------------------------------------------------------
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+\tolerance=3000
+\setlength{\emergencystretch}{3em}
 
 % -----------------------------------------------------------------------------
 % NUMERACIÓN DE PÁGINAS (Sección 2.4)
