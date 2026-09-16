@@ -15,5 +15,11 @@ para guiar la redacción más adelante.
   código del ERP ISI Mustang, y nota de alcance sobre Keycloak/MCP/Power BI.
 - [04-pendientes-preparacion.md](04-pendientes-preparacion.md) — checklist
   antes de empezar a redactar.
+- [05-herramientas-flujos.md](05-herramientas-flujos.md) — herramientas,
+  skills, repos y MCP evaluados (qué vale la pena y qué no) + los flujos de
+  trabajo que arman para investigación, citas, diagramas y revisión.
 
-Orden de lectura sugerido: 00 → 01 → 02 → 03 → 04.
+Orden de lectura sugerido: 00 → 01 → 02 → 03 → 04 → 05.
+
+Ver también, en la raíz: `../decisiones-tema.md` — decisiones pendientes
+sobre el alcance del tema, sin resolver todavía.
