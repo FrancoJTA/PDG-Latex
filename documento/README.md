@@ -18,8 +18,18 @@ para guiar la redacción más adelante.
 - [05-herramientas-flujos.md](05-herramientas-flujos.md) — herramientas,
   skills, repos y MCP evaluados (qué vale la pena y qué no) + los flujos de
   trabajo que arman para investigación, citas, diagramas y revisión.
+- [06-exploracion-datos-erp.md](06-exploracion-datos-erp.md) — exploración
+  real del esquema y la base de datos del ERP (ojo: la base local es de
+  demo, no el histórico real).
+- [07-corpus-literatura-comun.md](07-corpus-literatura-comun.md) —
+  candidatos de literatura que aplican sea cual sea el tema final (sin leer
+  ni verificar todavía).
+- [08-glosario-dominio.md](08-glosario-dominio.md) — glosario de términos
+  del negocio ISI Mustang / ERP.
+- [09-setup-zotero.md](09-setup-zotero.md) — estado del setup de Zotero +
+  Better BibTeX (instalado, faltan pasos manuales de GUI).
 
-Orden de lectura sugerido: 00 → 01 → 02 → 03 → 04 → 05.
+Orden de lectura sugerido: 00 → 01 → 02 → 03 → 04 → 05 → 06 → 07 → 08 → 09.
 
 Ver también, en la raíz: `../decisiones-tema.md` — decisiones pendientes
 sobre el alcance del tema, sin resolver todavía.

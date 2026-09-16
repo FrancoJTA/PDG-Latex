@@ -61,6 +61,13 @@ antecedente breve (Cap. I) o recomendación/trabajo futuro.
 ### Sobre el trámite y el cronograma
 4. ¿La carrera tiene un proceso formal de "cambio de tema" o "ampliación de
    alcance" para un perfil ya aprobado? ¿Qué plazos tiene?
+   **Búsqueda hecha (2026-09-16), sin resultado:** no aparece públicamente
+   ningún reglamento de Universidad Privada del Valle (Bolivia) sobre esto.
+   Los resultados de búsqueda solo devuelven normativa de la Universidad
+   del Valle de Cali, Colombia — es una institución completamente distinta,
+   no aplica. Esto no está documentado públicamente en ningún lado
+   accesible; **hay que preguntarlo directo a tu tutor o a coordinación de
+   carrera**, no hay atajo de investigación acá.
 5. ¿El jurado que ya dejó observaciones (commit `1ea19e4`) tiene que volver a
    revisar si el tema cambia o se amplía?
 6. La delimitación temporal aprobada es abril–agosto 2026. ¿Ese plazo sigue
