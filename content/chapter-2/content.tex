@@ -1,0 +1,111 @@
+% Capítulo II — Marco Teórico y Tecnológico
+% Cada subsección se redacta a partir de su brief en documento/investigacion/ (pipeline investigador → redactor → revisor).
+\capitulo{2}{II}{Marco Teórico y Tecnológico}
+
+\subsection{SISTEMAS ERP}
+\subsubsection{DEFINICIÓN Y CARACTERÍSTICAS}
+\subsubsection{ERP EN EMPRESAS DE INGENIERÍA}
+\subsubsection{ERP EN EL SECTOR DE PETRÓLEO, GAS Y MINERÍA}
+
+\subsection{APRENDIZAJE AUTOMÁTICO}
+\subsubsection{TIPOS DE APRENDIZAJE}
+
+El aprendizaje automático (\textit{machine learning}) es la rama de la inteligencia artificial que estudia los algoritmos capaces de mejorar su desempeño de manera automática a partir de la experiencia. \textcite{Mitchell1997} lo formaliza con tres elementos: se dice que un programa aprende de una experiencia $E$ respecto de una clase de tareas $T$ y una medida de desempeño $P$ si su desempeño en $T$, medido por $P$, mejora con $E$. Trasladada al presente proyecto, la experiencia es el histórico operativo de más de diez años de ISI Mustang, la tarea es anticipar desviaciones en sus proyectos y la medida de desempeño son las métricas que se describen en la subsección siguiente.
+
+La forma en que esa experiencia se presenta al algoritmo define los paradigmas clásicos del campo. \textcite{Geron2022} organiza los sistemas de aprendizaje automático según la supervisión que reciben durante el entrenamiento en tres familias: supervisado, no supervisado y por refuerzo. En el aprendizaje supervisado cada observación de entrenamiento viene acompañada de la respuesta correcta, la etiqueta o valor objetivo, y el algoritmo aprende una función que asocia las entradas con esa salida para predecirla sobre observaciones nuevas \parencite{Hastie2009}. En el aprendizaje no supervisado no existe tal respuesta: el algoritmo recibe únicamente las entradas y busca estructura en ellas, como grupos de observaciones similares o direcciones de mayor variabilidad \parencite{James2021}. El aprendizaje por refuerzo, por último, no parte de un conjunto de datos fijo sino de un agente que interactúa con un entorno y ajusta su comportamiento según las recompensas que recibe \parencite{Mitchell1997}.
+
+Dentro del aprendizaje supervisado, la naturaleza de la variable de salida distingue dos tipos de problema. Cuando la salida es cuantitativa (un monto, una duración, un porcentaje) se habla de regresión; cuando es cualitativa o categórica (una clase entre un conjunto finito) se habla de clasificación \parencite{Hastie2009, James2021}. La distinción no es solo nominal: determina qué algoritmos son aplicables, qué función de pérdida se optimiza y con qué métricas se evalúa el resultado.
+
+Los tres casos de uso del módulo predictivo se ubican en el paradigma supervisado, porque el histórico de la empresa ya contiene el resultado de cada proyecto cerrado: se conoce cuánto costó respecto de lo presupuestado, cuándo se cerró respecto de la fecha comprometida y cómo evolucionaron sus certificaciones frente a lo planificado. La predicción de desviación en certificaciones es un problema de clasificación, mientras que la estimación del sobrecosto y del retraso en la fecha de cierre son problemas de regresión. El aprendizaje no supervisado y el aprendizaje por refuerzo quedan fuera del alcance del proyecto.
+
+\subsubsection{APRENDIZAJE SUPERVISADO}
+
+Formalmente, el aprendizaje supervisado parte de un conjunto de entrenamiento compuesto por pares $(x_i, y_i)$, donde $x_i$ es un vector de variables predictoras y $y_i$ la respuesta observada, y busca una función $f$ tal que $f(x)$ aproxime a $y$ con el menor error posible sobre observaciones que no participaron del entrenamiento \parencite{Hastie2009}. Esta última condición es la que separa aprender de memorizar. \textcite{James2021} distinguen el error de entrenamiento, que mide el ajuste sobre los datos vistos, del error de prueba, que mide la capacidad de generalizar; un modelo puede reducir el primero indefinidamente aumentando su complejidad, pero a partir de cierto punto el segundo empieza a crecer. Ese fenómeno es el sobreajuste, y se explica por el compromiso entre sesgo y varianza: los modelos simples tienen sesgo alto porque no capturan la estructura de los datos, mientras que los modelos muy flexibles tienen varianza alta porque se ajustan al ruido de la muestra particular con la que fueron entrenados \parencite{Hastie2009, James2021}.
+
+Como el error de prueba no puede calcularse sobre los datos de entrenamiento, se requiere un procedimiento para estimarlo. La práctica básica consiste en separar una parte de los datos como conjunto de prueba, que se reserva y solo se usa al final para evaluar el modelo elegido \parencite{Geron2022}. Para seleccionar entre modelos o ajustar hiperparámetros sin contaminar ese conjunto se emplea la validación cruzada de $k$ particiones (\textit{k-fold}): los datos de entrenamiento se dividen en $k$ bloques, el modelo se entrena $k$ veces dejando fuera un bloque distinto en cada corrida y el error se promedia sobre las $k$ evaluaciones \parencite{James2021}. En un estudio empírico de referencia, \textcite{Kohavi1995} concluye que la validación cruzada estratificada de diez particiones es el mejor método para selección de modelos, incluso cuando la capacidad de cómputo permite usar más particiones, y advierte que la variante \textit{leave-one-out}, aunque casi insesgada, tiene alta varianza y produce estimaciones poco confiables. La estratificación conserva en cada bloque la proporción de clases del conjunto completo, lo que importa cuando una de las clases es minoritaria.
+
+La evaluación del modelo depende del tipo de problema. En clasificación, las medidas usuales derivan de la matriz de confusión, que cruza la clase real con la clase predicha y separa los verdaderos positivos (VP), verdaderos negativos (VN), falsos positivos (FP) y falsos negativos (FN) \parencite{Sokolova2009, Geron2022}. A partir de ella se calculan la exactitud (proporción de aciertos sobre el total), la precisión (proporción de positivos predichos que realmente lo son), la sensibilidad o \textit{recall} (proporción de positivos reales que el modelo detecta) y la medida F1, media armónica de las dos anteriores. \textcite{Sokolova2009} muestran que estas medidas no reaccionan igual ante cambios en la distribución de clases: la exactitud puede ser alta en un conjunto desbalanceado aunque el modelo ignore la clase minoritaria, razón por la cual conviene reportarlas juntas. En regresión, el punto de partida es el error cuadrático medio (MSE), promedio de las diferencias al cuadrado entre valor observado y predicho \parencite{James2021}; su raíz, el RMSE, se expresa en las unidades de la variable y penaliza con más fuerza los errores grandes, mientras que el error absoluto medio (MAE) promedia las diferencias en valor absoluto y es menos sensible a valores extremos. \textcite{Chai2014} sostienen que el RMSE es más apropiado cuando se espera que los errores sigan una distribución gaussiana y que, en general, evaluar un modelo requiere una combinación de métricas y no una sola. A estas se suma el coeficiente de determinación $R^2$, que expresa la proporción de la variabilidad de la respuesta que el modelo explica y permite comparar el ajuste entre variables de distinta escala. El cuadro~\ref{tab:metricas-supervisado} resume las métricas y su uso en el proyecto.
+
+\begin{table}[H]
+  \centering
+  \caption{Métricas de evaluación de modelos supervisados y su uso en el proyecto}\label{tab:metricas-supervisado}
+  \begin{tabular}{@{}>{\RaggedRight\arraybackslash}p{0.18\textwidth}>{\RaggedRight\arraybackslash}p{0.33\textwidth}>{\RaggedRight\arraybackslash}p{0.43\textwidth}@{}}
+    \toprule
+    \textbf{Métrica} & \textbf{Qué mide} & \textbf{Uso en el proyecto} \\
+    \midrule
+    \multicolumn{3}{@{}l}{\textit{Clasificación}} \\
+    Matriz de confusión & Cruce de clase real y clase predicha (VP, VN, FP, FN) & Base de las demás métricas; muestra qué tipo de error comete el clasificador de desviación en certificaciones \\
+    Exactitud & $(\mathrm{VP}+\mathrm{VN})/\mathrm{total}$ & Referencia general; insuficiente si las clases están desbalanceadas \\
+    Precisión & $\mathrm{VP}/(\mathrm{VP}+\mathrm{FP})$ & Proporción de alertas de desviación que son correctas \\
+    Sensibilidad & $\mathrm{VP}/(\mathrm{VP}+\mathrm{FN})$ & Proporción de desviaciones reales que el modelo detecta \\
+    F1 & Media armónica de precisión y sensibilidad & Resumen único cuando ambas importan \\
+    \midrule
+    \multicolumn{3}{@{}l}{\textit{Regresión}} \\
+    RMSE & Raíz del promedio de errores al cuadrado & Error en unidades de la variable; penaliza sobrecostos o retrasos grandes mal estimados \\
+    MAE & Promedio de errores en valor absoluto & Error típico esperado, robusto a valores extremos \\
+    $R^2$ & Proporción de la variabilidad explicada por el modelo & Comparación del ajuste entre el modelo de sobrecosto y el de retraso \\
+    \bottomrule
+  \end{tabular}
+  \fuente{Elaboración propia.}
+\end{table}
+
+Estas definiciones fijan el protocolo de evaluación del módulo predictivo: el clasificador de desviación en certificaciones se evaluará con exactitud, precisión, sensibilidad, F1 y matriz de confusión; los regresores de sobrecosto y de retraso en la fecha de cierre, con RMSE, MAE y $R^2$; y en los tres casos la selección de hiperparámetros se hará con validación cruzada estratificada sobre el conjunto de entrenamiento, reservando un conjunto de prueba independiente para la evaluación final.
+
+\subsubsection{ALGORITMOS DE APRENDIZAJE SUPERVISADO: GRADIENT BOOSTING Y XGBOOST}
+
+El aprendiz base de los algoritmos que usa este proyecto es el árbol de decisión. Un árbol particiona recursivamente el espacio de las variables predictoras mediante reglas binarias del tipo «presupuesto mayor que cierto umbral» y asigna a cada región resultante una predicción constante: la clase mayoritaria en clasificación o el promedio de las respuestas en regresión \parencite{Hastie2009, James2021}. El procedimiento CART formalizado por \textcite{Breiman1984} es el que implementan Scikit-learn y las bibliotecas de \textit{boosting}. Los árboles son fáciles de interpretar y admiten sin transformación previa variables numéricas y categóricas, pero un árbol aislado tiene alta varianza (pequeños cambios en los datos producen árboles muy distintos) y su capacidad predictiva suele ser inferior a la de otros métodos \parencite{James2021}.
+
+Los métodos de ensamble corrigen esa debilidad combinando muchos árboles, con dos estrategias distintas. En el \textit{bagging} y los bosques aleatorios de \textcite{Breiman2001}, los árboles se entrenan en paralelo sobre remuestreos de los datos y sus predicciones se promedian, lo que reduce la varianza. En el \textit{boosting}, en cambio, los árboles se construyen de forma secuencial: cada nuevo árbol se ajusta a lo que los anteriores todavía no explican, de modo que el ensamble mejora por etapas \parencite{Hastie2009, James2021}. \textcite{Friedman2001} dio a esta idea su formulación general al plantear la estimación de la función como un problema de optimización numérica en el espacio de funciones: en cada etapa se ajusta un árbol de regresión al gradiente negativo de la función de pérdida evaluada sobre el modelo acumulado, lo que equivale a un descenso por gradiente en el que cada paso es un árbol. El marco admite distintas funciones de pérdida (mínimos cuadrados, desviación absoluta o Huber para regresión, y verosimilitud logística para clasificación), de modo que el mismo algoritmo sirve para los problemas de regresión y de clasificación del proyecto. Sus hiperparámetros principales son el número de árboles, la tasa de aprendizaje o \textit{shrinkage}, que reduce la contribución de cada árbol, y la profundidad de los árboles, que controla el orden de las interacciones entre variables \parencite{James2021}; el submuestreo de observaciones en cada etapa agrega una regularización adicional \parencite{Hastie2009}.
+
+XGBoost es la implementación de \textit{gradient boosting} de árboles que utiliza el proyecto. \textcite{Chen2016} la presentan como un sistema escalable, ampliamente usado para obtener resultados de vanguardia en competencias de aprendizaje automático, y describen sus aportes: un algoritmo consciente de la dispersión (\textit{sparsity-aware}) para datos dispersos, un esquema de cuantiles ponderados para construir árboles de forma aproximada, y optimizaciones de caché, compresión y particionado que le permiten escalar a miles de millones de ejemplos con menos recursos que otros sistemas. En el diseño del módulo predictivo se prevé aprovechar el tratamiento de valores ausentes que ofrece la biblioteca, dado que el histórico del ERP presenta registros incompletos, y ajustar mediante validación cruzada tanto los hiperparámetros del \textit{boosting} ya mencionados como los parámetros de regularización que XGBoost expone sobre la complejidad de los árboles.
+
+La elección de \textit{gradient boosting} frente a alternativas más recientes se apoya en evidencia sobre datos tabulares. \textcite{Grinsztajn2022} compararon modelos de árboles y redes neuronales profundas sobre 45 conjuntos de datos tabulares y concluyeron que los primeros siguen siendo el estado del arte en conjuntos de tamaño medio, del orden de diez mil observaciones, aun sin considerar su ventaja en velocidad; atribuyen el resultado a sesgos inductivos de los árboles, como la robustez frente a variables no informativas y la capacidad de aprender funciones irregulares, que las redes no comparten. \textcite{ShwartzZiv2022} llegaron a la misma conclusión al enfrentar XGBoost con modelos profundos diseñados específicamente para datos tabulares: XGBoost los superó incluso en los conjuntos de datos usados por los artículos que los proponían y requirió mucho menos ajuste. Ambos resultados describen el escenario del proyecto (datos tabulares de tamaño medio extraídos de un ERP, un solo desarrollador y un plazo acotado) y justifican adoptar XGBoost, integrado con la API de Scikit-learn \parencite{Pedregosa2011}, como algoritmo para los tres casos de uso.
+
+\subsubsection{FEATURE ENGINEERING}
+
+La ingeniería de características (\textit{feature engineering}) es el conjunto de operaciones que transforman los datos crudos en las variables predictoras que recibe el modelo. \textcite{Kuhn2019} la sitúan dentro del proceso de modelado predictivo, junto con la división de datos, el remuestreo, el ajuste de hiperparámetros y la evaluación, y sostienen que la representación de los predictores condiciona el desempeño tanto como la elección del algoritmo. \textcite{Geron2022} muestra el mismo proceso desde la práctica con Scikit-learn: limpieza, codificación de variables categóricas, escalado y encadenamiento de esas transformaciones en \textit{pipelines} que se ajustan únicamente con datos de entrenamiento, para evitar que información del conjunto de prueba se filtre al modelo.
+
+Tres grupos de técnicas son relevantes para este proyecto. El primero es la codificación de predictores categóricos, como el cliente, el tipo de proyecto o el rubro: \textcite{Kuhn2019} describen la codificación \textit{one-hot} o por variables indicadoras, el agrupamiento de categorías poco frecuentes y las codificaciones supervisadas, que reemplazan cada categoría por un estadístico de la respuesta, útiles cuando la variable tiene muchos niveles. El segundo es la transformación de predictores numéricos, que incluye el centrado y escalado, las transformaciones para corregir asimetría y la discretización en intervalos. El tercero, y el más sensible en un histórico operativo, es el manejo de datos faltantes: los mismos autores recomiendan visualizar primero el patrón de ausencia, y luego decidir entre eliminar observaciones o variables, imputar los valores o emplear modelos tolerantes a faltantes. Esta última opción se conecta con los defectos de calidad del ERP identificados en el análisis de datos y con la capacidad de XGBoost mencionada en la subsección anterior.
+
+La selección de variables completa el proceso. \textcite{Guyon2003} le atribuyen tres objetivos: mejorar el desempeño del predictor, obtener modelos más rápidos y económicos, y comprender mejor el proceso que generó los datos. \textcite{Kuhn2019} clasifican los métodos en filtros, que evalúan cada variable de forma independiente del modelo, y envolventes (\textit{wrappers}), que buscan subconjuntos de variables evaluando el modelo sobre cada candidato mediante estrategias voraces, como la eliminación recursiva, o globales; y advierten que, si la selección se realiza fuera del esquema de remuestreo, la estimación del error queda sesgada de forma optimista.
+
+Como decisión de diseño del proyecto, la ingeniería de características se implementa en la capa Gold del pipeline de datos con Polars, y construye para cada proyecto un vector de variables a partir de sus atributos maestros y de agregados calculados sobre sus registros transaccionales a una fecha de corte, como totales y proporciones acumuladas. Un requisito propio de este caso es que las mismas variables deben poder calcularse tanto desde el histórico MySQL del portal anterior, que alimenta el entrenamiento, como desde el ERP nuevo en PostgreSQL, sobre el que se hará la inferencia; sin ese mapeo común, un modelo entrenado con una fuente no puede aplicarse a la otra.
+
+
+\subsection{INGENIERÍA DE DATOS}
+\subsubsection{PROCESOS ETL Y ELT}
+\subsubsection{ARQUITECTURA MEDALLION (BRONZE, SILVER, GOLD)}
+\subsubsection{CALIDAD DE DATOS}
+
+\subsection{ANALÍTICA PREDICTIVA}
+\subsubsection{DEFINICIÓN Y APLICACIONES}
+\subsubsection{ANALÍTICA PREDICTIVA EN GESTIÓN DE PROYECTOS}
+\subsubsection{PREDICCIÓN DE DESVIACIONES Y COSTOS}
+
+\subsection{GESTIÓN DE PROYECTOS EPC}
+\subsubsection{DEFINICIÓN Y CARACTERÍSTICAS}
+\subsubsection{CERTIFICACIONES Y CONTROL DE AVANCE}
+\subsubsection{DESVIACIONES PRESUPUESTARIAS Y DE CRONOGRAMA}
+
+\subsection{INGENIERÍA DE SOFTWARE}
+\subsubsection{PROCESO DE DESARROLLO DE SOFTWARE}
+\subsubsection{METODOLOGÍA DE DESARROLLO ITERATIVA E INCREMENTAL}
+\subsubsection{ARQUITECTURA DE SOFTWARE POR CAPAS}
+
+\subsection{TECNOLOGÍAS DEL STACK DE DESARROLLO}
+\subsubsection{PYTHON Y SU ECOSISTEMA ML}
+\subsubsection{DUCKDB Y POLARS}
+\subsubsection{FASTAPI COMO MICROSERVICIO}
+\subsubsection{NESTJS Y ANGULAR}
+
+\subsection{GESTIÓN DE IDENTIDAD Y ACCESO}
+\subsubsection{OAUTH 2.0 Y OPENID CONNECT}
+\subsubsection{KEYCLOAK}
+
+\subsection{MODEL CONTEXT PROTOCOL (MCP)}
+\subsubsection{DEFINICIÓN Y ARQUITECTURA}
+\subsubsection{INTEGRACIÓN DE SISTEMAS EMPRESARIALES CON MODELOS DE LENGUAJE}
+
+\subsection{INTELIGENCIA DE NEGOCIOS}
+\subsubsection{DEFINICIÓN Y REPORTES DESCRIPTIVOS}
+\subsubsection{POWER BI}

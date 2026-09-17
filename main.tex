@@ -1,0 +1,60 @@
+% =============================================================================
+% main.tex — Documento final de Proyecto de Grado
+% Universidad Privada del Valle — Norma DAAP 2019
+%
+% Motor requerido: XeLaTeX
+%   Compilar con: latexmk -xelatex main.tex   (desde la raíz del repo)
+% Capítulos en content/chapter-N/content.tex (índice: documento/01-estructura-capitulos.md)
+% =============================================================================
+
+\documentclass{univalle-perfil}
+\addbibresource{documento.bib}
+
+% Numeración de figuras y cuadros por capítulo (Figura 2.1, Cuadro 3.2, ...)
+\counterwithin{figure}{section}
+\counterwithin{table}{section}
+
+% --- Carátula ----------------------------------------------------------------
+\universidad{Universidad Privada del Valle}
+\facultad{Facultad de Informática y Electrónica}
+\carrera{Carrera de Licenciatura en Ingeniería de Sistemas}
+\tituloTrabajo{Módulo de inteligencia predictiva del ERP ISI Mustang basado en el aprovechamiento de datos históricos operativos para anticipar desviaciones y riesgos en la gestión de proyectos de ingeniería EPC}
+\modalidad{Proyecto de Grado}
+\tituloOptar{Licenciatura en Ingeniería de Sistemas}
+\postulante{Franco Javier Torrez Alvarado}
+\tutor{Rolando Lara Sanchez}
+\ciudad{Santa Cruz}
+\pais{Bolivia}
+\anio{2026}
+
+\begin{document}
+
+\makecaratula
+
+% --- Índices (sin numerar) ---------------------------------------------------
+\pagenumbering{gobble}
+\tableofcontents
+\listoffigures
+\listoftables
+
+% --- Cuerpo ------------------------------------------------------------------
+\pagenumbering{arabic}
+
+\section*{INTRODUCCIÓN}
+\addcontentsline{toc}{section}{INTRODUCCIÓN}
+% TODO: redactar al final, cuando estén los cuatro capítulos.
+
+\input{content/chapter-1/content.tex}
+\input{content/chapter-2/content.tex}
+\input{content/chapter-3/content.tex}
+\input{content/chapter-4/content.tex}
+
+\seccioncuerpo{CONCLUSIONES}
+% TODO: al final.
+
+\seccioncuerpo{RECOMENDACIONES}
+% TODO: al final (incluye migración a la nube y asistente conversacional sobre MCP como trabajo futuro).
+
+\referencias
+
+\end{document}
