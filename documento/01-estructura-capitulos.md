@@ -25,6 +25,7 @@ CAPÍTULO I. MARCO GENERAL
     1.3.2 Objetivos Específicos
   1.4 Justificación (Técnica / Económica / Social)
   1.5 Metodología (Tipo / Método / Técnicas e Instrumentos / Población y Muestra)
+  1.6 Delimitación de la Investigación (Temática / Espacial / Temporal)  [agregada 2026-09-17: no estaba en el índice del perfil; sí en el ejemplo de referencia §1.8 y en la norma]
 
 CAPÍTULO II. MARCO TEÓRICO Y TECNOLÓGICO
   2.1 Sistemas ERP (definición, ERP en empresas de ingeniería, ERP en
@@ -45,7 +46,7 @@ CAPÍTULO II. MARCO TEÓRICO Y TECNOLÓGICO
   2.10 Inteligencia de Negocios (Power BI)                                  [ampliación]
 
 CAPÍTULO III. ANÁLISIS Y DISEÑO DEL SISTEMA PROPUESTO
-  3.1 Análisis de Datos Históricos del ERP (exploración, variables
+  3.1 Análisis de Datos Históricos (portal anterior MySQL + planillas; exploración, variables
       predictoras, casos de uso predictivos)
   3.2 Análisis de Procesos del Portal Anterior (qué se migra al ERP)        [ampliación]
   3.3 Requerimientos del Sistema (funcionales / no funcionales)

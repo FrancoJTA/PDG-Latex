@@ -195,16 +195,18 @@ El proceso de gestión y control de desviaciones y riesgos en los proyectos de i
 
 \subsection{OBJETIVO GENERAL}
 
-Desarrollar un módulo de inteligencia predictiva integrado al ERP ISI Mustang, mediante técnicas de aprendizaje automático aplicadas sobre datos históricos operativos, para anticipar desviaciones y riesgos en la gestión de proyectos de ingeniería EPC.
+Desarrollar un módulo de inteligencia predictiva integrado al ERP ISI Mustang, mediante técnicas de aprendizaje automático aplicadas sobre los datos históricos operativos de la empresa, para anticipar desviaciones y riesgos en la gestión de proyectos de ingeniería EPC, en el marco de una modernización del ERP que incorpora autenticación centralizada, integración con herramientas de inteligencia de negocios y exposición de sus datos mediante el protocolo MCP.
 
 \subsection{OBJETIVOS ESPECÍFICOS}
 
 \begin{itemize}
-    \item Analizar los datos históricos disponibles en los módulos del ERP ISI Mustang para la identificación de patrones de desviación y la definición de los casos de uso del módulo predictivo.
-    \item Diseñar la arquitectura del módulo predictivo, incluyendo la selección de los modelos de aprendizaje automático adecuados para cada caso de uso.
-    \item Construir el módulo predictivo, comprendiendo el pipeline de datos y el entrenamiento de los modelos para los casos de uso definidos.
-    \item Integrar el módulo predictivo y su dashboard de visualización al ERP ISI Mustang.
-    \item Evaluar la precisión de los modelos y la funcionalidad del módulo mediante métricas de rendimiento y pruebas con usuarios clave de ISI Mustang.
+    \item Identificar los procesos del portal anterior (Portal ISIMustang Bolivia) pendientes de reimplementar en el ERP y los defectos que afectan la calidad de sus datos operativos.
+    \item Analizar los datos históricos de proyectos registrados en el sistema legado y en las planillas de control complementarias, para la definición de los casos de uso del módulo predictivo.
+    \item Diseñar la arquitectura del módulo predictivo y de sus integraciones con el ERP, incluyendo la selección de los modelos de aprendizaje automático adecuados para cada caso de uso.
+    \item Implementar en el ERP los procesos identificados y la autenticación centralizada con Keycloak (OAuth 2.0 / OpenID Connect), como base para las integraciones del sistema.
+    \item Construir el pipeline de datos y los modelos predictivos para los casos de uso definidos: desviación en certificaciones, sobrecosto de proyecto y retraso en la fecha de cierre.
+    \item Integrar al ERP el servicio de predicción con su dashboard de visualización, los reportes descriptivos en Power BI y el servidor MCP.
+    \item Evaluar la precisión de los modelos y la funcionalidad del sistema mediante métricas de rendimiento y pruebas con usuarios clave de ISI Mustang.
 \end{itemize}
 
 % =============================================================================
@@ -231,15 +233,16 @@ Una gestión de proyectos más proactiva y basada en datos garantiza entregas m�
 
 \subsection{TEMÁTICA}
 
-El presente trabajo se delimita a las áreas de aprendizaje automático supervisado, ingeniería de datos y analítica predictiva, aplicadas sobre los datos operativos del ERP ISI Mustang. En cuanto a la gestión de proyectos, el estudio se circunscribe a proyectos de tipo EPC ejecutados por ISI Mustang. Quedan fuera del alcance las fuentes de datos externas al ERP, como sensores IoT, datos de mercado o información climática, así como los módulos del sistema que no se encuentren activos o poblados con datos históricos suficientes.
+El presente trabajo se delimita a las áreas de aprendizaje automático supervisado, ingeniería de datos y analítica predictiva, aplicadas sobre los datos históricos operativos de ISI Mustang, y a la ingeniería de software aplicada a la modernización de su ERP: autenticación centralizada con Keycloak (OAuth 2.0 / OpenID Connect), integración con Power BI, exposición de datos mediante un servidor MCP y reimplementación en el ERP de los procesos del portal anterior. Los datos de entrenamiento provienen del sistema legado (Portal ISIMustang Bolivia, MySQL) y de las planillas de control de proyectos que se llevan fuera del sistema; la inferencia se realiza sobre los proyectos activos del ERP nuevo (PostgreSQL). En cuanto a la gestión de proyectos, el estudio se circunscribe a proyectos de tipo EPC ejecutados por ISI Mustang. Quedan fuera del alcance las fuentes de datos externas, como sensores IoT, datos de mercado o información climática; los módulos del sistema que no se encuentren activos o poblados con datos históricos suficientes; la migración del histórico del sistema legado al esquema del ERP nuevo; y el desarrollo de un asistente conversacional o agente de inteligencia artificial sobre el servidor MCP, que se plantea como trabajo futuro.
 
 \subsection{ESPACIAL}
 
-El estudio se desarrolla en las instalaciones de ISI Mustang Bolivia, con sede en Santa Cruz de la Sierra, Bolivia. Los datos históricos utilizados corresponden a proyectos ejecutados por la empresa principalmente en territorio boliviano. El módulo de inteligencia predictiva desarrollado será integrado y validado en el ERP operativo de ISI Mustang en su sede central.
+El estudio se desarrolla en las instalaciones de ISI Mustang Bolivia, con sede en Santa Cruz de la Sierra, Bolivia. Los datos históricos utilizados corresponden a proyectos ejecutados por la empresa principalmente en territorio boliviano. El módulo de inteligencia predictiva desarrollado será integrado y validado en el ERP operativo de ISI Mustang en su sede central, desplegado en un servidor propio de la empresa; la migración a la nube se plantea como trabajo futuro.
 
 \subsection{TEMPORAL}
 
-Los datos históricos utilizados para el entrenamiento de los modelos de aprendizaje automático abarcan un período de más de diez años de operación del ERP ISI Mustang. El desarrollo del proyecto de grado se estima entre abril y agosto de 2026, período que comprende las etapas de análisis, diseño, construcción y evaluación del módulo predictivo.
+Los datos históricos utilizados para el entrenamiento de los modelos de aprendizaje automático abarcan un período de más de diez años de operación de ISI Mustang, registrados en el sistema legado (Portal ISIMustang Bolivia) y en las planillas de control complementarias. El desarrollo del proyecto de grado se inicia en abril de 2026 y comprende las etapas de análisis, diseño, construcción por incrementos y evaluación del sistema.
+% PENDIENTE (brief §7): la fecha de cierre la define la carrera o el tutor; no fijar una fecha hasta tenerla.
 
 En cuanto a la validez temporal de la investigación, dado que los modelos predictivos se entrenan sobre patrones históricos, se estima que la solución mantiene su vigencia mientras las condiciones operativas de la empresa permanezcan estables. Se recomienda un reentrenamiento periódico de los modelos —de forma anual o ante cambios sustanciales en los procesos de la empresa— con el fin de mitigar la pérdida de precisión por deriva de datos (\textit{model drift}).
 
@@ -289,8 +292,9 @@ Se propone el desarrollo de un módulo de inteligencia predictiva organizado com
 \node[titulo] at (16.0,-0.25) {Capa 6\\Presentación};
 
 % --- Componentes ---
-\node[compex] at (0,-2.9)   {\textbf{PostgreSQL}\\ERP ISI Mustang};
-\node[comp]   at (0,-4.9)   {\textbf{Datos complementarios}\\CSV / Parquet};
+\node[compex, text width=2.35cm] at (0,-2.55) {\textbf{MySQL}\\Portal anterior};
+\node[compex, text width=2.35cm] at (0,-3.75) {\textbf{PostgreSQL}\\ERP ISI Mustang};
+\node[comp, text width=2.35cm]   at (0,-4.95) {\textbf{Planillas Excel}\\de control};
 \node[comp]   at (3.1,-3.3) {\textbf{DuckDB}};
 \node[comp]   at (6.2,-3.3) {\textbf{Polars}};
 \node[comp]   at (9.3,-3.3) {\textbf{Modelos predictivos}\\Desviaciones, sobrecostos y retrasos};
@@ -311,7 +315,7 @@ Se propone el desarrollo de un módulo de inteligencia predictiva organizado com
 \label{fig:arquitectura}
 \end{figure}
 
-Siguiendo la arquitectura Medallion, la capa de fuentes (Bronze) reúne los datos operativos crudos del ERP (PostgreSQL) junto con datos complementarios en archivos (CSV/Parquet); la capa de unificación (Silver) los consolida y depura mediante DuckDB; la capa de transformación (Gold) realiza la ingeniería de variables con Polars; y la capa de modelos entrena los modelos predictivos para los casos de uso definidos. Posteriormente, la capa de servicio expone los modelos como una API REST con FastAPI, que el backend NestJS del ERP consume para presentar las predicciones en un dashboard de Angular.
+Siguiendo la arquitectura Medallion, la capa de fuentes (Bronze) reúne los datos operativos crudos de tres orígenes: el histórico de más de diez años del sistema legado (Portal ISIMustang Bolivia, MySQL), que se utiliza para el entrenamiento; los proyectos activos del ERP nuevo (PostgreSQL), sobre los que se realiza la inferencia; y las planillas Excel de control de proyectos que se llevan fuera del sistema; la capa de unificación (Silver) los consolida y depura mediante DuckDB; la capa de transformación (Gold) realiza la ingeniería de variables con Polars; y la capa de modelos entrena los modelos predictivos para los casos de uso definidos. Posteriormente, la capa de servicio expone los modelos como una API REST con FastAPI, que el backend NestJS del ERP consume para presentar las predicciones en un dashboard de Angular.
 
 El siguiente diagrama de flujo (Figura~\ref{fig:flujo}) describe el proceso predictivo de extremo a extremo, desde los datos históricos hasta la visualización del resultado por el usuario.
 
@@ -457,37 +461,55 @@ CAPÍTULO II. MARCO TEÓRICO Y TECNOLÓGICO \\
 \quad\quad 2.7.1 Python y su Ecosistema ML \\
 \quad\quad 2.7.2 DuckDB y Polars \\
 \quad\quad 2.7.3 FastAPI como Microservicio \\
-\quad\quad 2.7.4 NestJS y Angular \\[2pt]
+\quad\quad 2.7.4 NestJS y Angular \\
+\quad 2.8 Gestión de Identidad y Acceso \\
+\quad\quad 2.8.1 OAuth 2.0 y OpenID Connect \\
+\quad\quad 2.8.2 Keycloak \\
+\quad 2.9 Model Context Protocol (MCP) \\
+\quad\quad 2.9.1 Definición y Arquitectura \\
+\quad\quad 2.9.2 Integración de Sistemas Empresariales con Modelos de Lenguaje \\
+\quad 2.10 Inteligencia de Negocios \\
+\quad\quad 2.10.1 Definición y Reportes Descriptivos \\
+\quad\quad 2.10.2 Power BI \\[2pt]
 CAPÍTULO III. ANÁLISIS Y DISEÑO DEL SISTEMA PROPUESTO \\
-\quad 3.1 Análisis de Datos Históricos del ERP \\
-\quad\quad 3.1.1 Exploración y Caracterización de Datos \\
+\quad 3.1 Análisis de Datos Históricos \\
+\quad\quad 3.1.1 Exploración y Caracterización de las Fuentes de Datos \\
 \quad\quad 3.1.2 Identificación de Variables Predictoras \\
 \quad\quad 3.1.3 Definición de Casos de Uso Predictivos \\
-\quad 3.2 Requerimientos del Sistema \\
-\quad\quad 3.2.1 Requerimientos Funcionales \\
-\quad\quad 3.2.2 Requerimientos No Funcionales \\
-\quad 3.3 Diseño de la Arquitectura del Módulo Predictivo \\
-\quad\quad 3.3.1 Arquitectura por Capas \\
-\quad\quad 3.3.2 Diseño del Pipeline de Datos \\
-\quad\quad 3.3.3 Diseño de Modelos ML \\
-\quad\quad 3.3.4 Diseño de la API Predictiva \\
-\quad\quad 3.3.5 Diseño del Dashboard \\[2pt]
+\quad 3.2 Análisis de Procesos del Portal Anterior \\
+\quad\quad 3.2.1 Relevamiento de Procesos del Portal Anterior \\
+\quad\quad 3.2.2 Procesos a Reimplementar en el ERP \\
+\quad\quad 3.2.3 Defectos y Brechas que Afectan la Calidad de los Datos \\
+\quad 3.3 Requerimientos del Sistema \\
+\quad\quad 3.3.1 Requerimientos Funcionales \\
+\quad\quad 3.3.2 Requerimientos No Funcionales \\
+\quad 3.4 Diseño de la Arquitectura \\
+\quad\quad 3.4.1 Arquitectura por Capas \\
+\quad\quad 3.4.2 Diseño del Pipeline de Datos \\
+\quad\quad 3.4.3 Diseño de Modelos ML \\
+\quad\quad 3.4.4 Diseño de la API Predictiva \\
+\quad\quad 3.4.5 Diseño del Dashboard \\
+\quad\quad 3.4.6 Diseño de la Autenticación Centralizada \\
+\quad\quad 3.4.7 Diseño de las Integraciones con MCP y Power BI \\[2pt]
 CAPÍTULO IV. CONSTRUCCIÓN E IMPLEMENTACIÓN DEL SISTEMA \\
-\quad 4.1 Pipeline de Extracción y Transformación de Datos \\
-\quad\quad 4.1.1 Integración DuckDB con PostgreSQL \\
-\quad\quad 4.1.2 Transformación de Datos con Polars \\
-\quad\quad 4.1.3 Feature Engineering \\
-\quad 4.2 Entrenamiento de Modelos Predictivos \\
-\quad\quad 4.2.1 Modelo de Desviación en Certificaciones \\
-\quad\quad 4.2.2 Modelo de Sobrecosto de Proyectos \\
-\quad\quad 4.2.3 Modelo de Retraso en Cronograma \\
-\quad 4.3 Desarrollo del Microservicio FastAPI \\
-\quad 4.4 Integración con el ERP \\
-\quad\quad 4.4.1 Endpoints de Predicción en NestJS \\
-\quad\quad 4.4.2 Dashboard de Inteligencia Predictiva en Angular \\
-\quad 4.5 Evaluación y Validación \\
-\quad\quad 4.5.1 Métricas de Rendimiento de Modelos \\
-\quad\quad 4.5.2 Pruebas con Usuarios Clave \\[2pt]
+\quad 4.1 Incremento 1: Procesos del Portal Anterior Migrados al ERP \\
+\quad 4.2 Incremento 2: Autenticación Centralizada con Keycloak \\
+\quad 4.3 Incremento 3: Pipeline de Datos y Entrenamiento de Modelos \\
+\quad\quad 4.3.1 Integración DuckDB con MySQL y PostgreSQL \\
+\quad\quad 4.3.2 Transformación de Datos con Polars y Feature Engineering \\
+\quad\quad 4.3.3 Modelo de Desviación en Certificaciones \\
+\quad\quad 4.3.4 Modelo de Sobrecosto de Proyectos \\
+\quad\quad 4.3.5 Modelo de Retraso en la Fecha de Cierre \\
+\quad 4.4 Incremento 4: Microservicio FastAPI e Integración con el ERP \\
+\quad\quad 4.4.1 Desarrollo del Microservicio FastAPI \\
+\quad\quad 4.4.2 Endpoints de Predicción en NestJS \\
+\quad\quad 4.4.3 Dashboard de Inteligencia Predictiva en Angular \\
+\quad 4.5 Incremento 5: Integración con Power BI y MCP \\
+\quad\quad 4.5.1 API de Datos para Power BI \\
+\quad\quad 4.5.2 Servidor MCP \\
+\quad 4.6 Evaluación y Validación \\
+\quad\quad 4.6.1 Métricas de Rendimiento de Modelos \\
+\quad\quad 4.6.2 Pruebas con Usuarios Clave \\[2pt]
 CONCLUSIONES \\
 RECOMENDACIONES \\
 REFERENCIAS BIBLIOGRÁFICAS \\

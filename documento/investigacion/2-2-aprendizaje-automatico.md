@@ -624,3 +624,21 @@ antes de citarlas en cualquier capítulo:
 
 No verifiqué el contenido (abstracts) de estas cinco; sólo metadatos. Eso
 corresponde al brief de 2.4 / estado del arte.
+
+## Verificaciones posteriores (2026-09-17, redactor, sobre PDF completo)
+
+- **Chen2016** (arXiv 1603.02754): [V] §2.1 "Regularized Learning Objective",
+  ec. (2): Ω(f) = γT + ½λ‖w‖², T = número de hojas, w = pesos de hoja;
+  "the second term Ω penalizes the complexity of the model". [V] §3.4
+  "Sparsity-aware Split Finding", Alg. 3 / Fig. 4: dirección por defecto en
+  cada nodo, aprendida de los datos, para valores ausentes. Resuelve las
+  notas 3 y 6 de arriba.
+- **James2021** (ISLR2, PDF de statlearning.com): [V] §3.1.3 "Assessing the
+  Accuracy of the Model", apartado "R² Statistic", ec. (3.17): proporción
+  de varianza explicada, independiente de la escala de Y; "what is a good
+  R² value […] will depend on the application". Resuelve la nota 1.
+- Soporte nativo de categóricas (sin key en el brief; candidatas `@online`
+  en comentario al pie de 2.2 en `content/chapter-2/content.tex`): docs
+  XGBoost "Since version 1.5, XGBoost has support for categorical data"
+  (`enable_categorical`); docs scikit-learn §1.11.1.1.4 "Categorical
+  Features Support" (`categorical_features` en `HistGradientBoosting*`).

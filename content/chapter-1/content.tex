@@ -1,23 +1,211 @@
 % Capítulo I — Marco General
-% Fuente: perfil/perfil.tex (aprobado), expandido al formato de capítulo. Ver documento/02-mapeo-fuentes.md
+% Fuente: perfil/perfil.tex (aprobado, actualizado 2026-09-17), expandido al formato de capítulo.
+% Manda documento/11-brief-proyecto.md donde el perfil se contradice (fuente histórica MySQL, certificaciones por verificar, sin fecha de cierre).
 \capitulo{1}{I}{Marco General}
 
 \subsection{ANTECEDENTES}
 
+Los sistemas de planificación de recursos empresariales (ERP) constituyen el núcleo operativo de las empresas de ingeniería: registran de forma continua los datos de proyectos, certificaciones, recursos humanos, horas trabajadas, requisiciones y compras que sostienen la operación diaria. Sin embargo, como señalan \textcite{MLdrivenERP2023}, la mayoría de las organizaciones utilizan estos sistemas principalmente para la gestión operativa y la generación de reportes descriptivos, sin explotar el potencial predictivo de los datos históricos que acumulan. En el ámbito de la gestión de proyectos de ingeniería, el aprendizaje automático ha demostrado superar en precisión a los métodos tradicionales de planificación y control: \textcite{AIcostEstimation2024} concluyen, a partir de una revisión sistemática de 39 estudios publicados entre 2016 y 2024, que los modelos de inteligencia artificial mejoran significativamente la estimación de costos frente a los métodos convencionales, mientras que \textcite{AutoMLpipeline2025} proponen pipelines automatizados capaces de predecir costos y duración de proyectos con mayor exactitud que las herramientas basadas en la gestión del valor ganado (\textit{Earned Value Management}).
+
+En cuanto a trabajos que abordan problemas análogos al planteado, \textcite{XGBoostCostOverrun2026} desarrollaron un modelo de XGBoost explicable para predecir sobrecostos en proyectos de construcción a partir de datos históricos estructurados, superando en precisión a modelos tradicionales como la regresión lineal y los árboles de decisión simples; no obstante, su estudio se sustenta en conjuntos de datos del sector construcción y no contempla la integración del modelo en el sistema de información operativo de una empresa. \textcite{MLcostForecasting2022} reportan que los modelos de aprendizaje automático entrenados sobre datos históricos de proyectos producen estimaciones de costo más precisas que los índices tradicionales del valor ganado. Por su parte, \textcite{AutoMLpipeline2025} evidencian que la integración de múltiples fuentes de datos mejora la precisión predictiva; aun así, su pipeline opera sobre datos consolidados de diversas organizaciones y no sobre el historial operativo de una empresa en particular. En el terreno de los sistemas ERP del sector, \textcite{AlJafari2018} analizan, mediante un estudio de caso con enfoque mixto en el Sultanato de Omán, cómo la implementación del ERP influye en la eficiencia y la productividad de las empresas de petróleo y gas, y concluyen recomendando su adopción; su trabajo se ocupa del ERP como registro de la operación y no de la explotación predictiva de los datos que acumula.
+
+Los antecedentes revisados confirman la viabilidad técnica de aplicar aprendizaje automático para anticipar desviaciones y riesgos en proyectos de ingeniería, pero comparten una limitación común: se desarrollan sobre conjuntos de datos públicos o multiorganizacionales y no se integran en el sistema de gestión operativo de la empresa que origina los datos. Tampoco se identificaron antecedentes de aplicación de inteligencia predictiva sobre los datos del ERP de ISI Mustang ni trabajos similares en el contexto de empresas de ingeniería bolivianas. Esta doble brecha, la ausencia de soluciones integradas al ERP y la falta de precedentes en el contexto local, constituye el punto de partida del presente proyecto de grado.
+
+ISI Mustang Bolivia es una empresa con más de 25 años de operación en ingeniería y servicios tecnológicos para los sectores de gas y petróleo, energía y minería, con sede en Santa Cruz de la Sierra. Ejecuta proyectos integrales de tipo EPC (\textit{Engineering, Procurement and Construction}), modalidad en la que asume de forma completa el diseño de ingeniería, la procura de equipos y materiales, y la construcción de las instalaciones. Para planificar y controlar estos proyectos, la empresa se ha apoyado durante más de una década en un sistema de información propio, el Portal ISIMustang Bolivia, desarrollado en PHP sobre una base de datos MySQL 5.7 cuyo esquema comprende 175 tablas. En ese sistema se encuentra el histórico de más de diez años de operación: proyectos y centros de costo, actividades, facturación, horas trabajadas, requisiciones y compras. De forma complementaria, parte del control de proyectos se lleva en planillas Excel fuera del sistema.
+
+En la actualidad la empresa reconstruye ese portal como un ERP nuevo, de desarrollo propio y en curso, con un backend en NestJS y TypeScript sobre PostgreSQL y un frontend en Angular. El ERP nuevo reimplementa progresivamente los módulos del portal anterior y es el sistema sobre el que operan los proyectos activos; el portal anterior, por su parte, conserva el histórico que no ha sido migrado. Esta coexistencia de dos sistemas, uno con el pasado y otro con el presente de la operación, define el escenario técnico del presente trabajo: los datos para aprender están en un esquema y los proyectos sobre los que se quiere anticipar riesgos en otro.
+
+Se parte de la hipótesis de que ese histórico contiene un activo de especial valor para el aprendizaje automático: el registro del avance facturado de cada proyecto frente a lo planificado, junto con las horas, compras y presupuestos asociados, que permitiría reconstruir las desviaciones ocurridas y, en la medida en que las causas hayan sido registradas de forma consistente, conformar un conjunto de datos etiquetado para aprendizaje supervisado. La confirmación de esa hipótesis corresponde al análisis de datos del Capítulo III\@. \textcite{XGBoostCostOverrun2026} demuestran que modelos como XGBoost alcanzan alta precisión en la predicción de sobrecostos cuando se dispone de datos históricos estructurados, lo que respalda la viabilidad de aprovechar el historial de ISI Mustang para anticipar desviaciones y riesgos operativos. El presente trabajo propone, en consecuencia, el desarrollo de un módulo de inteligencia predictiva integrado al ERP de ISI Mustang que, mediante técnicas de aprendizaje automático aplicadas sobre ese histórico, permita anticipar desviaciones y riesgos en la gestión de sus proyectos EPC, en el marco de una modernización del ERP que incorpora autenticación centralizada, integración con herramientas de inteligencia de negocios y exposición de sus datos mediante el protocolo MCP.
+
 \subsection{PLANTEAMIENTO DEL PROBLEMA}
+
+Los proyectos EPC que ejecuta ISI Mustang para los sectores de gas, petróleo, minería y energía involucran alta complejidad técnica, presupuestos considerables y plazos estrictos. Para planificarlos y controlarlos, avances, certificaciones, recursos, compras y horas trabajadas, la empresa se apoya en su sistema de información, que acumula más de diez años de datos históricos operativos. Sin embargo, dicha información se utiliza únicamente con fines descriptivos y de control inmediato: sirve para saber qué ocurrió y cuánto se ejecutó, pero no existe un mecanismo que permita identificar patrones en el historial ni anticipar comportamientos futuros. Como consecuencia, la detección de desviaciones presupuestarias, retrasos y cuellos de botella ocurre de forma reactiva, una vez que la desviación ya se materializó y su corrección resulta más costosa, lo que limita la capacidad de gestión proactiva de riesgos en proyectos de alta envergadura. La literatura del sector confirma que se trata de un problema recurrente: \textcite{EPCleadingIndicators2018}, a partir de una revisión de más de doscientos artículos sobre proyectos EPC, señalan que más de la mitad de los proyectos enfrenta retrasos significativos y escaladas de costo importantes, identifican el cambio de diseño como la causa más común de retraso y sobrecosto, seguida de la escasez de recursos y la fluctuación de precios, y observan que todo retraso termina traduciéndose en sobrecosto.
+
+A la gestión reactiva se suma la situación del propio sistema de información. El histórico reside en el portal anterior, cuyos registros están dispersos en módulos sin integración analítica y cuya calidad depende de la disciplina de carga de cada usuario; el ERP nuevo, en construcción, todavía no cubre todos los procesos del portal anterior y presenta defectos que ensucian los datos que registra; y ninguno de los dos cuenta con un módulo de analítica predictiva, una capa de visualización de predicciones ni un mecanismo de alertas tempranas basado en datos. Anticipar riesgos exige, por tanto, no solo construir modelos, sino también preparar el ERP para que sus datos y sus integraciones lo permitan.
+
+El diagrama de Ishikawa de la Figura~\ref{fig:c1-ishikawa} sintetiza las causas de esta problemática agrupadas en cuatro categorías. En la categoría de \emph{procesos}, la detección de desviaciones solo cuando ya ocurrieron, la toma de decisiones sin retroalimentación histórica y la ausencia de métricas de anticipación de riesgo. En la de \emph{datos}, los registros dispersos en módulos sin integración analítica, la inexistencia de variables predictoras definidas y un historial de diez años sin estructura para el aprendizaje automático. En la de \emph{modelos}, la ausencia de un pipeline de entrenamiento y validación, las estimaciones basadas únicamente en criterio y experiencia, y la inexistencia de modelos entrenados sobre datos operativos. Finalmente, en la de \emph{sistema}, un ERP sin módulo de analítica predictiva, sin alertas tempranas basadas en datos y sin una capa de visualización de predicciones. La figura recoge las causas relevadas en la etapa de perfil; el análisis posterior de los dos sistemas de información añadió, en la categoría de datos, la coexistencia del histórico y de los proyectos activos en esquemas distintos y los defectos de registro del ERP nuevo, causa que se incorpora al árbol del problema de la Figura~\ref{fig:c1-arbol}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{imagenes/ishikawa.png}
+  \caption{Diagrama de Ishikawa: causas de la gestión reactiva de riesgos en los proyectos EPC de ISI Mustang}\label{fig:c1-ishikawa}
+  \fuente{Elaboración propia, 2026.}
+\end{figure}
+
+El análisis FODA del Cuadro~\ref{tab:c1-foda} resume la situación de la empresa frente a la explotación predictiva de sus datos. Entre las fortalezas destacan el volumen del histórico acumulado y el control total sobre el sistema de información, al tratarse de un desarrollo propio; entre las debilidades, las posibles inconsistencias del registro histórico y la dependencia de la disciplina de carga. Las oportunidades provienen de la demanda de gestión proactiva en el sector energético y de la madurez de las técnicas de análisis predictivo, mientras que las amenazas se concentran en la adopción por parte de los usuarios y en la vigencia de los modelos ante cambios en los procesos.
+
+\begin{table}[H]
+  \centering
+  \small
+  \caption{Análisis FODA de ISI Mustang Bolivia respecto a la explotación predictiva de los datos de su ERP}\label{tab:c1-foda}
+  \renewcommand{\arraystretch}{1.4}
+  \begin{tabular}{|>{\raggedright\arraybackslash}p{0.46\textwidth}|>{\raggedright\arraybackslash}p{0.46\textwidth}|}
+    \hline
+    \textbf{Fortalezas} & \textbf{Oportunidades} \\[2pt]
+    $\bullet$ Más de diez años de datos históricos operativos acumulados en el portal anterior. \newline
+    $\bullet$ Registro del avance facturado frente a lo planificado que, de confirmarse en el análisis de datos, permitiría reconstruir las desviaciones ocurridas. \newline
+    $\bullet$ Sistema de información propio, con control total sobre el código y los datos operativos.
+    &
+    $\bullet$ Alta demanda de gestión proactiva en proyectos de ingeniería del sector energético. \newline
+    $\bullet$ Madurez y disponibilidad de técnicas de aprendizaje automático para datos tabulares. \newline
+    $\bullet$ Mejora del posicionamiento competitivo en la estimación y adjudicación de contratos. \\
+    \hline
+    \textbf{Debilidades} & \textbf{Amenazas} \\[2pt]
+    $\bullet$ Posibles inconsistencias en el registro histórico de información. \newline
+    $\bullet$ Histórico y proyectos activos en dos sistemas con esquemas distintos. \newline
+    $\bullet$ Ausencia de una cultura de análisis de datos en la organización. \newline
+    $\bullet$ Dependencia de la disciplina en el registro operativo para la calidad de los resultados.
+    &
+    $\bullet$ Resistencia al cambio por parte de los usuarios ante nuevas herramientas de gestión. \newline
+    $\bullet$ Cambios en los procesos operativos que reduzcan la vigencia de los modelos desarrollados. \newline
+    $\bullet$ Baja adopción si los resultados no se comunican de forma clara a los usuarios clave. \\
+    \hline
+  \end{tabular}
+  \fuente{Elaboración propia, 2026.}
+\end{table}
+
+El árbol del problema de la Figura~\ref{fig:c1-arbol} ordena esta situación en términos de causas y efectos. El problema central es la gestión reactiva de desviaciones y riesgos en los proyectos de ingeniería de ISI Mustang. Sus causas son un historial de diez años sin estructura para el análisis predictivo, la coexistencia del histórico y de los proyectos activos en dos sistemas con esquemas distintos y con defectos de registro en el ERP nuevo, un ERP sin módulo de analítica predictiva, un control de proyectos reactivo y sin seguimiento anticipado, y la inexistencia de modelos entrenados sobre los datos operativos de la empresa. Sus efectos son los sobrecostos por detección tardía de desviaciones, los retrasos de cronograma no anticipados, los cuellos de botella en la asignación de recursos y la pérdida de competitividad en licitaciones, dado que la estimación de nuevas propuestas no se beneficia de lo aprendido en los proyectos anteriores.
+
+\begin{figure}[H]
+  \centering
+  \resizebox{\textwidth}{!}{%
+  \begin{tikzpicture}[
+      efecto/.style   = {rectangle, rounded corners=2pt, draw=red!55!black, fill=red!8,
+                         text width=2.7cm, align=center, minimum height=1.1cm, font=\footnotesize},
+      problema/.style = {rectangle, rounded corners=2pt, draw=black, fill=gray!25, very thick,
+                         text width=11cm, align=center, minimum height=1cm, font=\footnotesize\bfseries},
+      causa/.style    = {rectangle, rounded corners=2pt, draw=blue!55!black, fill=blue!8,
+                         text width=2.7cm, align=center, minimum height=1.1cm, font=\footnotesize},
+      banda/.style    = {font=\small\bfseries},
+      arrow/.style    = {-{Stealth}, thick, gray!60!black},
+    ]
+    % Problema central
+    \node[problema] (p) at (0,0) {Gestión reactiva de desviaciones y riesgos en los proyectos de ingeniería de ISI Mustang};
+    % Efectos
+    \node[efecto] (e1) at (-6,3.4) {Sobrecostos por detección tardía de desviaciones};
+    \node[efecto] (e2) at (-2,3.4) {Retrasos de cronograma no anticipados};
+    \node[efecto] (e3) at (2,3.4)  {Cuellos de botella en la asignación de recursos};
+    \node[efecto] (e4) at (6,3.4)  {Pérdida de competitividad en licitaciones};
+    % Causas
+    \node[causa] (c1) at (-7,-3.4)   {Historial de diez años sin estructura para análisis predictivo};
+    \node[causa] (c5) at (-3.5,-3.4) {Histórico y proyectos activos en dos sistemas, con defectos de registro en el ERP nuevo};
+    \node[causa] (c2) at (0,-3.4)    {ERP sin módulo de analítica predictiva};
+    \node[causa] (c3) at (3.5,-3.4)  {Control de proyectos reactivo, sin seguimiento anticipado};
+    \node[causa] (c4) at (7,-3.4)    {Inexistencia de modelos entrenados sobre datos operativos};
+    % Bandas
+    \node[banda, text=red!55!black]  at (0,5.1)  {EFECTOS};
+    \node[banda, text=blue!55!black] at (0,-5.1) {CAUSAS};
+    % Flechas causas -> problema central
+    \draw[arrow] (c1.north) -- (p.south);
+    \draw[arrow] (c5.north) -- (p.south);
+    \draw[arrow] (c2.north) -- (p.south);
+    \draw[arrow] (c3.north) -- (p.south);
+    \draw[arrow] (c4.north) -- (p.south);
+    % Flechas problema central -> efectos
+    \draw[arrow] (p.north) -- (e1.south);
+    \draw[arrow] (p.north) -- (e2.south);
+    \draw[arrow] (p.north) -- (e3.south);
+    \draw[arrow] (p.north) -- (e4.south);
+  \end{tikzpicture}%
+  }
+  \caption{Árbol del problema: causas y efectos de la gestión reactiva de desviaciones y riesgos en los proyectos de ISI Mustang}\label{fig:c1-arbol}
+  \fuente{Elaboración propia, 2026.}
+\end{figure}
+
+El objeto de estudio del presente trabajo es, en consecuencia, el proceso de gestión y control de desviaciones y riesgos en los proyectos de ingeniería de ISI Mustang, a partir de los datos históricos registrados en su sistema de información.
+
 \subsubsection{FORMULACIÓN DEL PROBLEMA}
 
+¿Cómo aprovechar los datos históricos del ERP ISI Mustang para anticipar desviaciones y riesgos en los proyectos de ingeniería EPC de la empresa?
+
 \subsection{OBJETIVOS}
+
 \subsubsection{OBJETIVO GENERAL}
+
+Desarrollar un módulo de inteligencia predictiva integrado al ERP ISI Mustang, mediante técnicas de aprendizaje automático aplicadas sobre los datos históricos operativos de la empresa, para anticipar desviaciones y riesgos en la gestión de proyectos de ingeniería EPC, en el marco de una modernización del ERP que incorpora autenticación centralizada, integración con herramientas de inteligencia de negocios y exposición de sus datos mediante el protocolo MCP.
+
 \subsubsection{OBJETIVOS ESPECÍFICOS}
 
+\begin{enumerate}
+  \item Identificar los procesos del portal anterior (Portal ISIMustang Bolivia) pendientes de reimplementar en el ERP y los defectos que afectan la calidad de sus datos operativos.
+  \item Analizar los datos históricos de proyectos registrados en el sistema legado y en las planillas de control complementarias, para la definición de los casos de uso del módulo predictivo.
+  \item Diseñar la arquitectura del módulo predictivo y de sus integraciones con el ERP, incluyendo la selección de los modelos de aprendizaje automático adecuados para cada caso de uso.
+  \item Implementar en el ERP los procesos identificados y la autenticación centralizada con Keycloak (OAuth 2.0 / OpenID Connect), como base para las integraciones del sistema.
+  \item Construir el pipeline de datos y los modelos predictivos para los casos de uso definidos: desviación en certificaciones, sobrecosto de proyecto y retraso en la fecha de cierre.
+  \item Integrar al ERP el servicio de predicción con su dashboard de visualización, los reportes descriptivos en Power BI y el servidor MCP.
+  \item Evaluar la precisión de los modelos y la funcionalidad del sistema mediante métricas de rendimiento y pruebas con usuarios clave de ISI Mustang.
+\end{enumerate}
+
 \subsection{JUSTIFICACIÓN}
+
 \subsubsection{JUSTIFICACIÓN TÉCNICA}
+
+El sistema de información de ISI Mustang acumula más de diez años de datos operativos distribuidos en múltiples módulos (proyectos y centros de costo, actividades, facturación, horas trabajadas, requisiciones y compras), complementados por las planillas de control que la empresa lleva fuera del sistema. Ese volumen es suficiente para el entrenamiento de modelos de aprendizaje automático sobre datos tabulares. En particular, el portal anterior calculaba indicadores de desvío de costo, de ingresos y de avance por proyecto a partir del avance facturado frente a lo planificado; se parte de la hipótesis de que los datos con los que se calculaban esos indicadores permiten reconstruir las desviaciones ocurridas en cada proyecto y, junto con las causas que los usuarios hayan documentado, conformar un conjunto de datos etiquetado para aprendizaje supervisado. La confirmación de esa hipótesis, tanto de la consistencia del registro de avance facturado frente a lo planificado como de la completitud con que se registraron las causas, corresponde a la exploración de datos que se desarrolla en el Capítulo III; si las causas no resultan aprovechables, la etiqueta se derivaría únicamente de la comparación entre lo planificado y lo ejecutado.
+
+Las técnicas de aprendizaje automático supervisado, en particular los modelos de \textit{gradient boosting} como XGBoost, son suficientemente maduras para aplicarse sobre este tipo de datos, como muestran los antecedentes revisados, y cuentan con implementaciones abiertas y ampliamente utilizadas en el ecosistema de Python. La ingeniería de datos dispone además de herramientas, como DuckDB y Polars, capaces de leer directamente bases MySQL y PostgreSQL y archivos de planilla, y de unificarlos en un pipeline analítico sin infraestructura especializada, lo que resuelve la principal dificultad técnica del caso: que el histórico y los proyectos activos residan en dos sistemas con esquemas distintos.
+
+Por último, la integración del módulo predictivo al ERP es técnicamente viable porque el ERP es un desarrollo propio de la empresa. Ello permite exponer los datos y las predicciones mediante servicios con contratos bien definidos, incorporar la autenticación centralizada con Keycloak como base común de acceso para el ERP, el servicio de predicción, el servidor MCP y Power BI, y corregir en el propio ERP los defectos que degradan la calidad de los datos, algo que no sería posible sobre un paquete comercial cerrado.
+
 \subsubsection{JUSTIFICACIÓN ECONÓMICA}
+
+Los proyectos de tipo EPC que ejecuta ISI Mustang en los sectores de gas y petróleo, minería y energía involucran presupuestos de alta envergadura, en los que una desviación pequeña en términos porcentuales representa montos significativos. La detección temprana de desviaciones permite actuar cuando las medidas correctivas todavía son baratas, reasignar recursos, adelantar una compra o ajustar el cronograma, y reduce el costo de corrección frente a la detección tardía. La anticipación de cuellos de botella en la asignación de recursos evita sobrecostos por sobreasignación o por tiempos improductivos. Asimismo, la capacidad de contrastar nuevas propuestas con el comportamiento de proyectos anteriores mejora la competitividad de la empresa en la estimación y adjudicación de contratos.
+
+La solución se construye, además, sobre activos que la empresa ya posee: sus datos históricos, su ERP y su servidor propio. Las tecnologías del módulo predictivo (Python, DuckDB, Polars, XGBoost, FastAPI) y de la autenticación centralizada (Keycloak) son de código abierto; la única herramienta con licencia comercial es Power BI, cuya adopción para los reportes descriptivos ya está prevista por la empresa con independencia de este trabajo. La inversión se concentra, por tanto, en el desarrollo.
+
 \subsubsection{JUSTIFICACIÓN SOCIAL}
 
+Una gestión de proyectos más proactiva y basada en datos contribuye a entregas más confiables en sectores críticos para el desarrollo de Bolivia, como los hidrocarburos, la energía y la minería, cuyas instalaciones dependen de que los proyectos de ingeniería se completen en plazo y con la calidad comprometida. La reducción de la gestión reactiva disminuye la carga operativa y las urgencias de último momento de los equipos de proyecto, lo que se traduce en mejores condiciones de trabajo. A nivel más amplio, el proyecto muestra que una empresa boliviana puede capitalizar sus propios datos históricos mediante inteligencia artificial, con herramientas abiertas y sobre infraestructura existente, y deja un antecedente replicable para otras empresas de ingeniería del país.
+
 \subsection{METODOLOGÍA}
+
 \subsubsection{TIPO DE INVESTIGACIÓN}
+
+El presente trabajo corresponde a una investigación aplicada, dado que utiliza conocimiento científico existente en el área del aprendizaje automático y de la ingeniería de software para dar solución a un problema concreto en el contexto operativo de ISI Mustang Bolivia. De acuerdo con sus fases, combina tres niveles de alcance: exploratorio, en la etapa inicial de comprensión y caracterización de los datos históricos del portal anterior y de las planillas de control; descriptivo, para identificar y caracterizar las variables operativas relevantes y los patrones de desviación; y correlacional, al modelar las relaciones entre dichas variables, como horas trabajadas, líneas de presupuesto, compras y avance certificado, con el fin de anticipar desviaciones y riesgos en los proyectos.
+
 \subsubsection{MÉTODO DE INVESTIGACIÓN}
+
+El trabajo adopta un enfoque mixto, dado que combina la recolección y el análisis de datos cuantitativos, los registros históricos del sistema de información, con datos cualitativos provenientes de las entrevistas a usuarios clave. Para operacionalizar este enfoque se emplean los siguientes métodos.
+
+\emph{Análisis documental.} Se aplica a la revisión de la literatura científica sobre aprendizaje automático, analítica predictiva, ingeniería de datos, sistemas ERP, gestión de identidad y protocolos de integración, con el fin de establecer los fundamentos teóricos del trabajo, y a la documentación del portal anterior y del ERP nuevo, para identificar los procesos pendientes de reimplementar y los defectos que afectan a los datos.
+
+\emph{Histórico-lógico.} Se aplica sobre los datos acumulados durante más de diez años de operación, con el fin de identificar patrones y tendencias en el comportamiento de los proyectos a lo largo del tiempo y de reconstruir, a partir de ellos, las desviaciones ocurridas.
+
+\emph{Modelación.} Se emplea para la construcción de los modelos de aprendizaje automático que representan el comportamiento de las variables operativas y generan las predicciones, y para el diseño de la arquitectura del sistema.
+
+\emph{Enfoque de sistemas.} Se utiliza para analizar el ERP de ISI Mustang como un sistema con entradas, procesos y salidas, identificando las interrelaciones entre sus módulos, los flujos de datos relevantes para el módulo predictivo y los puntos de integración con los componentes nuevos.
+
+En cuanto al desarrollo del sistema, se adopta una metodología iterativa e incremental, en la que el producto se construye en ciclos sucesivos que agregan funcionalidad de manera progresiva y permiten validar tempranamente cada entrega con los usuarios de la empresa. El trabajo se organiza en cinco incrementos: la reimplementación en el ERP de los procesos del portal anterior; la autenticación centralizada con Keycloak; el pipeline de datos y el entrenamiento de los modelos; el microservicio de predicción y su integración con el ERP mediante el dashboard; y la integración con Power BI y el servidor MCP. Cada incremento comprende la definición de su alcance, el análisis, el diseño, el desarrollo y la validación, y se documenta en el Capítulo IV. Los fundamentos de esta metodología se desarrollan en el Capítulo II.
+
 \subsubsection{TÉCNICAS E INSTRUMENTOS DE INVESTIGACIÓN}
+
+Se emplean tres técnicas, cada una con sus instrumentos.
+
+\emph{Análisis de datos.} Se aplica sobre los registros históricos del portal anterior y las planillas de control complementarias, con el propósito de caracterizar las fuentes, identificar variables predictoras, detectar patrones de comportamiento y construir los conjuntos de datos necesarios para el entrenamiento de los modelos. Sus instrumentos son los scripts de extracción y transformación de datos del pipeline y los cuadernos de análisis exploratorio (\textit{notebooks}).
+
+\emph{Entrevista.} Se aplica a usuarios clave del ERP en ISI Mustang Bolivia en la etapa de evaluación y validación del sistema, con el fin de validar las predicciones generadas y recoger criterios de utilidad desde la perspectiva operativa; sus resultados se presentan en el Capítulo IV\@. Los requisitos funcionales del módulo, en cambio, no dependen de estas entrevistas: provienen del relevamiento de negocio ya documentado en la especificación del ERP, en particular de las preguntas del requerimiento registradas para cada proceso, y de la entrevista preliminar realizada en la etapa de perfil, y se presentan en el Capítulo III\@. El instrumento de las entrevistas de validación es una guía semiestructurada organizada en bloques: contexto del rol y gestión de proyectos; desviaciones y riesgos frecuentes; uso del sistema y datos disponibles; calidad y confiabilidad del registro; y utilidad y expectativas respecto al módulo predictivo.
+
+\emph{Pruebas de los modelos predictivos.} Se aplican sobre un conjunto de datos de prueba independiente del de entrenamiento para evaluar el desempeño de los modelos. Para los casos de clasificación se emplean la exactitud, la precisión, la sensibilidad, el F1 y la matriz de confusión; para los casos de regresión, la raíz del error cuadrático medio (RMSE), el error absoluto medio (MAE) y el coeficiente de determinación ($R^2$). Adicionalmente se aplica validación cruzada para verificar la estabilidad de los resultados. Sus instrumentos son el cuadro de métricas de evaluación y las rutinas de validación cruzada.
+
 \subsubsection{POBLACIÓN Y MUESTRA}
+
+\emph{Análisis de datos.} La población corresponde a la totalidad de los registros históricos generados en el Portal ISIMustang Bolivia durante su período operativo y a las planillas de control de proyectos complementarias. Se trabaja con el conjunto completo de datos disponibles en los módulos relevantes para los casos de predicción definidos, sin muestreo, dado que el volumen es tratable en su totalidad por el pipeline analítico. Los proyectos activos registrados en el ERP nuevo constituyen la población sobre la que se realiza la inferencia.
+
+\emph{Entrevista.} La población está conformada por aproximadamente 20 usuarios del ERP en ISI Mustang Bolivia. La muestra es de 5 a 8 usuarios clave seleccionados mediante muestreo no probabilístico intencional, priorizando los perfiles con roles de jefe de proyecto, certificador y administrador del sistema, por ser quienes registran, controlan y consumen la información sobre la que opera el módulo predictivo.
+
+\subsection{DELIMITACIÓN DE LA INVESTIGACIÓN}
+
+\subsubsection{DELIMITACIÓN TEMÁTICA}
+
+El presente trabajo se delimita a las áreas de aprendizaje automático supervisado, ingeniería de datos y analítica predictiva, aplicadas sobre los datos históricos operativos de ISI Mustang, y a la ingeniería de software aplicada a la modernización de su ERP: autenticación centralizada con Keycloak (OAuth 2.0 / OpenID Connect), integración con Power BI, exposición de datos mediante un servidor MCP y reimplementación en el ERP de los procesos del portal anterior. Los datos de entrenamiento provienen del sistema legado (Portal ISIMustang Bolivia, MySQL) y de las planillas de control de proyectos que se llevan fuera del sistema; la inferencia se realiza sobre los proyectos activos del ERP nuevo (PostgreSQL). El pipeline de datos es exclusivamente analítico: no migra datos al ERP. Los reportes en Power BI son descriptivos y no incorporan predicciones, que se presentan únicamente en el dashboard del ERP. En cuanto a la gestión de proyectos, el estudio se circunscribe a los proyectos de tipo EPC ejecutados por ISI Mustang.
+
+Quedan fuera del alcance las fuentes de datos externas, como sensores IoT, datos de mercado o información climática; los módulos del sistema que no se encuentren activos o poblados con datos históricos suficientes; la migración del histórico del sistema legado al esquema del ERP nuevo; y el desarrollo de un asistente conversacional o agente de inteligencia artificial sobre el servidor MCP, que se plantea como trabajo futuro.
+
+\subsubsection{DELIMITACIÓN ESPACIAL}
+
+El estudio se desarrolla en las instalaciones de ISI Mustang Bolivia, con sede en Santa Cruz de la Sierra, Bolivia. Los datos históricos utilizados corresponden a proyectos ejecutados por la empresa principalmente en territorio boliviano. El módulo de inteligencia predictiva se integra y valida en el ERP operativo de ISI Mustang en su sede central, desplegado en un servidor propio de la empresa; la migración a la nube se plantea como trabajo futuro.
+
+\subsubsection{DELIMITACIÓN TEMPORAL}
+
+Los datos históricos utilizados para el entrenamiento de los modelos abarcan un período de más de diez años de operación de ISI Mustang, registrados en el sistema legado y en las planillas de control complementarias. El desarrollo del proyecto de grado se inicia en abril de 2026 y comprende las etapas de análisis, diseño, construcción por incrementos y evaluación del sistema, con un cierre sujeto al calendario académico de la carrera.
+
+En cuanto a la validez temporal de la investigación, dado que los modelos predictivos se entrenan sobre patrones históricos, se estima que la solución mantiene su vigencia mientras las condiciones operativas de la empresa permanezcan estables. Se recomienda un reentrenamiento periódico de los modelos, de forma anual o ante cambios sustanciales en los procesos de la empresa, con el fin de mitigar la pérdida de precisión por deriva de datos (\textit{model drift}).

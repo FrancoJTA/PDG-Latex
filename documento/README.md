@@ -35,6 +35,10 @@ para guiar la redacción más adelante.
 - [11-brief-proyecto.md](11-brief-proyecto.md) — **fuente de verdad**:
   idea, alcance, datos, tecnologías, metodología, confidencialidad y plazos.
   Manda sobre el resto si hay contradicción.
+- [12-necesidades-cap3.md](12-necesidades-cap3.md) — qué insumos, decisiones
+  y accesos hacen falta para redactar cada sección del Cap. III.
+- [13-necesidades-cap4.md](13-necesidades-cap4.md) — qué hay que construir y
+  qué evidencia hay que guardar para redactar cada incremento del Cap. IV.
 
 Orden de lectura sugerido: **11 primero**, después 00 → 10.
 
