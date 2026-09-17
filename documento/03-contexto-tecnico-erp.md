@@ -5,30 +5,27 @@ insumo para el Capítulo II (2.1, 2.7) y sobre todo para el Capítulo III
 (qué datos y qué módulos existen realmente para el análisis). **No es
 contenido para copiar tal cual al documento** — es la base factual.
 
-## Dos pistas de trabajo distintas — no mezclar
+## Alcance de la tesis sobre el ERP — ampliado (2026-09-16)
 
-**Importante, aclarado por Franco:** el ERP (`erp-isi-mustang` + `portal-erp`)
-**no va a tener el módulo predictivo implementado dentro**. Son dos pistas de
-trabajo separadas:
+**Actualizado tras `decisiones-tema.md` (opción B, aprobada por el tutor).**
+Antes esto se trataba como "dos pistas separadas"; ya no. El alcance de la
+tesis es:
 
-1. **El ERP en sí (trabajo de Franco en la empresa, no es la tesis):**
-   adaptarlo a los procesos reales de ISI Mustang, sus reglas de negocio,
-   mejorar flujos existentes, y dejar preparado lo demás (autenticación,
-   integraciones futuras). Acá es donde entran Keycloak/OAuth, MCP y Power
-   BI — son trabajo de plataforma del ERP, no del módulo predictivo. Todo lo
-   de este archivo sobre módulos de negocio, brechas y defectos de datos
-   pertenece a esta pista: es el **contexto y la fuente de datos**, no algo
-   que la tesis construya.
-2. **El módulo predictivo (la tesis, el PDG):** se construye aparte
-   (DuckDB/Polars/FastAPI/modelos ML, según el perfil aprobado). Consume
-   los datos del ERP y, recién al final (Cap. IV del índice, ver
-   [[01-estructura-capitulos]]), se conecta con un endpoint puntual en
-   NestJS y una sección de dashboard en Angular — una integración delgada,
-   no una reescritura ni una feature más del ERP.
+1. **El módulo predictivo** (objeto de estudio principal): se construye
+   como componente propio (DuckDB/Polars/FastAPI/modelos ML) que consume los
+   datos del ERP y se conecta con un endpoint en NestJS y una sección de
+   dashboard en Angular. El módulo sigue sin vivir *dentro* del código del
+   ERP — la integración es ese punto de conexión.
+2. **Trabajo formal sobre el ERP**, ahora parte del alcance:
+   autenticación con Keycloak/OAuth, MCP, integración con Power BI, y
+   reimplementación en el ERP de procesos que vivían en un portal anterior
+   (obsoleto/ignorado, distinto de `portal-erp`).
 
-Al redactar el Capítulo IV, dejar claro que "integración con el ERP" es ese
-punto de conexión acotado, no que el ERP en desarrollo ya incluye o va a
-incluir el módulo predictivo como parte de su alcance regular.
+**Pendiente de decidir:** dónde entra el punto 2 en el índice de capítulos
+(ver `decisiones-tema.md`). Hasta entonces, no asumir ubicación al redactar.
+
+Todo lo de este archivo sobre módulos de negocio, brechas y defectos de
+datos sigue siendo **contexto y fuente de datos** para el módulo predictivo.
 
 ## Qué es el proyecto real
 
@@ -69,30 +66,21 @@ completo de brechas está en `docs/documentation/90-pendientes-y-brechas.md`
   Dashboard está "en desarrollo"; Clientes, Inventario, Productos, Órdenes,
   Reportes, Documentos siguen "pendiente".
 
-## Roadmap del ERP (pista 1, no de la tesis), todavía sin rastro en el código
+## Alcance ERP ampliado — todavía sin rastro en el código
 
-Franco mencionó tres frentes que siguen en desarrollo dentro de la pista del
-ERP (adaptación a procesos, reglas y flujos de la empresa), pero que **no
-aparecen todavía en ningún .md de docs/ ni en package.json de ninguno de los
-dos repos** (verificado por grep): autenticación con **Keycloak/OAuth**,
-**MCP**, e integración con **Power BI**. Hoy el auth real es JWT propio
-(Passport), no Keycloak.
+Keycloak/OAuth, MCP e integración con Power BI **no aparecen todavía en
+ningún .md de docs/ ni en package.json de ninguno de los dos repos**
+(verificado por grep al 2026-09-16). Hoy el auth real es JWT propio
+(Passport), no Keycloak. Tampoco está identificado en este archivo el portal
+anterior cuyos procesos se reimplementan.
 
-**Nota de alcance — confirmada por Franco (ver pista 1 arriba):** estos tres
-frentes son trabajo de la plataforma ERP en general, **no del módulo
-predictivo** — el perfil aprobado delimita el trabajo de tesis a "aprendizaje
-automático supervisado, ingeniería de datos y analítica predictiva... sobre
-los datos operativos del ERP" y excluye explícitamente fuentes externas al
-ERP (`perfil/perfil.tex:234`). Consecuencia para el documento final:
-- **No van en el Cap. III (Análisis y Diseño) ni en el Cap. IV
-  (Construcción)** — esos capítulos son sobre el módulo predictivo, no
-  sobre el ERP en general.
-- Pueden aparecer como **antecedentes/contexto** breve en el Cap. I (para
-  situar hacia dónde va el ERP en general), o como **recomendaciones/trabajo
-  futuro** al final (p. ej. si Power BI termina consumiendo el dashboard
-  predictivo más adelante).
-- Si no aportan a explicar el problema o la solución del módulo predictivo,
-  se dejan fuera del documento.
+Desde la decisión B (`decisiones-tema.md`) esto **sí es alcance formal de la
+tesis**. Consecuencias:
+- Mismo criterio que el Cap. IV del módulo predictivo: no se redacta su
+  construcción hasta que exista el código.
+- `perfil/perfil.tex:234` (delimitación) todavía excluye esto — hay que
+  reescribirlo antes de que el documento final lo cite como alcance.
+- Ubicación en el índice: pendiente (ver `decisiones-tema.md`).
 
 ## Fuentes primarias para cuando haga falta más detalle
 

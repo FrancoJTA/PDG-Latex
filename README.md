@@ -26,18 +26,17 @@ PDG-Latex/
 │   └── imagenes/
 ├── univalle-perfil.cls      # Clase LaTeX con el formato de la norma DAAP-UNIVALLE
 ├── imagenes/                # Assets institucionales compartidos (logo, etc.)
+├── decisiones-tema.md       # Decisión de alcance (opción B: alcance ampliado) + pendientes
+├── .claude/agents/          # Agentes investigador / redactor / revisor
 └── documento/                # Preparación del documento final (capítulos I-IV)
-    ├── README.md                 # Índice de lectura
-    ├── 00-estado-actual.md
-    ├── 01-estructura-capitulos.md
-    ├── 02-mapeo-fuentes.md
-    ├── 03-contexto-tecnico-erp.md
-    ├── 04-pendientes-preparacion.md
+    ├── README.md                 # Índice de lectura (00 → 10)
+    ├── 00-estado-actual.md … 10-arquitectura-agentes.md
     └── referencias/               # Normas, guías y ejemplos usados como modelo de forma
 ```
 
 **`perfil/`** es el perfil ya aprobado por el tutor — el contrato de alcance
-frente al tribunal. **`documento/`** es la fase de preparación para escribir
+frente al tribunal (objetivos y delimitación pendientes de actualizar al
+alcance ampliado, ver `decisiones-tema.md`). **`documento/`** es la fase de preparación para escribir
 el documento final, dividido en capítulos según la norma DAAP-UNIVALLE (que
 todavía no existe como scaffold LaTeX — ver `documento/04-pendientes-preparacion.md`).
 

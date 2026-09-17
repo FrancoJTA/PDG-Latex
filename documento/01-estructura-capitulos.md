@@ -79,7 +79,12 @@ para revisar si al Capítulo III/IV del perfil le falta algo (p. ej.
 factibilidad, consideraciones éticas, riesgos residuales), pero **no
 reemplaza el índice de 4 capítulos ya aprobado**.
 
-### `referencias/ejemplo-capitulos-1-2.docx`
+### `referencias/ejemplo-capitulos-1-2.docx` (texto en `ejemplo-capitulos-1-2.md`)
+
+> **Alcance ampliado (2026-09-16):** el índice de arriba todavía no ubica
+> Keycloak/OAuth, MCP, Power BI ni los procesos del portal anterior, que
+> entran en la tesis por `decisiones-tema.md`. Ubicación pendiente de
+> decidir (capítulo propio vs. secciones en III/IV).
 Ejemplo real y avanzado de otro postulante (Pedro Renato Escobar Ortuño,
 tema: plataforma de historia clínica para una clínica). Sigue exactamente la
 plantilla del INDICE genérico en sus Capítulos I y II (86 páginas). Útil

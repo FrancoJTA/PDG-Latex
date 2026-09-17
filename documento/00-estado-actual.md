@@ -40,6 +40,12 @@ tentativo exacto que ya fue aprobado ahí.
   módulos sin datos históricos suficientes.
 - **Delimitación temporal:** desarrollo abril–agosto 2026.
 
+**Alcance ampliado (2026-09-16):** además de lo anterior, entran
+Keycloak/OAuth, MCP, Power BI y la reimplementación de procesos de un portal
+anterior (opción B de `decisiones-tema.md`, aprobada por el tutor). El
+objetivo general/específicos y la delimitación de `perfil.tex` se reescriben
+para reflejarlo; el objeto de estudio sigue siendo el módulo predictivo.
+
 ## Ese perfil es distinto del documento que hay que escribir ahora
 
 El perfil (`perfil/perfil.tex`) es un documento corto, de una sola sección

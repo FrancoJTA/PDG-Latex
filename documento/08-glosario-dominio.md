@@ -72,7 +72,6 @@ ERP — separando negocio (Parte A) de técnico (Parte B).
 ## Pendiente
 
 Este glosario cubre solo el dominio de negocio/ERP. Los términos técnicos
-específicos (ML, arquitectura Medallion, gradient boosting, etc., o los de
-autenticación/Keycloak/MCP/Power BI si aplica) se agregan después de
-resolver `decisiones-tema.md`, cuando se sepa cuáles términos técnicos
-entran realmente en el documento.
+específicos (ML, arquitectura Medallion, gradient boosting, etc., y los de
+autenticación Keycloak/OAuth, MCP y Power BI — todos dentro del alcance
+desde `decisiones-tema.md`, opción B) están pendientes de agregar.

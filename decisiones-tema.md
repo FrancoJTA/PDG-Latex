@@ -1,10 +1,26 @@
-# Decisiones pendientes sobre el tema — no tocar `perfil/perfil.tex` hasta resolver esto
+# Decisión sobre el tema — RESUELTO (2026-09-16, consultado con el tutor)
 
-Este archivo existe porque surgió una tensión real entre lo que dice el
-perfil **ya aprobado** (`perfil/perfil.tex`) y lo que Franco está evaluando
-hacer. Hasta que esto se resuelva (con el tutor, no solo acá), todo lo
-preparado en `documento/` sigue asumiendo el escenario tal como está
-aprobado hoy — no se reescribe nada por adelantado.
+**Decisión: opción B.** Se mantiene el módulo predictivo como objeto de
+estudio y objetivo general del Proyecto de Grado. Se amplía el alcance para
+incluir formalmente el trabajo sobre el ERP. El tutor aprobó la ampliación;
+no hace falta que el jurado (commit `1ea19e4`) vuelva a revisar, y el plazo
+abril–agosto 2026 se mantiene.
+
+**Alcance ERP agregado formalmente:**
+- Autenticación con Keycloak/OAuth
+- MCP
+- Power BI
+- Reimplementación en el ERP de procesos que antes vivían en otro portal
+  (anterior, distinto de `portal-erp` que es el frontend del ERP nuevo —
+  nombre y procesos exactos a identificar) y que habían quedado
+  obsoletos/ignorados
+
+**Formalidad del cambio:** se reescriben objetivo general, objetivos
+específicos y delimitación en `perfil/perfil.tex` para reflejar el alcance
+ampliado (no es solo una mención en Cap. I).
+
+Este archivo queda como registro histórico de las opciones evaluadas antes
+de esta decisión.
 
 ## El problema
 
@@ -83,6 +99,15 @@ antecedente breve (Cap. I) o recomendación/trabajo futuro.
 
 ## Estado
 
-**Sin decidir.** `perfil/perfil.tex` no se toca. `documento/` sigue
-preparado bajo el escenario A (módulo predictivo tal como está aprobado)
-hasta que esto se resuelva.
+**Decidido (opción B, ver encabezado).** Queda pendiente:
+- Dónde entra el alcance ERP en el índice de capítulos (capítulo propio vs.
+  secciones dentro de III/IV) — probablemente a validar con el tutor.
+- Qué `.bib` usa el documento final (uno propio vs. compartir
+  `perfil/perfil.bib`, que hoy es el destino del auto-export de Zotero).
+- Reescribir objetivo general/específicos y delimitación en
+  `perfil/perfil.tex`.
+- Revisar qué partes de `documento/` (estructura de capítulos, mapeo de
+  fuentes, contexto técnico ERP) siguen sirviendo tal cual y cuáles hay que
+  rehacer para el alcance ampliado (pregunta 8, sin responder aún).
+- Confirmar si hay que avisar a alguien más además del tutor —
+  coordinación de carrera, director (pregunta 9, sin responder aún).

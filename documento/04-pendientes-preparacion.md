@@ -9,11 +9,14 @@ según se vaya resolviendo (edición manual de este archivo).
       sigue vigente, o si conviene separar/fusionar algo (p. ej. dejar
       Evaluación como sección propia dentro del Cap. IV vs. un capítulo
       aparte, como sugiere el patrón de `referencias/ejemplo-plantilla-capitulos.pdf`).
-- [x] Dónde entran Keycloak/OAuth, MCP y Power BI — **resuelto**: son trabajo
-      del ERP en general (pista aparte de Franco en la empresa), no del
-      módulo predictivo. No van en Cap. III/IV; a lo sumo, mención breve
-      como antecedente (Cap. I) o como recomendación/trabajo futuro. Ver
-      [[03-contexto-tecnico-erp]].
+- [x] ¿Keycloak/OAuth, MCP, Power BI y procesos del portal anterior entran
+      en la tesis? — **Sí**, alcance ampliado (opción B, aprobada por el
+      tutor, sin re-revisión del jurado). Ver `decisiones-tema.md`.
+- [ ] Dónde entra el alcance ERP en el índice (capítulo propio vs.
+      secciones en III/IV).
+- [ ] Qué `.bib` usa el documento final (propio vs. `perfil/perfil.bib`).
+- [ ] Reescribir objetivo general/específicos y delimitación en
+      `perfil/perfil.tex` para el alcance ampliado.
 - [ ] Confirmar si el Marco Legal/Normativo (visto como opcional-si-aplica en
       el `INDICE` genérico y presente en el ejemplo EOPR) aplica acá: ¿hay
       normativa boliviana de protección de datos o de la industria EPC que
@@ -53,7 +56,8 @@ según se vaya resolviendo (edición manual de este archivo).
 
 ## No hacer todavía
 
-- No editar `perfil/perfil.tex` — es el documento ya aprobado, se usa como
-  fuente, no se modifica salvo pedido explícito del tutor.
+- No editar `perfil/perfil.tex` fuera de lo aprobado: solo objetivos y
+  delimitación para el alcance ampliado (ver `decisiones-tema.md`); el resto
+  se mantiene como está.
 - No empezar a redactar el Capítulo IV sin haber construido primero lo que
   describe (evitar documentar código que no existe).

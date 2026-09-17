@@ -12,7 +12,7 @@ para guiar la redacción más adelante.
 - [02-mapeo-fuentes.md](02-mapeo-fuentes.md) — de dónde sale el contenido de
   cada sección.
 - [03-contexto-tecnico-erp.md](03-contexto-tecnico-erp.md) — estado real del
-  código del ERP ISI Mustang, y nota de alcance sobre Keycloak/MCP/Power BI.
+  código del ERP ISI Mustang, y alcance ampliado (Keycloak/MCP/Power BI).
 - [04-pendientes-preparacion.md](04-pendientes-preparacion.md) — checklist
   antes de empezar a redactar.
 - [05-herramientas-flujos.md](05-herramientas-flujos.md) — herramientas,
@@ -28,8 +28,11 @@ para guiar la redacción más adelante.
   del negocio ISI Mustang / ERP.
 - [09-setup-zotero.md](09-setup-zotero.md) — estado del setup de Zotero +
   Better BibTeX (instalado, faltan pasos manuales de GUI).
+- [10-arquitectura-agentes.md](10-arquitectura-agentes.md) — pipeline de
+  agentes (`investigador` → `redactor` → `revisor`, en `.claude/agents/`)
+  para investigar, redactar y revisar cada subsección.
 
-Orden de lectura sugerido: 00 → 01 → 02 → 03 → 04 → 05 → 06 → 07 → 08 → 09.
+Orden de lectura sugerido: 00 → 01 → 02 → 03 → 04 → 05 → 06 → 07 → 08 → 09 → 10.
 
-Ver también, en la raíz: `../decisiones-tema.md` — decisiones pendientes
-sobre el alcance del tema, sin resolver todavía.
+Ver también, en la raíz: `../decisiones-tema.md` — decisión sobre el alcance
+del tema (resuelta: opción B, alcance ampliado) y lo que queda pendiente.

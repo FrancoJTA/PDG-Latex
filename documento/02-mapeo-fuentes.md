@@ -84,10 +84,11 @@ Fuentes a medida que avance el desarrollo real:
   Angular). Se redacta a medida que se construye — no antes.
 - **4.4 Integración con el ERP**: es un punto de conexión delgado (un
   endpoint en NestJS, una sección de dashboard en Angular), no una
-  reescritura del ERP. El ERP en sí (adaptación a procesos, reglas, flujos,
-  Keycloak/MCP/Power BI) es trabajo aparte de Franco en la empresa, no parte
-  de la tesis — ver la nota de las "dos pistas" en
-  [[03-contexto-tecnico-erp]].
+  reescritura del ERP.
+- **Alcance ERP ampliado** (Keycloak/OAuth, MCP, Power BI, procesos del
+  portal anterior): sí es parte de la tesis desde `decisiones-tema.md`
+  (opción B). Ubicación en el índice pendiente; fuente = el código real
+  cuando exista (hoy no hay rastro, ver [[03-contexto-tecnico-erp]]).
 
 ## Conclusiones / Recomendaciones
 

@@ -1,9 +1,9 @@
 # Herramientas, skills, repos y MCP evaluados — y los flujos que arman
 
 Recopilación de todo lo que se evaluó en la fase de preparación de
-herramientas (independiente de la decisión de tema en `decisiones-tema.md`
-— esto aplica igual sea cual sea el resultado). Formato: qué es, veredicto,
-por qué.
+herramientas. Sigue vigente tras la decisión de tema (`decisiones-tema.md`,
+opción B). Formato: qué es, veredicto, por qué. Cómo se combinan en agentes:
+[[10-arquitectura-agentes]].
 
 ## Resumen rápido — qué vale la pena de entrada
 
@@ -119,7 +119,6 @@ Estas cuatro son el piso: verificación de fuentes reales antes de meter cualqui
 
 ## Nota sobre alcance
 
-Todo esto es preparación de herramientas, independiente de qué opción se
-elija en `decisiones-tema.md` — los flujos de investigación/citas/redacción
-aplican igual si el tema queda como está, se amplía o cambia. Nada de esto
-se instaló todavía; queda para cuando se retome la fase de redacción.
+Los flujos aplican igual con el alcance ampliado. Estado de instalación al
+2026-09-16: `chktex`, `lacheck`, `latexdiff`, `latexmk` y Zotero (Flatpak)
+instalados; `language-tool-python`, PaperQA2, GROBID y `pandoc` no.

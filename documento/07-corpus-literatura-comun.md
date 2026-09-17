@@ -8,9 +8,10 @@ todavía** — son candidatos por título/metadata, no fuentes confirmadas. Hay
 que verificar cada uno (acceso al texto completo, calidad de la revista/
 conferencia, relevancia real) antes de citarlo en `perfil.bib`.
 
-No se buscó literatura específica de ML/analítica predictiva ni de
-Keycloak/MCP/Power BI — esas dependen de qué opción de `decisiones-tema.md`
-gane, y se buscan después de esa decisión.
+No se buscó todavía literatura específica de ML/analítica predictiva ni de
+Keycloak/OAuth, MCP y Power BI. `decisiones-tema.md` ya se resolvió (opción
+B): ambos bloques entran en el alcance y quedan pendientes de búsqueda
+(agente `investigador`).
 
 ## ERP en empresas de ingeniería / construcción / EPC
 
