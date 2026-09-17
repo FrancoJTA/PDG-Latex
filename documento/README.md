@@ -41,6 +41,8 @@ para guiar la redacción más adelante.
   qué evidencia hay que guardar para redactar cada incremento del Cap. IV.
 - [14-traspaso-sesion.md](14-traspaso-sesion.md) — **estado al 2026-09-17 y
   próximos pasos**; leer al abrir una sesión nueva.
+- [15-incertidumbres-cap1-cap2.md](15-incertidumbres-cap1-cap2.md) — qué
+  puede cambiar o no está firme en los capítulos I y II.
 
 Orden de lectura sugerido: **11 primero**, después 00 → 10.
 
