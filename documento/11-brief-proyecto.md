@@ -51,6 +51,19 @@ nuevo, módulos sin datos suficientes.
   `facturacion`, `act_proyecto` y `codeproyecto`). No afirmarlo en el
   documento hasta confirmarlo con los datos.
 - La base PostgreSQL local es de **demo** y no sirve para análisis.
+- **Puesta en producción y corte (confirmado con Franco, 2026-09-17):** hoy
+  la empresa opera con el **portal viejo**. El ERP nuevo está casi
+  terminado para ir a producción. Al pasar se hace un **corte**: no hay
+  migración de base de datos. Lo vigente (contratos, proyectos activos,
+  etc.) se **registra de nuevo** en el ERP nuevo; los centros de costo
+  cerrados y el resto del histórico **quedan solo en el MySQL viejo**.
+  Consecuencias: (a) no afirmar en presente que el ERP nuevo opera
+  proyectos reales hasta que esté en producción; (b) un proyecto activo al
+  momento del corte arranca en el ERP nuevo sin su historia previa, que
+  sigue en el portal viejo — la inferencia sobre esos proyectos puede
+  necesitar combinar ambas fuentes (a resolver en 3.4 / 4.3).
+- **Tamaño de los esquemas:** 175 tablas en el portal viejo (MySQL); unas
+  50–51 tablas (modelos Prisma) en el ERP nuevo (PostgreSQL).
 
 **Corrección a la arquitectura del perfil:** la capa Bronze del perfil dice
 "PostgreSQL ERP + CSV/Parquet". La real es **MySQL del portal viejo (entrenamiento)

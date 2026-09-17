@@ -39,6 +39,8 @@ para guiar la redacción más adelante.
   y accesos hacen falta para redactar cada sección del Cap. III.
 - [13-necesidades-cap4.md](13-necesidades-cap4.md) — qué hay que construir y
   qué evidencia hay que guardar para redactar cada incremento del Cap. IV.
+- [14-traspaso-sesion.md](14-traspaso-sesion.md) — **estado al 2026-09-17 y
+  próximos pasos**; leer al abrir una sesión nueva.
 
 Orden de lectura sugerido: **11 primero**, después 00 → 10.
 

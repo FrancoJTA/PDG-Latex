@@ -16,8 +16,20 @@ real es "una subsección a la vez", no un batch de capítulos enteros.
 Cada uno tiene su propio archivo de definición con el detalle completo —
 esto es solo el mapa de cómo se combinan.
 
-Los tres corren con `model: fable` y leen primero
-[[11-brief-proyecto]] (fuente de verdad del proyecto).
+Leen primero [[11-brief-proyecto]] (fuente de verdad del proyecto).
+
+Modelos (cambiado el 2026-09-17, tras agotar el crédito de Fable):
+
+| Agente | Modelo | Por qué |
+|---|---|---|
+| `investigador` | `opus` | Verificar fuentes es donde más daño hace un error: en la primera tanda aparecieron siete entradas del `.bib` con autores o DOI inventados |
+| `revisor` | `opus` | Es el control de calidad; los hallazgos que importan son sutiles (una cita que dice más que su fuente) |
+| `redactor` | `sonnet` | Trabaja sobre un brief ya verificado y lo revisa después un agente `opus` |
+
+Reglas aprendidas en la primera tanda:
+- Ningún agente compila `main.tex`; la sesión principal compila al final.
+- No más de tres o cuatro agentes en paralelo.
+- Una ronda de revisión de fondo por sección; estilo en una pasada final del capítulo.
 
 ## Qué falta para que el pipeline corra completo
 
