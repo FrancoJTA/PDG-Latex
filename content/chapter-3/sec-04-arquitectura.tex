@@ -1,0 +1,289 @@
+% 3.4 — fuentes: brief §2–§4, decisiones de documento/12-necesidades-cap3.md (3.1 y 3.4), código de erp-isi-mustang y portal-erp (main, 2026-09-17),
+% secciones 2.2, 2.3, 2.8, 2.9 y 2.10. Hallazgos abiertos en documento/16-hallazgos-cap3.md.
+\subsection{DISEÑO DE LA ARQUITECTURA}
+
+El diseño parte de los requerimientos de la sección 3.3 y de lo encontrado en el análisis de datos (sección 3.1) y de procesos (sección 3.2). Se presenta de lo general a lo particular: primero la arquitectura por capas y sus vistas de contexto y de contenedores, y después cada componente.
+
+\subsubsection{ARQUITECTURA POR CAPAS}
+
+La arquitectura se organiza en seis capas (figura~\ref{fig:arquitectura-capas}). Las cuatro primeras forman el módulo predictivo y siguen la arquitectura \textit{medallion} de la sección 2.3: fuentes (Bronze), unificación (Silver), transformación (Gold) y modelos. Las dos últimas integran el módulo con el ERP: la capa de servicio, donde FastAPI expone las predicciones y NestJS los datos del ERP, y la capa de presentación, que comprende el tablero en Angular, los reportes de Power BI y el servidor MCP\@. Keycloak atraviesa las capas de servicio y de presentación, porque todos sus componentes validan los tokens que emite.
+
+Respecto de la arquitectura propuesta en el perfil, el diseño introduce tres cambios. La capa de fuentes distingue el uso de cada una: el portal anterior y las planillas alimentan el entrenamiento, y el ERP nuevo, la inferencia. La capa de presentación incorpora Power BI y el servidor MCP\@. Y la autenticación pasa a ser un componente propio, compartido por todo el sistema.
+
+\begin{figure}[H]
+\centering
+\caption{Arquitectura por capas del sistema}\label{fig:arquitectura-capas}
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[
+    capa/.style  = {draw=blue!30, fill=blue!4, rounded corners=3pt, minimum width=2.7cm, minimum height=6.0cm, anchor=north},
+    capaE/.style = {draw=green!45!black, fill=green!5, rounded corners=3pt, minimum width=2.7cm, minimum height=6.0cm, anchor=north},
+    comp/.style  = {draw=gray!55, fill=white, rounded corners=2pt, align=center, text width=2.2cm, minimum height=0.9cm, font=\scriptsize},
+    titulo/.style= {align=center, font=\footnotesize\bfseries, anchor=north},
+    arr/.style   = {-{Stealth}, thick, gray!55!black},
+]
+\foreach \x/\t in {0/{Capa 1\\Fuentes\\{\scriptsize(Bronze)}}, 3.1/{Capa 2\\Unificación\\{\scriptsize(Silver)}}, 6.2/{Capa 3\\Transformación\\{\scriptsize(Gold)}}, 9.3/{Capa 4\\Modelos}} {
+  \node[capa] at (\x,0) {};
+  \node[titulo] at (\x,-0.2) {\t};
+}
+\foreach \x/\t in {12.4/{Capa 5\\Servicio}, 15.5/{Capa 6\\Presentación}} {
+  \node[capaE] at (\x,0) {};
+  \node[titulo] at (\x,-0.2) {\t};
+}
+\node[comp, text width=2.4cm] at (0,-2.7)  {\textbf{MySQL} portal anterior\\(entrenamiento)};
+\node[comp, text width=2.4cm] at (0,-4.0)  {\textbf{Planillas Excel}\\(entrenamiento)};
+\node[comp, text width=2.4cm] at (0,-5.3)  {\textbf{PostgreSQL} ERP nuevo\\(inferencia)};
+\node[comp] (duck) at (3.1,-4.0) {\textbf{DuckDB}\\modelo común de variables};
+\node[comp] (pol)  at (6.2,-4.0) {\textbf{Polars}\\características a fecha de corte};
+\node[comp] (mod)  at (9.3,-4.0) {\textbf{XGBoost}\\tres modelos versionados};
+\node[comp] (fast) at (12.4,-3.0) {\textbf{FastAPI}\\servicio de predicción};
+\node[comp] (nest) at (12.4,-5.0) {\textbf{NestJS}\\API del ERP};
+\node[comp] (ang) at (15.5,-2.8) {\textbf{Angular}\\tablero};
+\node[comp] (pbi) at (15.5,-4.0) {\textbf{Power BI}\\reportes};
+\node[comp] (mcp) at (15.5,-5.2) {\textbf{Servidor MCP}};
+\draw[arr] (1.35,-4.0) -- (duck.west);
+\draw[arr] (duck) -- (pol);
+\draw[arr] (pol) -- (mod);
+\draw[arr] (mod.east) -- (fast.west);
+\draw[arr] (fast) -- (nest);
+\draw[arr] (nest.east) -- (ang.west);
+\draw[arr] (nest.east) -- (pbi.west);
+\draw[arr] (nest.east) -- (mcp.west);
+\node[draw=orange!85!black, fill=orange!8, rounded corners=3pt, minimum width=5.8cm, minimum height=0.55cm, font=\scriptsize\bfseries] at (13.95,-6.75) {Keycloak: identidad y tokens (OAuth 2.0 / OIDC)};
+\end{tikzpicture}
+}
+\fuente{Elaboración propia, 2026.}
+\end{figure}
+
+La vista de contexto del modelo C4 (figura~\ref{fig:c4-contexto}) sitúa el sistema entre sus usuarios y los sistemas externos. El personal de ISI Mustang usa el ERP y su tablero desde el navegador y consulta los reportes en el servicio Power BI\@. Un cliente MCP, como un asistente de inteligencia artificial, consulta el sistema en nombre de un usuario. El portal anterior y las planillas de control solo se leen para construir el conjunto de entrenamiento: tras la puesta en producción del ERP nuevo no reciben datos nuevos.
+
+\begin{figure}[H]
+\centering
+\caption{Diagrama de contexto (C4, nivel 1)}\label{fig:c4-contexto}
+\resizebox{0.95\textwidth}{!}{%
+\begin{tikzpicture}[
+    persona/.style = {draw=blue!60!black, fill=blue!10, rounded corners=8pt, align=center, text width=3.2cm, minimum height=1.2cm, font=\scriptsize},
+    sistema/.style = {draw=blue!70!black, fill=blue!20, rounded corners=3pt, align=center, text width=4.6cm, minimum height=2cm, font=\scriptsize},
+    externo/.style = {draw=gray!60, fill=gray!12, rounded corners=3pt, align=center, text width=3.2cm, minimum height=1.2cm, font=\scriptsize},
+    arr/.style     = {-{Stealth}, thick, gray!55!black},
+    et/.style      = {font=\tiny, align=center, inner sep=1pt},
+]
+\node[sistema] (sis) at (0,0) {\textbf{ERP ISI Mustang con módulo predictivo}\\[2pt] Gestión de proyectos, predicción de desviaciones, API de datos y servidor MCP};
+\node[persona] (per) at (-6,0) {\textbf{Personal de ISI Mustang}\\jefes de proyecto, Gerencia, Compras, RRHH};
+\node[externo] (pbi) at (0,3.3) {\textbf{Servicio Power BI}\\(Microsoft)};
+\node[externo] (mcp) at (6,0) {\textbf{Cliente MCP}\\asistente o aplicación que actúa por un usuario};
+\node[externo] (old) at (-3.2,-3.3) {\textbf{Portal anterior}\\MySQL, solo histórico};
+\node[externo] (xls) at (3.2,-3.3) {\textbf{Planillas Excel}\\de control de proyectos};
+\draw[arr] (per) -- node[et, above=2pt] {opera el ERP y\\consulta predicciones} (sis);
+\draw[arr] (mcp) -- node[et, above=2pt] {consulta datos y\\predicciones} (sis);
+\draw[arr] (per) |- node[et, pos=0.75, above=2pt] {consulta reportes} (pbi);
+\draw[arr] (pbi) -- node[et, right=2pt] {importa datos descriptivos} (sis);
+\draw[arr] (sis) -- node[et, left=4pt] {lee el histórico} (old);
+\draw[arr] (sis) -- node[et, right=4pt] {lee} (xls);
+\end{tikzpicture}
+}
+\fuente{Elaboración propia, 2026.}
+\end{figure}
+
+La vista de contenedores (figura~\ref{fig:c4-contenedores}) descompone el sistema en las unidades que se despliegan por separado. Todas corren como contenedores Docker en el servidor propio de la empresa (RNF-07), detrás de un proxy inverso que termina TLS, requisito de Keycloak y de los flujos OAuth fuera de un entorno local. Los contenedores nuevos son Keycloak, el servicio de predicción, el trabajo del pipeline, el almacén de capas y el servidor MCP; Angular, NestJS y PostgreSQL ya existen y se modifican. El portal anterior no se despliega: su histórico se extrae una sola vez a la capa Bronze.
+
+\begin{figure}[H]
+\centering
+\caption{Diagrama de contenedores (C4, nivel 2). En naranja, los contenedores nuevos; FastAPI y el servidor MCP también validan tokens de Keycloak}\label{fig:c4-contenedores}
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[
+    cont/.style  = {draw=blue!60!black, fill=blue!12, rounded corners=3pt, align=center, text width=2.8cm, minimum height=1.25cm, font=\scriptsize},
+    nuevo/.style = {draw=orange!85!black, line width=0.9pt, fill=orange!8, rounded corners=3pt, align=center, text width=2.8cm, minimum height=1.25cm, font=\scriptsize},
+    bd/.style    = {draw=gray!60!black, fill=gray!12, rounded corners=6pt, align=center, text width=2.8cm, minimum height=1.25cm, font=\scriptsize},
+    ext/.style   = {draw=gray!60, fill=white, dashed, rounded corners=3pt, align=center, text width=2.6cm, minimum height=1.1cm, font=\scriptsize},
+    arr/.style   = {-{Stealth}, thick, gray!55!black},
+    et/.style    = {font=\tiny, align=center, inner sep=2pt},
+]
+\node[cont]  (ang)  at (0,0)     {\textbf{Angular}\\tablero y ERP web};
+\node[cont]  (nest) at (5,0)     {\textbf{NestJS}\\API del ERP, API de datos};
+\node[bd]    (pg)   at (10,0)    {\textbf{PostgreSQL}\\base del ERP};
+\node[nuevo] (kc)   at (5,3)     {\textbf{Keycloak}\\dominio \texttt{isi-mustang}};
+\node[nuevo] (fast) at (5,-3)    {\textbf{FastAPI}\\servicio de predicción};
+\node[bd]    (pred) at (0,-3)    {\textbf{PostgreSQL}\\base de predicciones};
+\node[nuevo] (job)  at (10,-3)   {\textbf{Pipeline}\\DuckDB y Polars, ejecución diaria};
+\node[bd]    (lake) at (10,-6)   {\textbf{Almacén de capas}\\archivos Parquet Bronze, Silver, Gold};
+\node[nuevo] (mcp)  at (0,3)     {\textbf{Servidor MCP}\\herramientas de consulta};
+\node[ext]   (cli)  at (-4.4,3)  {Cliente MCP};
+\node[ext]   (usr)  at (-4.4,0)  {Navegador del usuario};
+\node[ext]   (pbi)  at (10,3)    {Servicio Power BI};
+\node[ext]   (old)  at (14.6,-6) {Histórico MySQL y planillas (extracción única)};
+\draw[arr] (usr) -- (ang);
+\draw[arr] (cli) -- (mcp);
+\draw[arr] (ang) -- node[et, above] {HTTPS/JSON} (nest);
+\draw[arr] (nest) -- node[et, above] {SQL} (pg);
+\draw[arr] (mcp) -- node[et, sloped, above] {HTTPS/JSON} (nest);
+\draw[arr] (pbi) -- node[et, sloped, above] {API de datos} (nest);
+\draw[arr] (nest) -- node[et, right] {predicciones} (fast);
+\draw[arr] (fast) -- node[et, above] {lee y escribe} (pred);
+\draw[arr] (job) -- node[et, right] {lee (solo lectura)} (pg);
+\draw[arr] (job) -- node[et, above] {solicita el cálculo} (fast);
+\draw[arr] (job) -- node[et, right] {escribe} (lake);
+\draw[arr] (old) -- (lake);
+\draw[arr] (fast) |- node[et, pos=0.75, above] {lee características y modelos} (lake);
+\draw[arr, dashed] (nest) -- node[et, right] {valida tokens} (kc);
+\end{tikzpicture}
+}
+\fuente{Elaboración propia, 2026.}
+\end{figure}
+
+\subsubsection{DISEÑO DEL PIPELINE DE DATOS}
+
+El pipeline es un proceso por lotes con dos modos de operación, como anticipa la sección 2.3. La carga histórica se ejecuta una vez: extrae el portal anterior y las planillas, construye el conjunto de entrenamiento y produce los modelos. La carga incremental se ejecuta a diario: extrae los centros de costo activos del ERP nuevo, calcula sus características a la fecha del día y solicita al servicio de predicción que las evalúe. En ningún modo el pipeline escribe en el ERP (RNF-04): se conecta a PostgreSQL con un usuario de base de datos de solo lectura.
+
+\paragraph{Bronze}
+
+Cada fuente se copia a archivos Parquet sin transformar, uno por tabla y por fecha de extracción. Del portal anterior se extraen únicamente las tablas que usa el modelo (sección 3.1) y se excluyen las de nómina, contratos y datos personales (RNF-03); lo mismo se aplica a las tablas del ERP nuevo, donde el costo de servicios se toma ya agregado por centro de costo desde las provisiones.
+
+\paragraph{Silver}
+
+DuckDB lee los archivos Bronze y los proyecta sobre un modelo común de variables, en moneda base (RNF-05), con los dominios conformados: los estados de cada sistema se traducen a los mismos valores, los prefijos de centro de costo del portal anterior se traducen a los tipos del ERP nuevo (proyecto, servicio, estructura y comercial) y solo pasan a las capas siguientes los de tipo proyecto y servicio. El cuadro~\ref{tab:silver-mapeo} resume las correspondencias. Las variables que no tienen equivalente en ambos esquemas no se usan, porque un modelo entrenado con ellas no podría evaluar los proyectos activos.
+
+\begin{table}[H]
+  \centering
+  \caption{Correspondencia de entidades en la capa Silver}\label{tab:silver-mapeo}
+  \begin{tblr}{colspec={X[0.64,l] X[0.96,l] X[1.41,l]}}
+    \textbf{Entidad común} & \textbf{Portal anterior (MySQL)} & \textbf{ERP nuevo (PostgreSQL)} \\
+    Centro de costo & \texttt{act\_proyecto} & \texttt{cost\_centers} \\
+    Vendido por bolsa & \texttt{act\_proyecto}, \texttt{adicionales} & \texttt{cost\_center\_budget\_lines} de línea base \\
+    Seguimiento & \texttt{gpre} y fotos mensuales \texttt{gprepublicadomensual} & \texttt{cost\_center\_budget\_lines} de seguimiento, reconstruidas a la fecha desde \texttt{cost\_center\_events} \\
+    Certificación planificada y real & \texttt{gpre}, rubros \texttt{WI001} y \texttt{WA001}, con la fecha original tomada de la primera foto mensual & \texttt{certifications} (\texttt{planned\_date}, \texttt{certification\_date}, montos solicitado y certificado) \\
+    Replanificaciones & \texttt{gpreeventos} & \texttt{cost\_center\_events} \\
+    Horas & \texttt{horas} con \texttt{horasctroctos} & \texttt{hour\_entries} aprobadas \\
+    Compras & \texttt{rq} aprobadas & \texttt{purchase\_orders} (factura, RF-02) \\
+    Viáticos & \texttt{viaticos} & \texttt{travel\_allowance\_settlement\_lines} \\
+    Costo de servicios & horas por costo hora del cash flow & \texttt{provision\_lines} agregadas por centro de costo \\
+  \end{tblr}
+  \fuente{Elaboración propia, 2026, en base a los esquemas de ambos sistemas.}
+\end{table}
+
+\paragraph{Gold}
+
+Polars construye, a partir de Silver, una fila por unidad de análisis y fecha de corte, usando solo registros con fecha anterior o igual al corte (RF-13). La unidad es la certificación para el primer caso de uso y el proyecto para los otros dos (sección 3.1). Para el entrenamiento, cada proyecto cerrado se observa en varias fechas de corte, al 25, 50 y 75\,\% de su plazo planificado, y cada certificación, treinta días antes de su fecha planificada original; así el modelo aprende a predecir con la información parcial que hay durante la ejecución. Las variables previstas se agrupan en cinco familias: tamaño y composición del vendido por bolsa; avance temporal (fracción del plazo transcurrida); avance económico (ejecutado y certificado acumulados frente a lo vendido y lo planificado a la fecha); inestabilidad del plan (número de replanificaciones y crecimiento del vendido respecto de la línea base inicial); y actividad operativa (horas, compras y viáticos del último mes y acumulados). El detalle de cada variable y su disponibilidad se presenta en la sección 3.1.
+
+Los archivos Gold de entrenamiento y los de cada ejecución diaria se conservan con la fecha de ejecución, de modo que cada predicción puede rastrearse hasta las características que la produjeron (RNF-08) y el entrenamiento puede repetirse con los mismos datos (RNF-09).
+
+\subsubsection{DISEÑO DE MODELOS ML}
+
+Se entrenan tres modelos con XGBoost mediante su interfaz compatible con Scikit-learn (cuadro~\ref{tab:modelos}), según la sección 2.2. La desviación en certificaciones se plantea como clasificación binaria; el sobrecosto y el retraso, como regresión del porcentaje de desviación, que luego se traduce a niveles de semáforo con los umbrales de la sección 3.1.
+
+\begin{table}[H]
+  \centering
+  \caption{Modelos del módulo predictivo}\label{tab:modelos}
+  \begin{tblr}{colspec={X[0.7,l] X[0.65,l] X[1.48,l] X[1.17,l]}}
+    \textbf{Caso de uso} & \textbf{Unidad} & \textbf{Variable objetivo} & \textbf{Tipo y métricas} \\
+    Desviación en certificaciones & Certificación & Desviada si se certifica después de su fecha planificada original por más del 10\,\% del plazo planificado del proyecto, o por un monto inferior en más del 10\,\% al planificado & Clasificación; exactitud, precisión, sensibilidad, F1 y matriz de confusión \\
+    Sobrecosto & Proyecto & Costo ejecutado al cierre respecto del vendido, en porcentaje & Regresión; RMSE, MAE y $R^2$ \\
+    Retraso en la fecha de cierre & Proyecto & Días entre la última certificación real y la última certificación planificada originalmente, como porcentaje del plazo planificado & Regresión; RMSE, MAE y $R^2$ \\
+  \end{tblr}
+  \fuente{Elaboración propia, 2026.}
+\end{table}
+
+El protocolo de evaluación sigue la sección 2.2, con dos precisiones que impone la forma de los datos. La primera es que las filas de un mismo proyecto están correlacionadas, ya sea porque son certificaciones del mismo proyecto o porque son fechas de corte distintas del mismo proyecto; si quedaran repartidas entre entrenamiento y validación, el modelo se evaluaría sobre proyectos que ya vio. Por eso la validación cruzada agrupa por proyecto, y en el clasificador además estratifica por clase. La segunda es que el conjunto de prueba se forma con los proyectos más recientes del histórico y no con una muestra aleatoria, lo que simula el uso real: predecir proyectos posteriores a los del entrenamiento. Como línea base se compara cada modelo con una regla simple, la clase mayoritaria en el clasificador y la mediana del histórico en los regresores; un modelo se acepta si la supera en el conjunto de prueba. Con el tamaño del histórico (sección 3.1), la búsqueda de hiperparámetros se limita a la profundidad de los árboles, la tasa de aprendizaje, el número de árboles y la regularización.
+
+Cada entrenamiento produce una versión del modelo compuesta por el archivo del modelo y un registro con la fecha, el identificador de los archivos Gold usados, los hiperparámetros, la semilla aleatoria y las métricas de validación y de prueba (RF-17). El servicio de predicción carga la versión marcada como vigente; publicar una versión nueva no cambia el contrato de la API (RNF-10).
+
+La explicación de cada predicción (RF-20) se obtiene de las contribuciones por variable que XGBoost calcula para cada observación sobre sus árboles. El servicio devuelve las tres variables de mayor contribución, con su valor y el sentido en que empujan la predicción.
+
+\subsubsection{DISEÑO DE LA API PREDICTIVA}
+
+El servicio de predicción es una aplicación FastAPI con su propia base de datos PostgreSQL, separada de la del ERP, donde guarda cada predicción emitida (RNF-08). Las predicciones no se calculan en cada consulta: el pipeline diario solicita una ejecución de cálculo, el servicio evalúa todas las unidades activas con la versión vigente de cada modelo y guarda los resultados, y las consultas leen el último resultado. Así el tiempo de respuesta no depende del cálculo (RNF-06) y el tablero puede mostrar la evolución de cada proyecto (RF-23). El cuadro~\ref{tab:api-prediccion} lista los endpoints.
+
+\begin{table}[H]
+  \centering
+  \caption{Endpoints del servicio de predicción}\label{tab:api-prediccion}
+  \begin{tblr}{colspec={X[1.24,l] X[1.3,l] X[0.46,l]}}
+    \textbf{Endpoint} & \textbf{Respuesta} & \textbf{Cliente} \\
+    \texttt{POST /v1/scoring-runs} & Inicia el cálculo sobre la última carga Gold; devuelve el identificador de la ejecución & Pipeline \\
+    \texttt{GET /v1/cost-centers/\{id\}/}\newline\texttt{predictions} & Última predicción de los tres casos para un centro de costo, con sus certificaciones pendientes & NestJS \\
+    \texttt{GET /v1/cost-centers/\{id\}/}\newline\texttt{predictions/history} & Serie de predicciones del centro de costo por fecha de corte & NestJS \\
+    \texttt{GET /v1/predictions?level=red} & Resumen por centro de costo, filtrable por nivel de semáforo & NestJS \\
+    \texttt{GET /v1/models} & Versiones vigentes de los modelos y sus métricas & NestJS \\
+  \end{tblr}
+  \fuente{Elaboración propia, 2026.}
+\end{table}
+
+Cada predicción se devuelve en JSON con el centro de costo, la fecha de corte, la versión del modelo y, por caso de uso, el valor predicho (probabilidad o porcentaje), el nivel de semáforo y las tres variables de mayor contribución. Los esquemas de entrada y salida se declaran con Pydantic, de modo que FastAPI valida las peticiones y publica la especificación OpenAPI del servicio.
+
+El servicio no conoce a los usuarios del ERP ni sus permisos. Solo acepta tokens de acceso de Keycloak cuya audiencia sea el propio servicio, emitidos por credenciales de cliente al backend del ERP o al pipeline (sección 2.8), y cada endpoint exige el rol correspondiente: cálculo para el pipeline y lectura para NestJS\@. El control de qué predicciones ve cada persona queda en NestJS, que aplica las reglas de acceso del ERP antes de llamar al servicio (RF-21). De ese modo las reglas de acceso viven en un solo lugar.
+
+\subsubsection{DISEÑO DEL DASHBOARD}
+
+Las predicciones se presentan dentro del ERP existente en Angular, en dos vistas nuevas (cuadro~\ref{tab:vistas-tablero}), y no en una aplicación aparte. NestJS agrega un módulo de predicciones que verifica el acceso del usuario al centro de costo, con las mismas reglas que el presupuesto (miembros del centro y Gerencia), llama al servicio de predicción y devuelve el resultado al frontend.
+
+\begin{table}[H]
+  \centering
+  \caption{Vistas del tablero de predicciones}\label{tab:vistas-tablero}
+  \begin{tblr}{colspec={X[0.64,l] X[1.41,l] X[0.96,l]}}
+    \textbf{Vista} & \textbf{Contenido} & \textbf{Endpoint NestJS} \\
+    Riesgo de la cartera & Tabla de proyectos accesibles para el usuario con el semáforo de cada caso de uso, ordenable por nivel; filtro por nivel y por tipo de centro de costo (RF-22) & \texttt{GET /predictions} \\
+    Pestaña \emph{Riesgo} del centro de costo & Valor y semáforo de los tres casos, variables que explican cada predicción, certificaciones pendientes con su probabilidad de desviación y gráfico de la evolución de las predicciones (RF-23) & \texttt{GET /cost-centers/:id/}\newline\texttt{predictions} y su variante \texttt{/history} \\
+  \end{tblr}
+  \fuente{Elaboración propia, 2026.}
+\end{table}
+
+La pestaña se agrega al detalle del centro de costo, junto a las de presupuesto, tareas y bitácora que ya existen, de modo que la predicción aparece al lado de los datos que la explican. El semáforo usa los mismos colores y umbrales que el semáforo de desviaciones del presupuesto que ya muestra el ERP\@. Cada vista indica la fecha de corte y la versión del modelo, para que el usuario sepa con qué información se calculó.
+
+\subsubsection{DISEÑO DE LA AUTENTICACIÓN CENTRALIZADA}
+
+Keycloak se despliega con un único dominio, \texttt{isi-mustang}, que contiene a los usuarios de la empresa. El cuadro~\ref{tab:clientes-keycloak} lista sus clientes. Las audiencias se asignan con \textit{client scopes} y \textit{audience mappers}, de modo que cada token sirve solo para el servicio al que va dirigido (RNF-01).
+
+\begin{table}[H]
+  \centering
+  \caption{Clientes registrados en Keycloak}\label{tab:clientes-keycloak}
+  \begin{tblr}{colspec={X[0.78,l] X[0.7,l] X[0.87,l] X[1.65,l]}}
+    \textbf{Cliente} & \textbf{Tipo} & \textbf{Flujo} & \textbf{Uso} \\
+    \texttt{erp-web} & Público & Código de autorización con PKCE & Inicio de sesión de las personas en Angular; token con audiencia \texttt{erp-api} \\
+    \texttt{erp-api} & Confidencial & Credenciales de cliente & NestJS como servidor de recursos; invoca al servicio de predicción con audiencia \texttt{prediction-api} \\
+    \texttt{prediction-api} & Servidor de recursos & --- & Audiencia del servicio FastAPI \\
+    \texttt{pipeline} & Confidencial & Credenciales de cliente & Solicita las ejecuciones de cálculo al servicio de predicción \\
+    \texttt{powerbi} & Confidencial & Credenciales de cliente & Lectura de la API de datos descriptivos, con un único rol de lectura \\
+    \texttt{mcp-server} & Confidencial & Intercambio de tokens & Recibe tokens con audiencia del servidor MCP y los intercambia por un token del mismo usuario con audiencia \texttt{erp-api} \\
+    \texttt{mcp-client} & Público & Código de autorización con PKCE & Cliente MCP que actúa en nombre de un usuario \\
+  \end{tblr}
+  \fuente{Elaboración propia, 2026, en base a la sección 2.8.}
+\end{table}
+
+Keycloak resuelve la autenticación; la autorización sigue en el ERP\@. Los roles globales y los roles por centro de costo (sección 3.3, RF-07) permanecen en la base del ERP, porque dependen de datos que solo el ERP conoce, como la pertenencia de cada persona a cada centro de costo. El token identifica a la persona y NestJS busca sus roles. Keycloak guarda solo los roles técnicos de los clientes (lectura, cálculo), que no dependen del negocio.
+
+La migración desde la autenticación actual, basada en Passport y en tokens firmados por el propio backend, se hace en cuatro pasos. Primero, los usuarios activos del ERP se importan en Keycloak sin contraseña y con la acción obligatoria de definirla, de modo que cada persona la crea por correo en su primer acceso. Segundo, la tabla de usuarios del ERP incorpora el identificador de Keycloak (\texttt{sub}), que se asocia por correo electrónico en el primer inicio de sesión. Tercero, NestJS reemplaza la validación con secreto compartido por la validación con las claves públicas del dominio y comprueba emisor, expiración y audiencia. Cuarto, se retiran los endpoints propios de inicio de sesión, renovación y recuperación de contraseña, con las tablas de tokens que los sostienen. El cierre de sesión y la expiración pasan a ser los de Keycloak (RF-09).
+
+\subsubsection{DISEÑO DE LAS INTEGRACIONES CON MCP Y POWER BI}
+
+\paragraph{Power BI}
+
+NestJS expone un módulo de datos descriptivos, separado de la API que usa el frontend, con cuatro endpoints de solo lectura, uno por reporte (cuadro~\ref{tab:api-datos}). Devuelven datos agregados por centro de costo y mes, sin predicciones ni importes de nómina individuales (RNF-03). Entre los dos caminos de autenticación que plantea la sección 2.10 se elige la credencial de servicio: el cliente \texttt{powerbi} de Keycloak obtiene un token por credenciales de cliente y Power Query lo envía en el encabezado \texttt{Authorization}. Se descarta el conector personalizado con OAuth y PKCE porque autenticaría a cada persona sin necesidad: los reportes son de la empresa y los consultan jefes de proyecto y administración con los permisos del servicio Power BI\@. Los reportes usan el modo de importación con refresco programado; si la API del servidor no es alcanzable desde Internet, el refresco pasa por una puerta de enlace de datos local instalada en la red de la empresa.
+
+\begin{table}[H]
+  \centering
+  \caption{Endpoints de la API de datos descriptivos}\label{tab:api-datos}
+  \begin{tblr}{colspec={X[0.72,l] X[1.28,l]}}
+    \textbf{Endpoint} & \textbf{Datos} \\
+    \texttt{GET /reporting/portfolio} & Centros de costo con tipo, estado, cliente, responsable, fechas y vendido total \\
+    \texttt{GET /reporting/budget} & Vendido, seguimiento, comprometido y ejecutado por centro de costo, bolsa y mes \\
+    \texttt{GET /reporting/certifications} & Certificaciones por centro de costo y mes: planificado, certificado y cobrado \\
+    \texttt{GET /reporting/hours} & Horas aprobadas por centro de costo, tipo de hora y mes, sin detalle por persona \\
+  \end{tblr}
+  \fuente{Elaboración propia, 2026.}
+\end{table}
+
+\paragraph{Servidor MCP}
+
+Es un servicio independiente con transporte Streamable HTTP que expone cinco herramientas de solo lectura (cuadro~\ref{tab:herramientas-mcp}), con esquemas de entrada estrictos (sección 2.9). No accede a bases de datos: cada herramienta llama a la API de NestJS, de modo que las reglas de acceso del ERP se aplican igual que en el tablero (RF-28). El cliente MCP obtiene de Keycloak un token con la audiencia del servidor MCP; el servidor lo valida y, como no debe reenviarlo (sección 2.9), lo intercambia en Keycloak por un token del mismo usuario con audiencia \texttt{erp-api}. Así NestJS recibe la identidad de la persona que consulta y le muestra solo lo que esa persona puede ver.
+
+\begin{table}[H]
+  \centering
+  \caption{Herramientas del servidor MCP}\label{tab:herramientas-mcp}
+  \begin{tblr}{colspec={X[0.64,l] X[1.36,l]}}
+    \textbf{Herramienta} & \textbf{Descripción} \\
+    \texttt{get\_cost\_center} & Datos generales de un centro de costo: tipo, estado, cliente, responsable y fechas \\
+    \texttt{compare\_budget} & Vendido, seguimiento y ejecutado por bolsa de un centro de costo, con su desviación \\
+    \texttt{list\_certifications} & Certificaciones de un centro de costo con fechas y montos planificados y reales \\
+    \texttt{get\_risk\_prediction} & Última predicción de los tres casos de uso de un centro de costo, con su explicación \\
+    \texttt{list\_red\_projects} & Centros de costo accesibles para el usuario con algún caso en nivel rojo \\
+  \end{tblr}
+  \fuente{Elaboración propia, 2026.}
+\end{table}

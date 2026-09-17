@@ -35,13 +35,100 @@
 
 \makecaratula
 
-% --- Índices (sin numerar) ---------------------------------------------------
+% --- Preliminares (sin numerar; orden de la Norma, figura 2) ------------------
 \pagenumbering{gobble}
+\pagestyle{empty}
+
+% Dedicatoria: opcional (Norma §1.1.5). Descomentar si se incluye.
+% \paginaprevia{DEDICATORIA}
+
+\paginaprevia{AGRADECIMIENTOS}
+% TODO(Franco): texto libre, máximo una página (Norma §1.1.6, obligatorio).
+Pendiente de redacción.
+
+\paginaprevia{RESUMEN}
+% TODO: al final. ~250 palabras: antecedentes, objetivo general, metodología, resultados y conclusiones (Norma §1.1.7).
+Pendiente de redacción.
+
+\textbf{Palabras clave:} % TODO: entre 4 y 10.
+
+\paginaprevia{ABSTRACT}
+% TODO: traducción adaptada del resumen (Norma §1.1.8).
+Pending.
+
+\textbf{Keywords:} % TODO
+
 \tableofcontents
 \listoffigures
+\listoftablas
 \listoftables
 
+% Lista de siglas y abreviaturas (Norma §1.1.11): orden alfabético, sin número de página.
+\paginaprevia{LISTA DE SIGLAS Y ABREVIATURAS}
+\begin{spacing}{1.0}
+\setlength{\parskip}{0pt}
+\noindent
+  \textbf{AC}: Costo real (\textit{Actual Cost})\\
+  \textbf{API}: Interfaz de programación de aplicaciones (\textit{Application Programming Interface})\\
+  \textbf{ASGI}: Interfaz asíncrona de pasarela de servidor (\textit{Asynchronous Server Gateway Interface})\\
+  \textbf{BAC}: Presupuesto a la conclusión (\textit{Budget at Completion})\\
+  \textbf{BI}: Inteligencia de negocios (\textit{Business Intelligence})\\
+  \textbf{CPI}: Índice de desempeño del costo (\textit{Cost Performance Index})\\
+  \textbf{CV}: Variación del costo (\textit{Cost Variance})\\
+  \textbf{DAX}: Expresiones de análisis de datos (\textit{Data Analysis Expressions})\\
+  \textbf{EAC}: Estimación a la conclusión (\textit{Estimate at Completion})\\
+  \textbf{ELT}: Extracción, carga y transformación (\textit{Extract, Load, Transform})\\
+  \textbf{EPC}: Ingeniería, procura y construcción (\textit{Engineering, Procurement and Construction})\\
+  \textbf{ERP}: Planificación de recursos empresariales (\textit{Enterprise Resource Planning})\\
+  \textbf{ETL}: Extracción, transformación y carga (\textit{Extract, Transform, Load})\\
+  \textbf{EV}: Valor ganado (\textit{Earned Value})\\
+  \textbf{EVM}: Gestión del valor ganado (\textit{Earned Value Management})\\
+  \textbf{FIDIC}: Federación Internacional de Ingenieros Consultores\\
+  \textbf{HTTP}: Protocolo de transferencia de hipertexto (\textit{Hypertext Transfer Protocol})\\
+  \textbf{HTTPS}: HTTP seguro (\textit{Hypertext Transfer Protocol Secure})\\
+  \textbf{IA}: Inteligencia artificial\\
+  \textbf{JSON}: Notación de objetos de JavaScript (\textit{JavaScript Object Notation})\\
+  \textbf{JWT}: Token web JSON (\textit{JSON Web Token})\\
+  \textbf{KPI}: Indicador clave de desempeño (\textit{Key Performance Indicator})\\
+  \textbf{LDAP}: Protocolo ligero de acceso a directorios (\textit{Lightweight Directory Access Protocol})\\
+  \textbf{LLM}: Modelo de lenguaje de gran tamaño (\textit{Large Language Model})\\
+  \textbf{LSTM}: Memoria de corto y largo plazo (\textit{Long Short-Term Memory})\\
+  \textbf{MAE}: Error absoluto medio (\textit{Mean Absolute Error})\\
+  \textbf{MAPE}: Error porcentual absoluto medio (\textit{Mean Absolute Percentage Error})\\
+  \textbf{MCP}: Protocolo de contexto de modelo (\textit{Model Context Protocol})\\
+  \textbf{MSE}: Error cuadrático medio (\textit{Mean Squared Error})\\
+  \textbf{OE}: Objetivo específico\\
+  \textbf{OIDC}: OpenID Connect\\
+  \textbf{OLAP}: Procesamiento analítico en línea (\textit{Online Analytical Processing})\\
+  \textbf{OLTP}: Procesamiento de transacciones en línea (\textit{Online Transaction Processing})\\
+  \textbf{OP}: Proveedor de OpenID (\textit{OpenID Provider})\\
+  \textbf{ORM}: Mapeo objeto-relacional (\textit{Object-Relational Mapping})\\
+  \textbf{PKCE}: Clave de prueba para el intercambio de código (\textit{Proof Key for Code Exchange})\\
+  \textbf{PMBOK}: Guía de los fundamentos para la dirección de proyectos (\textit{Project Management Body of Knowledge})\\
+  \textbf{PV}: Valor planificado (\textit{Planned Value})\\
+  \textbf{RAG}: Generación aumentada por recuperación (\textit{Retrieval-Augmented Generation})\\
+  \textbf{REQ}: Relevamiento de requerimientos del ERP de ISI Mustang\\
+  \textbf{REST}: Transferencia de estado representacional (\textit{Representational State Transfer})\\
+  \textbf{RF}: Requerimiento funcional\\
+  \textbf{RMSE}: Raíz del error cuadrático medio (\textit{Root Mean Squared Error})\\
+  \textbf{RNF}: Requerimiento no funcional\\
+  \textbf{ROPC}: Credenciales de contraseña del propietario del recurso (\textit{Resource Owner Password Credentials})\\
+  \textbf{RRHH}: Recursos humanos\\
+  \textbf{SAML}: Lenguaje de marcado para confirmaciones de seguridad (\textit{Security Assertion Markup Language})\\
+  \textbf{SHAP}: Explicaciones aditivas de Shapley (\textit{SHapley Additive exPlanations})\\
+  \textbf{SPI}: Índice de desempeño del cronograma (\textit{Schedule Performance Index})\\
+  \textbf{SQL}: Lenguaje de consulta estructurado (\textit{Structured Query Language})\\
+  \textbf{SSO}: Inicio de sesión único (\textit{Single Sign-On})\\
+  \textbf{SSR}: Renderizado del lado del servidor (\textit{Server-Side Rendering})\\
+  \textbf{SV}: Variación del cronograma (\textit{Schedule Variance})\\
+  \textbf{TLS}: Seguridad de la capa de transporte (\textit{Transport Layer Security})\\
+  \textbf{URL}: Localizador uniforme de recursos (\textit{Uniform Resource Locator})\\
+  \textbf{WSGI}: Interfaz de pasarela de servidor web (\textit{Web Server Gateway Interface})\\
+\end{spacing}
+
 % --- Cuerpo ------------------------------------------------------------------
+\clearpage
+\pagestyle{fancy}
 \pagenumbering{arabic}
 
 \section*{INTRODUCCIÓN}
@@ -53,10 +140,15 @@
 \input{content/chapter-3/content.tex}
 \input{content/chapter-4/content.tex}
 
-\seccioncuerpo{CONCLUSIONES}
+% Norma §1.2.3: una sola carátula "CONCLUSIONES Y RECOMENDACIONES"; §1.2.4: recomendaciones en hoja independiente.
+\caratula{CONCLUSIONES Y RECOMENDACIONES}
+\section*{CONCLUSIONES}
+\addcontentsline{toc}{section}{CONCLUSIONES}
 % TODO: al final.
 
-\seccioncuerpo{RECOMENDACIONES}
+\clearpage
+\section*{RECOMENDACIONES}
+\addcontentsline{toc}{section}{RECOMENDACIONES}
 % TODO: al final (incluye migración a la nube y asistente conversacional sobre MCP como trabajo futuro).
 
 \referencias

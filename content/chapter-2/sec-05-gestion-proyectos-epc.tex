@@ -19,18 +19,15 @@ El método se apoya en tres magnitudes acumuladas a una fecha de corte: el valor
 \begin{table}[H]
   \centering
   \caption{Variaciones, índices y pronóstico de la gestión del valor ganado}\label{tab:evm-indicadores}
-  \begin{tabular}{@{}>{\RaggedRight\arraybackslash}p{0.30\textwidth}>{\RaggedRight\arraybackslash}p{0.22\textwidth}>{\RaggedRight\arraybackslash}p{0.42\textwidth}@{}}
-    \toprule
+  \begin{tblr}{colspec={X[0.96,l] X[0.7,l] X[1.34,l]}}
     \textbf{Indicador} & \textbf{Cálculo} & \textbf{Lectura} \\
-    \midrule
     Variación de costo (CV) & $\mathrm{EV}-\mathrm{AC}$ & Negativa: el trabajo realizado costó más de lo presupuestado \\
     Variación de cronograma (SV) & $\mathrm{EV}-\mathrm{PV}$ & Negativa: se hizo menos trabajo del planificado a la fecha \\
     Índice de desempeño de costo (CPI) & $\mathrm{EV}/\mathrm{AC}$ & Menor que 1: sobrecosto en lo ejecutado \\
     Índice de desempeño de cronograma (SPI) & $\mathrm{EV}/\mathrm{PV}$ & Menor que 1: atraso respecto del plan \\
     Estimación a la terminación (EAC) & $\mathrm{BAC}/\mathrm{CPI}$ (forma básica) & Costo final proyectado si se mantiene el desempeño actual; BAC es el presupuesto total \\
-    \bottomrule
-  \end{tabular}
-  \fuente{Elaboración propia a partir de \textcite{Anbari2003}, \textcite{Fleming2010} y \textcite{PMI2019EVM}.}
+  \end{tblr}
+  \fuente{Elaboración propia, 2026, en base a \textcite{Anbari2003}, \textcite{Fleming2010} y \textcite{PMI2019EVM}.}
 \end{table}
 
 En un contrato EPC el avance es la base del pago. La cláusula de precio y pago del Libro Plata establece que el contratista presenta estados de cuenta periódicos con el monto que considera devengado y que el propio comitente los evalúa y paga, sin el ingeniero independiente que en otras formas de la suite emite el certificado de pago provisional \parencite{FIDIC2017}. En la interpretación de este trabajo, la certificación de avance es el acto contractual por el cual el cliente reconoce como ejecutada una porción del alcance y habilita su facturación. En el ERP nuevo se modela como certificación, el ingreso ejecutado de un centro de costo, que el gerente del centro solicita y el área de compras registra y cobra, con estados de borrador, enviada y registrada. Con la misma lectura, esa entidad cumple la función del ciclo de estado de cuenta, certificación y pago de FIDIC: cada certificación es a la vez una medición de lo ejecutado y un ingreso reconocido.

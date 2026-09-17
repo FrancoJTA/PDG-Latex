@@ -23,15 +23,12 @@ Frente a otras herramientas, el criterio deriva del alcance: la BI debe leer el 
 \begin{table}[H]
   \centering
   \caption{Herramientas de BI consideradas y su forma de acceso a los datos del ERP}\label{tab:bi-alternativas}
-  \begin{tabular}{@{}>{\RaggedRight\arraybackslash}p{0.16\textwidth}>{\RaggedRight\arraybackslash}p{0.36\textwidth}>{\RaggedRight\arraybackslash}p{0.42\textwidth}@{}}
-    \toprule
+  \begin{tblr}{colspec={X[0.56,l] X[1.1,l] X[1.34,l]}}
     \textbf{Herramienta} & \textbf{Fuentes documentadas} & \textbf{Acceso a la API del ERP} \\
-    \midrule
     Power BI & Más de 100 fuentes: bases de datos, servicios en la nube, archivos y fuentes web & Conector Web de fábrica: JSON, encabezados HTTP, clave de API\@. OAuth integrado solo con Entra ID; para Keycloak, conector personalizado o token en el encabezado \\
     Apache Superset & Bases de datos SQL & Sin conector REST documentado; requeriría acceso directo a la base, excluido por el alcance \\
     Metabase & Controladores para bases de datos (PostgreSQL, MySQL, SQL Server, entre otras) & Sin conector REST documentado; misma restricción \\
     Tableau & Conectores nativos y \textit{web data connector} para fuentes HTTP & Requiere programar un conector en JavaScript (WDC 3.0; la 2.0 está obsoleta) \\
-    \bottomrule
-  \end{tabular}
-  \fuente{Elaboración propia a partir de \textcite{MSPowerBIOverview}, \textcite{MSPowerQueryWeb}, \textcite{MSPowerQueryAuth}, \textcite{ApacheSuperset}, \textcite{MetabaseDatabases} y \textcite{TableauWDC}.}
+  \end{tblr}
+  \fuente{Elaboración propia, 2026, en base a \textcite{MSPowerBIOverview}, \textcite{MSPowerQueryWeb}, \textcite{MSPowerQueryAuth}, \textcite{ApacheSuperset}, \textcite{MetabaseDatabases} y \textcite{TableauWDC}.}
 \end{table}

@@ -11,17 +11,14 @@ Esa crítica se formaliza en el modelo en espiral. \textcite{Boehm1988} lo prese
 \begin{table}[H]
   \centering
   \caption{Modelos de proceso de software comparados}\label{tab:modelos-proceso}
-  \begin{tabular}{@{}>{\RaggedRight\arraybackslash}p{0.14\textwidth}>{\RaggedRight\arraybackslash}p{0.30\textwidth}>{\RaggedRight\arraybackslash}p{0.24\textwidth}>{\RaggedRight\arraybackslash}p{0.24\textwidth}@{}}
-    \toprule
+  \begin{tblr}{colspec={X[0.61,l] X[1.3,l] X[1.04,l] X[1.04,l]}}
     \textbf{Modelo} & \textbf{Rasgo central} & \textbf{Fortaleza} & \textbf{Limitación} \\
-    \midrule
     Cascada & Fases secuenciales con especificación cerrada antes del desarrollo & Simple de explicar; percibido como ordenado y medible & Los problemas se descubren en las pruebas finales; el cambio es costoso \\
     Espiral & Ciclos guiados por el riesgo, con evaluación explícita en cada uno & Hace explícita la evaluación del riesgo en cada iteración & Su autor reconoce dificultades de uso por su elaboración incompleta \\
     Incremental & Especificación, desarrollo y validación intercalados en entregas parciales & Menor costo del cambio; retroalimentación temprana; entrega útil más rápida & Menor visibilidad para la gestión; la estructura se degrada sin refactorización \\
     Ágil & Iteraciones cortas, colaboración continua con el cliente, respuesta al cambio & Adaptación rápida; software funcionando como medida de avance & Depende de la colaboración continua con el cliente \\
-    \bottomrule
-  \end{tabular}
-  \fuente{Elaboración propia a partir de \textcite{Royce1970}, \textcite{Boehm1988}, \textcite{Sommerville2016}, \textcite{Larman2003} y \textcite{Beck2001}.}
+  \end{tblr}
+  \fuente{Elaboración propia, 2026, en base a \textcite{Royce1970}, \textcite{Boehm1988}, \textcite{Sommerville2016}, \textcite{Larman2003} y \textcite{Beck2001}.}
 \end{table}
 
 Para este trabajo, las actividades del proceso quedan fijas: cada incremento comprende definición de alcance, análisis, diseño, desarrollo y validación, que corresponden a procesos técnicos y de gestión técnica de la norma. Lo que se elige es el modelo de ciclo de vida que las ordena, y se prevé que sea el iterativo e incremental, por las razones que se desarrollan en la subsección siguiente.

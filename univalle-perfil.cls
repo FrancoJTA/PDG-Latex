@@ -63,6 +63,7 @@
 \RequirePackage{csquotes}                           % Comillas tipográficas (requerido por biblatex)
 \RequirePackage{ragged2e}                           % Justificación mejorada
 \RequirePackage{xcolor}                             % Colores (uso opcional)
+\RequirePackage{tabularray}                         % Cuadros y tablas con formato único (ver más abajo)
 \RequirePackage{booktabs}                           % Tablas con mejor tipografía
 \RequirePackage{array}                              % Columnas de tabla mejoradas
 \RequirePackage{float}                              % Control de posición de figuras y tablas
@@ -168,6 +169,13 @@
 \setcounter{secnumdepth}{4}               % numerar hasta \paragraph
 \setcounter{tocdepth}{4}                  % mostrar hasta \paragraph en el índice
 
+% Índice de contenido con el mismo formato de número que el cuerpo (Norma, cuadro 3):
+% "1.1." y "1.1.1." con punto; el cuarto nivel sin punto final.
+\contentsmargin{3em}% números de página de tres dígitos
+\titlecontents{subsection}[1.5em]{}{\contentslabel[\thecontentslabel.]{2.6em}}{}{\titlerule*[0.6pc]{.}\contentspage}
+\titlecontents{subsubsection}[4.1em]{}{\contentslabel[\thecontentslabel.]{3.5em}}{}{\titlerule*[0.6pc]{.}\contentspage}
+\titlecontents{paragraph}[7.6em]{}{\contentslabel{4.1em}}{}{\titlerule*[0.6pc]{.}\contentspage}
+
 % Formato visual de cada nivel
 \titleformat{\section}[block]
   {\normalfont\large\bfseries}
@@ -175,11 +183,11 @@
 
 \titleformat{\subsection}[block]
   {\normalfont\normalsize\bfseries}
-  {\thesubsection}{1em}{}
+  {\thesubsection.}{1em}{}
 
 \titleformat{\subsubsection}[block]
   {\normalfont\normalsize\itshape}
-  {\thesubsubsection}{1em}{}
+  {\thesubsubsection.}{1em}{}
 
 \titleformat{\paragraph}[block]
   {\normalfont\normalsize\itshape}
@@ -481,16 +489,20 @@
 %   \seccioncuerpo{RECOMENDACIONES}
 %   \seccioncuerpo{APÉNDICES}
 % -----------------------------------------------------------------------------
-\newcommand{\seccioncuerpo}[1]{%
+\newcommand{\caratula}[1]{%
   \clearpage%
   \thispagestyle{sinpagina}%
-  \addcontentsline{toc}{section}{#1}%
   \vspace*{\fill}%
   \begin{center}%
     \fontsize{15}{18}\selectfont\textbf{#1}%
   \end{center}%
   \vspace*{\fill}%
   \clearpage%
+  \addtocounter{page}{-1}% el separador no se considera en la paginación (Norma §2.7)
+}
+\newcommand{\seccioncuerpo}[1]{%
+  \caratula{#1}%
+  \addcontentsline{toc}{section}{#1}%
 }
 
 % -----------------------------------------------------------------------------
@@ -534,6 +546,8 @@
   \end{center}%
   \vspace*{\fill}%
   \clearpage%
+  \addtocounter{page}{-1}% el separador no se considera en la paginación (Norma §2.7)
+  \setcounter{tabla}{0}%
 }
 
 % -----------------------------------------------------------------------------
@@ -554,7 +568,48 @@
   \renewcommand{\tablename}{Cuadro}%
   \renewcommand{\listfigurename}{ÍNDICE DE FIGURAS}%
   \renewcommand{\listtablename}{ÍNDICE DE CUADROS}%
+  \renewcommand{\contentsname}{ÍNDICE DE CONTENIDO}%
 }
+
+% Entradas de los índices de figuras, tablas y cuadros (Norma, cuadro 4):
+% "Figura 1.1. Título ........ pág."
+\titlecontents{figure}[0em]{}{\figurename~\thecontentslabel.\enspace}{}{\titlerule*[0.6pc]{.}\contentspage}
+\titlecontents{table}[0em]{}{Cuadro~\thecontentslabel.\enspace}{}{\titlerule*[0.6pc]{.}\contentspage}
+
+% TABLA (Norma §2.8, cuadro 10): valores numéricos exactos, aunque combinen texto.
+% El ambiente table sigue siendo "Cuadro" (contenido textual o cualitativo).
+% Uso: \begin{tabla}[H] ... \caption{...} ... \end{tabla}; índice con \listoftablas.
+\floatstyle{plaintop}% título encima, como los cuadros
+\newfloat{tabla}{htbp}{lotb}
+\floatstyle{plain}
+\floatname{tabla}{Tabla}
+\renewcommand{\thetabla}{\thesection.\arabic{tabla}}
+\titlecontents{tabla}[0em]{}{Tabla~\thecontentslabel.\enspace}{}{\titlerule*[0.6pc]{.}\contentspage}
+\newcommand{\listoftablas}{%
+  \newpage%
+  \thispagestyle{sinpagina}%
+  \begin{spacing}{1.0}%
+    \setlength{\parskip}{2pt}%
+    \section*{ÍNDICE DE TABLAS}%
+    \@starttoc{lotb}%
+  \end{spacing}%
+  \newpage%
+}
+
+% §2.5.1: contenido de cuadros y tablas en interlineado simple
+\AtBeginEnvironment{table}{\setstretch{1.0}}
+\AtBeginEnvironment{tabla}{\setstretch{1.0}}
+
+% FORMATO DE CUADROS Y TABLAS (se aplica solo a todo \begin{tblr})
+% Celdas cerradas, encabezado (primera fila) en gris y negrita, ancho = línea de texto.
+% Uso:
+%   \begin{tblr}{colspec={X[1,l] X[2,l]}}   % X[peso,alineación]: l, c, r
+%     Encabezado 1 & Encabezado 2 \\
+%     dato & dato \\
+%   \end{tblr}
+% Fila de grupo: \SetCell[c=2]{l} \textit{Grupo} & \\
+% Otra fila de encabezado: \SetRow{bg=gray!20,font=\bfseries} ...
+\SetTblrInner{hlines, vlines, rowsep=2pt, row{1}={bg=gray!20, font=\bfseries}}
 
 % Numeración de figuras y cuadros con prefijo de capítulo: Figura 1.1, Cuadro 2.3
 % Los contadores se reinician en cada \capitulo{}
@@ -565,7 +620,7 @@
 % Uso: \fuente{DAAP, 2019.}
 \newcommand{\fuente}[1]{%
   \par\vspace{2pt}%
-  {\small\textit{Fuente: #1}}%
+  {\raggedright\small Fuente: #1\par}%
 }
 
 % -----------------------------------------------------------------------------

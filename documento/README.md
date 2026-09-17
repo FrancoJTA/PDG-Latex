@@ -41,6 +41,7 @@ para guiar la redacción más adelante.
   qué evidencia hay que guardar para redactar cada incremento del Cap. IV.
 - [14-traspaso-sesion.md](14-traspaso-sesion.md) — **estado al 2026-09-17 y
   próximos pasos**; leer al abrir una sesión nueva.
+- [16-hallazgos-cap3.md](16-hallazgos-cap3.md) — hallazgos abiertos al redactar el Cap. III (decidir, fuentes, ajustes).
 - [15-incertidumbres-cap1-cap2.md](15-incertidumbres-cap1-cap2.md) — qué
   puede cambiar o no está firme en los capítulos I y II.
 

@@ -21,16 +21,13 @@ El proyecto lo adopta sin la plataforma del proveedor, en línea con el argument
 \begin{table}[H]
   \centering
   \caption{Capas de la arquitectura \textit{medallion} y su correspondencia en el proyecto}\label{tab:medallion-proyecto}
-  \begin{tabular}{@{}>{\RaggedRight\arraybackslash}p{0.12\textwidth}>{\RaggedRight\arraybackslash}p{0.38\textwidth}>{\RaggedRight\arraybackslash}p{0.44\textwidth}@{}}
-    \toprule
+  \begin{tblr}{colspec={X[0.38,l] X[1.21,l] X[1.41,l]}}
     \textbf{Capa} & \textbf{Contenido según el patrón} & \textbf{En el proyecto} \\
-    \midrule
     Bronze & Datos crudos de las fuentes, sin validación, en su estado original & Copias de las tablas MySQL del portal anterior, de las tablas PostgreSQL del ERP nuevo y de las planillas Excel de control de proyectos \\
     Silver & Al menos una representación validada y no agregada de cada registro; limpieza, deduplicación y normalización & Esquema unificado en DuckDB: los dos esquemas relacionales y las planillas mapeados a las mismas variables, con tipos y dominios conformados y registros deduplicados \\
     Gold & Datos agregados y ajustados a los requisitos de análisis y reporte & Tablas de características por proyecto construidas con Polars; entrada del entrenamiento (histórico) y de la inferencia (proyectos activos) \\
-    \bottomrule
-  \end{tabular}
-  \fuente{Elaboración propia a partir de \textcite{DatabricksMedallion} y \textcite{Armbrust2021}.}
+  \end{tblr}
+  \fuente{Elaboración propia, 2026, en base a \textcite{DatabricksMedallion} y \textcite{Armbrust2021}.}
 \end{table}
 
 \subsubsection{CALIDAD DE DATOS}
@@ -42,19 +39,16 @@ Las dimensiones concretas más usadas son la exactitud, la completitud, la consi
 \begin{table}[H]
   \centering
   \caption{Dimensiones de calidad de datos adoptadas en el proyecto}\label{tab:dimensiones-calidad}
-  \begin{tabular}{@{}>{\RaggedRight\arraybackslash}p{0.15\textwidth}>{\RaggedRight\arraybackslash}p{0.38\textwidth}>{\RaggedRight\arraybackslash}p{0.41\textwidth}@{}}
-    \toprule
+  \begin{tblr}{colspec={X[0.48,l] X[1.21,l] X[1.31,l]}}
     \textbf{Dimensión} & \textbf{Definición operativa} & \textbf{Verificación prevista} \\
-    \midrule
     Exactitud & El valor registrado coincide con el valor real del objeto que describe & Contraste de montos y fechas del sistema contra las planillas de control y documentos de respaldo, sobre una muestra \\
     Completitud & Los valores requeridos para la tarea están presentes & Proporción de proyectos con presupuesto, fechas y certificaciones registrados; patrón de valores nulos por variable \\
     Consistencia & Los valores no se contradicen entre registros ni entre tablas & Sumas de detalle frente a totales de cabecera; estados de flujo compatibles con las fechas \\
     Oportunidad & El dato está disponible cuando la tarea lo necesita & Rezago entre la fecha del evento y la fecha de registro en el sistema \\
     Unicidad & Cada objeto de negocio aparece una sola vez & Duplicados de proyectos, clientes y proveedores por clave natural \\
     Validez & Los valores pertenecen al dominio definido & Valores fuera de rango o de catálogo; tipos incorrectos en campos de texto libre \\
-    \bottomrule
-  \end{tabular}
-  \fuente{Elaboración propia a partir de \textcite{WangStrong1996}, \textcite{BatiniScannapieco2016} y \textcite{DAMA2017}.}
+  \end{tblr}
+  \fuente{Elaboración propia, 2026, en base a \textcite{WangStrong1996}, \textcite{BatiniScannapieco2016} y \textcite{DAMA2017}.}
 \end{table}
 
 La relación entre esas dimensiones y el desempeño de un modelo de aprendizaje automático cuenta con evidencia empírica reciente. \textcite{Mohammed2025} sostienen que datos de entrenamiento incompletos, erróneos o inapropiados conducen a modelos poco confiables, y estudian de forma sistemática el efecto de seis dimensiones de calidad sobre el desempeño de 19 algoritmos de clasificación, regresión y agrupamiento sobre datos tabulares, contaminando los datos de entrenamiento, los de prueba o ambos; un diseño pertinente para un proyecto cuyos datos son tabulares y cuyos modelos se entrenan sobre un histórico y se aplican sobre datos nuevos. \textcite{Sambasivan2021} aportan la dimensión organizacional: a partir de entrevistas con 53 practicantes de inteligencia artificial en contextos de alto riesgo, describen las cascadas de datos, efectos negativos que se propagan aguas abajo a partir de problemas en los datos, y las encuentran omnipresentes, invisibles, de efecto retardado y con frecuencia evitables, fruto de prácticas que subvaloran los datos frente al modelado. \textcite{Gudivada2017} agregan que, para el aprendizaje automático, la calidad va más allá de la limpieza y las transformaciones y requiere gobernar el ciclo de vida completo de los datos.

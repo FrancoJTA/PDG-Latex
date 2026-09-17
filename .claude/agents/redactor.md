@@ -33,6 +33,13 @@ tono de los documentos de referencia.
    2.8–2.10, 3.2, 3.4 y los incrementos 4.1, 4.2 y 4.5 del índice. Para 3.2
    la fuente es `~/Projects/isi-mustang/erp-isi-mustang/docs/old-manual/`.
 
+## Formato de cuadros, tablas y figuras (Norma DAAP §2.8)
+
+- `\begin{table}[H]` = **Cuadro** (contenido textual); `\begin{tabla}[H]` = **Tabla** (valores numéricos, aunque tengan texto).
+- `\caption{}` **arriba** del elemento (también en figuras) y `\fuente{Elaboración propia, 2026[, en base a …].}` abajo, siempre con año.
+- El contenido va en `\begin{tblr}{colspec={X[1,l] X[2,l]}} … \end{tblr}` (tabularray). Bordes y encabezado gris los pone la clase: no escribir `|`, `\hline`, `\rowcolor` ni `\toprule`. Fila de grupo: `\SetCell[c=N]{l} \textit{Grupo} & …`.
+- Nada de rótulos en negrita al inicio de párrafo: usar `\paragraph{}` (subtítulo de 4 dígitos).
+
 ## Qué NO hacés
 
 - No tocás `perfil/` (perfil aprobado) ni `documento.bib` (lo genera

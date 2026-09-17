@@ -23,24 +23,20 @@ En regresión, el punto de partida es el error cuadrático medio (MSE), que al e
 \begin{table}[H]
   \centering
   \caption{Métricas de evaluación de modelos supervisados y su uso en el proyecto}\label{tab:metricas-supervisado}
-  \begin{tabular}{@{}>{\RaggedRight\arraybackslash}p{0.18\textwidth}>{\RaggedRight\arraybackslash}p{0.33\textwidth}>{\RaggedRight\arraybackslash}p{0.43\textwidth}@{}}
-    \toprule
+  \begin{tblr}{colspec={X[0.57,l] X[1.05,l] X[1.37,l]}}
     \textbf{Métrica} & \textbf{Qué mide} & \textbf{Uso en el proyecto} \\
-    \midrule
-    \multicolumn{3}{@{}l}{\textit{Clasificación}} \\
+    \SetCell[c=3]{l} \textit{Clasificación} & & \\
     Matriz de confusión & Cruce de clase real y clase predicha (VP, VN, FP, FN) & Base de las demás métricas; muestra qué tipo de error comete el clasificador de desviación en certificaciones \\
     Exactitud & $(\mathrm{VP}+\mathrm{VN})/\mathrm{total}$ & Referencia general; insuficiente si las clases están desbalanceadas \\
     Precisión & $\mathrm{VP}/(\mathrm{VP}+\mathrm{FP})$ & Proporción de alertas de desviación que son correctas \\
     Sensibilidad & $\mathrm{VP}/(\mathrm{VP}+\mathrm{FN})$ & Proporción de desviaciones reales que el modelo detecta \\
     F1 & Media armónica de precisión y sensibilidad & Resumen único cuando ambas importan \\
-    \midrule
-    \multicolumn{3}{@{}l}{\textit{Regresión}} \\
+    \SetCell[c=3]{l} \textit{Regresión} & & \\
     RMSE & Raíz del promedio de errores al cuadrado & Error en unidades de la variable; penaliza sobrecostos o retrasos grandes mal estimados \\
     MAE & Promedio de errores en valor absoluto & Error típico esperado, menos sensible a valores extremos \\
     $R^2$ & Proporción de la variabilidad explicada por el modelo & Ajuste de cada regresor sobre su propia respuesta, independiente de la escala; complementa al RMSE y al MAE \\
-    \bottomrule
-  \end{tabular}
-  \fuente{Elaboración propia a partir de \textcite{Sokolova2009}, \textcite{James2021} y \textcite{Chai2014}.}
+  \end{tblr}
+  \fuente{Elaboración propia, 2026, en base a \textcite{Sokolova2009}, \textcite{James2021} y \textcite{Chai2014}.}
 \end{table}
 
 Con estas definiciones, el protocolo de evaluación del módulo predictivo es el siguiente: el clasificador de desviación en certificaciones se evalúa con exactitud, precisión, sensibilidad, F1 y matriz de confusión; los regresores de sobrecosto y de retraso en la fecha de cierre, con RMSE, MAE y $R^2$. En los tres casos la selección de hiperparámetros se realiza con validación cruzada de $k$ particiones sobre el conjunto de entrenamiento (estratificada solo en el clasificador) y se reserva un conjunto de prueba independiente para la evaluación final.

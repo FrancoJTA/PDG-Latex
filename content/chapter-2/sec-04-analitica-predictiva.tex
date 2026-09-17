@@ -31,10 +31,8 @@ Dos trabajos recientes ilustran la arquitectura de solución que este proyecto a
 \begin{table}[H]
   \centering
   \caption{Estudios revisados sobre predicción de desviaciones, costos y plazos en proyectos}\label{tab:estudios-predictiva}
-  \begin{tabular}{@{}>{\RaggedRight\arraybackslash}p{0.22\textwidth}>{\RaggedRight\arraybackslash}p{0.17\textwidth}>{\RaggedRight\arraybackslash}p{0.13\textwidth}>{\RaggedRight\arraybackslash}p{0.40\textwidth}@{}}
-    \toprule
+  \begin{tblr}{colspec={X[0.96,l] X[0.74,l] X[0.57,l] X[1.74,l]}}
     \textbf{Estudio} & \textbf{Técnica} & \textbf{Variable} & \textbf{Dato relevante} \\
-    \midrule
     \textcite{Vandevoorde2006} & Índices EVM y ES & Duración & El EVM se creó para costos y se usó poco para pronosticar duración; compara tres métodos sobre datos reales \\
     \textcite{Wauters2016} & Cinco métodos de IA & Duración & Superan a EVM/ES si entrenamiento y prueba son similares; pierden ventaja al crecer la discrepancia \\
     \textcite{MLcostForecasting2022} & LSTM & Costo & Siete características con medias móviles de indicadores; 300 experimentos; más preciso que el EVM por índices \\
@@ -44,9 +42,8 @@ Dos trabajos recientes ilustran la arquitectura de solución que este proyecto a
     \textcite{AIcostEstimation2024} & Revisión sistemática (39 artículos) & Costo & ANN más frecuente (26,3\,\%); árboles y \textit{gradient boosting} con mejoras sustanciales \\
     \textcite{XGBoostCostOverrun2026} & XGBoost + SHAP & Sobrecosto & CV de 5 particiones, MAE y $R^2$; 1\,000 observaciones simuladas \\
     \textcite{Shen2025} & XGBoost con reglas de dominio & Retraso & Mejora la exactitud y reduce falsos negativos sobre datos reales \\
-    \bottomrule
-  \end{tabular}
-  \fuente{Elaboración propia a partir de las fuentes citadas.}
+  \end{tblr}
+  \fuente{Elaboración propia, 2026, en base a las fuentes citadas.}
 \end{table}
 
 De esta revisión se desprende el planteo de los tres casos del proyecto: la desviación en certificaciones como problema de clasificación, y el sobrecosto y el retraso en la fecha de cierre como problemas de regresión, los tres con \textit{gradient boosting} sobre el histórico del portal anterior y las planillas de control. Ninguna de las fuentes revisadas aporta cifras de sobrecosto para el sector de petróleo, gas y minería en Bolivia, por lo que la magnitud de las desviaciones en ISI Mustang solo puede establecerse con sus propios datos. Se prevé incorporar reglas de negocio como variables y validaciones de consistencia, como en \textcite{Shen2025}. Las predicciones se muestran únicamente en el tablero del ERP; los reportes de Power BI se mantienen en el nivel descriptivo.

@@ -1,3 +1,5 @@
+> **Fuente original:** `norma-de-trabajos-de-grado-6.pdf` (en esta carpeta). Si este resumen contradice el PDF, manda el PDF.
+
 # Análisis: Norma de Organización y Presentación de Trabajos de Grado
 **Fuente:** DAAP, UNIVALLE — 1ra Edición, 2019  
 **Aplica a:** Proyecto de Grado — Sistemas y Tecnología Informática (ISI/TSV)
@@ -197,12 +199,12 @@ Formatos principales (APA):
 
 ### 7.3 Apéndices (opcional)
 - Información complementaria elaborada por el autor (encuestas, planos, manuales…).
-- Hoja con título "APÉNDICES" seguida de la lista A.1, A.2…
+- Hoja con título "APÉNDICES". Numeración de apartados en **romanos minúsculas** (i, ii, iii), según el cuadro 2 del PDF original (corregido 2026-09-17).
 - En orden de aparición en el texto.
 
 ### 7.4 Anexos (opcional)
 - Información externa al autor que corrobora el proyecto (leyes, normas, proformas, mapas…).
-- Hoja con título "ANEXOS" con lista A.1, A.2…
+- Hoja con título "ANEXOS". Misma numeración en romanos minúsculas (cuadro 2).
 - En orden de aparición en el texto.
 
 ---
@@ -217,13 +219,14 @@ La secuencia reinicia en cada capítulo.
 - Ubicado **debajo del número**, antes del elemento visual.
 - Times New Roman 12 o Arial 11.
 - Redactado en minúscula (forma de oración).
-- En negrilla.
+- **No** se pide negrilla en el título (corregido 2026-09-17 contra el PDF original: la negrilla va en el número dentro del índice, cuadro 4).
 
 ### Fuente
 - Obligatoria en toda figura, tabla o cuadro.
 - Ubicada **debajo** del elemento, alineada a la izquierda.
 - Formato APA: `Fuente: Autor, año: pág.`
-- Elaboración propia: `Fuente: Elaboración propia, año.`
+- Elaboración propia: `Fuente: Elaboración propia, año.` o `Fuente: Elaboración propia, año, en base a …`
+- Separar "Gráfico" de "Figura" es **opcional**; "Tabla" sí corresponde cuando hay valores numéricos, aunque se combinen con texto.
 
 ### Diferencias entre tipos
 

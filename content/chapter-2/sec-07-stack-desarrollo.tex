@@ -38,31 +38,26 @@ El frontend es Angular 21.2, un marco web mantenido por un equipo de Google que 
 \begin{table}[H]
   \centering
   \caption{Tecnologías del sistema por capa de la arquitectura}\label{tab:stack-desarrollo}
-  \begin{tabular}{@{}>{\RaggedRight\arraybackslash}p{0.24\textwidth}>{\RaggedRight\arraybackslash}p{0.22\textwidth}>{\RaggedRight\arraybackslash}p{0.32\textwidth}>{\RaggedRight\arraybackslash}p{0.14\textwidth}@{}}
-    \toprule
+  \begin{tblr}{colspec={X[1.04,l] X[0.96,l] X[1.39,l] X[0.61,l]}}
     \textbf{Tecnología} & \textbf{Capa} & \textbf{Rol} & \textbf{Versión} \\
-    \midrule
-    \multicolumn{4}{@{}l}{\textit{ERP existente}} \\
+    \SetCell[c=4]{l} \textit{ERP existente} & & & \\
     NestJS (Express, Node) & Backend del ERP & API y módulos de negocio; integración con FastAPI y API para Power BI; consumido por el servidor MCP & 11 (Node 22) \\
     Prisma & Backend del ERP & ORM y migraciones & 7.8 \\
     PostgreSQL & Base OLTP del ERP & Datos transaccionales; fuente de inferencia & 17 \\
     Angular (SSR) & Frontend del ERP & Interfaz de usuario y dashboard de predicciones & 21.2 \\
     PrimeNG / Tailwind & Frontend del ERP & Componentes de interfaz y estilos & 21.1 / 4.1 \\
     PHP + MySQL & Portal anterior & Fuente del histórico (entrenamiento) & MySQL 5.7 \\
-    \midrule
-    \multicolumn{4}{@{}l}{\textit{Módulo predictivo (por implementar)}} \\
+    \SetCell[c=4]{l} \textit{Módulo predictivo (por implementar)} & & & \\
     Python (NumPy, pandas) & Pipeline y modelos & Lenguaje del ETL, exploración y modelado & Cap.~IV \\
     DuckDB & Silver & Motor OLAP embebido; lee MySQL, PostgreSQL y archivos & Cap.~IV \\
     Polars & Gold & Ingeniería de características & Cap.~IV \\
     Scikit-learn / XGBoost & Modelos & Pipelines, validación cruzada y \textit{gradient boosting} & Cap.~IV \\
     FastAPI (Starlette, Pydantic, Uvicorn) & Servicio de predicción & Endpoint de inferencia con contrato OpenAPI & Cap.~IV \\
-    \midrule
-    \multicolumn{4}{@{}l}{\textit{Transversales}} \\
+    \SetCell[c=4]{l} \textit{Transversales} & & & \\
     Keycloak & Identidad & SSO con OAuth 2.0 / OpenID Connect (sección 2.8) & Cap.~IV \\
     Servidor MCP & Integración con IA & Tools sobre el ERP y las predicciones (sección 2.9) & Cap.~IV \\
     Power BI & Inteligencia de negocios & Reportes descriptivos vía API NestJS (sección 2.10) & --- \\
     Docker / Docker Compose & Despliegue & Contenedores en servidor propio; migración a nube como trabajo futuro & --- \\
-    \bottomrule
-  \end{tabular}
-  \fuente{Elaboración propia a partir de la documentación y los repositorios del ERP de ISI Mustang.}
+  \end{tblr}
+  \fuente{Elaboración propia, 2026, en base a la documentación y los repositorios del ERP de ISI Mustang.}
 \end{table}

@@ -1,0 +1,126 @@
+% 3.3 — fuentes: objetivos (1.3.2), documentos de requerimientos del ERP (erp-isi-mustang/docs/documentation/complete/02-base-URS-TO-BE.md),
+% relevamiento AS-IS (docs/documentation/90-pendientes-y-brechas.md), hallazgos de 3.1 (documento/12-necesidades-cap3.md) y brief §2, §4, §6.
+\subsection{REQUERIMIENTOS DEL SISTEMA}
+
+Los requerimientos del sistema se derivan de cuatro fuentes. La primera son los objetivos específicos del trabajo (sección 1.3.2), que se citan como OE-1 a OE-7. La segunda es el relevamiento de requerimientos del ERP que la empresa consolidó en agosto de 2026 como base para su especificación de requerimientos de usuario \parencite{ISIMustang2026Requerimientos}; distingue lo que el sistema hace hoy de lo que el negocio confirmó como comportamiento vigente, y se cita como REQ seguido del apartado. La tercera es el relevamiento del código actual del ERP, que documenta defectos y brechas, y la cuarta son los hallazgos del análisis de datos históricos (sección 3.1) y del análisis de procesos del portal anterior (sección 3.2). No se incluyen requerimientos obtenidos por entrevistas: de acuerdo con la metodología (sección 1.5), las entrevistas a usuarios clave se aplican en la etapa de evaluación y validación, y lo que surja de ellas se incorpora en ese momento.
+
+Cada requerimiento lleva un identificador estable (RF-\textit{nn} para los funcionales y RNF-\textit{nn} para los no funcionales), una prioridad y su origen. La prioridad es \emph{esencial} cuando el requerimiento es condición para cumplir un objetivo específico, y \emph{deseable} cuando mejora el sistema sin ser condición de ninguno. El identificador no depende del incremento en que se construye el requerimiento, de modo que un ajuste en la planificación de los incrementos no obliga a renumerar.
+
+\subsubsection{REQUERIMIENTOS FUNCIONALES}
+
+Los requerimientos funcionales se agrupan en cinco bloques que corresponden a los cinco incrementos del desarrollo (sección 2.6): procesos y calidad de datos del ERP, autenticación centralizada, pipeline de datos y modelos, servicio de predicción y tablero, e integraciones con Power BI y MCP\@.
+
+El primer bloque (cuadro~\ref{tab:rf-erp}) reúne lo que falta en el ERP para que sus datos sirvan al módulo predictivo. El ERP ya calcula el ejecutado del presupuesto a partir de las provisiones, las órdenes de compra y las rendiciones de viáticos, pero toma las compras en el momento en que se emite la orden, con el importe estimado de la requisición, porque todavía no registra la factura del proveedor. El relevamiento de requerimientos define, en cambio, que la orden emitida es costo comprometido y que el ejecutado corresponde a la factura recibida (REQ~10.7 y 12.3). Mientras esa diferencia no se cierre, el sobrecosto que se calculara sobre los proyectos activos no sería comparable con el costo real del histórico. Del mismo modo, el análisis de datos mostró que en el portal anterior no quedaron registradas las causas de las desviaciones; exigirlas en las certificaciones que superan el umbral (REQ~13.9) permite que el ERP nuevo acumule esa información desde su puesta en producción.
+
+\begin{table}[H]
+  \centering
+  \caption{Requerimientos funcionales: procesos y calidad de datos del ERP}\label{tab:rf-erp}
+  \begin{tblr}{colspec={X[0.4,l] X[2.42,l] X[0.53,l] X[0.66,l]}}
+    \textbf{ID} & \textbf{Requerimiento} & \textbf{Prioridad} & \textbf{Origen} \\
+    RF-01 & Reimplementar en el ERP los procesos del portal anterior priorizados en la sección 3.2 & Esencial & OE-1, OE-4, sección 3.2 \\
+    RF-02 & Registrar en la orden de compra los datos de la factura del proveedor: número, fecha, importe real, moneda, estado de pago y fecha de pago & Esencial & REQ~10.6 \\
+    RF-03 & Calcular el ejecutado de materiales, logística y subcontratos a partir de la factura recibida, y conservar la orden emitida como costo comprometido & Esencial & REQ~10.7, 12.3 \\
+    RF-04 & Exigir causa y mitigación en las certificaciones cuya desviación supere un umbral parametrizable (inicial: 10\,\%) & Esencial & REQ~13.9, sección 3.1 \\
+    RF-05 & Reconstruir el estado del presupuesto de un centro de costo al cierre de cualquier mes a partir de la bitácora & Esencial & REQ~12.7, OE-5 \\
+  \end{tblr}
+  \fuente{Elaboración propia, 2026.}
+\end{table}
+
+El segundo bloque (cuadro~\ref{tab:rf-auth}) reemplaza la autenticación propia del ERP por Keycloak, según lo fundamentado en la sección 2.8. El control de acceso del ERP se compone de roles globales y de roles por centro de costo (REQ~2.1); la migración cambia quién autentica, no quién puede ver o hacer qué, por lo que esos dos ejes se conservan.
+
+\begin{table}[H]
+  \centering
+  \caption{Requerimientos funcionales: autenticación centralizada}\label{tab:rf-auth}
+  \begin{tblr}{colspec={X[0.4,l] X[2.42,l] X[0.53,l] X[0.66,l]}}
+    \textbf{ID} & \textbf{Requerimiento} & \textbf{Prioridad} & \textbf{Origen} \\
+    RF-06 & Autenticar a los usuarios del ERP mediante Keycloak con el flujo de código de autorización y PKCE, en reemplazo de la emisión de tokens propia del backend & Esencial & OE-4 \\
+    RF-07 & Asociar cada identidad de Keycloak con su usuario del ERP y conservar los roles globales y los roles por centro de costo & Esencial & OE-4, REQ~2.1 \\
+    RF-08 & Emitir desde Keycloak las credenciales con las que se autentican los servicios entre sí y los clientes de Power BI y del servidor MCP & Esencial & OE-4, OE-6 \\
+    RF-09 & Cerrar la sesión del usuario en todos los componentes y aplicar la expiración de sesión definida por Keycloak & Esencial & REQ~2.4 \\
+    RF-10 & Mantener la recuperación de contraseña por correo, ahora gestionada por Keycloak & Deseable & REQ~2.4 \\
+  \end{tblr}
+  \fuente{Elaboración propia, 2026.}
+\end{table}
+
+El tercer bloque (cuadro~\ref{tab:rf-pipeline}) corresponde al pipeline y a los modelos. Las unidades de análisis responden a lo encontrado en la sección 3.1: la desviación se predice por certificación, que es la única unidad con volumen suficiente en el histórico, y el sobrecosto y el retraso se predicen por proyecto. El requerimiento RF-13 evita que el modelo aprenda de información que no existía en el momento de la predicción.
+
+\begin{table}[H]
+  \centering
+  \caption{Requerimientos funcionales: pipeline de datos y modelos}\label{tab:rf-pipeline}
+  \begin{tblr}{colspec={X[0.4,l] X[2.42,l] X[0.53,l] X[0.66,l]}}
+    \textbf{ID} & \textbf{Requerimiento} & \textbf{Prioridad} & \textbf{Origen} \\
+    RF-11 & Copiar a la capa Bronze, sin modificarlos, los datos del portal anterior (MySQL), del ERP nuevo (PostgreSQL) y de las planillas de control & Esencial & OE-5 \\
+    RF-12 & Unificar en la capa Silver los dos esquemas y las planillas en un modelo común de variables: centros de costo, bolsas, certificaciones, horas, compras y viáticos, en moneda base & Esencial & OE-5, sección 3.1 \\
+    RF-13 & Construir en la capa Gold las tablas de características a una fecha de corte, usando solo información registrada hasta esa fecha & Esencial & OE-5 \\
+    RF-14 & Entrenar un modelo de clasificación que prediga, por certificación, si se desviará del plan & Esencial & OE-5 \\
+    RF-15 & Entrenar un modelo que prediga, por proyecto, el sobrecosto respecto del vendido & Esencial & OE-5 \\
+    RF-16 & Entrenar un modelo que prediga, por proyecto, el retraso respecto de la fecha de cierre planificada & Esencial & OE-5 \\
+    RF-17 & Evaluar cada modelo con validación cruzada y las métricas de la sección 2.2, y registrar métricas, datos y parámetros de cada versión & Esencial & OE-5, OE-7 \\
+    RF-18 & Reentrenar los modelos incorporando los proyectos cerrados en el ERP nuevo & Deseable & Sección 1.6 \\
+  \end{tblr}
+  \fuente{Elaboración propia, 2026.}
+\end{table}
+
+El cuarto bloque (cuadro~\ref{tab:rf-prediccion}) lleva las predicciones al usuario. Las predicciones se muestran en el tablero del ERP y no en Power BI; el acceso a ellas sigue las mismas reglas que el presupuesto del proyecto, que ven sus miembros y Gerencia (REQ~12.6).
+
+\begin{table}[H]
+  \centering
+  \caption{Requerimientos funcionales: servicio de predicción y tablero}\label{tab:rf-prediccion}
+  \begin{tblr}{colspec={X[0.4,l] X[2.42,l] X[0.53,l] X[0.66,l]}}
+    \textbf{ID} & \textbf{Requerimiento} & \textbf{Prioridad} & \textbf{Origen} \\
+    RF-19 & Exponer un servicio que devuelva, para un proyecto activo, las predicciones de los tres casos con su valor o probabilidad, su nivel de semáforo y la versión del modelo & Esencial & OE-6 \\
+    RF-20 & Acompañar cada predicción con las variables que más contribuyeron a ella & Esencial & OE-6 \\
+    RF-21 & Consultar las predicciones desde el ERP respetando la pertenencia del usuario al centro de costo, con visibilidad total para Gerencia & Esencial & OE-6, REQ~12.6 \\
+    RF-22 & Mostrar en el tablero un semáforo de riesgo por proyecto para los proyectos a los que el usuario tiene acceso & Esencial & OE-6 \\
+    RF-23 & Mostrar el detalle de un proyecto con sus predicciones, su explicación y su evolución en el tiempo & Esencial & OE-6 \\
+    RF-24 & Notificar al responsable del centro de costo cuando una predicción pasa a nivel rojo & Deseable & REQ~4.3 \\
+  \end{tblr}
+  \fuente{Elaboración propia, 2026.}
+\end{table}
+
+El quinto bloque (cuadro~\ref{tab:rf-integraciones}) define las integraciones. Los reportes y las herramientas que se listan son la propuesta inicial; su diseño detallado se desarrolla en la sección 3.4.
+
+\begin{table}[H]
+  \centering
+  \caption{Requerimientos funcionales: integraciones con Power BI y MCP}\label{tab:rf-integraciones}
+  \begin{tblr}{colspec={X[0.4,l] X[2.42,l] X[0.53,l] X[0.66,l]}}
+    \textbf{ID} & \textbf{Requerimiento} & \textbf{Prioridad} & \textbf{Origen} \\
+    RF-25 & Exponer desde el ERP una API de datos descriptivos, sin predicciones, para cartera de proyectos, presupuesto contra ejecutado, certificaciones y cobranza, y horas por centro de costo & Esencial & OE-6 \\
+    RF-26 & Publicar en Power BI cuatro reportes descriptivos alimentados por esa API: cartera de proyectos, presupuesto contra ejecutado, certificaciones y cobranza, y horas por centro de costo & Esencial & OE-6 \\
+    RF-27 & Exponer en el servidor MCP herramientas para consultar un centro de costo, comparar vendido y ejecutado por bolsa, listar las certificaciones de un proyecto, obtener la predicción de riesgo de un proyecto y listar los proyectos en nivel rojo & Esencial & OE-6 \\
+    RF-28 & Limitar las herramientas del servidor MCP a consultas, sin operaciones que modifiquen datos del ERP & Esencial & OE-6, sección 1.6 \\
+  \end{tblr}
+  \fuente{Elaboración propia, 2026.}
+\end{table}
+
+\subsubsection{REQUERIMIENTOS NO FUNCIONALES}
+
+Los requerimientos no funcionales (cuadros~\ref{tab:rnf} y~\ref{tab:rnf-operacion}) restringen cómo se construye y opera el sistema. Dos de ellos derivan de condiciones propias del trabajo. La confidencialidad responde a que el documento se deposita en la biblioteca de la universidad y a que el ERP maneja nómina y datos personales: el costo de servicios de un proyecto se usa agregado, sin exponer el sueldo de cada persona (REQ~9.2). El despliegue responde a que el objetivo es dejar el sistema completo en operación en el servidor de la empresa, no una demostración local. El tiempo de respuesta de RNF-06 es un valor de diseño inicial, que se contrasta en la evaluación (sección 4.6).
+
+\begin{table}[H]
+  \centering
+  \caption{Requerimientos no funcionales: seguridad y datos}\label{tab:rnf}
+  \begin{tblr}{colspec={X[0.39,l] X[0.8,l] X[1.72,l] X[1.09,l]}}
+    \textbf{ID} & \textbf{Atributo} & \textbf{Requerimiento} & \textbf{Origen} \\
+    RNF-01 & Seguridad & NestJS, FastAPI y el servidor MCP validan la firma, la expiración, el emisor y la audiencia de cada token emitido por Keycloak antes de atender una petición & OE-4, sección 2.8 \\
+    RNF-02 & Seguridad & Cada cliente recibe solo los permisos que necesita: Power BI y el servidor MCP acceden en modo de solo lectura, y el servidor MCP no reenvía a otros servicios el token que recibe & OE-6, sección 2.9 \\
+    RNF-03 & Confidencialidad & Ninguna capa del pipeline, reporte de Power BI ni herramienta MCP expone remuneraciones individuales ni datos personales de empleados; el costo de servicios se usa agregado por centro de costo & REQ~9.2, sección 1.6 \\
+    RNF-04 & Integridad de las fuentes & El pipeline accede a las fuentes en modo de solo lectura: no escribe en el ERP ni migra el histórico al esquema nuevo & Sección 1.6 \\
+    RNF-05 & Consistencia & Los montos se comparan en moneda base, convertidos con el tipo de cambio de la fecha de cada operación & REQ~4.1, 12.8 \\
+  \end{tblr}
+  \fuente{Elaboración propia, 2026.}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{Requerimientos no funcionales: operación del sistema}\label{tab:rnf-operacion}
+  \begin{tblr}{colspec={X[0.39,l] X[0.8,l] X[1.72,l] X[1.09,l]}}
+    \textbf{ID} & \textbf{Atributo} & \textbf{Requerimiento} & \textbf{Origen} \\
+    RNF-06 & Rendimiento & El servicio de predicción responde la consulta de un proyecto en menos de dos segundos & Valor de diseño \\
+    RNF-07 & Despliegue & Todos los componentes (Keycloak, PostgreSQL, NestJS, Angular, FastAPI y servidor MCP) se despliegan en contenedores Docker en el servidor propio de la empresa & OE-6, sección 1.6 \\
+    RNF-08 & Trazabilidad & Cada predicción queda registrada con el proyecto, la fecha de corte, la versión del modelo y el resultado & OE-7 \\
+    RNF-09 & Reproducibilidad & El pipeline puede ejecutarse de nuevo desde la capa Bronze y, con los mismos datos y parámetros, produce los mismos modelos & OE-5, OE-7 \\
+    RNF-10 & Mantenibilidad & Los umbrales del semáforo y de desviación son parámetros configurables, y un modelo nuevo se publica sin cambiar el contrato del servicio de predicción & REQ~12.11, 13.9 \\
+  \end{tblr}
+  \fuente{Elaboración propia, 2026.}
+\end{table}

@@ -83,7 +83,7 @@ nuevo, módulos sin datos suficientes.
 | Identidad | Keycloak (OAuth 2.0 / OpenID Connect) |
 | Integración con IA | Servidor MCP (Model Context Protocol) |
 | BI | Power BI (vía API NestJS) |
-| Despliegue | Docker. **Fase 1: servidor propio** de la empresa. **Más adelante: migración a la nube (Contabo)**, que va en recomendaciones o trabajo futuro |
+| Despliegue | Docker. **Fase 1: servidor propio** de la empresa. **Objetivo final: todo el sistema desplegado** (Keycloak, PostgreSQL, NestJS, Angular, FastAPI, MCP), no solo demostrado en local (confirmado 2026-09-17). **Más adelante: migración a la nube (Contabo)**, que va en recomendaciones o trabajo futuro |
 
 ## 5. Metodología
 

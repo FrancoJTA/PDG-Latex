@@ -13,6 +13,7 @@
 *.xdv
 *.lof
 *.lot
+*.lotb
 
 # ── Confidencial del repo ────────────────────────────────────────
 *.sql

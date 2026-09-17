@@ -1,0 +1,94 @@
+% 3.2 — fuentes: manual del portal anterior (erp-isi-mustang/docs/old-manual/manual.md y 05-proyectos.md),
+% requerimiento vigente de la empresa (docs/documentation/complete/02-base-URS-TO-BE.md, citado como REQ) y código de
+% erp-isi-mustang y portal-erp (main, verificado el 2026-09-17). Los docs AS-IS de docs/documentation/ están desactualizados: no usar.
+\subsection{ANÁLISIS DE PROCESOS DEL PORTAL ANTERIOR}
+
+Este análisis responde al primer objetivo específico: identificar qué procesos del portal anterior faltan en el ERP nuevo y qué defectos afectan la calidad de los datos. Parte de dos fuentes. La primera es el manual de usuario del Portal ISIMustang Bolivia \parencite{ISIMustang2020Manual}, publicado por la empresa en 2020 como un blog en \url{https://manualportalbolivia.blogspot.com/}, con una entrada por módulo, que describe cada proceso tal como lo operan los usuarios. La segunda es el código fuente del ERP nuevo, revisado en septiembre de 2026, contra el que se verificó el estado de cada proceso. La documentación técnica del ERP no se usó para establecer ese estado porque, en varios puntos, describe brechas que el código ya había resuelto. Las decisiones de la empresa sobre cómo debe funcionar cada proceso se toman del relevamiento de requerimientos que la empresa consolidó en agosto de 2026 \parencite{ISIMustang2026Requerimientos}, citado en adelante como REQ seguido del apartado.
+
+\subsubsection{RELEVAMIENTO DE PROCESOS DEL PORTAL ANTERIOR}
+
+El manual organiza el portal en módulos de horas, requisiciones y compras, viáticos, proyectos, áreas de estructura y permisos. Los cuadros~\ref{tab:procesos-portal} y~\ref{tab:procesos-portal-gestion} listan sus procesos y su estado en el ERP nuevo, con cuatro valores: \emph{implementado}, cuando el ERP nuevo cubre el proceso; \emph{parcial}, cuando lo cubre con una diferencia que afecta sus datos; \emph{reemplazado}, cuando la empresa decidió resolverlo de otro modo; y \emph{fuera de alcance}.
+
+\begin{table}[H]
+  \centering
+  \caption{Procesos operativos del portal anterior y su estado en el ERP nuevo}\label{tab:procesos-portal}
+  \small
+  \begin{tblr}{colspec={X[1.3,l] X[0.44,l] X[0.61,l] X[1.65,l]}}
+    \textbf{Proceso del portal} & \textbf{Manual} & \textbf{Estado} & \textbf{En el ERP nuevo} \\
+    Carga de horas por centro de costo y tarea & 01 & Implementado & Borrador, envío y aprobación; horas de oficina y de campo, equivalentes a las HHC y PEMC del portal \\
+    Consulta de horas por persona o proyecto & 04, 05.4, 06.3 & Implementado & Listados filtrables por centro de costo y por persona \\
+    Pedido de requisición con aprobación & 02 & Implementado & Requisición contra centro de costo y bolsa, con motor de aprobaciones \\
+    Administración de requisiciones y emisión de la orden de compra & 02.1 & Parcial & Órdenes de compra con proveedor y recepción parcial; no registran la factura del proveedor, por lo que el ejecutado de compras se toma de la orden emitida \\
+    Pedido y administración de viáticos & 03, 03.2 & Implementado & Solicitud, aprobación del responsable y pago del anticipo por Compras \\
+    Política de viáticos: topes de gasto y plazo de rendición & 03.1 & Reemplazado & Sin topes ni plazos formales (REQ~11.3) \\
+    Rendición de viáticos & 03.3 & Implementado & Rendición en el sistema, con líneas en distintas monedas convertidas por separado; en el portal era una planilla externa \\
+  \end{tblr}
+  \fuente{Elaboración propia, 2026, en base a \textcite{ISIMustang2020Manual} y al código del ERP nuevo.}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{Procesos de gestión de proyectos y estructura del portal anterior y su estado en el ERP nuevo}\label{tab:procesos-portal-gestion}
+  \small
+  \begin{tblr}{colspec={X[1.3,l] X[0.44,l] X[0.61,l] X[1.65,l]}}
+    \textbf{Proceso del portal} & \textbf{Manual} & \textbf{Estado} & \textbf{En el ERP nuevo} \\
+    Asignación de personas y permisos en el proyecto & 05.1 & Implementado & Miembros del centro de costo con rol de responsable o de miembro \\
+    Seguimiento y control mensual: planificado frente a ejecutado & 05, 05.2 & Parcial & Flujo de caja con vendido, seguimiento y ejecutado por bolsa y mes; hereda la diferencia de compras señalada arriba \\
+    Indicadores de margen y desvíos de costo e ingreso & 05, 05.2 & Implementado & Margen bruto y desvíos por bolsa con semáforo de 5 y 10\,\% \\
+    Avance del proyecto y avance por actividad con escalas de valor ganado & 05, 05.5 & Reemplazado & Sin fórmula de avance por decisión de la empresa (REQ~6.6); las tareas registran solo horas planificadas \\
+    Publicación mensual del flujo de caja & 05.2 & Reemplazado & Bitácora de cambios de cada línea (REQ~12.1); falta consultar el presupuesto tal como estaba a una fecha (REQ~12.7) \\
+    Seguimiento de requisiciones y viáticos del proyecto & 05.3 & Implementado & Listados filtrables por centro de costo \\
+    Facturación de la orden de compra y de adicionales & 05 & Parcial & Certificaciones con registro y cobro; no exigen causa ni mitigación cuando se desvían (REQ~13.9) \\
+    Seguimiento y control de áreas de estructura & 06, 06.2, 06.3 & Implementado & Centros de costo de tipo estructura, con el mismo presupuesto \\
+    Rubros e ítems de gasto & 06.1, 12 & Reemplazado & Cuatro bolsas fijas: servicios, materiales, logística y subcontratos (REQ~12.2) \\
+    Permisos por módulo & 11 & Implementado & Roles globales y roles por centro de costo (REQ~2.1) \\
+    Consulta de proyectos históricos & 11 & Fuera de alcance & El histórico no se migra al ERP nuevo (sección 1.6) \\
+  \end{tblr}
+  \fuente{Elaboración propia, 2026, en base a \textcite{ISIMustang2020Manual} y al código del ERP nuevo.}
+\end{table}
+
+El relevamiento muestra que el ERP nuevo cubre la operación diaria del portal: horas, requisiciones, órdenes de compra, viáticos, rendiciones, presupuesto por centro de costo y permisos. Los procesos reemplazados responden a decisiones explícitas de la empresa y no a omisiones: la publicación mensual del flujo de caja se sustituyó por una bitácora, los rubros contables por cuatro bolsas fijas, y los topes de viáticos y la fórmula de avance se eliminaron o se difirieron. Los tres procesos parciales comparten un rasgo: el ERP nuevo registra la operación, pero no el dato que cierra el ciclo, ya sea la factura del proveedor, la causa del desvío o el estado del plan en una fecha pasada.
+
+\subsubsection{PROCESOS A REIMPLEMENTAR EN EL ERP}
+
+Para decidir qué se reimplementa se aplicaron dos criterios, en este orden. El primero es que el proceso produzca datos que el módulo predictivo necesita como variable o como resultado a predecir; el segundo, que la empresa lo haya confirmado como requerimiento vigente. Un proceso reemplazado por decisión de la empresa no se reimplementa, aunque existiera en el portal. El cuadro~\ref{tab:procesos-reimplementar} presenta el resultado.
+
+\begin{table}[H]
+  \centering
+  \caption{Procesos a reimplementar en el ERP nuevo}\label{tab:procesos-reimplementar}
+  \begin{tblr}{colspec={X[0.91,l] X[1.37,l] X[0.72,l]}}
+    \textbf{Proceso} & \textbf{Dato que aporta al módulo predictivo} & \textbf{Requerimiento} \\
+    Registro de la factura del proveedor y ejecutado de compras por factura & Costo real de materiales, logística y subcontratos, comparable con el costo contable del histórico; base del sobrecosto & RF-02, RF-03; REQ~10.6, 10.7 \\
+    Causa y mitigación en certificaciones desviadas & Registro de causas, ausente en el histórico, para ampliar el análisis en futuros reentrenamientos & RF-04; REQ~13.9 \\
+    Consulta del presupuesto a una fecha & Seguimiento vigente en cada fecha de corte, sin usar información posterior; equivale a las fotos mensuales del portal & RF-05; REQ~12.7 \\
+  \end{tblr}
+  \fuente{Elaboración propia, 2026.}
+\end{table}
+
+Quedan sin reimplementar el avance por actividad con escalas de valor ganado, porque la empresa decidió no definir todavía una fórmula de avance, y la consulta de proyectos históricos, porque el histórico permanece en el portal anterior. En consecuencia, el módulo predictivo no usa variables de avance físico: el avance se aproxima con el tiempo transcurrido, el costo ejecutado y lo certificado frente a lo planificado, como se describe en la sección 3.4.
+
+\subsubsection{DEFECTOS Y BRECHAS QUE AFECTAN LA CALIDAD DE LOS DATOS}
+
+Los defectos que interesan a este trabajo son los que alteran una variable del módulo predictivo o su resultado a predecir. Se presentan en dos grupos, según el sistema en que se originan (cuadro~\ref{tab:defectos-datos}), y se clasifican con las dimensiones de calidad de la sección 2.3.
+
+En el portal anterior los defectos provienen de cómo se operaron sus procesos durante más de diez años: el plan se sobrescribía al replanificar, los proyectos se cerraban administrativamente en fechas masivas y la moneda de los asientos contables no se registró de forma uniforme en todos los períodos. Estos defectos ya no pueden corregirse en la fuente; se tratan en la capa Silver del pipeline, y su magnitud se mide en la sección 3.1. En el ERP nuevo, en cambio, los defectos pueden corregirse antes de que produzcan datos: las brechas de la sección anterior se resuelven con los requerimientos RF-02 a RF-05, y de los defectos que la empresa había relevado en el cálculo de costos, la conversión de monedas en las rendiciones ya está corregida en el código, mientras que la imputación de ausencias al costo y el subsidio sin moneda no aplican a la operación actual.
+
+\begin{table}[H]
+  \centering
+  \caption{Defectos que afectan los datos del módulo predictivo}\label{tab:defectos-datos}
+  \small
+  \begin{tblr}{colspec={X[1.3,l] X[0.61,l] X[0.87,l] X[1.22,l]}}
+    \textbf{Defecto} & \textbf{Dimensión} & \textbf{Dato afectado} & \textbf{Tratamiento} \\
+    \SetCell[c=4]{l} \textit{Portal anterior} & & & \\
+    La fecha planificada de cada certificación se sobrescribe al replanificar & Exactitud & Desvío en certificaciones y retraso & Fecha original tomada de la primera foto mensual del flujo de caja (Silver) \\
+    Fecha de cierre administrativa, asignada en lotes & Exactitud & Retraso en la fecha de cierre & Fin real a partir de la última certificación (Silver) \\
+    Moneda de los asientos contables no uniforme entre períodos & Consistencia & Costo ejecutado & Conversión con control de ingresos contra el monto de la orden de compra (Silver) \\
+    Horas sin centro de costo asignable & Completitud & Horas y costo de servicios & Variable usada solo donde su cobertura lo permite (sección 3.1) \\
+    Causas de desviación no registradas & Completitud & Causa del desvío & Sin tratamiento posible; queda como limitación \\
+    \SetCell[c=4]{l} \textit{ERP nuevo} & & & \\
+    Ejecutado de compras tomado de la orden emitida, sin factura & Exactitud & Sobrecosto & RF-02 y RF-03 \\
+    Certificación desviada sin causa ni mitigación & Completitud & Causa del desvío & RF-04 \\
+    Sin consulta del presupuesto a una fecha pasada & Oportunidad & Variables a fecha de corte & RF-05 \\
+  \end{tblr}
+  \fuente{Elaboración propia, 2026.}
+\end{table}

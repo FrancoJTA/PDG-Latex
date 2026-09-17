@@ -15,25 +15,21 @@ El cuadro~\ref{tab:oauth-proyecto} traslada estos roles y flujos al proyecto. El
 \begin{table}[H]
   \centering
   \caption{Roles y flujos de OAuth 2.0 / OpenID Connect y su uso en el proyecto}\label{tab:oauth-proyecto}
-  \begin{tabular}{@{}>{\RaggedRight\arraybackslash}p{0.22\textwidth}>{\RaggedRight\arraybackslash}p{0.34\textwidth}>{\RaggedRight\arraybackslash}p{0.38\textwidth}@{}}
-    \toprule
+  \begin{tblr}{colspec={X[0.7,l] X[1.09,l] X[1.21,l]}}
     \textbf{Rol o flujo} & \textbf{Definición} & \textbf{En el proyecto} \\
-    \midrule
-    \multicolumn{3}{@{}l}{\textit{Roles}} \\
+    \SetCell[c=3]{l} \textit{Roles} & & \\
     Servidor de autorización / OP & Autentica al usuario y emite tokens de acceso e identidad & Keycloak (véase 2.8.2) \\
     Propietario del recurso & Usuario final que concede el acceso & Personal de ISI Mustang que usará el ERP \\
     Cliente público & Aplicación en navegador o nativa, sin secreto & Frontend Angular del ERP \\
     Cliente confidencial & Aplicación en servidor que guarda sus credenciales & NestJS al invocar a FastAPI \\
     Servidor de recursos & Acepta tokens y sirve recursos protegidos & API NestJS, servicio FastAPI y servidor MCP, cada uno con audiencia propia \\
-    \midrule
-    \multicolumn{3}{@{}l}{\textit{Flujos}} \\
+    \SetCell[c=3]{l} \textit{Flujos} & & \\
     Código de autorización + PKCE & Inicio de sesión interactivo de personas & Angular ante Keycloak \\
     Credenciales de cliente & Acceso máquina a máquina, solo clientes confidenciales & NestJS hacia FastAPI \\
     Implícito & Token emitido directamente al navegador; desaconsejado & No se usa \\
     ROPC & El cliente recibe usuario y contraseña; no debe usarse & No se usa; el inicio de sesión propio del ERP, equivalente en sus propiedades, se sustituye por código + PKCE \\
-    \bottomrule
-  \end{tabular}
-  \fuente{Elaboración propia a partir de \textcite{RFC6749}, \textcite{RFC9700} y \textcite{OIDCCore2014}.}
+  \end{tblr}
+  \fuente{Elaboración propia, 2026, en base a \textcite{RFC6749}, \textcite{RFC9700} y \textcite{OIDCCore2014}.}
 \end{table}
 
 \subsubsection{KEYCLOAK}

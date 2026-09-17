@@ -27,8 +27,8 @@ El diagrama de Ishikawa de la Figura~\ref{fig:c1-ishikawa} sintetiza las causas 
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\textwidth]{imagenes/ishikawa.png}
   \caption{Diagrama de Ishikawa: causas de la gestión reactiva de riesgos en los proyectos EPC de ISI Mustang}\label{fig:c1-ishikawa}
+  \includegraphics[width=\textwidth]{imagenes/ishikawa.png}
   \fuente{Elaboración propia, 2026.}
 \end{figure}
 
@@ -38,10 +38,8 @@ El análisis FODA del Cuadro~\ref{tab:c1-foda} resume la situación de la empres
   \centering
   \small
   \caption{Análisis FODA de ISI Mustang Bolivia respecto a la explotación predictiva de los datos de su ERP}\label{tab:c1-foda}
-  \renewcommand{\arraystretch}{1.4}
-  \begin{tabular}{|>{\raggedright\arraybackslash}p{0.46\textwidth}|>{\raggedright\arraybackslash}p{0.46\textwidth}|}
-    \hline
-    \textbf{Fortalezas} & \textbf{Oportunidades} \\[2pt]
+  \begin{tblr}{colspec={X[1,l] X[1,l]}}
+    \textbf{Fortalezas} & \textbf{Oportunidades} \\
     $\bullet$ Más de diez años de datos históricos operativos acumulados en el portal anterior. \newline
     $\bullet$ Registro del avance facturado frente a lo planificado que, de confirmarse en el análisis de datos, permitiría reconstruir las desviaciones ocurridas. \newline
     $\bullet$ Sistema de información propio, con control total sobre el código y los datos operativos.
@@ -49,8 +47,7 @@ El análisis FODA del Cuadro~\ref{tab:c1-foda} resume la situación de la empres
     $\bullet$ Alta demanda de gestión proactiva en proyectos de ingeniería del sector energético. \newline
     $\bullet$ Madurez y disponibilidad de técnicas de aprendizaje automático para datos tabulares. \newline
     $\bullet$ Mejora del posicionamiento competitivo en la estimación y adjudicación de contratos. \\
-    \hline
-    \textbf{Debilidades} & \textbf{Amenazas} \\[2pt]
+    \SetRow{bg=gray!20,font=\bfseries} \textbf{Debilidades} & \textbf{Amenazas} \\
     $\bullet$ Posibles inconsistencias en el registro histórico de información. \newline
     $\bullet$ Histórico y proyectos activos en dos sistemas con esquemas distintos. \newline
     $\bullet$ Ausencia de una cultura de análisis de datos en la organización. \newline
@@ -59,8 +56,7 @@ El análisis FODA del Cuadro~\ref{tab:c1-foda} resume la situación de la empres
     $\bullet$ Resistencia al cambio por parte de los usuarios ante nuevas herramientas de gestión. \newline
     $\bullet$ Cambios en los procesos operativos que reduzcan la vigencia de los modelos desarrollados. \newline
     $\bullet$ Baja adopción si los resultados no se comunican de forma clara a los usuarios clave. \\
-    \hline
-  \end{tabular}
+  \end{tblr}
   \fuente{Elaboración propia, 2026.}
 \end{table}
 
@@ -68,6 +64,7 @@ El árbol del problema de la Figura~\ref{fig:c1-arbol} ordena esta situación en
 
 \begin{figure}[H]
   \centering
+  \caption{Árbol del problema: causas y efectos de la gestión reactiva de desviaciones y riesgos en los proyectos de ISI Mustang}\label{fig:c1-arbol}
   \resizebox{\textwidth}{!}{%
   \begin{tikzpicture}[
       efecto/.style   = {rectangle, rounded corners=2pt, draw=red!55!black, fill=red!8,
@@ -108,7 +105,6 @@ El árbol del problema de la Figura~\ref{fig:c1-arbol} ordena esta situación en
     \draw[arrow] (p.north) -- (e4.south);
   \end{tikzpicture}%
   }
-  \caption{Árbol del problema: causas y efectos de la gestión reactiva de desviaciones y riesgos en los proyectos de ISI Mustang}\label{fig:c1-arbol}
   \fuente{Elaboración propia, 2026.}
 \end{figure}
 
@@ -166,13 +162,21 @@ El presente trabajo corresponde a una investigación aplicada, dado que utiliza 
 
 El trabajo adopta un enfoque mixto, dado que combina la recolección y el análisis de datos cuantitativos, los registros históricos del sistema de información, con datos cualitativos provenientes de las entrevistas a usuarios clave. Para operacionalizar este enfoque se emplean los siguientes métodos.
 
-\emph{Análisis documental.} Se aplica a la revisión de la literatura científica sobre aprendizaje automático, analítica predictiva, ingeniería de datos, sistemas ERP, gestión de identidad y protocolos de integración, con el fin de establecer los fundamentos teóricos del trabajo, y a la documentación del portal anterior y del ERP nuevo, para identificar los procesos pendientes de reimplementar y los defectos que afectan a los datos.
+\paragraph{Análisis documental}
 
-\emph{Histórico-lógico.} Se aplica sobre los datos acumulados durante más de diez años de operación, con el fin de identificar patrones y tendencias en el comportamiento de los proyectos a lo largo del tiempo y de reconstruir, a partir de ellos, las desviaciones ocurridas.
+Se aplica a la revisión de la literatura científica sobre aprendizaje automático, analítica predictiva, ingeniería de datos, sistemas ERP, gestión de identidad y protocolos de integración, con el fin de establecer los fundamentos teóricos del trabajo, y a la documentación del portal anterior y del ERP nuevo, para identificar los procesos pendientes de reimplementar y los defectos que afectan a los datos.
 
-\emph{Modelación.} Se emplea para la construcción de los modelos de aprendizaje automático que representan el comportamiento de las variables operativas y generan las predicciones, y para el diseño de la arquitectura del sistema.
+\paragraph{Histórico-lógico}
 
-\emph{Enfoque de sistemas.} Se utiliza para analizar el ERP de ISI Mustang como un sistema con entradas, procesos y salidas, identificando las interrelaciones entre sus módulos, los flujos de datos relevantes para el módulo predictivo y los puntos de integración con los componentes nuevos.
+Se aplica sobre los datos acumulados durante más de diez años de operación, con el fin de identificar patrones y tendencias en el comportamiento de los proyectos a lo largo del tiempo y de reconstruir, a partir de ellos, las desviaciones ocurridas.
+
+\paragraph{Modelación}
+
+Se emplea para la construcción de los modelos de aprendizaje automático que representan el comportamiento de las variables operativas y generan las predicciones, y para el diseño de la arquitectura del sistema.
+
+\paragraph{Enfoque de sistemas}
+
+Se utiliza para analizar el ERP de ISI Mustang como un sistema con entradas, procesos y salidas, identificando las interrelaciones entre sus módulos, los flujos de datos relevantes para el módulo predictivo y los puntos de integración con los componentes nuevos.
 
 En cuanto al desarrollo del sistema, se adopta una metodología iterativa e incremental, en la que el producto se construye en ciclos sucesivos que agregan funcionalidad de manera progresiva y permiten validar tempranamente cada entrega con los usuarios de la empresa. El trabajo se organiza en cinco incrementos: la reimplementación en el ERP de los procesos del portal anterior; la autenticación centralizada con Keycloak; el pipeline de datos y el entrenamiento de los modelos; el microservicio de predicción y su integración con el ERP mediante el dashboard; y la integración con Power BI y el servidor MCP. Cada incremento comprende la definición de su alcance, el análisis, el diseño, el desarrollo y la validación, y se documenta en el Capítulo IV. Los fundamentos de esta metodología se desarrollan en el Capítulo II.
 
@@ -180,17 +184,27 @@ En cuanto al desarrollo del sistema, se adopta una metodología iterativa e incr
 
 Se emplean tres técnicas, cada una con sus instrumentos.
 
-\emph{Análisis de datos.} Se aplica sobre los registros históricos del portal anterior y las planillas de control complementarias, con el propósito de caracterizar las fuentes, identificar variables predictoras, detectar patrones de comportamiento y construir los conjuntos de datos necesarios para el entrenamiento de los modelos. Sus instrumentos son los scripts de extracción y transformación de datos del pipeline y los cuadernos de análisis exploratorio (\textit{notebooks}).
+\paragraph{Análisis de datos}
 
-\emph{Entrevista.} Se aplica a usuarios clave del ERP en ISI Mustang Bolivia en la etapa de evaluación y validación del sistema, con el fin de validar las predicciones generadas y recoger criterios de utilidad desde la perspectiva operativa; sus resultados se presentan en el Capítulo IV\@. Los requisitos funcionales del módulo, en cambio, no dependen de estas entrevistas: provienen del relevamiento de negocio ya documentado en la especificación del ERP, en particular de las preguntas del requerimiento registradas para cada proceso, y de la entrevista preliminar realizada en la etapa de perfil, y se presentan en el Capítulo III\@. El instrumento de las entrevistas de validación es una guía semiestructurada organizada en bloques: contexto del rol y gestión de proyectos; desviaciones y riesgos frecuentes; uso del sistema y datos disponibles; calidad y confiabilidad del registro; y utilidad y expectativas respecto al módulo predictivo.
+Se aplica sobre los registros históricos del portal anterior y las planillas de control complementarias, con el propósito de caracterizar las fuentes, identificar variables predictoras, detectar patrones de comportamiento y construir los conjuntos de datos necesarios para el entrenamiento de los modelos. Sus instrumentos son los scripts de extracción y transformación de datos del pipeline y los cuadernos de análisis exploratorio (\textit{notebooks}).
 
-\emph{Pruebas de los modelos predictivos.} Se aplican sobre un conjunto de datos de prueba independiente del de entrenamiento para evaluar el desempeño de los modelos. Para los casos de clasificación se emplean la exactitud, la precisión, la sensibilidad, el F1 y la matriz de confusión; para los casos de regresión, la raíz del error cuadrático medio (RMSE), el error absoluto medio (MAE) y el coeficiente de determinación ($R^2$). Adicionalmente se aplica validación cruzada para verificar la estabilidad de los resultados. Sus instrumentos son el cuadro de métricas de evaluación y las rutinas de validación cruzada.
+\paragraph{Entrevista}
+
+Se aplica a usuarios clave del ERP en ISI Mustang Bolivia en la etapa de evaluación y validación del sistema, con el fin de validar las predicciones generadas y recoger criterios de utilidad desde la perspectiva operativa; sus resultados se presentan en el Capítulo IV\@. Los requisitos funcionales del módulo, en cambio, no dependen de estas entrevistas: provienen del relevamiento de negocio ya documentado en la especificación del ERP, en particular de las preguntas del requerimiento registradas para cada proceso, y de la entrevista preliminar realizada en la etapa de perfil, y se presentan en el Capítulo III\@. El instrumento de las entrevistas de validación es una guía semiestructurada organizada en bloques: contexto del rol y gestión de proyectos; desviaciones y riesgos frecuentes; uso del sistema y datos disponibles; calidad y confiabilidad del registro; y utilidad y expectativas respecto al módulo predictivo.
+
+\paragraph{Pruebas de los modelos predictivos}
+
+Se aplican sobre un conjunto de datos de prueba independiente del de entrenamiento para evaluar el desempeño de los modelos. Para los casos de clasificación se emplean la exactitud, la precisión, la sensibilidad, el F1 y la matriz de confusión; para los casos de regresión, la raíz del error cuadrático medio (RMSE), el error absoluto medio (MAE) y el coeficiente de determinación ($R^2$). Adicionalmente se aplica validación cruzada para verificar la estabilidad de los resultados. Sus instrumentos son el cuadro de métricas de evaluación y las rutinas de validación cruzada.
 
 \subsubsection{POBLACIÓN Y MUESTRA}
 
-\emph{Análisis de datos.} La población corresponde a la totalidad de los registros históricos generados en el Portal ISIMustang Bolivia durante su período operativo y a las planillas de control de proyectos complementarias. Se trabaja con el conjunto completo de datos disponibles en los módulos relevantes para los casos de predicción definidos, sin muestreo, dado que el volumen es tratable en su totalidad por el pipeline analítico. Los proyectos activos registrados en el ERP nuevo constituyen la población sobre la que se realiza la inferencia.
+\paragraph{Análisis de datos}
 
-\emph{Entrevista.} La población está conformada por aproximadamente 20 usuarios del ERP en ISI Mustang Bolivia. La muestra es de 5 a 8 usuarios clave seleccionados mediante muestreo no probabilístico intencional, priorizando los perfiles con roles de jefe de proyecto, certificador y administrador del sistema, por ser quienes registran, controlan y consumen la información sobre la que opera el módulo predictivo.
+La población corresponde a la totalidad de los registros históricos generados en el Portal ISIMustang Bolivia durante su período operativo y a las planillas de control de proyectos complementarias. Se trabaja con el conjunto completo de datos disponibles en los módulos relevantes para los casos de predicción definidos, sin muestreo, dado que el volumen es tratable en su totalidad por el pipeline analítico. Los proyectos activos registrados en el ERP nuevo constituyen la población sobre la que se realiza la inferencia.
+
+\paragraph{Entrevista}
+
+La población está conformada por aproximadamente 20 usuarios del ERP en ISI Mustang Bolivia. La muestra es de 5 a 8 usuarios clave seleccionados mediante muestreo no probabilístico intencional, priorizando los perfiles con roles de jefe de proyecto, certificador y administrador del sistema, por ser quienes registran, controlan y consumen la información sobre la que opera el módulo predictivo.
 
 \subsection{DELIMITACIÓN DE LA INVESTIGACIÓN}
 

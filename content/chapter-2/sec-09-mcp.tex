@@ -11,16 +11,13 @@ Un servidor ofrece tres primitivas: los recursos (\textit{resources}), contexto 
 \begin{table}[H]
   \centering
   \caption{Primitivas del servidor MCP y su uso previsto en el proyecto}\label{tab:mcp-primitivas}
-  \begin{tabular}{@{}>{\RaggedRight\arraybackslash}p{0.14\textwidth}>{\RaggedRight\arraybackslash}p{0.16\textwidth}>{\RaggedRight\arraybackslash}p{0.28\textwidth}>{\RaggedRight\arraybackslash}p{0.36\textwidth}@{}}
-    \toprule
+  \begin{tblr}{colspec={X[0.67,l] X[0.7,l] X[1.17,l] X[1.46,l]}}
     \textbf{Primitiva} & \textbf{Control} & \textbf{Definición} & \textbf{Uso previsto} \\
-    \midrule
     Herramientas (\textit{tools}) & Modelo & Funciones que el modelo descubre e invoca, con esquema de entrada y salida & Consultas de lectura sobre el ERP (centros de costo, certificaciones, presupuesto) y sobre las predicciones del servicio FastAPI \\
     Recursos (\textit{resources}) & Aplicación & Contexto y datos que el host adjunta al modelo & No se contempla en el alcance; posible exposición futura de documentación del ERP \\
     \textit{Prompts} & Usuario & Mensajes con plantilla y flujos de trabajo & No se contempla; corresponden al asistente que queda como trabajo futuro \\
-    \bottomrule
-  \end{tabular}
-  \fuente{Elaboración propia a partir de \textcite{MCPSpec2026} y \textcite{Ehtesham2025}.}
+  \end{tblr}
+  \fuente{Elaboración propia, 2026, en base a \textcite{MCPSpec2026} y \textcite{Ehtesham2025}.}
 \end{table}
 
 El protocolo se apoya en la investigación sobre uso de herramientas por modelos de lenguaje. \textcite{Schick2023} parten de que los modelos fallan en tareas básicas, como la aritmética o la consulta de hechos, y entrenan uno capaz de decidir qué API llamar, cuándo, con qué argumentos y cómo incorporar el resultado. \textcite{Qin2024} llevan el problema a más de 16\,000 API REST reales, y \textcite{Patil2024} identifican el modo de fallo característico: argumentos incorrectos y alucinación del uso de una API, que se mitiga cuando el modelo consulta documentación en tiempo de ejecución. Esos trabajos resuelven el lado del modelo; MCP estandariza el opuesto, cómo un servidor describe sus herramientas con esquemas explícitos y las ejecuta, de modo que cualquier host las descubra sin los adaptadores a medida que \textcite{Ehtesham2025} señalan como obstáculo entre marcos de agentes. Los mismos autores sitúan a MCP como el primer escalón, el acceso a herramientas, frente a los protocolos entre agentes, que quedan fuera del alcance de este trabajo.
