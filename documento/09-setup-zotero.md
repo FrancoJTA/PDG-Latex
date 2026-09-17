@@ -18,14 +18,21 @@ Hecho automáticamente el 2026-09-16:
    `~/Downloads/zotero-better-bibtex-9.0.64.xpi` → reiniciar Zotero.
 3. **Crear una colección** para el proyecto de grado (clic derecho en "Mi
    Biblioteca" → Nueva Colección → p. ej. "PDG ISI Mustang").
-4. **Configurar auto-export a `perfil.bib`:**
+4. **Importar las citas existentes:** *Archivo → Importar* →
+   `documento.bib` (raíz del repo, copia inicial de `perfil/perfil.bib`) a
+   la colección. Verificar que las claves (`XGBoostCostOverrun2026`, etc.)
+   se conserven en el campo *Citation Key*; si Better BibTeX las cambia,
+   fijarlas a mano para no romper los `\cite` existentes.
+5. **Configurar auto-export a `documento.bib`** (decidido 2026-09-16: el
+   documento final tiene su propio `.bib`; `perfil/perfil.bib` queda
+   congelado):
    - Clic derecho sobre la colección → *Exportar Colección* (Export
      Collection) → formato **Better BibLaTeX** (no BibTeX a secas, para que
      combine bien con `biblatex-apa` que ya usa `univalle-perfil.cls`).
    - Marcar **"Mantener actualizado"** (Keep updated) y guardar apuntando a
-     `perfil/perfil.bib` — desde ahí, cada vez que agregues una fuente a
-     esa colección en Zotero, el `.bib` se actualiza solo.
-5. **Instalar el conector de navegador** (Zotero Connector, en la Chrome
+     `documento.bib` en la raíz del repo — desde ahí, cada vez que agregues
+     una fuente a esa colección en Zotero, el `.bib` se actualiza solo.
+6. **Instalar el conector de navegador** (Zotero Connector, en la Chrome
    Web Store o Firefox Add-ons) para guardar papers directo desde
    Google Scholar / Semantic Scholar / la página de la revista con un clic.
 
@@ -35,7 +42,7 @@ Hecho automáticamente el 2026-09-16:
 2. Lo guardás en Zotero con el conector del navegador (o `File → Import` si
    es un DOI/PDF suelto).
 3. Lo movés a la colección "PDG ISI Mustang" si no cayó ahí directo.
-4. `perfil/perfil.bib` se actualiza solo — no se vuelve a editar a mano.
+4. `documento.bib` se actualiza solo — no se vuelve a editar a mano.
 5. En el `.tex`, citás con la clave que Better BibTeX generó
    (`\textcite{clave}` / `\parencite{clave}`, como ya está documentado en
    `README.md` de la raíz).

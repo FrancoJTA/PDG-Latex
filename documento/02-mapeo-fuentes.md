@@ -73,7 +73,7 @@ Fuentes a medida que avance el desarrollo real:
   para las limitaciones/supuestos del análisis de datos (3.1.1) — hay que
   decidir con el tutor si se filtran, se corrigen o se documentan como
   limitación conocida del dataset.
-- **3.2 Requerimientos** y **3.3 Diseño de arquitectura**: ya hay una
+- **3.3 Requerimientos** y **3.4 Diseño de arquitectura**: ya hay una
   propuesta de arquitectura en el perfil (`perfil/perfil.tex:249-360`,
   capas Bronze/Silver/Gold/Modelos/Servicio/Presentación). Formalizar eso en
   diagramas C4 (estilo `referencias/ejemplo-plantilla-capitulos.pdf`) y en requerimientos funcionales/no
@@ -82,13 +82,19 @@ Fuentes a medida que avance el desarrollo real:
   (pipeline, entrenamiento, FastAPI, integración). Hoy no existe código de
   esto en `~/Projects/isi-mustang/` (solo existe el ERP base: NestJS +
   Angular). Se redacta a medida que se construye — no antes.
-- **4.4 Integración con el ERP**: es un punto de conexión delgado (un
+- **4.4 FastAPI e integración con el ERP**: es un punto de conexión delgado (un
   endpoint en NestJS, una sección de dashboard en Angular), no una
   reescritura del ERP.
-- **Alcance ERP ampliado** (Keycloak/OAuth, MCP, Power BI, procesos del
-  portal anterior): sí es parte de la tesis desde `decisiones-tema.md`
-  (opción B). Ubicación en el índice pendiente; fuente = el código real
-  cuando exista (hoy no hay rastro, ver [[03-contexto-tecnico-erp]]).
+- **Alcance ERP ampliado** (`decisiones-tema.md`, opción B):
+  - **2.8–2.10** (OAuth/OIDC/Keycloak, MCP, Power BI): literatura y
+    documentación oficial — agente `investigador`.
+  - **3.2 Procesos del portal anterior**:
+    `erp-isi-mustang/docs/old-manual/` (`manual.md`, `05-proyectos.md`,
+    capturas en `images/`), contrastado con los módulos del ERP nuevo en
+    `docs/documentation/`.
+  - **4.1, 4.2, 4.5** (incrementos de ERP): el código real cuando exista —
+    hoy no hay rastro de Keycloak/MCP/Power BI (ver
+    [[03-contexto-tecnico-erp]]).
 
 ## Conclusiones / Recomendaciones
 

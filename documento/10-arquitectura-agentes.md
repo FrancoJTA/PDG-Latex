@@ -16,14 +16,17 @@ real es "una subsección a la vez", no un batch de capítulos enteros.
 Cada uno tiene su propio archivo de definición con el detalle completo —
 esto es solo el mapa de cómo se combinan.
 
+Los tres corren con `model: fable` y leen primero
+[[11-brief-proyecto]] (fuente de verdad del proyecto).
+
 ## Qué falta para que el pipeline corra completo
 
 - `investigador` ya puede usarse (solo escribe en `documento/investigacion/`).
 - `redactor` necesita el scaffold (`main.tex` + `content/`) — si no existe,
   frena y avisa.
-- Pendiente de decidir (ver `decisiones-tema.md`): qué `.bib` usa el
-  documento final y dónde va el alcance ERP en el índice. Hasta entonces,
-  `revisor` lo marca como pendiente, no como error.
+- Citas: el documento final usa `documento.bib` (raíz). Hasta que Zotero
+  exporte ahí, las entradas nuevas del `investigador` quedan como
+  candidatas en su brief.
 
 ## Pipeline por subsección
 

@@ -12,11 +12,36 @@ según se vaya resolviendo (edición manual de este archivo).
 - [x] ¿Keycloak/OAuth, MCP, Power BI y procesos del portal anterior entran
       en la tesis? — **Sí**, alcance ampliado (opción B, aprobada por el
       tutor, sin re-revisión del jurado). Ver `decisiones-tema.md`.
-- [ ] Dónde entra el alcance ERP en el índice (capítulo propio vs.
-      secciones en III/IV).
-- [ ] Qué `.bib` usa el documento final (propio vs. `perfil/perfil.bib`).
-- [ ] Reescribir objetivo general/específicos y delimitación en
-      `perfil/perfil.tex` para el alcance ampliado.
+- [x] Dónde entra el alcance ERP en el índice — secciones en II/III/IV, Cap.
+      IV por incrementos. Ver [[01-estructura-capitulos]].
+- [ ] Avisar al tutor del ajuste al índice tentativo.
+- [x] Qué `.bib` usa el documento final — `documento.bib` propio en la raíz
+      (creado como copia de `perfil/perfil.bib`, que queda congelado).
+- [ ] Zotero: importar `documento.bib` y apuntar el auto-export ahí (pasos
+      4–5 de [[09-setup-zotero]], manual por GUI).
+- [x] Dónde están las decisiones sobre procesos del portal anterior — en
+      `erp-isi-mustang/docs/documentation/` (partes C/D de cada doc + `90`).
+      Ver [[03-contexto-tecnico-erp]].
+
+- [x] Idea, alcance, datos, tecnologías, metodología y confidencialidad
+      consolidados en [[11-brief-proyecto]] (2026-09-16).
+- [ ] Fecha real de entrega (la definen la carrera o el tutor).
+- [ ] Entrevistas a usuarios clave (5–8), pendientes.
+
+## Qué se puede redactar sin el proyecto terminado
+
+| Parte | ¿Se puede ya? | Depende de |
+|---|---|---|
+| Cap. I Marco General | Sí | Reescribir objetivos/delimitación en `perfil.tex` primero |
+| Cap. II Marco Teórico (2.1–2.10) | Sí, completo | Solo investigación bibliográfica |
+| 3.1 Análisis de datos históricos | Sí | Exploración del MySQL de producción del portal viejo (ya hay acceso) |
+| 3.2 Procesos del portal anterior | Sí, con lo ya decidido | `docs/documentation/` + `old-manual/` |
+| 3.3 Requerimientos / 3.4 Diseño | Sí | Es diseño: se escribe antes de construir |
+| 4.1–4.5 Incrementos | Uno por uno, al cerrar cada incremento | Código real de ese incremento |
+| 4.6 Evaluación | Al final | Métricas y pruebas reales |
+| Conclusiones / Recomendaciones | Al final | Todo lo anterior |
+- [ ] Reescribir objetivo general/específicos, delimitación e índice
+      tentativo en `perfil/perfil.tex` para el alcance ampliado.
 - [ ] Confirmar si el Marco Legal/Normativo (visto como opcional-si-aplica en
       el `INDICE` genérico y presente en el ejemplo EOPR) aplica acá: ¿hay
       normativa boliviana de protección de datos o de la industria EPC que

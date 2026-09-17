@@ -21,8 +21,55 @@ tesis es:
    reimplementación en el ERP de procesos que vivían en un portal anterior
    (obsoleto/ignorado, distinto de `portal-erp`).
 
-**Pendiente de decidir:** dónde entra el punto 2 en el índice de capítulos
-(ver `decisiones-tema.md`). Hasta entonces, no asumir ubicación al redactar.
+Ubicación en el índice: Cap. II 2.8–2.10, Cap. III 3.2/3.4, Cap. IV
+incrementos 4.1, 4.2 y 4.5 (ver [[01-estructura-capitulos]]).
+
+## Portal anterior — Portal ISIMustang Bolivia
+
+Sistema previo (PHP + MySQL 5.7, dump de phpMyAdmin), documentado en
+`~/Projects/isi-mustang/erp-isi-mustang/docs/old-manual/`:
+
+- `manual.md` — manual de usuario. Módulos: 01 Carga de Horas, 02 Pedido de
+  Requisición (+02.1 Compras), 03 Viáticos (política, administración,
+  rendición), 04 Consulta de Horas, 05 Proyectos Activos, 06 Áreas de
+  Estructura (rubros e ítems de gasto, seguimiento y control, centros de
+  costo, horas de estructura, glosario de costos directos/indirectos), 11
+  Permisos, 12 Tipos de Costos por Rubro.
+- `05-proyectos.md` — módulo Proyectos en detalle: planificación,
+  seguimiento y control con **indicadores (Desvío de Costo, Desvío de
+  Ingresos, Avance del Proyecto, Avance de Trabajo)**, seguimiento de
+  VM/RQ, horas por proyecto, avance por actividad, rubros y tareas.
+- `isi(1).sql` — esquema de 175 tablas, **solo estructura, sin datos**
+  (0 `INSERT`). No sirve como histórico para entrenar modelos.
+- `images/` — 45 capturas del portal (útiles como figuras en 3.2).
+
+Varios de estos módulos **ya tienen equivalente en el ERP nuevo**
+(`hour-entries`, `requisitions`, `purchase-orders`, `travel-allowances`,
+`travel-allowance-settlements`, `cost-center`). El propio
+`docs/documentation/00-indice.md` del ERP trata `old-manual/` como "solo
+glosario y contexto histórico".
+
+**Qué se reimplementa — en evolución.** No es una lista cerrada: el ERP
+sigue en desarrollo, hay puntos que faltan desarrollar y otros que dependen
+de decisiones todavía en curso. 3.2 y el incremento 4.1 se redactan con lo
+que esté decidido e implementado en ese momento, no antes.
+
+**Dónde están las decisiones:** no se duplican acá. La fuente de verdad es
+`erp-isi-mustang/docs/documentation/`: cada doc de área tiene los flujos
+(parte A), la implementación (B), las preguntas del requerimiento con su
+respuesta y estado (C) y los pendientes (D). Todo lo ABIERTO/BRECHA está
+consolidado en `90-pendientes-y-brechas.md`. Para 3.2 y 4.1, leer ahí el
+estado al momento de redactar. Relevante para los indicadores de control de
+proyectos: `05-centros-de-costo-y-proyectos.md` y `11-presupuesto.md` (línea
+base, seguimiento, flujo de caja).
+
+Candidatos observados (no confirmados): indicadores de seguimiento y control de proyectos (desvíos,
+avance) y avance por actividad; un grep en `erp-isi-mustang/src` sobre
+desvío/avance/progress/deviation no encontró nada equivalente (solo
+`proposal_activities`, que son actividades de propuestas, no avance de
+proyectos). Además, los indicadores
+de desvío del portal viejo son antecedente directo de lo que predicen los
+modelos (sección 3.1).
 
 Todo lo de este archivo sobre módulos de negocio, brechas y defectos de
 datos sigue siendo **contexto y fuente de datos** para el módulo predictivo.

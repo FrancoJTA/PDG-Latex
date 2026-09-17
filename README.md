@@ -26,6 +26,7 @@ PDG-Latex/
 │   └── imagenes/
 ├── univalle-perfil.cls      # Clase LaTeX con el formato de la norma DAAP-UNIVALLE
 ├── imagenes/                # Assets institucionales compartidos (logo, etc.)
+├── documento.bib            # Bibliografía del documento final (auto-export de Zotero)
 ├── decisiones-tema.md       # Decisión de alcance (opción B: alcance ampliado) + pendientes
 ├── .claude/agents/          # Agentes investigador / redactor / revisor
 └── documento/                # Preparación del documento final (capítulos I-IV)

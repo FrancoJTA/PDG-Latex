@@ -10,7 +10,7 @@ opción B). Formato: qué es, veredicto, por qué. Cómo se combinan en agentes:
 | Herramienta | Para qué | Vale la pena |
 |---|---|---|
 | Semantic Scholar / CrossRef / OpenAlex / arXiv (APIs) | buscar y verificar citas | **Sí** — cero fricción, lo uso yo directo |
-| Zotero + Better BibTeX | dejar de editar `perfil.bib` a mano | **Sí** — mayor impacto por menor esfuerzo |
+| Zotero + Better BibTeX | dejar de editar `documento.bib` a mano | **Sí** — mayor impacto por menor esfuerzo |
 | PaperQA2 | preguntas con cita exacta sobre tus propios PDFs | **Sí** — lo puedo correr yo mismo |
 | GROBID | extraer metadata bibliográfica de PDFs → `.bib` | **Sí**, junto con PaperQA2 |
 | LanguageTool | gramática/estilo en español | **Sí** — lo corro yo, sin cuenta |
@@ -40,14 +40,14 @@ opción B). Formato: qué es, veredicto, por qué. Cómo se combinan en agentes:
 - **OpenAlex API** — índice académico abierto, buena cobertura en ingeniería/ML.
 - **arXiv API** — preprints de ML (Gradient Boosting, XGBoost, feature engineering).
 
-Estas cuatro son el piso: verificación de fuentes reales antes de meter cualquier cita en `perfil.bib`, sin fricción de instalación.
+Estas cuatro son el piso: verificación de fuentes reales antes de meter cualquier cita en `documento.bib`, sin fricción de instalación.
 
 ## 2. Repos / frameworks open source de investigación
 
 - **STORM** (`stanford-oval/storm`) — pre-writing en dos etapas (investigación multi-perspectiva → outline → artículo con citas). Explícitamente no da texto listo para publicar, sirve para pre-escritura. `VectorRM` permite anclarlo a documentos propios en vez de solo la web.
 - **GPT-Researcher** (`assafelovic/gpt-researcher`) — reportes de investigación puntuales (planner + agentes ejecutores + agregador), soporta investigación local y MCP, exporta a PDF/Word, instalable como Claude Skill (`npx skills add assafelovic/gpt-researcher`).
 - **PaperQA2** (`Future-House/paper-qa`) — preguntas científicas sobre tu propia colección de PDFs con cita exacta a paper/página. Hecho específicamente para minimizar alucinación de citas. Lo puedo correr yo (`pip install paper-qa`).
-- **GROBID** — extrae metadata bibliográfica estructurada de PDFs de papers (Java, corre local o Docker). Automatiza construir entradas de `perfil.bib` a partir de una carpeta de PDFs.
+- **GROBID** — extrae metadata bibliográfica estructurada de PDFs de papers (Java, corre local o Docker). Automatiza construir entradas de `documento.bib` a partir de una carpeta de PDFs.
 - **dzhng/deep-research** y **LangChain `open_deep_research`** — clones del patrón "deep research". No aportan nada sobre GPT-Researcher para este caso — mencionados solo por completitud.
 
 ## 3. Herramientas SaaS (las usás vos, no las opero yo)
@@ -58,7 +58,7 @@ Estas cuatro son el piso: verificación de fuentes reales antes de meter cualqui
 
 ## 4. Gestión de referencias
 
-- **Zotero + Better BibTeX** — reemplaza la edición manual de `perfil.bib`: cada fuente que agregás en Zotero se sincroniza automáticamente al `.bib`. Es la mejora de mayor impacto con menor esfuerzo de todo lo evaluado.
+- **Zotero + Better BibTeX** — reemplaza la edición manual de `documento.bib`: cada fuente que agregás en Zotero se sincroniza automáticamente al `.bib`. Es la mejora de mayor impacto con menor esfuerzo de todo lo evaluado.
 - **Zotero MCP** (opcional) — si adoptás Zotero, me deja leer/agregar citas directo a tu biblioteca desde la sesión.
 
 ## 5. Calidad de escritura y de LaTeX
@@ -94,14 +94,14 @@ Estas cuatro son el piso: verificación de fuentes reales antes de meter cualqui
 ### Flujo 1 — Investigación y citas para el Cap. II (marco teórico / estado del arte)
 1. Buscar candidatos por subtema con Semantic Scholar/CrossRef/OpenAlex (los consulto yo) o con Elicit (lo hacés vos para estado del arte comparativo).
 2. Juntar los PDFs relevantes en una carpeta del repo.
-3. GROBID extrae la metadata → entradas nuevas para `perfil.bib`.
+3. GROBID extrae la metadata → entradas nuevas para `documento.bib`.
 4. PaperQA2 responde preguntas puntuales ancladas a esos PDFs, con cita exacta a paper y página.
 5. Yo redacto la prosa del capítulo con esas respuestas + tu criterio, en el formato de la norma (`documento/referencias/norma-analisis.md`).
 6. LanguageTool + chktex antes de compilar, para no mandar errores de forma al tutor.
 
 ### Flujo 2 — Gestión de referencias continua
 1. Zotero como fuente única de verdad de la bibliografía (conector de navegador o import por DOI).
-2. Better BibTeX sincroniza automáticamente `perfil.bib` — se termina la edición manual del `.bib`.
+2. Better BibTeX sincroniza automáticamente `documento.bib` — se termina la edición manual del `.bib`.
 
 ### Flujo 3 — Diagramas técnicos (Cap. III/IV)
 1. TikZ nativo para lo que sigue el estilo ya establecido en el perfil (Ishikawa, árbol del problema, arquitectura por capas).

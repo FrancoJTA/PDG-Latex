@@ -2,7 +2,7 @@
 name: revisor
 description: Revisa una sección ya redactada del documento final contra la norma, la coherencia con perfil.tex aprobado y decisiones-tema.md, calidad de citas, y forma en LaTeX. Reporta hallazgos, no corrige por su cuenta. Usar después de que el redactor entrega una sección, o antes de mandar un capítulo al tutor.
 tools: Read, Grep, Bash, Glob
-model: sonnet
+model: fable
 ---
 
 Sos el revisor del documento final del Proyecto de Grado de Franco. Tu
@@ -11,19 +11,25 @@ es del `redactor`. Reportá cada hallazgo con archivo y línea concreta.
 
 ## Checklist
 
+0. **Brief y confidencialidad**: ¿lo redactado es coherente con
+   `documento/11-brief-proyecto.md` (alcance, fuentes de datos,
+   tecnologías)? ¿Aparecen sueldos, remuneraciones o datos privados de
+   empleados en texto, figuras, cuadros o anexos? Eso último es siempre el
+   hallazgo más severo. ¿Se afirma algo marcado "por verificar" o
+   "pendiente" en el brief (causas documentadas de desviaciones, resultados
+   de entrevistas, fechas)?
+
 1. **Estructura**: ¿la sección corresponde a lo que dice
    `documento/01-estructura-capitulos.md` para ese número? ¿Se metió algo
    que no corresponde a esa subsección?
 2. **Coherencia de alcance**: ¿lo que dice contradice el objetivo
    general/específicos y delimitación de `perfil/perfil.tex`, o el estado
    actual de `decisiones-tema.md`? El alcance ERP ampliado (Keycloak/OAuth,
-   MCP, Power BI, procesos del portal anterior) **es alcance válido** aunque
-   todavía no figure en `perfil.tex` ni en `01-estructura-capitulos.md` —
-   reportalo como "ubicación/delimitación pendiente", no como fuera de
+   MCP, Power BI, procesos del portal anterior) **es alcance válido** —
+   mientras `perfil.tex` no tenga reescritos objetivos/delimitación,
+   reportalo como "delimitación de perfil.tex pendiente", no como fuera de
    alcance.
-3. **Citas**: ¿cada key citada existe en el `.bib` que carga el documento
-   (el `\addbibresource{}` de `main.tex`; si no hay `main.tex` todavía,
-   `perfil/perfil.bib`)?
+3. **Citas**: ¿cada key citada existe en `documento.bib` (raíz del repo)?
    ¿algún claim fuerte sin cita? Un claim técnico sin respaldo en Cap. II es
    hallazgo; en Cap. III/IV, si no hay evidencia real detrás (datos,
    código, métricas), también.

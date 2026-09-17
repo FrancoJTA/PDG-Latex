@@ -6,7 +6,7 @@ empresas de ingeniería, gestión de proyectos EPC, metodología de desarrollo
 de software, arquitectura por capas). **Ninguno de estos papers fue leído
 todavía** — son candidatos por título/metadata, no fuentes confirmadas. Hay
 que verificar cada uno (acceso al texto completo, calidad de la revista/
-conferencia, relevancia real) antes de citarlo en `perfil.bib`.
+conferencia, relevancia real) antes de citarlo en `documento.bib`.
 
 No se buscó todavía literatura específica de ML/analítica predictiva ni de
 Keycloak/OAuth, MCP y Power BI. `decisiones-tema.md` ya se resolvió (opción
@@ -44,7 +44,7 @@ B): ambos bloques entran en el alcance y quedan pendientes de búsqueda
    Google Scholar / repositorio institucional / contactar autor).
 2. Leer y decidir cuáles realmente aportan (no todos van a servir — la
    búsqueda fue amplia a propósito para no perder cobertura).
-3. Los que se confirmen, pasan a `perfil/perfil.bib` en formato APA (ver
+3. Los que se confirmen, pasan a `documento.bib` (vía Zotero) en formato APA (ver
    `documento/referencias/norma-analisis.md` §7.1).
 4. Ampliar la búsqueda con PaperQA2 (ver `documento/05-herramientas-flujos.md`)
    una vez que haya un primer lote de PDFs descargados.

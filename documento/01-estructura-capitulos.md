@@ -7,6 +7,12 @@ tutor. Es el punto de partida obligatorio — no se inventa una estructura
 nueva, se parte de esta y se ajusta solo si el avance real del proyecto lo
 exige (y en ese caso, avisar al tutor, no decidirlo solo).
 
+**Ajustado el 2026-09-16** por el alcance ampliado (`decisiones-tema.md`):
+las secciones marcadas `[ampliación]` son nuevas, 3.x y 4.x se renumeraron y
+el Cap. IV pasa a organizarse por incrementos. El orden de los incrementos es
+tentativo. **Pendiente: avisar al tutor de este ajuste y reflejarlo en el
+índice de `perfil.tex`** junto con los objetivos y la delimitación.
+
 ```
 INTRODUCCIÓN
 
@@ -34,22 +40,28 @@ CAPÍTULO II. MARCO TEÓRICO Y TECNOLÓGICO
       arquitectura por capas)
   2.7 Stack de desarrollo (Python/ML, DuckDB y Polars, FastAPI, NestJS y
       Angular)
+  2.8 Gestión de Identidad y Acceso (OAuth 2.0 / OpenID Connect, Keycloak)  [ampliación]
+  2.9 Model Context Protocol (MCP)                                          [ampliación]
+  2.10 Inteligencia de Negocios (Power BI)                                  [ampliación]
 
 CAPÍTULO III. ANÁLISIS Y DISEÑO DEL SISTEMA PROPUESTO
   3.1 Análisis de Datos Históricos del ERP (exploración, variables
       predictoras, casos de uso predictivos)
-  3.2 Requerimientos del Sistema (funcionales / no funcionales)
-  3.3 Diseño de la Arquitectura del Módulo Predictivo (por capas, pipeline
-      de datos, modelos ML, API predictiva, dashboard)
+  3.2 Análisis de Procesos del Portal Anterior (qué se migra al ERP)        [ampliación]
+  3.3 Requerimientos del Sistema (funcionales / no funcionales)
+  3.4 Diseño de la Arquitectura (módulo predictivo por capas, pipeline,
+      modelos ML, API, dashboard + autenticación e integraciones MCP/BI)
 
-CAPÍTULO IV. CONSTRUCCIÓN E IMPLEMENTACIÓN DEL SISTEMA
-  4.1 Pipeline de Extracción y Transformación (DuckDB+PostgreSQL, Polars,
-      feature engineering)
-  4.2 Entrenamiento de Modelos (desviación en certificaciones, sobrecosto,
-      retraso en cronograma)
-  4.3 Microservicio FastAPI
-  4.4 Integración con el ERP (endpoints NestJS, dashboard Angular)
-  4.5 Evaluación y Validación (métricas, pruebas con usuarios clave)
+CAPÍTULO IV. CONSTRUCCIÓN E IMPLEMENTACIÓN DEL SISTEMA (por incrementos)
+  4.1 Incremento 1 — Procesos del portal anterior migrados al ERP           [ampliación]
+  4.2 Incremento 2 — Autenticación con Keycloak/OAuth                       [ampliación]
+  4.3 Incremento 3 — Pipeline de datos y entrenamiento de modelos
+      (DuckDB+PostgreSQL, Polars, feature engineering; desviación en
+      certificaciones, sobrecosto, retraso en cronograma)
+  4.4 Incremento 4 — Microservicio FastAPI e integración con el ERP
+      (endpoints NestJS, dashboard Angular)
+  4.5 Incremento 5 — Integración con Power BI y MCP                         [ampliación]
+  4.6 Evaluación y Validación (métricas, pruebas con usuarios clave)
 
 CONCLUSIONES
 RECOMENDACIONES
@@ -81,10 +93,6 @@ reemplaza el índice de 4 capítulos ya aprobado**.
 
 ### `referencias/ejemplo-capitulos-1-2.docx` (texto en `ejemplo-capitulos-1-2.md`)
 
-> **Alcance ampliado (2026-09-16):** el índice de arriba todavía no ubica
-> Keycloak/OAuth, MCP, Power BI ni los procesos del portal anterior, que
-> entran en la tesis por `decisiones-tema.md`. Ubicación pendiente de
-> decidir (capítulo propio vs. secciones en III/IV).
 Ejemplo real y avanzado de otro postulante (Pedro Renato Escobar Ortuño,
 tema: plataforma de historia clínica para una clínica). Sigue exactamente la
 plantilla del INDICE genérico en sus Capítulos I y II (86 páginas). Útil
@@ -114,8 +122,10 @@ Franco. Lo más útil:
 - Ese patrón de **incrementos** encaja bien con los objetivos específicos del
   perfil de Franco, que ya están secuenciados de forma incremental
   (analizar datos → diseñar arquitectura → construir pipeline+modelos →
-  integrar dashboard → evaluar). Se puede usar ese mismo patrón dentro de
-  4.1–4.5 sin tener que fusionar los capítulos III y IV del perfil aprobado.
+  integrar dashboard → evaluar). **Adoptado:** el Cap. IV del índice
+  ajustado ya está organizado en incrementos 4.1–4.5 + evaluación 4.6, sin
+  fusionar III y IV. Cada incremento puede seguir la sub-estructura de la
+  plantilla (alcance → análisis → diseño → desarrollo → validación).
 - Usa diagramas C4 (contexto/contenedores) para la arquitectura — coherente
   con la figura de arquitectura por capas que ya está en el perfil
   (`perfil/perfil.tex:249-312`, Medallion Bronze/Silver/Gold + capa de

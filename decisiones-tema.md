@@ -11,9 +11,8 @@ abril–agosto 2026 se mantiene.
 - MCP
 - Power BI
 - Reimplementación en el ERP de procesos que antes vivían en otro portal
-  (anterior, distinto de `portal-erp` que es el frontend del ERP nuevo —
-  nombre y procesos exactos a identificar) y que habían quedado
-  obsoletos/ignorados
+  anterior (Portal ISIMustang Bolivia, PHP/MySQL — distinto de `portal-erp`,
+  que es el frontend del ERP nuevo) y que habían quedado obsoletos/ignorados
 
 **Formalidad del cambio:** se reescriben objetivo general, objetivos
 específicos y delimitación en `perfil/perfil.tex` para reflejar el alcance
@@ -99,11 +98,28 @@ antecedente breve (Cap. I) o recomendación/trabajo futuro.
 
 ## Estado
 
-**Decidido (opción B, ver encabezado).** Queda pendiente:
-- Dónde entra el alcance ERP en el índice de capítulos (capítulo propio vs.
-  secciones dentro de III/IV) — probablemente a validar con el tutor.
-- Qué `.bib` usa el documento final (uno propio vs. compartir
-  `perfil/perfil.bib`, que hoy es el destino del auto-export de Zotero).
+**Decidido (opción B, ver encabezado).**
+
+Decisiones derivadas (2026-09-16):
+- **Índice:** se mantienen 4 capítulos y un objeto de estudio. El alcance ERP
+  entra como secciones: teoría en Cap. II (2.8–2.10), análisis y diseño en
+  Cap. III, y construcción **por incrementos** en Cap. IV. Detalle en
+  `documento/01-estructura-capitulos.md`. Avisar al tutor del ajuste al
+  índice tentativo.
+- **Bibliografía:** el documento final usa su propio `documento.bib` (raíz,
+  copia inicial de `perfil/perfil.bib`, destino del auto-export de Zotero).
+  `perfil/perfil.bib` queda congelado.
+- **Portal anterior** = Portal ISIMustang Bolivia (PHP/MySQL 5.7).
+  Documentación en `~/Projects/isi-mustang/erp-isi-mustang/docs/old-manual/`.
+  Ver `documento/03-contexto-tecnico-erp.md`.
+
+Queda abierto (por diseño, no por falta de respuesta):
+- Qué procesos del portal anterior se reimplementan **no es una lista
+  cerrada**: el ERP sigue en desarrollo, algunos puntos faltan desarrollar y
+  otros dependen de decisiones de negocio todavía en curso. El alcance de
+  3.2 y del incremento 4.1 se va fijando a medida que se toman esas
+  decisiones — registrarlas en `documento/03-contexto-tecnico-erp.md`
+  (sección "Portal anterior") cuando ocurran.
 - Reescribir objetivo general/específicos y delimitación en
   `perfil/perfil.tex`.
 - Revisar qué partes de `documento/` (estructura de capítulos, mapeo de

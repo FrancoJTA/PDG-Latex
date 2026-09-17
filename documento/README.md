@@ -32,7 +32,11 @@ para guiar la redacción más adelante.
   agentes (`investigador` → `redactor` → `revisor`, en `.claude/agents/`)
   para investigar, redactar y revisar cada subsección.
 
-Orden de lectura sugerido: 00 → 01 → 02 → 03 → 04 → 05 → 06 → 07 → 08 → 09 → 10.
+- [11-brief-proyecto.md](11-brief-proyecto.md) — **fuente de verdad**:
+  idea, alcance, datos, tecnologías, metodología, confidencialidad y plazos.
+  Manda sobre el resto si hay contradicción.
+
+Orden de lectura sugerido: **11 primero**, después 00 → 10.
 
 Ver también, en la raíz: `../decisiones-tema.md` — decisión sobre el alcance
 del tema (resuelta: opción B, alcance ampliado) y lo que queda pendiente.
