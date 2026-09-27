@@ -1,0 +1,104 @@
+% Apéndice i — Matriz de requisitos: actor y criterio de aceptación de cada requerimiento de la sección 3.3.
+% Numeración de apartados en romanos minúsculas (norma §7.3); cuadros numerados i.1, i.2, …
+\section*{i. MATRIZ DE REQUISITOS}
+\addcontentsline{toc}{subsection}{i. MATRIZ DE REQUISITOS}
+\setcounter{table}{0}
+\renewcommand{\thetable}{i.\arabic{table}}
+
+Este apéndice completa los requerimientos de la sección 3.3 con el actor que los ejerce o el componente que los cumple y con un criterio de aceptación verificable, que se usa en la validación de cada incremento y en la evaluación de la sección 4.6.
+
+\begin{table}[H]
+  \centering
+  \caption{Requisitos de procesos y calidad de datos del ERP}\label{tab:apx-rf-erp}
+  \small
+  \begin{tblr}{colspec={X[0.4,l] X[0.9,l] X[2.6,l] X[0.5,l]}}
+    \textbf{ID} & \textbf{Actor} & \textbf{Criterio de aceptación} & \textbf{Inc.} \\
+    RF-01 & Administración del ERP & Cada proyecto activo al corte existe en el ERP con su línea base, ejecutado, horas y certificaciones desde su inicio, y sus totales por categoría coinciden con los del portal anterior al mes del corte & 1 \\
+    RF-02 & Compras & Una orden de compra admite número, fecha, importe, moneda, estado y fecha de pago de la factura del proveedor & 1 \\
+    RF-03 & ERP & El ejecutado de materiales, logística y subcontratos es la suma de las facturas registradas; una orden sin factura suma solo al comprometido & 1 \\
+    RF-04 & Responsable del centro de costo & Una certificación cuya desviación supera el umbral no puede registrarse sin causa y mitigación; el umbral se cambia sin modificar código & 1 \\
+    RF-05 & ERP & La consulta del presupuesto a una fecha devuelve cada línea con el valor vigente en esa fecha según la bitácora & 1 \\
+  \end{tblr}
+  \fuente{Elaboración propia, 2026.}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{Requisitos de autenticación centralizada}\label{tab:apx-rf-auth}
+  \small
+  \begin{tblr}{colspec={X[0.4,l] X[0.9,l] X[2.6,l] X[0.5,l]}}
+    \textbf{ID} & \textbf{Actor} & \textbf{Criterio de aceptación} & \textbf{Inc.} \\
+    RF-06 & Usuario del ERP & El inicio de sesión se realiza en Keycloak con código de autorización y PKCE, y el backend ya no expone endpoints propios de inicio de sesión & 2 \\
+    RF-07 & Usuario del ERP & Tras la migración, cada usuario ve los mismos centros de costo y puede ejecutar las mismas acciones que antes & 2 \\
+    RF-08 & NestJS, pipeline, Power BI, servidor MCP & Cada componente obtiene sus tokens de Keycloak; no hay secretos de acceso entre servicios fuera de Keycloak & 2, 4, 5 \\
+    RF-09 & Usuario, administración & Tras cerrar sesión o desactivar al usuario, sus tokens de renovación son rechazados; la expiración es la configurada en el dominio & 2 \\
+    RF-10 & Usuario del ERP & El usuario restablece su contraseña desde la pantalla de inicio de sesión de Keycloak con un enlace recibido por correo & 2 \\
+  \end{tblr}
+  \fuente{Elaboración propia, 2026.}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{Requisitos del pipeline de datos y de los modelos}\label{tab:apx-rf-pipeline}
+  \small
+  \begin{tblr}{colspec={X[0.4,l] X[0.9,l] X[2.6,l] X[0.5,l]}}
+    \textbf{ID} & \textbf{Actor} & \textbf{Criterio de aceptación} & \textbf{Inc.} \\
+    RF-11 & Pipeline & Bronze contiene una copia por tabla y fecha de extracción, con el mismo número de filas que la fuente & 3 \\
+    RF-12 & Pipeline & Cada entidad del cuadro de correspondencias de la sección 3.4 tiene las mismas columnas y tipos para ambos sistemas, con montos en dólares; los registros rechazados quedan en cuarentena con su motivo & 3 \\
+    RF-13 & Pipeline & Una prueba automática verifica que ninguna variable de la fila de un mes usa registros con fecha posterior al cierre de ese mes & 3 \\
+    RF-14 a RF-16 & Pipeline & Cada modelo se entrena y evalúa; se acepta si supera a las reglas de referencia en la banda de 0 a 50\,\% de avance y, si no, el resultado se informa como negativo & 3 \\
+    RF-17 & Pipeline & Cada versión tiene un registro con fecha, archivos Gold, parámetros, semilla y métricas por banda de avance & 3 \\
+    RF-18 & Pipeline & Los proyectos cerrados en el ERP nuevo entran al entrenamiento sin cambios de código & 3 \\
+  \end{tblr}
+  \fuente{Elaboración propia, 2026.}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{Requisitos del servicio de predicción y del tablero}\label{tab:apx-rf-prediccion}
+  \small
+  \begin{tblr}{colspec={X[0.4,l] X[0.9,l] X[2.6,l] X[0.5,l]}}
+    \textbf{ID} & \textbf{Actor} & \textbf{Criterio de aceptación} & \textbf{Inc.} \\
+    RF-19 & NestJS & Para cada centro de costo activo, el servicio devuelve el puntaje, la posición, el nivel de semáforo y la versión del modelo de los tres casos & 4 \\
+    RF-20 & Usuario del ERP & Cada predicción muestra al menos una variable en que se basa, con su valor y el sentido en que la empuja & 4 \\
+    RF-21 & Usuario del ERP, Gerencia & Un usuario sin pertenencia al centro de costo recibe una respuesta de acceso denegado; Gerencia accede a todos & 4 \\
+    RF-22 & Usuario del ERP & La lista muestra solo los proyectos accesibles para el usuario, ordenados de mayor a menor riesgo y con el semáforo de cada caso & 4 \\
+    RF-23 & Usuario del ERP & La pestaña de riesgo muestra puntaje, semáforo, variables y la serie mensual de cada caso & 4 \\
+    RF-24 & Responsable del centro de costo & Cuando un caso pasa a nivel rojo, el responsable recibe un aviso del módulo de notificaciones del ERP & 4 \\
+  \end{tblr}
+  \fuente{Elaboración propia, 2026.}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{Requisitos de las integraciones con Power BI y MCP}\label{tab:apx-rf-integraciones}
+  \small
+  \begin{tblr}{colspec={X[0.4,l] X[0.9,l] X[2.6,l] X[0.5,l]}}
+    \textbf{ID} & \textbf{Actor} & \textbf{Criterio de aceptación} & \textbf{Inc.} \\
+    RF-25 & Power BI & Los endpoints de datos descriptivos devuelven datos agregados por centro de costo y mes, sin predicciones ni importes por persona & 5 \\
+    RF-26 & Jefes de proyecto, administración & Los cuatro reportes están publicados en Power BI y su actualización programada se completa sin errores & 5 \\
+    RF-27 & Cliente MCP & El cliente MCP lista las cinco herramientas con su esquema de entrada y cada una devuelve datos del centro de costo consultado & 5 \\
+    RF-28 & Cliente MCP & Ninguna herramienta modifica datos: todas se resuelven con consultas de lectura a la API del ERP & 5 \\
+  \end{tblr}
+  \fuente{Elaboración propia, 2026.}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{Requisitos no funcionales}\label{tab:apx-rnf}
+  \small
+  \begin{tblr}{colspec={X[0.4,l] X[0.9,l] X[2.6,l] X[0.5,l]}}
+    \textbf{ID} & \textbf{Componente} & \textbf{Criterio de aceptación} & \textbf{Inc.} \\
+    RNF-01 & NestJS, FastAPI, servidor MCP & Un token con firma, emisor, expiración o audiencia inválidos recibe una respuesta de no autorizado & 2, 4, 5 \\
+    RNF-02 & Keycloak, servidor MCP & Power BI y el servidor MCP solo tienen roles de lectura, y el servidor MCP llama al ERP con un token obtenido por intercambio, nunca con el recibido & 5 \\
+    RNF-03 & Pipeline, reportes, MCP & Ninguna salida contiene remuneraciones individuales ni datos personales de empleados & 3, 5 \\
+    RNF-04 & Pipeline & El usuario de base de datos del pipeline solo tiene permisos de lectura & 3 \\
+    RNF-05 & ERP, pipeline & Los montos que se comparan están en la misma moneda, convertidos con el tipo de cambio de la fecha de cada operación & 1, 3 \\
+    RNF-06 & Servicio de predicción & La consulta de un proyecto responde en menos de dos segundos en el servidor de la empresa & 4 \\
+    RNF-07 & Todos & Todos los componentes se levantan como contenedores Docker en el servidor de la empresa & 2--5 \\
+    RNF-08 & Servicio de predicción & Para cada predicción mostrada pueden recuperarse el proyecto, el mes, la versión del modelo y el resultado & 4 \\
+    RNF-09 & Pipeline & Ejecutar de nuevo el pipeline desde Bronze con los mismos datos y la misma semilla produce las mismas métricas & 3 \\
+    RNF-10 & Servicio de predicción & Cambiar un umbral o publicar una versión nueva del modelo no modifica el contrato de la API & 4 \\
+  \end{tblr}
+  \fuente{Elaboración propia, 2026.}
+\end{table}

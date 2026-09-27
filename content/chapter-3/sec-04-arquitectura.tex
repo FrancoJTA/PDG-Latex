@@ -214,6 +214,21 @@ El servicio de predicción es una aplicación FastAPI con su propia base de dato
 
 Cada predicción se devuelve en JSON con el centro de costo, el mes, la versión del modelo y, por caso de uso, el puntaje, la posición en el orden de riesgo, el nivel de semáforo y las variables en que se basa. Los esquemas de entrada y salida se declaran con Pydantic, de modo que FastAPI valida las peticiones y publica la especificación OpenAPI del servicio.
 
+La base de datos del servicio de predicción tiene tres tablas (cuadro~\ref{tab:modelo-datos-prediccion}). Guardar cada ejecución y cada predicción con la versión del modelo que la produjo permite reconstruir cualquier resultado mostrado en el tablero (RNF-08) y comparar las predicciones de un proyecto a lo largo de los meses (RF-23).
+
+\begin{table}[H]
+  \centering
+  \caption{Modelo de datos de la base de predicciones}\label{tab:modelo-datos-prediccion}
+  \small
+  \begin{tblr}{colspec={X[0.8,l] X[2.2,l] X[1.0,l]}}
+    \textbf{Tabla} & \textbf{Columnas principales} & \textbf{Relaciones} \\
+    \texttt{model\_versions} & Identificador, caso de uso, versión, fecha de entrenamiento, archivos Gold usados, parámetros, semilla, métricas por banda y marca de versión vigente & --- \\
+    \texttt{scoring\_runs} & Identificador, mes evaluado, archivos Gold usados, estado, fechas de inicio y fin y cliente que la solicitó & --- \\
+    \texttt{predictions} & Identificador, centro de costo, caso de uso, puntaje, posición en el orden de riesgo, nivel de semáforo y variables en que se basa & Pertenece a una ejecución y a una versión del modelo \\
+  \end{tblr}
+  \fuente{Elaboración propia, 2026.}
+\end{table}
+
 El servicio no conoce a los usuarios del ERP ni sus permisos. Solo acepta tokens de acceso de Keycloak cuya audiencia sea el propio servicio, emitidos por credenciales de cliente al backend del ERP o al pipeline (sección 2.8), y cada endpoint exige el rol correspondiente: cálculo para el pipeline y lectura para NestJS\@. El control de qué predicciones ve cada persona queda en NestJS, que aplica las reglas de acceso del ERP antes de llamar al servicio (RF-21). De ese modo las reglas de acceso viven en un solo lugar.
 
 \subsubsection{DISEÑO DEL DASHBOARD}

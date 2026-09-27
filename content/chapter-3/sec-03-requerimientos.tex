@@ -124,3 +124,24 @@ Los requerimientos no funcionales (cuadros~\ref{tab:rnf} y~\ref{tab:rnf-operacio
   \end{tblr}
   \fuente{Elaboración propia, 2026.}
 \end{table}
+
+\subsubsection{TRAZABILIDAD DE OBJETIVOS Y REQUERIMIENTOS}
+
+El cuadro~\ref{tab:trazabilidad} relaciona cada objetivo específico con los requerimientos que lo concretan, la sección o el incremento en que se desarrollan y el resultado con el que se verifica su cumplimiento. El actor y el criterio de aceptación de cada requerimiento se detallan en el apéndice~i.
+
+\begin{table}[H]
+  \centering
+  \caption{Trazabilidad de objetivos específicos, requerimientos e incrementos}\label{tab:trazabilidad}
+  \small
+  \begin{tblr}{colspec={X[0.42,l] X[0.95,l] X[0.8,l] X[1.83,l]}}
+    \textbf{Objetivo} & \textbf{Requerimientos} & \textbf{Sección o incremento} & \textbf{Resultado verificable} \\
+    OE-1 & RF-01 a RF-05 & Sección 3.2 & Procesos a reimplementar y defectos que afectan los datos, priorizados \\
+    OE-2 & RF-11 a RF-13 & Sección 3.1 & Panel proyecto-mes y casos de uso con reglas de etiquetado explícitas \\
+    OE-3 & RF-01 a RF-28, RNF-01 a RNF-10 & Sección 3.4 & Arquitectura, pipeline, modelos, API, tablero, autenticación e integraciones diseñados \\
+    OE-4 & RF-01 a RF-10 & Incrementos 1 y 2 & Procesos implementados y autenticación con Keycloak en operación \\
+    OE-5 & RF-11 a RF-18 & Incremento 3 & Pipeline ejecutable y modelos versionados con sus métricas por banda de avance \\
+    OE-6 & RF-19 a RF-28 & Incrementos 4 y 5 & Servicio de predicción y tablero, reportes de Power BI y servidor MCP en operación \\
+    OE-7 & RF-17, RNF-06, RNF-08, RNF-09 & Sección 4.6 & Métricas de los modelos frente a las reglas de referencia y resultados de las pruebas con usuarios clave \\
+  \end{tblr}
+  \fuente{Elaboración propia, 2026.}
+\end{table}

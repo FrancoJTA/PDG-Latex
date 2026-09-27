@@ -210,24 +210,28 @@ y máximo 4 niveles de subtítulo. El Cap. III ocupa ~35 páginas (80–114).
 
 ### Recomendaciones del índice de la carrera no cubiertas (orientativas)
 
-42. **[RECOMENDADO] Matriz de trazabilidad** objetivo → requerimiento →
+42. ~~**[RECOMENDADO] Matriz de trazabilidad** objetivo → requerimiento →
     incremento (la guía lo pide explícitamente: "matriz que relacione problema,
     objetivos, requisitos, actividades, resultados e indicadores"; el ejemplo
     tiene "Trazabilidad de incrementos y requerimientos"). Hoy solo hay la
-    columna Origen. Propuesta: un cuadro corto al final de 3.3.
-43. **[RECOMENDADO] Requerimientos verificables.** Los RF no tienen criterio
+    columna Origen. Propuesta: un cuadro corto al final de 3.3.~~
+    → **Resuelto (27/09):** cuadro de trazabilidad en 3.3.3 (OE → RF/RNF → sección o incremento → resultado verificable).
+43. ~~**[RECOMENDADO] Requerimientos verificables.** Los RF no tienen criterio
     de aceptación ni actor (el ejemplo usa ficha por RF). Propuesta: matriz
     completa con actor y criterio en un apéndice ("Apéndice C. Matriz de
-    requisitos" del índice de la carrera), sin alargar el capítulo.
-44. **[RECOMENDADO] Proyecto de IA:** el índice pide "análisis de sesgos y
+    requisitos" del índice de la carrera), sin alargar el capítulo.~~
+    → **Resuelto (27/09):** apéndice i (`content/apendices/ap-i-matriz-requisitos.tex`) con actor, criterio de aceptación e incremento de cada RF y RNF; cuadros i.1 a i.6.
+44. ~~**[RECOMENDADO] Proyecto de IA:** el índice pide "análisis de sesgos y
     limitaciones" y "consideraciones éticas y de privacidad" (incluye
     autorización institucional para usar los datos). Hoy están dispersos
     (sesgo pre-2013, RNF-03). Propuesta: un párrafo o subsección breve al final
-    de 3.1.
-45. **[RECOMENDADO] Diseño de datos e interfaces.** No hay modelo de datos de
+    de 3.1.~~
+    → **Resuelto (27/09):** nueva 3.1.4 "Limitaciones, sesgos y consideraciones éticas".
+45. ~~**[RECOMENDADO] Diseño de datos e interfaces.** No hay modelo de datos de
     la base de predicciones ni prototipo del tablero. Propuesta: un cuadro con
     las tablas de la base de predicciones en 3.4.4; el prototipo puede ir en
-    4.4 con capturas reales.
+    4.4 con capturas reales.~~
+    → **Resuelto (27/09):** cuadro del modelo de datos de la base de predicciones en 3.4 (API). El prototipo del tablero va en 4.4 con capturas reales.
 46. **[NOTA] Extranjerismos.** Sin regla en la norma. El Cap. II es
     inconsistente (`token` sin cursiva 30 veces; `pipeline` en cursiva 2 de 16).
     Decidir un criterio para todo el documento en la pasada de estilo.
@@ -383,3 +387,13 @@ Keycloak frente a Auth0/Entra ID y por qué el MCP es un servicio aparte.
 - [AJUSTE] 2.8: agregar la elección de Keycloak frente a otros proveedores.
 - [DECIDIR] Horizonte de 3 meses en certificaciones: preguntar a los usuarios
   en 4.6 o a quien gestiona las certificaciones.
+
+
+### Pendientes tras las recomendaciones 42–45 (27/09)
+
+- [PENDIENTE] **Autorización escrita de ISI Mustang** para usar el histórico:
+  3.1.4 dice que se incluye como anexo. Franco la aporta; crear la sección
+  ANEXOS en `main.tex` (después de APÉNDICES) cuando esté.
+- [PENDIENTE] Prototipo del tablero: capturas reales en 4.4.
+- [NOTA] Criterio de RF-01 (totales por categoría iguales a los del portal al
+  mes del corte): confirmar cuando se defina cómo se hace la migración.
