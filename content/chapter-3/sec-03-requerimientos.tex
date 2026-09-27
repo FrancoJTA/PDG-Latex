@@ -10,14 +10,14 @@ Cada requerimiento lleva un identificador estable (RF-\textit{nn} para los funci
 
 Los requerimientos funcionales se agrupan en cinco bloques que corresponden a los cinco incrementos del desarrollo (sección 2.6): procesos y calidad de datos del ERP, autenticación centralizada, pipeline de datos y modelos, servicio de predicción y tablero, e integraciones con Power BI y MCP\@.
 
-El primer bloque (cuadro~\ref{tab:rf-erp}) reúne lo que falta en el ERP para que sus datos sirvan al módulo predictivo. El ERP ya calcula el ejecutado del presupuesto a partir de las provisiones, las órdenes de compra y las rendiciones de viáticos, pero toma las compras en el momento en que se emite la orden, con el importe estimado de la requisición, porque todavía no registra la factura del proveedor. El relevamiento de requerimientos define, en cambio, que la orden emitida es costo comprometido y que el ejecutado corresponde a la factura recibida (REQ~10.7 y 12.3). Mientras esa diferencia no se cierre, el sobrecosto que se calculara sobre los proyectos activos no sería comparable con el costo real del histórico. Del mismo modo, el análisis de datos mostró que en el portal anterior no quedaron registradas las causas de las desviaciones; exigirlas en las certificaciones que superan el umbral (REQ~13.9) permite que el ERP nuevo acumule esa información desde su puesta en producción.
+El primer bloque (cuadro~\ref{tab:rf-erp}) reúne lo que falta en el ERP para que sus datos sirvan al módulo predictivo. El ERP ya calcula el ejecutado del presupuesto a partir de las provisiones, las órdenes de compra y las rendiciones de viáticos, pero toma las compras en el momento en que se emite la orden, con el importe estimado de la requisición, porque todavía no registra la factura del proveedor. El relevamiento de requerimientos define, en cambio, que la orden emitida es costo comprometido y que el ejecutado corresponde a la factura recibida (REQ~10.7 y 12.3). Mientras esa diferencia no se cierre, el sobrecosto que se calculara sobre los proyectos activos no sería comparable con el costo real del histórico. Del mismo modo, el análisis de datos mostró que en el portal anterior no quedaron registradas las causas de las desviaciones; exigirlas en las certificaciones que superan el umbral (REQ~13.9) permite que el ERP nuevo acumule esa información desde su puesta en producción. Por último, los proyectos activos al momento del corte se migran con su historia (RF-01), para que el módulo los evalúe desde el primer mes con las mismas variables que el histórico.
 
 \begin{table}[H]
   \centering
   \caption{Requerimientos funcionales: procesos y calidad de datos del ERP}\label{tab:rf-erp}
   \begin{tblr}{colspec={X[0.4,l] X[2.42,l] X[0.53,l] X[0.66,l]}}
     \textbf{ID} & \textbf{Requerimiento} & \textbf{Prioridad} & \textbf{Origen} \\
-    RF-01 & Reimplementar en el ERP los procesos del portal anterior priorizados en la sección 3.2 & Esencial & OE-1, OE-4, sección 3.2 \\
+    RF-01 & Migrar al ERP nuevo los proyectos activos al momento del corte, con su historia desde el inicio: línea base, ejecutado, horas y certificaciones & Esencial & OE-4, sección 3.4 \\
     RF-02 & Registrar en la orden de compra los datos de la factura del proveedor: número, fecha, importe real, moneda, estado de pago y fecha de pago & Esencial & REQ~10.6 \\
     RF-03 & Calcular el ejecutado de materiales, logística y subcontratos a partir de la factura recibida, y conservar la orden emitida como costo comprometido & Esencial & REQ~10.7, 12.3 \\
     RF-04 & Exigir causa y mitigación en las certificaciones cuya desviación supere un umbral parametrizable (inicial: 10\,\%) & Esencial & REQ~13.9, sección 3.1 \\
@@ -42,38 +42,38 @@ El segundo bloque (cuadro~\ref{tab:rf-auth}) reemplaza la autenticación propia 
   \fuente{Elaboración propia, 2026.}
 \end{table}
 
-El tercer bloque (cuadro~\ref{tab:rf-pipeline}) corresponde al pipeline y a los modelos. Las unidades de análisis responden a lo encontrado en la sección 3.1: la desviación se predice por certificación, que es la única unidad con volumen suficiente en el histórico, y el sobrecosto y el retraso se predicen por proyecto. El requerimiento RF-13 evita que el modelo aprenda de información que no existía en el momento de la predicción.
+El tercer bloque (cuadro~\ref{tab:rf-pipeline}) corresponde al pipeline y a los modelos. La unidad de análisis responde a lo encontrado en la sección 3.1: los tres casos se predicen sobre un panel en el que cada fila es un proyecto al cierre de un mes, con las etiquetas definidas en esa sección. El requerimiento RF-13 evita que el modelo aprenda de información que no existía en el momento de la predicción.
 
 \begin{table}[H]
   \centering
   \caption{Requerimientos funcionales: pipeline de datos y modelos}\label{tab:rf-pipeline}
   \begin{tblr}{colspec={X[0.4,l] X[2.42,l] X[0.53,l] X[0.66,l]}}
     \textbf{ID} & \textbf{Requerimiento} & \textbf{Prioridad} & \textbf{Origen} \\
-    RF-11 & Copiar a la capa Bronze, sin modificarlos, los datos del portal anterior (MySQL), del ERP nuevo (PostgreSQL) y de las planillas de control & Esencial & OE-5 \\
-    RF-12 & Unificar en la capa Silver los dos esquemas y las planillas en un modelo común de variables: centros de costo, bolsas, certificaciones, horas, compras y viáticos, en moneda base & Esencial & OE-5, sección 3.1 \\
-    RF-13 & Construir en la capa Gold las tablas de características a una fecha de corte, usando solo información registrada hasta esa fecha & Esencial & OE-5 \\
-    RF-14 & Entrenar un modelo de clasificación que prediga, por certificación, si se desviará del plan & Esencial & OE-5 \\
-    RF-15 & Entrenar un modelo que prediga, por proyecto, el sobrecosto respecto del vendido & Esencial & OE-5 \\
-    RF-16 & Entrenar un modelo que prediga, por proyecto, el retraso respecto de la fecha de cierre planificada & Esencial & OE-5 \\
-    RF-17 & Evaluar cada modelo con validación cruzada y las métricas de la sección 2.2, y registrar métricas, datos y parámetros de cada versión & Esencial & OE-5, OE-7 \\
+    RF-11 & Copiar a la capa Bronze, sin modificarlos, los datos del volcado del portal anterior (MySQL), del ERP nuevo (PostgreSQL) y de las planillas de control & Esencial & OE-5 \\
+    RF-12 & Unificar en la capa Silver los dos esquemas y las planillas en un modelo común de variables: centros de costo, presupuesto base, ejecutado por categoría, certificaciones, republicaciones del presupuesto y horas, en dólares & Esencial & OE-5, sección 3.1 \\
+    RF-13 & Construir en la capa Gold un panel proyecto-mes cuyas variables usen solo información registrada hasta el cierre de cada mes & Esencial & OE-5 \\
+    RF-14 & Entrenar un modelo que estime, para cada proyecto y mes, el riesgo de que alguna certificación de los tres meses siguientes se atrase más de 15 días & Esencial & OE-5 \\
+    RF-15 & Entrenar un modelo que estime, para cada proyecto y mes, el sobrecosto final respecto del presupuesto base & Esencial & OE-5 \\
+    RF-16 & Entrenar un modelo que estime, para cada proyecto y mes, el retraso final en días respecto del fin planificado & Esencial & OE-5 \\
+    RF-17 & Evaluar cada modelo con validación cruzada agrupada por proyecto, por banda de avance y frente a la regla del consumo (sección 3.1), y registrar métricas, datos y parámetros de cada versión & Esencial & OE-5, OE-7 \\
     RF-18 & Reentrenar los modelos incorporando los proyectos cerrados en el ERP nuevo & Deseable & Sección 1.6 \\
   \end{tblr}
   \fuente{Elaboración propia, 2026.}
 \end{table}
 
-El cuarto bloque (cuadro~\ref{tab:rf-prediccion}) lleva las predicciones al usuario. Las predicciones se muestran en el tablero del ERP y no en Power BI; el acceso a ellas sigue las mismas reglas que el presupuesto del proyecto, que ven sus miembros y Gerencia (REQ~12.6).
+El cuarto bloque (cuadro~\ref{tab:rf-prediccion}) lleva las predicciones al usuario. Las predicciones se usan en la revisión mensual para decidir qué proyectos revisar primero, por lo que el tablero las presenta como una lista ordenada por riesgo. Se muestran en el tablero del ERP y no en Power BI; el acceso a ellas sigue las mismas reglas que el presupuesto del proyecto, que ven sus miembros y Gerencia (REQ~12.6).
 
 \begin{table}[H]
   \centering
   \caption{Requerimientos funcionales: servicio de predicción y tablero}\label{tab:rf-prediccion}
   \begin{tblr}{colspec={X[0.4,l] X[2.42,l] X[0.53,l] X[0.66,l]}}
     \textbf{ID} & \textbf{Requerimiento} & \textbf{Prioridad} & \textbf{Origen} \\
-    RF-19 & Exponer un servicio que devuelva, para un proyecto activo, las predicciones de los tres casos con su valor o probabilidad, su nivel de semáforo y la versión del modelo & Esencial & OE-6 \\
-    RF-20 & Acompañar cada predicción con las variables que más contribuyeron a ella & Esencial & OE-6 \\
+    RF-19 & Exponer un servicio que devuelva, para cada proyecto activo, la puntuación de riesgo de los tres casos, su posición en el orden de riesgo, su nivel de semáforo y la versión del modelo & Esencial & OE-6 \\
+    RF-20 & Acompañar cada predicción con las variables en que se basa y su valor & Esencial & OE-6 \\
     RF-21 & Consultar las predicciones desde el ERP respetando la pertenencia del usuario al centro de costo, con visibilidad total para Gerencia & Esencial & OE-6, REQ~12.6 \\
-    RF-22 & Mostrar en el tablero un semáforo de riesgo por proyecto para los proyectos a los que el usuario tiene acceso & Esencial & OE-6 \\
+    RF-22 & Mostrar en el tablero los proyectos a los que el usuario tiene acceso, ordenados por riesgo y con el semáforo de cada caso de uso & Esencial & OE-6 \\
     RF-23 & Mostrar el detalle de un proyecto con sus predicciones, su explicación y su evolución en el tiempo & Esencial & OE-6 \\
-    RF-24 & Notificar al responsable del centro de costo cuando una predicción pasa a nivel rojo & Deseable & REQ~4.3 \\
+    RF-24 & Notificar al responsable del centro de costo, mediante el módulo de notificaciones del ERP, cuando una predicción pasa a nivel rojo & Deseable & REQ~4.3 \\
   \end{tblr}
   \fuente{Elaboración propia, 2026.}
 \end{table}
@@ -118,9 +118,9 @@ Los requerimientos no funcionales (cuadros~\ref{tab:rnf} y~\ref{tab:rnf-operacio
     \textbf{ID} & \textbf{Atributo} & \textbf{Requerimiento} & \textbf{Origen} \\
     RNF-06 & Rendimiento & El servicio de predicción responde la consulta de un proyecto en menos de dos segundos & Valor de diseño \\
     RNF-07 & Despliegue & Todos los componentes (Keycloak, PostgreSQL, NestJS, Angular, FastAPI y servidor MCP) se despliegan en contenedores Docker en el servidor propio de la empresa & OE-6, sección 1.6 \\
-    RNF-08 & Trazabilidad & Cada predicción queda registrada con el proyecto, la fecha de corte, la versión del modelo y el resultado & OE-7 \\
+    RNF-08 & Trazabilidad & Cada predicción queda registrada con el proyecto, el mes de cálculo, la versión del modelo y el resultado & OE-7 \\
     RNF-09 & Reproducibilidad & El pipeline puede ejecutarse de nuevo desde la capa Bronze y, con los mismos datos y parámetros, produce los mismos modelos & OE-5, OE-7 \\
-    RNF-10 & Mantenibilidad & Los umbrales del semáforo y de desviación son parámetros configurables, y un modelo nuevo se publica sin cambiar el contrato del servicio de predicción & REQ~12.11, 13.9 \\
+    RNF-10 & Mantenibilidad & Los umbrales del semáforo y de desviación son parámetros configurables, y un modelo nuevo se publica sin cambiar el contrato del servicio de predicción & REQ~12.11, sección 3.1 \\
   \end{tblr}
   \fuente{Elaboración propia, 2026.}
 \end{table}

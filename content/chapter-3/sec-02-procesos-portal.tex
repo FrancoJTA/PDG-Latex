@@ -42,7 +42,7 @@ El manual organiza el portal en módulos de horas, requisiciones y compras, viá
     Seguimiento y control de áreas de estructura & 06, 06.2, 06.3 & Implementado & Centros de costo de tipo estructura, con el mismo presupuesto \\
     Rubros e ítems de gasto & 06.1, 12 & Reemplazado & Cuatro bolsas fijas: servicios, materiales, logística y subcontratos (REQ~12.2) \\
     Permisos por módulo & 11 & Implementado & Roles globales y roles por centro de costo (REQ~2.1) \\
-    Consulta de proyectos históricos & 11 & Fuera de alcance & El histórico no se migra al ERP nuevo (sección 1.6) \\
+    Consulta de proyectos históricos & 11 & Fuera de alcance & Los proyectos cerrados no se migran al ERP nuevo (sección 1.6); los activos se migran con su historia (RF-01) \\
   \end{tblr}
   \fuente{Elaboración propia, 2026, en base a \textcite{ISIMustang2020Manual} y al código del ERP nuevo.}
 \end{table}
@@ -71,7 +71,7 @@ Quedan sin reimplementar el avance por actividad con escalas de valor ganado, po
 
 Los defectos que interesan a este trabajo son los que alteran una variable del módulo predictivo o su resultado a predecir. Se presentan en dos grupos, según el sistema en que se originan (cuadro~\ref{tab:defectos-datos}), y se clasifican con las dimensiones de calidad de la sección 2.3.
 
-En el portal anterior los defectos provienen de cómo se operaron sus procesos durante más de diez años: el plan se sobrescribía al replanificar, los proyectos se cerraban administrativamente en fechas masivas y la moneda de los asientos contables no se registró de forma uniforme en todos los períodos. Estos defectos ya no pueden corregirse en la fuente; se tratan en la capa Silver del pipeline, y su magnitud se mide en la sección 3.1. En el ERP nuevo, en cambio, los defectos pueden corregirse antes de que produzcan datos: las brechas de la sección anterior se resuelven con los requerimientos RF-02 a RF-05, y de los defectos que la empresa había relevado en el cálculo de costos, la conversión de monedas en las rendiciones ya está corregida en el código, mientras que la imputación de ausencias al costo y el subsidio sin moneda no aplican a la operación actual.
+En el portal anterior los defectos provienen de cómo se operaron sus procesos durante más de diez años: el presupuesto se replanificaba hasta igualar lo ejecutado, los proyectos se cerraban administrativamente en fechas masivas y la moneda de los asientos contables no se registró de forma uniforme en todos los períodos. Estos defectos ya no pueden corregirse en la fuente; se tratan en la capa Silver del pipeline, y su magnitud se mide en la sección 3.1. En el ERP nuevo, en cambio, los defectos pueden corregirse antes de que produzcan datos: las brechas de la sección anterior se resuelven con los requerimientos RF-02 a RF-05, y de los defectos que la empresa había relevado en el cálculo de costos, la conversión de monedas en las rendiciones ya está corregida en el código, mientras que la imputación de ausencias al costo y el subsidio sin moneda no aplican a la operación actual.
 
 \begin{table}[H]
   \centering
@@ -80,10 +80,10 @@ En el portal anterior los defectos provienen de cómo se operaron sus procesos d
   \begin{tblr}{colspec={X[1.3,l] X[0.61,l] X[0.87,l] X[1.22,l]}}
     \textbf{Defecto} & \textbf{Dimensión} & \textbf{Dato afectado} & \textbf{Tratamiento} \\
     \SetCell[c=4]{l} \textit{Portal anterior} & & & \\
-    La fecha planificada de cada certificación se sobrescribe al replanificar & Exactitud & Desvío en certificaciones y retraso & Fecha original tomada de la primera foto mensual del flujo de caja (Silver) \\
+    El presupuesto vigente se replanifica hasta igualar lo ejecutado & Exactitud & Sobrecosto y retraso & Planificado tomado de la línea base guardada en \texttt{gbasebk}, nunca del presupuesto vigente (Silver) \\
     Fecha de cierre administrativa, asignada en lotes & Exactitud & Retraso en la fecha de cierre & Fin real a partir de la última certificación (Silver) \\
-    Moneda de los asientos contables no uniforme entre períodos & Consistencia & Costo ejecutado & Conversión con control de ingresos contra el monto de la orden de compra (Silver) \\
-    Horas sin centro de costo asignable & Completitud & Horas y costo de servicios & Variable usada solo donde su cobertura lo permite (sección 3.1) \\
+    Moneda de los asientos contables no uniforme entre períodos & Validez & Costo ejecutado & Conversión con el tipo de cambio de cada asiento y clasificación completa del ejecutado por rubro, cuenta o descripción (Silver); los asientos con tipo de cambio igual a uno quedan pendientes de tratamiento \\
+    Horas sin centro de costo asignable & Completitud & Ritmo de carga de horas & Asignación mediante \texttt{horasctroctos} (sección 3.1) \\
     Causas de desviación no registradas & Completitud & Causa del desvío & Sin tratamiento posible; queda como limitación \\
     \SetCell[c=4]{l} \textit{ERP nuevo} & & & \\
     Ejecutado de compras tomado de la orden emitida, sin factura & Exactitud & Sobrecosto & RF-02 y RF-03 \\
