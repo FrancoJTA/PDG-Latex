@@ -165,13 +165,13 @@ Los archivos Gold de entrenamiento y los de cada ejecución mensual se conservan
 
 \subsubsection{DISEÑO DE MODELOS ML}
 
-El diseño de los modelos lo fija el tamaño del conjunto (sección 3.1): 79 desenlaces de sobrecosto, con 20 positivos, y 63 de retraso, con 14. Con esa cantidad de casos, un modelo con muchas variables o muchos parámetros encuentra patrones en el ruido, y las métricas de validación dejan de ser confiables. Por eso, además de las reglas de referencia, se prueban tres alternativas de complejidad creciente y se adopta la más simple que las supere; se descarta de antemano el \textit{gradient boosting}, que necesitaría un orden de magnitud más de casos. Todas se implementan con Scikit-learn (cuadro~\ref{tab:modelos}):
+El diseño de los modelos lo fija el tamaño del conjunto (sección 3.1): 79 desenlaces de sobrecosto, con 20 positivos, y 63 de retraso, con 14. Según la regla de diez eventos por variable candidata y sus revisiones (sección 2.2.4), esa cantidad de casos positivos admite una o dos variables, contadas antes de cualquier selección; un modelo con más variables encuentra patrones en el ruido y sus métricas de validación dejan de ser confiables. Por eso la alternativa principal es un puntaje de una sola variable, y los modelos multivariables se prueban solo como comparación, sabiendo que superan lo que el tamaño admite. Se descarta de antemano el \textit{gradient boosting}: los métodos flexibles comparables necesitaron más de diez veces más eventos por variable que los modelos clásicos, y el boosting pertenece a esa misma familia (sección 2.2.4). Se adopta la alternativa más simple que supere a las reglas de referencia. Todas se implementan con Scikit-learn (cuadro~\ref{tab:modelos}):
 
 \begin{enumerate}
   \item Reglas de referencia: predecir siempre la mediana del histórico y la regla del consumo de la sección 3.1, que extrapola el consumo acumulado según el avance.
-  \item Una sola variable de la sección 3.1 usada como puntaje de riesgo.
-  \item Regresión lineal regularizada (\textit{ridge}), con un máximo de ocho variables, una por cada diez casos, elegidas dentro de cada partición de la validación y nunca antes.
-  \item Árbol de decisión de profundidad máxima tres, que se lee como reglas de negocio.
+  \item Una sola variable de la sección 3.1 usada como puntaje de riesgo: es la alternativa que respeta el tamaño del conjunto.
+  \item Regresión lineal regularizada (\textit{ridge}), con pocas variables elegidas dentro de cada partición de la validación y nunca antes. Se prueba como comparación: la penalización reduce la varianza, pero con muestras chicas no garantiza un modelo confiable (sección 2.2.4).
+  \item Árbol de decisión de profundidad máxima tres, que se lee como reglas de negocio; también como comparación, por su inestabilidad ante cambios pequeños en los datos.
 \end{enumerate}
 
 El sobrecosto se modela sobre el logaritmo del cociente, para que los pocos proyectos extremos no dominen el ajuste, y el retraso, sobre los días; en ambos, la alerta se aplica después sobre la predicción. El atraso en certificaciones es una clasificación por fila. En los tres casos la salida que se usa es un puntaje con el que se ordenan los proyectos activos cada mes.

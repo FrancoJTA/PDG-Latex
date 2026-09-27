@@ -360,6 +360,10 @@ casos, correlaciones por banda) y los resultados de `resultados.md`.
 7. **Modelos.** `modelo.py` solo modela el sobrecosto; retraso y certificaciones
    son diseño. La precisión/sensibilidad se calcula por banda y partición, no
    por mes como dice 3.4.
+8. **Tope de variables.** `modelo.py` usa `MAX_VARIABLES = 8` (79 proyectos /
+   10). La regla cuenta eventos y candidatas antes de la selección: con 20 y 14
+   positivos admite 1–2 variables (2.2.4, 3.4). Bajar el tope y contar las
+   candidatas, no las elegidas.
 
 ### Otros pendientes del revisor
 
@@ -397,3 +401,25 @@ Keycloak frente a Auth0/Entra ID y por qué el MCP es un servicio aparte.
 - [PENDIENTE] Prototipo del tablero: capturas reales en 4.4.
 - [NOTA] Criterio de RF-01 (totales por categoría iguales a los del portal al
   mes del corte): confirmar cuando se defina cómo se hace la migración.
+
+### Cap. II alineado con el Cap. III (27/09)
+
+Resuelto: 2.2 (XGBoost queda como estado del arte, no como elección; nueva
+2.2.4 "Modelos para muestras pequeñas"; protocolo con AUC, validación
+agrupada, selección anidada y reglas de referencia; cuadro de métricas con
+columna de uso real), 2.3 (DuckDB único, panel proyecto-mes), 2.4, 2.5
+(definiciones), 2.7 (sin Polars/pandas/XGBoost; versiones reales), 2.8
+(Keycloak frente a Auth0/Entra ID), 2.9 y 2.10 (recortadas). Brief:
+`documento/investigacion/2-2-muestras-chicas.md`; 26 keys nuevas en
+`documento.bib` y `referencias/importar-zotero-cap3.bib`. Puntos 5, 6 y 17 y la
+lista "Para el Cap. II" quedan resueltos.
+
+~~**[DECIDIR] Tope de variables en 3.4 (alerta del investigador).**~~ **Resuelto (27/09) en 3.4:** una o dos variables según eventos; puntaje de una variable como alternativa principal, ridge y árbol como comparación. **Queda como observación de código 8:** `modelo.py` usa `MAX_VARIABLES = 8`. 3.4 dice
+"máximo de ocho variables, una por cada diez casos" (79/10). La regla de
+Peduzzi cuenta **eventos** (clase menos frecuente) y **candidatas antes de la
+selección** (Riley 2019 Parte II): con 20 sobrecostos da 2 variables y con 14
+retrasos, 1; con selección pueden hacer falta hasta 50 eventos por variable
+(Wynants 2015). 2.2.4 ya lo dice bien; 3.4 y `etl-data/modelo.py`
+(`MAX_VARIABLES = 8`) lo contradicen. Además "el boosting necesita un orden de
+magnitud más" es analogía (van der Ploeg 2014 no evaluó GBM): 3.4 debe
+remitir a 2.2.4 con esa salvedad.

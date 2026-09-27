@@ -98,3 +98,15 @@ tutor.
 **Prioridad:** el punto 1. Si la exploración muestra que no hay forma de
 construir la etiqueta de certificaciones, cambian los objetivos y buena
 parte del Cap. II.
+
+
+## Actualización 2026-09-27
+
+El Cap. II se alineó con el Cap. III y el código (`etl-data`, Keycloak). Se
+resolvieron: autenticación de Power BI (credencial de servicio), segundo token
+del servidor MCP (intercambio de tokens de Keycloak, RFC 8693), "seis capas"
+(3.4 las define), compatibilidad de DuckDB con MySQL 5.7 (ya no aplica: el
+volcado se lee sin conectarse a MySQL) y FastAPI (lee Gold y responde a NestJS,
+3.4). Siguen abiertos: puerta de enlace de Power BI (red de producción) y los
+supuestos de datos que dependen de las planillas Excel. Detalle en
+`16-hallazgos-cap3.md`.

@@ -43,20 +43,30 @@
 % \paginaprevia{DEDICATORIA}
 
 \paginaprevia{AGRADECIMIENTOS}
-% TODO(Franco): texto libre, máximo una página (Norma §1.1.6, obligatorio).
-Pendiente de redacción.
+% TODO(Franco): texto provisorio para completar la estructura; reemplazar o ajustar antes de la entrega final (Norma §1.1.6).
+Este trabajo no habría sido posible sin el apoyo de muchas personas, a quienes quiero expresar mi gratitud.
+
+A mi familia, por su apoyo incondicional durante todos estos años de estudio, por su paciencia en los momentos de mayor carga y por animarme a seguir cuando el camino se hacía largo.
+
+A mi tutor, Ing. Rolando Lara Sánchez, por su guía, su disposición y sus observaciones, que ayudaron a dar forma y rigor a este proyecto desde el perfil hasta su versión final.
+
+A ISI Mustang Bolivia, por la confianza depositada en mí, por abrirme las puertas de la empresa y por autorizar el uso de sus datos para este trabajo. En especial, a mis compañeros del equipo de desarrollo y a las personas de las áreas de proyectos y administración, que compartieron su conocimiento sobre la operación y respondieron con paciencia cada una de mis consultas.
+
+A los docentes de la carrera de Ingeniería de Sistemas de la Universidad del Valle, por la formación recibida, y a los miembros del tribunal, por el tiempo dedicado a la revisión de este documento y por sus aportes.
+
+A mis compañeros y amigos, por acompañarme en este proceso, por las horas de estudio compartidas y por su aliento constante.
 
 \paginaprevia{RESUMEN}
-% TODO: al final. ~250 palabras: antecedentes, objetivo general, metodología, resultados y conclusiones (Norma §1.1.7).
-Pendiente de redacción.
+% Norma §1.1.7: ~250 palabras. TODO: completar resultados y conclusiones al cerrar el Cap. IV (queda margen de ~50 palabras).
+El presente proyecto de grado desarrolla un módulo de inteligencia predictiva integrado al ERP de ISI Mustang Bolivia, empresa de ingeniería EPC para los sectores de gas y petróleo, energía y minería, con el fin de anticipar desviaciones en sus proyectos a partir de más de diez años de datos históricos operativos. La empresa reemplaza su portal anterior por un ERP propio, y el trabajo incluye la modernización necesaria para integrar el módulo: la reimplementación de procesos, la autenticación centralizada con Keycloak, reportes descriptivos en Power BI y un servidor MCP\@. Se trata de una investigación aplicada, desarrollada con una metodología iterativa e incremental en cinco incrementos. El análisis del histórico mostró que el presupuesto vigente del portal se replanificaba hasta igualar lo ejecutado, por lo que las desviaciones se miden contra la línea base, y que solo 79 proyectos cerrados tienen un desenlace reconstruible. En consecuencia, los tres casos de uso, la desviación en certificaciones, el sobrecosto y el retraso en la fecha de cierre, se modelan sobre un panel mensual por proyecto con modelos simples, validados por proyecto y comparados con reglas de referencia, y la salida del módulo es una lista mensual de proyectos ordenada por riesgo. % TODO: resultados de la evaluación (4.6) y conclusión principal.
 
-\textbf{Palabras clave:} % TODO: entre 4 y 10.
+\textbf{Palabras clave:} aprendizaje automático, analítica predictiva, ERP, gestión de proyectos EPC, ingeniería de datos, Keycloak, Model Context Protocol.
 
 \paginaprevia{ABSTRACT}
-% TODO: traducción adaptada del resumen (Norma §1.1.8).
-Pending.
+% Norma §1.1.8: traducción del resumen. TODO: actualizar junto con el resumen al cerrar el Cap. IV.
+This degree project develops a predictive intelligence module integrated into the ERP of ISI Mustang Bolivia, an EPC engineering company serving the oil and gas, energy and mining sectors, in order to anticipate deviations in its projects from more than ten years of historical operational data. The company is replacing its former portal with an in-house ERP, and the work includes the modernization required to integrate the module: the reimplementation of business processes, centralized authentication with Keycloak, descriptive reports in Power BI and an MCP server. It is applied research, carried out with an iterative and incremental methodology in five increments. The analysis of the historical data showed that the portal's current budget was replanned until it matched actual costs, so deviations are measured against the baseline, and that only 79 closed projects have a reconstructable outcome. Consequently, the three use cases, certification deviation, cost overrun and closing-date delay, are modeled on a monthly project panel with simple models, validated by project and compared against reference rules, and the module's output is a monthly list of projects ranked by risk. % TODO: evaluation results (4.6) and main conclusion.
 
-\textbf{Keywords:} % TODO
+\textbf{Keywords:} machine learning, predictive analytics, ERP, EPC project management, data engineering, Keycloak, Model Context Protocol.
 
 \tableofcontents
 \listoffigures
@@ -131,9 +141,7 @@ Pending.
 \pagestyle{fancy}
 \pagenumbering{arabic}
 
-\section*{INTRODUCCIÓN}
-\addcontentsline{toc}{section}{INTRODUCCIÓN}
-% TODO: redactar al final, cuando estén los cuatro capítulos.
+\input{content/introduccion}
 
 \input{content/chapter-1/content.tex}
 \input{content/chapter-2/content.tex}
